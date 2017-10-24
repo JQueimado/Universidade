@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scenes/Menu/ButtonMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Menu/jogadores-de-futebol-de-mesa_23-2147507076.jpg" type="Texture" id=2]
+
+[node name="MenuScene" type="Node"]
+
+[node name="ButtonMenu" parent="." instance=ExtResource( 1 )]
+
+margin/left = 197.0
+margin/top = 7.0
+margin/right = 791.0
+margin/bottom = 643.0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 319.0
+margin/top = 42.0
+margin/right = 657.0
+margin/bottom = 380.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+
