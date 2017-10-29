@@ -5,4 +5,4 @@ func _ready():
 	pass
 
 func _on_TextureButton_pressed():
-	get_tree().change_scene("res://Scenes/Fields/MainField.tscn")
+	get_tree().change_scene("res://Scenes/Game/Game.tscn")

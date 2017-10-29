@@ -3,33 +3,31 @@
 [ext_resource path="res://Scenes/Fields/Field.scn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Balls/BaseBall.scn" type="PackedScene" id=2]
 
-[node name="MainField" type="Spatial"]
+[node name="Game" type="Node"]
+
+[node name="Camera" type="Camera" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
-[node name="Ambient" type="Node" parent="."]
-
-editor/display_folded = true
-
-[node name="Camera" type="Camera" parent="Ambient"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 0.890126, 0.455715, 0, -0.455715, 0.890126, -0.00559235, 1.85212, 2.43367 )
+transform/local = Transform( 1, 0, 0, 0, 0.929469, 0.3689, 0, -0.3689, 0.929469, 0, 2.14397, 2.59881 )
 projection = 0
 fov = 65.0
 near = 0.1
 far = 100.0
 keep_aspect = 1
-current = true
+current = false
 visible_layers = 1048575
 environment = null
 h_offset = 0.0
 v_offset = 0.0
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Ambient"]
+[node name="Field" parent="." instance=ExtResource( 1 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00422096, 4.76837e-07, 0.027949 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.0115606, -0.495992, 0.86825, 0.00660348, 0.868327, 0.495948, -0.999911, 0, 0.0133137, 6.12782, 4.29683, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.869798, 0.493409, 0, -0.493409, 0.869798, 0, 3.60316, 5.17173 )
 layers = 1
 params/enabled = true
 params/editor_only = false
@@ -50,12 +48,8 @@ shadow/max_distance = 0.0
 shadow/split_weight = 0.5
 shadow/zoffset_scale = 2.0
 
-[node name="Field" parent="." instance=ExtResource( 1 )]
-
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301449, -0.068119 )
-
 [node name="BaseBall" parent="." instance=ExtResource( 2 )]
 
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25558, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13273, 0 )
 
 
