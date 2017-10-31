@@ -52,7 +52,6 @@ transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522101, 2.18107, 0.101
 
 [node name="FieldTest" parent="." instance=ExtResource( 2 )]
 
-editor/display_folded = true
 transform/local = Transform( -6.18452e-08, 0, 0.379603, 0, 0.379603, 0, -0.379603, 0, -6.18452e-08, 0, 0, 0 )
 
 [node name="P1" type="Spatial" parent="FieldTest"]
