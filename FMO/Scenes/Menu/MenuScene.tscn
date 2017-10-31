@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://Scenes/Menu/18086425-relva-1_jpg_500_500.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Menu/Foosball.jpg" type="Texture" id=1]
 [ext_resource path="res://Scenes/Menu/ButtonMenu.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
