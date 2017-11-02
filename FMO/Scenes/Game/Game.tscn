@@ -56,7 +56,9 @@ transform/local = Transform( -6.18452e-08, 0, 0.379603, 0, 0.379603, 0, -0.37960
 
 [node name="P1" type="Spatial" parent="FieldTest"]
 
+editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, -4.26326e-14, 0, 1, 0, 4.26326e-14, 0, 1, 0, -0.20929, 0 )
 script/script = ExtResource( 3 )
 
 [node name="MidPlayer" parent="FieldTest/P1" instance=ExtResource( 4 )]
@@ -67,6 +69,7 @@ transform/local = Transform( 0.252712, -3.55271e-15, 1.69407e-21, 0, -4.1172e-08
 
 editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, -4.26326e-14, 0, 1, 0, 4.26326e-14, 0, 1, 0, -0.20929, 0 )
 
 [node name="MidPlayer1" parent="FieldTest/P2 " instance=ExtResource( 4 )]
 
