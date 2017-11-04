@@ -1,6 +1,6 @@
 extends Spatial;
 
-const Rotation_Flow=0.2;
+const Rotation_Flow=0.1;
 const Movement_Flow=0.1;
 
 const Max_Left=-2.736745;
@@ -14,8 +14,8 @@ func _ready():
 	set_process(true);
 	set_process_input(true);
 	
-	player = get_node("MidPlayer");
-	
+	player = get_node("MidPlayer");	
+
 func _input(event):
 	t = player.get_transform();
 	
@@ -33,7 +33,6 @@ func _input(event):
 	
 	print(t.origin);
 	player.set_transform(t);
-
 
 func _process(delta):
 	pass
