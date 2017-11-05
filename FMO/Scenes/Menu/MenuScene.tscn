@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Scenes/Menu/ButtonMenu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Menu/xfooseball_02-600x400.jpg.pagespeed.ic.1CKzRbIA7e.jpg" type="Texture" id=2]
+[ext_resource path="res://Scenes/Menu/foosball-table-top-view-allan-swart.jpg" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -12,9 +12,10 @@ shader/shading_mode = 0
 [node name="ButtonMenu" parent="." instance=ExtResource( 1 )]
 
 material/material = SubResource( 1 )
-margin/left = -2.0
-margin/top = 0.0
-margin/right = 1023.0
+margin/left = -4.0
+margin/top = -38.0
+margin/right = 1021.0
+margin/bottom = 561.0
 button/align = 0
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -24,8 +25,8 @@ transform/scale = Vector2( 16.0258, 9.40313 )
 
 [node name="backgroud" type="Sprite" parent="Node2D"]
 
-transform/pos = Vector2( -0.193228, 0.0556927 )
-transform/scale = Vector2( 0.106623, 0.15924 )
+transform/pos = Vector2( -0.0278112, -0.0691347 )
+transform/scale = Vector2( 0.106038, 0.213205 )
 texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="Node2D/backgroud"]
@@ -34,10 +35,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 22.0
-margin/top = -31.0
-margin/right = 122.0
-margin/bottom = 45.0
+margin/left = -47.0
+margin/top = -40.0
+margin/right = 53.0
+margin/bottom = 36.0
 text = "
 
 Click on me!!! "
