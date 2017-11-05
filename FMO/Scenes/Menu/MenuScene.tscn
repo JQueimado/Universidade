@@ -12,8 +12,9 @@ shader/shading_mode = 0
 [node name="ButtonMenu" parent="." instance=ExtResource( 1 )]
 
 material/material = SubResource( 1 )
-margin/left = -1.0
+margin/left = -2.0
 margin/top = 0.0
+margin/right = 1023.0
 button/align = 0
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -23,8 +24,26 @@ transform/scale = Vector2( 16.0258, 9.40313 )
 
 [node name="backgroud" type="Sprite" parent="Node2D"]
 
-transform/pos = Vector2( -0.130827, 0.0556908 )
+transform/pos = Vector2( -0.193228, 0.0556927 )
 transform/scale = Vector2( 0.106623, 0.15924 )
 texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Node2D/backgroud"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 22.0
+margin/top = -31.0
+margin/right = 122.0
+margin/bottom = 45.0
+text = "
+
+Click on me!!! "
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
