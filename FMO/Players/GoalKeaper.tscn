@@ -5,6 +5,7 @@
 
 [node name="GoalKeaper" type="Spatial"]
 
+editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="PlayerPole" parent="." instance=ExtResource( 1 )]

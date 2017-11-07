@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Scenes/Balls/BaseBall.scn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Fields/FieldTest.scn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Game/Player.gd" type="Script" id=3]
 [ext_resource path="res://Players/GoalKeaper.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Players/Defenders.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node"]
 
@@ -59,7 +60,6 @@ transform/local = Transform( -3.66711e-08, 0, 0.225085, 0, 0.225085, 0, -0.22508
 
 [node name="P1" type="Spatial" parent="FieldTest"]
 
-editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 script/script = ExtResource( 3 )
@@ -67,6 +67,10 @@ script/script = ExtResource( 3 )
 [node name="GoalKeaper" parent="FieldTest/P1" instance=ExtResource( 4 )]
 
 transform/local = Transform( 0.2303, -3.55271e-15, 8.47033e-22, 0, -3.75206e-08, 0.2303, -3.55271e-15, -0.2303, -3.75206e-08, 3.71266e-08, 1.9344, 7.68371 )
+
+[node name="Defenders" parent="FieldTest/P1" instance=ExtResource( 5 )]
+
+transform/local = Transform( 0.2303, 0, -8.47033e-22, 0, -3.75206e-08, -0.2303, 0, 0.2303, -3.75206e-08, -8.72098e-07, 1.9344, 5.3529 )
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 

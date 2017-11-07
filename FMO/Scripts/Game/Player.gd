@@ -7,17 +7,32 @@ const Max_Left=-2.736745;
 const Max_Right=2.736745;
 
 
-var player;
+var player=[null,null];
+var current=0;
 var t;
 
 func _ready():
 	set_process(true);
 	set_process_input(true);
 	
-	player = get_node("GoalKeaper");	
+	player[0]=get_node("GoalKeaper");
+	player[1]=get_node("Defenders");
 
 func _input(event):
-	t = player.get_transform();
+	
+	if event.is_action("NextPlayer"):
+		current+=1;
+		
+	if event.is_action("LastPlayer"):
+		current-=1;
+		
+	if current>=player.size():
+		current=player.size()-1;
+	
+	if current<0:
+		current=0;
+		
+	t = player[current].get_transform();
 	
 	if event.is_action("Push") and t.origin[0]>=Max_Left:
 		t=t.translated(Vector3(-Movement_Flow,0,0));
@@ -32,7 +47,7 @@ func _input(event):
 		t=t.rotated(Vector3(-1,0,0),Rotation_Flow);
 	
 	print(t.origin);
-	player.set_transform(t);
+	player[current].set_transform(t);
 
 func _process(delta):
 	pass
