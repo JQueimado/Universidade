@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Balls/BaseBall.scn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Fields/FieldTest.scn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Game/Player.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Fields/PlayerPole.scn" type="PackedScene" id=4]
+[ext_resource path="res://Players/GoalKeaper.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node"]
 
@@ -48,7 +48,7 @@ shadow/zoffset_scale = 2.0
 
 [node name="BaseBall" parent="." instance=ExtResource( 1 )]
 
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522101, 2.18107, 0.101027 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.26287, 0 )
 friction = 0.1
 bounce = 0.5
 gravity_scale = 2.0
@@ -59,22 +59,23 @@ transform/local = Transform( -3.66711e-08, 0, 0.225085, 0, 0.225085, 0, -0.22508
 
 [node name="P1" type="Spatial" parent="FieldTest"]
 
+editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 script/script = ExtResource( 3 )
 
-[node name="MidPlayer" parent="FieldTest/P1" instance=ExtResource( 4 )]
+[node name="GoalKeaper" parent="FieldTest/P1" instance=ExtResource( 4 )]
 
-transform/local = Transform( 0.252712, 3.55271e-15, 2.11758e-21, 0, -4.1172e-08, 0.252712, 3.55271e-15, -0.252712, -4.1172e-08, -0.159085, 2.34366, 7.17959 )
+transform/local = Transform( 0.2303, -3.55271e-15, 8.47033e-22, 0, -3.75206e-08, 0.2303, -3.55271e-15, -0.2303, -3.75206e-08, 3.71266e-08, 1.9344, 7.68371 )
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 
+editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 
-[node name="MidPlayer" parent="FieldTest/P2 " instance=ExtResource( 4 )]
+[node name="GoalKeaper" parent="FieldTest/P2 " instance=ExtResource( 4 )]
 
-editor/display_folded = false
-transform/local = Transform( -0.252712, -3.55271e-15, 1.42595e-07, 1.42595e-07, -4.1172e-08, 0.252712, 1.77636e-14, 0.252712, 4.1172e-08, -0.159082, 2.34366, -7.56044 )
+transform/local = Transform( -0.2303, -7.50413e-08, 8.47033e-22, -1.22258e-14, 3.75206e-08, 0.2303, -7.50413e-08, 0.2303, -3.75206e-08, 2.54586e-06, 1.9344, -7.71481 )
 
 

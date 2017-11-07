@@ -14,7 +14,7 @@ func _ready():
 	set_process(true);
 	set_process_input(true);
 	
-	player = get_node("MidPlayer");	
+	player = get_node("GoalKeaper");	
 
 func _input(event):
 	t = player.get_transform();
