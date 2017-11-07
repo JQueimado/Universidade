@@ -52,7 +52,7 @@ shadow/zoffset_scale = 2.0
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.26287, 0 )
 mass = 0.5
-friction = 0.1
+friction = 0.01
 bounce = 0.5
 gravity_scale = 2.0
 
@@ -76,7 +76,7 @@ transform/local = Transform( 0.2303, 0, -8.47033e-22, 0, -3.75206e-08, -0.2303, 
 
 [node name="MidPlayer" parent="FieldTest/P1" instance=ExtResource( 6 )]
 
-transform/local = Transform( 0.2303, 0, -8.47033e-22, 0, -3.75206e-08, 0.2303, 0, -0.2303, -3.75206e-08, 0, 1.9344, 1.5 )
+transform/local = Transform( 0.2303, 0, -8.47033e-22, 0, -3.75206e-08, 0.2303, 0, -0.2303, -3.75206e-08, 0, 1.9344, 1 )
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 
