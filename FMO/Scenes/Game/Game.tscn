@@ -10,7 +10,7 @@
 [node name="Camera" type="Camera" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 0.929469, 0.3689, 0, -0.3689, 0.929469, 0, 2.14397, 2.59881 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 5.40717, 0 )
 projection = 0
 fov = 65.0
 near = 0.1
@@ -25,7 +25,7 @@ v_offset = 0.0
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 0.869798, 0.493409, 0, -0.493409, 0.869798, 0, 3.60316, 5.17173 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 22.7007, 0.117645 )
 layers = 1
 params/enabled = true
 params/editor_only = false
@@ -55,28 +55,26 @@ gravity_scale = 2.0
 
 [node name="FieldTest" parent="." instance=ExtResource( 2 )]
 
-transform/local = Transform( -6.18452e-08, 0, 0.379603, 0, 0.379603, 0, -0.379603, 0, -6.18452e-08, 0, 0, 0 )
+transform/local = Transform( -3.66711e-08, 0, 0.225085, 0, 0.225085, 0, -0.225085, 0, -3.66711e-08, 0, 0, 0 )
 
 [node name="P1" type="Spatial" parent="FieldTest"]
 
-editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, -4.26326e-14, 0, 1, 0, 4.26326e-14, 0, 1, 0, -0.20929, 0 )
+transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 script/script = ExtResource( 3 )
 
 [node name="MidPlayer" parent="FieldTest/P1" instance=ExtResource( 4 )]
 
-transform/local = Transform( 0.252712, -3.55271e-15, 1.69407e-21, 0, -4.1172e-08, 0.252712, -3.55271e-15, -0.252712, -4.1172e-08, -0.159084, 2.34366, 1.35721 )
+transform/local = Transform( 0.252712, 3.55271e-15, 2.11758e-21, 0, -4.1172e-08, 0.252712, 3.55271e-15, -0.252712, -4.1172e-08, -0.159085, 2.34366, 7.17959 )
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 
-editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, -4.26326e-14, 0, 1, 0, 4.26326e-14, 0, 1, 0, -0.20929, 0 )
+transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 
 [node name="MidPlayer" parent="FieldTest/P2 " instance=ExtResource( 4 )]
 
 editor/display_folded = false
-transform/local = Transform( -0.252712, 0, 1.42595e-07, 1.42595e-07, -4.1172e-08, 0.252712, 2.13163e-14, 0.252712, 4.1172e-08, -0.159083, 2.34366, -1.3055 )
+transform/local = Transform( -0.252712, -3.55271e-15, 1.42595e-07, 1.42595e-07, -4.1172e-08, 0.252712, 1.77636e-14, 0.252712, 4.1172e-08, -0.159082, 2.34366, -7.56044 )
 
 
