@@ -4,11 +4,10 @@ extends Spatial;
 const Rotation_Flow=0.1;
 const Movement_Flow=0.1;
 
-const Max_Left=-2.736745;
-const Max_Right=2.736745;
+const Max_Right=[2.736745,0.99029,0.55272];
 
 #Player vars
-var player=[null,null];
+var player=[null,null,null];
 var current=0;
 var t;
 
@@ -19,14 +18,15 @@ func _ready():
 	#Players
 	player[0]=get_node("GoalKeaper");
 	player[1]=get_node("Defenders");
+	player[2]=get_node("MidPlayer");
 
 func _input(event):
 	
 	#Player Changer
-	if event.is_action("NextPlayer"):
+	if event.is_action_pressed("NextPlayer"):
 		current+=1;
 		
-	if event.is_action("LastPlayer"):
+	if event.is_action_pressed("LastPlayer"):
 		current-=1;
 		
 	if current>=player.size():
@@ -38,10 +38,10 @@ func _input(event):
 	#Player Movement	
 	t = player[current].get_transform();
 	
-	if event.is_action("Push") and t.origin[0]>=Max_Left:
+	if event.is_action("Push") and t.origin[0]>=-Max_Right[current]:
 		t=t.translated(Vector3(-Movement_Flow,0,0));
 		
-	if event.is_action("Pull") and t.origin[0]<=Max_Right:
+	if event.is_action("Pull") and t.origin[0]<=Max_Right[current]:
 		t=t.translated(Vector3(Movement_Flow,0,0));
 	
 	if event.is_action("RotateLeft"):
