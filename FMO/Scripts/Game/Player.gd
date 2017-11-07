@@ -4,7 +4,7 @@ extends Spatial;
 const Rotation_Flow=0.1;
 const Movement_Flow=0.1;
 
-const Max_Right=[2.736745,0.99029,0.55272,1.03635];
+const Max_Right=[2.736745,0.99029,0.55272,0.99029];
 
 #Player vars
 var player=[null,null,null,null];
@@ -54,7 +54,5 @@ func _input(event):
 	print(t.origin);
 	player[current].set_transform(t);
 
-func _process(delta):
-	pass
-	
-    
+func _on_BaseBall_input_event( camera, event, click_pos, click_normal, shape_idx ):
+	pass # replace with function body
