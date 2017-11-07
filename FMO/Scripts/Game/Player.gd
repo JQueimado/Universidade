@@ -4,10 +4,10 @@ extends Spatial;
 const Rotation_Flow=0.1;
 const Movement_Flow=0.1;
 
-const Max_Right=[2.736745,0.99029,0.55272];
+const Max_Right=[2.736745,0.99029,0.55272,1.03635];
 
 #Player vars
-var player=[null,null,null];
+var player=[null,null,null,null];
 var current=0;
 var t;
 
@@ -19,6 +19,7 @@ func _ready():
 	player[0]=get_node("GoalKeaper");
 	player[1]=get_node("Defenders");
 	player[2]=get_node("MidPlayer");
+	player[3]=get_node("Strikers");
 
 func _input(event):
 	

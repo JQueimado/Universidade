@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://Scenes/Balls/BaseBall.scn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Fields/FieldTest.scn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Players/GoalKeaper.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Players/Defenders.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Players/MidPlayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Players/Strikers.tscn" type="PackedScene" id=7]
 
 [node name="Game" type="Node"]
 
@@ -77,6 +78,10 @@ transform/local = Transform( 0.2303, 0, -8.47033e-22, 0, -3.75206e-08, -0.2303, 
 [node name="MidPlayer" parent="FieldTest/P1" instance=ExtResource( 6 )]
 
 transform/local = Transform( 0.2303, 0, -8.47033e-22, 0, -3.75206e-08, 0.2303, 0, -0.2303, -3.75206e-08, 0, 1.9344, 1 )
+
+[node name="Strikers" parent="FieldTest/P1" instance=ExtResource( 7 )]
+
+transform/local = Transform( 0.2303, 0, 0, 0, -3.75206e-08, 0.2303, 0, -0.2303, -3.75206e-08, 0, 1.9344, -3 )
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 
