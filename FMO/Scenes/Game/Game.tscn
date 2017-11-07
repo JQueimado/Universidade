@@ -93,4 +93,6 @@ transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-1
 
 transform/local = Transform( -0.2303, -7.50413e-08, 8.47033e-22, -1.22258e-14, 3.75206e-08, 0.2303, -7.50413e-08, 0.2303, -3.75206e-08, 2.54586e-06, 1.9344, -7.71481 )
 
+[connection signal="input_event" from="BaseBall" to="FieldTest/P1" method="_on_BaseBall_input_event"]
+
 
