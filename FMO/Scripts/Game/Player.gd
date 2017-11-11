@@ -54,5 +54,3 @@ func _input(event):
 	print(t.origin);
 	player[current].set_transform(t);
 
-func _on_BaseBall_input_event( camera, event, click_pos, click_normal, shape_idx ):
-	pass # replace with function body

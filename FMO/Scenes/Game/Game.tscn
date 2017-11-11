@@ -54,7 +54,7 @@ shadow/zoffset_scale = 2.0
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.26287, 0 )
 mass = 0.5
 friction = 0.01
-bounce = 0.7
+bounce = 0.5
 gravity_scale = 2.0
 
 [node name="FieldTest" parent="." instance=ExtResource( 2 )]
