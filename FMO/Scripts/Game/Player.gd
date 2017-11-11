@@ -8,7 +8,7 @@ const Max_Right=[2.736745,0.99029,0.55272,0.99029];
 
 #Player vars
 var player=[null,null,null,null];
-var current=0;
+var current=2;
 var t;
 
 func _ready():
