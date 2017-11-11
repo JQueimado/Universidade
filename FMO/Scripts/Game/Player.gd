@@ -21,6 +21,8 @@ func _ready():
 	player[2]=get_node("MidPlayer");
 	player[3]=get_node("Strikers");
 
+
+#Player controlers
 func _input(event):
 	
 	#Player Changer
@@ -53,4 +55,3 @@ func _input(event):
 	
 	print(t.origin);
 	player[current].set_transform(t);
-
