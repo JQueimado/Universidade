@@ -1,0 +1,21 @@
+[gd_scene format=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 413.0
+margin/bottom = 308.0
+text = "HEllo
+"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
