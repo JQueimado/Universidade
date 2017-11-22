@@ -22,7 +22,6 @@ button/align = 0
 
 [node name="How to Play" type="VButtonArray" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 1
@@ -83,5 +82,7 @@ uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[connection signal="pressed" from="How to Play/TextureButton" to="How to Play" method="_on_TextureButton_pressed"]
 
 
