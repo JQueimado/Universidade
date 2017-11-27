@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Scenes/Menu/ButtonMenu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scripts/Play/How to play.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Menu/csdfjcnkr.jpg" type="Texture" id=3]
-[ext_resource path="res://Scenes/Menu/foosball-table-top-view-allan-swart.jpg" type="Texture" id=4]
+[ext_resource path="res://Scenes/Menu/foosball-table-top-view-allan-swart.jpg" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -20,42 +18,8 @@ margin/right = 1021.0
 margin/bottom = 561.0
 button/align = 0
 
-[node name="How to Play" type="VButtonArray" parent="."]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 1
-size_flags/vertical = 1
-margin/left = 138.0
-margin/top = 109.0
-margin/right = 305.0
-margin/bottom = 253.0
-flat = false
-button/count = 0
-button/min_button_size = -1.0
-button/align = 0
-script/script = ExtResource( 2 )
-
-[node name="TextureButton" type="TextureButton" parent="How to Play"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 1.0
-margin/right = 112.0
-margin/bottom = 116.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-textures/normal = ExtResource( 3 )
-params/resize_mode = 0
-params/stretch_mode = 0
-
 [node name="Node2D" type="Node2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 512.826, 299.9 )
 transform/scale = Vector2( 16.0258, 9.40313 )
 
@@ -63,7 +27,7 @@ transform/scale = Vector2( 16.0258, 9.40313 )
 
 transform/pos = Vector2( -0.0278112, -0.0691347 )
 transform/scale = Vector2( 0.106038, 0.213205 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="Node2D/backgroud"]
 
@@ -82,7 +46,5 @@ uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-
-[connection signal="pressed" from="How to Play/TextureButton" to="How to Play" method="_on_TextureButton_pressed"]
 
 
