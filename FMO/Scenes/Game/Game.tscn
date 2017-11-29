@@ -89,6 +89,7 @@ transform/local = Transform( 0.2303, 0, 0, 0, -3.75206e-08, 0.2303, 0, -0.2303, 
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 
+editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 
