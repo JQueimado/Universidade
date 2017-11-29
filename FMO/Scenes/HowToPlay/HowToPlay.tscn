@@ -1,0 +1,32 @@
+[gd_scene format=1]
+
+[node name="HowToPlay" type="Node"]
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 4.0
+margin/top = 0.0
+margin/right = 1026.0
+margin/bottom = 601.0
+text = "
+
+
+
+
+
+
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!This is for the Rules and the mini animations!!!!!!!!!!!!!!!!!
+"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
