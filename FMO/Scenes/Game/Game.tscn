@@ -62,6 +62,7 @@ gravity_scale = 2.0
 
 [node name="FieldTest" parent="." instance=ExtResource( 3 )]
 
+editor/display_folded = true
 transform/local = Transform( -3.66711e-08, 0, 0.225085, 0, 0.225085, 0, -0.225085, 0, -3.66711e-08, 0, 0, 0 )
 
 [node name="P1" type="Spatial" parent="FieldTest"]
