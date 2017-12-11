@@ -5,7 +5,7 @@ func _ready():
 	pass
 
 func _on_TextureButton_pressed():
-	get_tree().change_scene("res://Scenes/Game/Game.tscn")
+	get_tree().change_scene("res://Scenes/Menu/ServerOP.tscn")
 	
 
 
