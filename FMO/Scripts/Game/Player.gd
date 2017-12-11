@@ -1,5 +1,7 @@
 extends Spatial;
 
+const active_Debug=false;
+
 #Movement Restrictions 
 const Rotation_Flow=0.1;
 const Movement_Flow=0.1;
@@ -53,5 +55,7 @@ func _input(event):
 	if event.is_action("RotateRight"):
 		t=t.rotated(Vector3(-1,0,0),Rotation_Flow);
 	
-	print(t.origin);
+	if active_Debug:
+		print(t.origin);
+	
 	player[current].set_transform(t);
