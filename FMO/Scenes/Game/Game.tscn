@@ -96,6 +96,13 @@ transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-1
 
 transform/local = Transform( -0.2303, -3.47743e-08, 0, 3.47743e-08, -0.2303, 0, 0, -4.23516e-22, 0.2303, 2.54586e-06, 1.9344, -7.71481 )
 
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="input_event" from="BaseBall" to="FieldTest/P1" method="_on_BaseBall_input_event"]
 
 

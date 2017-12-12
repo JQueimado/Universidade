@@ -3,15 +3,16 @@ extends Node;
 const active_debug=true;
 
 #SV
-var is_sv=true;
+var is_sv=false;
 var sv = PacketPeerUDP.new();
 var PORT = 4321;
-var ip = "localhost";
+var ip;
 
 #Game
 var ball;
 
 func _ready():
+	ip =global.ip;
 	sv.set_send_address(ip,PORT);
 	
 	ball = get_node("BaseBall");
@@ -22,8 +23,8 @@ func _ready():
 func _process(delta):
 	if is_sv:
 		send(ball.get_transform())
-	else:
-		msg=[];
+	elif sv.get_available_packet_count()!=0:
+		var msg=[];
 		while sv.get_available_packet_count()>0:
 			msg.append(sv.get_var());
 		ball.set_transform(msg[0]);
