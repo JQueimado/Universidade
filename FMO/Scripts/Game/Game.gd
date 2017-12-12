@@ -3,8 +3,6 @@ extends Node;
 const active_debug=true;
 
 #SV
-var is_sv=false;
-var sv = PacketPeerUDP.new();
 var PORT = 4321;
 var ip;
 
@@ -14,8 +12,7 @@ var timer;
 var start;
 
 func _ready():
-	ip =global.ip;
-	sv.set_send_address(ip,PORT);
+	Server.start();
 	
 	ball = get_node("BaseBall");
 	timer = get_node("Timer");
@@ -29,13 +26,6 @@ func _ready():
 	set_process_input(true);
 	
 func _process(delta):
-	if is_sv:
-		send(ball.get_transform())
-	elif sv.get_available_packet_count()!=0:
-		var msg=[];
-		while sv.get_available_packet_count()>0:
-			msg.append(sv.get_var());
-		ball.set_transform(msg[0]);
 	
 	if timer.get_time_left()==0:
 		get_tree().change_scene("res://Scenes/Game/GameOver.tscn");
@@ -47,14 +37,7 @@ func _process(delta):
 		global.set_timer=timer.get_time_left();
 		get_tree().reload_current_scene();
 	
-func send(data):
-	sv.put_packet(data);
-	
-	
 func _input(event):
-	
-	if event.is_action_pressed("Debug_Server_Send_Msg") and active_debug:
-		send("Msg");
 	
 	if event.is_action_pressed("Debug_Restart_Button"):
 		get_tree().reload_current_scene();
