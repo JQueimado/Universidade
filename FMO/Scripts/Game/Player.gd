@@ -22,6 +22,8 @@ func _ready():
 	player[1]=get_node("Defenders");
 	player[2]=get_node("MidPlayer");
 	player[3]=get_node("Strikers");
+	
+	global.player=current;
 
 
 #Player controlers

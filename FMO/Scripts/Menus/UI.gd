@@ -27,6 +27,16 @@ func _process(delta):
 	
 	timer.set_text(str(int(global.timer)));
 	
-	player.set_text(str(global.player));
+	var st=str();
+	var p = global.player;
+	if p==0:
+		st="GK";
+	if p==1:
+		st="DF";
+	if p==2:
+		st="CD";
+	if p==3:
+		st="ATK"; 
+	player.set_text(st);
 	
 

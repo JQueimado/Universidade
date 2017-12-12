@@ -12,6 +12,7 @@ var ip;
 const TIME = 600;
 var ball;
 var timer;
+var start;
 
 func _ready():
 	ip =global.ip;
@@ -19,6 +20,8 @@ func _ready():
 	
 	ball = get_node("BaseBall");
 	timer = get_node("Timer");
+	
+	start=ball.get_transform();
 	
 	timer.set_wait_time(TIME);
 	timer.start();
@@ -39,7 +42,11 @@ func _process(delta):
 		get_tree().change_scene("res://Scenes/Game/GameOver.tscn");
 		
 	global.timer=timer.get_time_left();
-		
+	
+	if(ball.get_transform().origin.x<=-3.5):
+		global.score[0]+=1;
+		ball.set_transform(start);
+	
 func send(data):
 	sv.put_packet(data);
 	
