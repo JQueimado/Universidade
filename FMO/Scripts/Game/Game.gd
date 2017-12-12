@@ -9,6 +9,7 @@ var PORT = 4321;
 var ip;
 
 #Game
+const TIME = 600;
 var ball;
 var timer;
 
@@ -19,7 +20,7 @@ func _ready():
 	ball = get_node("BaseBall");
 	timer = get_node("Timer");
 	
-	timer.set_wait_time(5);
+	timer.set_wait_time(TIME);
 	timer.start();
 	
 	set_process(true);
