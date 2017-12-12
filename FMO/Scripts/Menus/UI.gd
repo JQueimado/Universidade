@@ -2,6 +2,7 @@ extends TextureFrame
 
 var scorelabel;
 var timer;
+var player;
 
 func _ready():
 	#scoreBoard
@@ -14,11 +15,18 @@ func _ready():
 	#timer
 	timer=get_node("Timer");
 	
+	#player
+	player = get_node("Player")
+	x=int(pos.x-player.get_size().x);
+	player.set_pos(Vector2(x,y));
+	
 	set_process(true);
 	
 func _process(delta):
 	scorelabel.set_text(str(global.score[0])+":"+str(global.score[1]));
 	
 	timer.set_text(str(int(global.timer)));
+	
+	player.set_text(str(global.player));
 	
 

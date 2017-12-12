@@ -59,3 +59,4 @@ func _input(event):
 		print(t.origin);
 	
 	player[current].set_transform(t);
+	global.player=current;

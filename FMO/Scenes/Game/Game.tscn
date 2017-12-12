@@ -137,6 +137,26 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="Player" type="Label" parent="UI"]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 512.5
+margin/top = 299.0
+margin/right = 329.5
+margin/bottom = 242.0
+text = "0:0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Timer" type="Label" parent="UI"]
 
 anchor/left = 3
