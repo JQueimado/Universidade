@@ -66,7 +66,6 @@ script/script = null
 
 [node name="FieldTest" parent="." instance=ExtResource( 3 )]
 
-editor/display_folded = true
 transform/local = Transform( -3.66711e-08, 0, 0.225085, 0, 0.225085, 0, -0.225085, 0, -3.66711e-08, 0, 0, 0 )
 
 [node name="P1" type="Spatial" parent="FieldTest"]
@@ -94,14 +93,13 @@ transform/local = Transform( 0.2303, 0, 0, 0, -3.75206e-08, 0.2303, 0, -0.2303, 
 
 [node name="P2 " type="Spatial" parent="FieldTest"]
 
-editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1.50449, 0, -8.52651e-14, 0, 1.50449, 0, 8.52651e-14, 0, 1.50449, 0, -0.20929, 0 )
 script/script = ExtResource( 9 )
 
 [node name="GoalKeaper" parent="FieldTest/P2 " instance=ExtResource( 5 )]
 
-transform/local = Transform( -0.2303, -3.47743e-08, 0, 3.47743e-08, -0.2303, 0, 0, -4.23516e-22, 0.2303, 2.54586e-06, 1.9344, -7.71481 )
+transform/local = Transform( -0.2303, 7.50413e-08, 0, 1.22258e-14, 3.75206e-08, 0.2303, 7.50413e-08, 0.2303, -3.75206e-08, 2.54586e-06, 1.9344, -7.71481 )
 
 [node name="UI" type="TextureFrame" parent="."]
 

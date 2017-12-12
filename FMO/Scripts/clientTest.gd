@@ -7,7 +7,7 @@ func _ready():
 	set_process_input(true);
 
 func _input(event):
-	if event.is_action_pressed("Debug_Server_Send_Msg"):
+	if event.is_action("Debug_Server_Send_Msg"):
 		print("sent");
 		server.put_var("Move");
 		
