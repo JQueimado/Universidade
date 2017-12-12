@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
 	scorelabel.set_text(str(global.score[0])+":"+str(global.score[1]));
 	
-	timer.set_text(str(int(global.timer.get_time_left())));
+	timer.set_text(str(int(global.timer)/60)+","+str((int(global.timer)%60)));
 	
 	var st=str();
 	var p = global.player;
