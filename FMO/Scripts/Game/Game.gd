@@ -37,6 +37,8 @@ func _process(delta):
 	if timer.get_time_left()==0:
 		get_tree().change_scene("res://Scenes/Game/GameOver.tscn");
 		
+	global.timer=timer.get_time_left();
+		
 func send(data):
 	sv.put_packet(data);
 	
