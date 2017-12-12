@@ -9,7 +9,7 @@ var PORT = 4321;
 var ip;
 
 #Game
-const TIME = 600;
+const TIME = 300;
 var ball;
 var timer;
 var start;
@@ -45,7 +45,7 @@ func _process(delta):
 	
 	if(ball.get_transform().origin.x<=-3.5):
 		global.score[0]+=1;
-		ball.set_transform(start);
+		get_tree().reload_current_scene();
 	
 func send(data):
 	sv.put_packet(data);

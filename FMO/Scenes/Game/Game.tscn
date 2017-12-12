@@ -60,6 +60,7 @@ mass = 0.5
 friction = 0.01
 bounce = 0.5
 gravity_scale = 2.0
+script/script = null
 
 [node name="FieldTest" parent="." instance=ExtResource( 3 )]
 
