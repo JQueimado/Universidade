@@ -98,9 +98,9 @@ transform/local = Transform( -0.2303, -3.47743e-08, 0, 3.47743e-08, -0.2303, 0, 
 
 [node name="Timer" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
+process_mode = 0
+wait_time = 5.0
+one_shot = true
 autostart = false
 
 [connection signal="input_event" from="BaseBall" to="FieldTest/P1" method="_on_BaseBall_input_event"]

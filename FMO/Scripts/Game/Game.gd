@@ -10,12 +10,17 @@ var ip;
 
 #Game
 var ball;
+var timer;
 
 func _ready():
 	ip =global.ip;
 	sv.set_send_address(ip,PORT);
 	
 	ball = get_node("BaseBall");
+	timer = get_node("Timer");
+	
+	timer.set_wait_time(5);
+	timer.start();
 	
 	set_process(true);
 	set_process_input(true);
@@ -28,6 +33,9 @@ func _process(delta):
 		while sv.get_available_packet_count()>0:
 			msg.append(sv.get_var());
 		ball.set_transform(msg[0]);
+	
+	if timer.get_time_left()==0:
+		get_tree().change_scene("res://Scenes/Game/GameOver.tscn");
 		
 func send(data):
 	sv.put_packet(data);
