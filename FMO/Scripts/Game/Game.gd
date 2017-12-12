@@ -37,6 +37,11 @@ func _process(delta):
 		global.set_timer=timer.get_time_left();
 		get_tree().reload_current_scene();
 	
+	if(ball.get_transform().origin.x>=3.6):
+		global.score[1]+=1;
+		global.set_timer=timer.get_time_left();
+		get_tree().reload_current_scene();
+	
 func _input(event):
 	
 	if event.is_action_pressed("Debug_Restart_Button"):
