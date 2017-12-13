@@ -59,7 +59,7 @@ shadow/zoffset_scale = 2.0
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
 mass = 0.5
-friction = 0.01
+friction = 0.0
 bounce = 0.5
 gravity_scale = 2.0
 script/script = null
