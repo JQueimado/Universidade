@@ -76,6 +76,7 @@ script/script = ExtResource( 4 )
 
 [node name="GoalKeaper" parent="FieldTest/P1" instance=ExtResource( 5 )]
 
+editor/display_folded = false
 transform/local = Transform( 0.2303, -3.55271e-15, 8.47033e-22, 0, -3.75206e-08, 0.2303, -3.55271e-15, -0.2303, -3.75206e-08, 0, 1.9344, 8 )
 
 [node name="Defenders" parent="FieldTest/P1" instance=ExtResource( 6 )]
