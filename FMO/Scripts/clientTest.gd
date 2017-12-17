@@ -5,6 +5,19 @@ var server = PacketPeerUDP.new();
 func _ready():
 	server.set_send_address("localhost",4321);
 	set_process_input(true);
+	set_process(true);
+	
+func _process(delta):
+	var msg = receve();
+	if msg != []:
+		print ("Receved",Transform(msg[0]).origin);
+		
+func receve():
+	server.listen(4321);
+	var msg=[];
+	while server.get_available_packet_count()>0:
+		msg.append(server.get_var());
+	return msg;
 
 func _input(event):
 	if event.is_action("ui_up"):

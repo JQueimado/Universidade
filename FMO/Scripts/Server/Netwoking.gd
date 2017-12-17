@@ -9,12 +9,10 @@ func start():
 	
 func send(data):
 	packet.put_var(data);
-	print("Sent");
 
 func receve():
 	var msg=[];
 	packet.listen(PORT);
 	while packet.get_available_packet_count()>0:
-		print("Receved");
 		msg.append(packet.get_var());
 	return msg;
