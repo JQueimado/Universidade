@@ -183,7 +183,7 @@ wait_time = 1.0
 one_shot = true
 autostart = false
 
-[node name="client" type="Node" parent="."]
+[node name="ClientTest" type="Node" parent="."]
 
 script/script = ExtResource( 11 )
 

@@ -10,17 +10,20 @@ func _ready():
 func _process(delta):
 	var sv = Server.receve();
 	if sv!=[]:
-		if str(sv[0])=="1":
-			translate(1);
+		var pack = sv[0];
 		
-		if str(sv[0])=="2":
-			translate(-1);
+		if pack[0]==1:
+			if str(pack[1])=="1":
+				translate(1);
 			
-		if str(sv[0])=="3":
-			rotate(-1);
-			
-		if str(sv[0])=="4":
-			rotate(1);
+			if str(pack[1])=="2":
+				translate(-1);
+				
+			if str(pack[1])=="3":
+				rotate(-1);
+				
+			if str(pack[1])=="4":
+				rotate(1);
 		
 
 func rotate(side):

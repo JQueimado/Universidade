@@ -3,8 +3,6 @@ extends Node;
 const active_debug=true;
 
 #SV
-var PORT = 4321;
-var ip;
 var is_sv;
 
 #Game
@@ -13,7 +11,7 @@ var timer;
 var start;
 
 func _ready():
-	is_sv = true;
+	is_sv = global.ip=="localhost";
 	Server.start();
 	
 	ball = get_node("BaseBall");
@@ -44,7 +42,23 @@ func _process(delta):
 		global.set_timer=timer.get_time_left();
 		get_tree().reload_current_scene();
 	
-	Server.send(ball.get_transform().origin);
+	if is_sv:
+		var msg =[];
+		var org =ball.get_transform().origin;
+		msg.append(org.x);
+		msg.append(org.y);
+		msg.append(org.z);
+		Server.send([1,msg]);
+	else:
+		var msg = Server.receve();
+		if msg != []:
+			var arr  = msg[0];
+			var x = Vector3(1,0,0);
+			var y = Vector3(0,1,0);
+			var z = Vector3(0,0,1);
+			var org = Vector3(arr[0],arr[1],arr[2]);
+			ball.set_transform(Transform(x,y,z,org));
+			
 	
 func _input(event):
 	
