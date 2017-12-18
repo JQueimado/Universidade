@@ -4,6 +4,7 @@ const active_debug=true;
 
 #SV
 var is_sv;
+var delay = Timer.new();
 
 #Game
 var ball;
@@ -41,7 +42,6 @@ func _process(delta):
 		global.score[1]+=1;
 		global.set_timer=timer.get_time_left();
 		get_tree().reload_current_scene();
-	
 	if is_sv:
 		var msg =[];
 		var org =ball.get_transform().origin;

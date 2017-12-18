@@ -25,6 +25,10 @@ func _process(delta):
 			if str(pack[1])=="4":
 				rotate(1);
 		
+		var org=Gk.get_transform().origin;
+		var msg =[org.x,org.y,org.z];
+		Server.send([2,msg]);
+		
 
 func rotate(side):
 	var transform = Gk.get_transform();

@@ -16,7 +16,10 @@ func _process(delta):
 		var unpack = msg[0];
 		if unpack[0]==1:
 			var new_msg = unpack[1];
-			print ("Receved"," ",new_msg[0]," ",new_msg[1]," ",new_msg[2]);
+			print ("Ball:"," ",new_msg[0]," ",new_msg[1]," ",new_msg[2]);
+		elif unpack[0]==2:
+			var new_msg = unpack[1];
+			print ("Player:"," ",new_msg[0]," ",new_msg[1]," ",new_msg[2]);
 	
 		
 func receve():
