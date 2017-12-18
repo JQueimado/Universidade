@@ -12,9 +12,8 @@ func _ready():
 func _process(delta):
 	var msg = receve();
 	if msg != []:
-		print ("Receved",msg[0]);
+		print (msg[0]);
 	if send!=0:
-		print("sent");
 		server.put_var(send);
 		send=0;
 	

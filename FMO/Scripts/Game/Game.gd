@@ -44,7 +44,6 @@ func _process(delta):
 		global.set_timer=timer.get_time_left();
 		get_tree().reload_current_scene();
 	
-	print("Send",ball.get_transform().origin);
 	Server.send(ball.get_transform().origin);
 	
 func _input(event):
