@@ -1,38 +1,38 @@
 extends Node
 
 var server = PacketPeerUDP.new();
-var send=0;
+var send;
 
 func _ready():
 	server.set_send_address("localhost",4321);
-	server.listen(1234);
 	set_process_input(true);
 	set_process(true);
 	
 func _process(delta):
 	var msg = receve();
 	if msg != []:
-		print (msg[0]);
-	if send!=0:
-		server.put_var(send);
-		send=0;
+		print ("Receved",msg[0]);
 	
+		
 func receve():
+	server.listen(4321);
 	var msg=[];
 	while server.get_available_packet_count()>0:
 		msg.append(server.get_var());
 	return msg;
 
 func _input(event):
-		
+	send=true;
+	print ("Input");
 	if event.is_action("ui_up"):
-		send =1;
+		server.put_var(1);
 		
 	if event.is_action("ui_down"):
-		send =2;
+		server.put_var(2);
 	
 	if event.is_action("ui_left"):
-		send =3;
+		server.put_var(3);
 		
 	if event.is_action("ui_right"):
-		send =4;
+		server.put_var(4);
+	send=false;
