@@ -13,7 +13,7 @@ var timer;
 var start;
 
 func _ready():
-	is_sv = (ip=="localhost");
+	is_sv = true;
 	Server.start();
 	
 	ball = get_node("BaseBall");
@@ -45,7 +45,7 @@ func _process(delta):
 		get_tree().reload_current_scene();
 	
 	print("Send",ball.get_transform().origin);
-	Server.send(ball.get_transform());
+	Server.send(ball.get_transform().origin);
 	
 func _input(event):
 	
