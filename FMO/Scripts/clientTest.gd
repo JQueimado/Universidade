@@ -12,15 +12,15 @@ func _ready():
 	
 func _process(delta):
 	var msg = receve();
-	if msg != []:
+	while msg != []:
 		var unpack = msg[0];
 		if unpack[0]==1:
-			var new_msg = unpack[1];
-			print ("Ball:"," ",new_msg[0]," ",new_msg[1]," ",new_msg[2]);
+			var new_msg = Transform(unpack[1]).origin;
+			print ("Ball:"," ",new_msg.x," ",new_msg.y," ",new_msg.z);
 		elif unpack[0]==2:
-			var new_msg = unpack[1];
-			print ("Player:"," ",new_msg[0]," ",new_msg[1]," ",new_msg[2]);
-	
+			var new_msg = Transform(unpack[1]).origin;
+			print ("Player:"," ",new_msg.x," ",new_msg.y," ",new_msg.z);
+		msg.pop_front();
 		
 func receve():
 	var msg=[];

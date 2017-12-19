@@ -1,10 +1,10 @@
 extends Node;
 
 const active_debug=true;
+const delay_time=1;
 
 #SV
 var is_sv;
-var delay = Timer.new();
 
 #Game
 var ball;
@@ -42,12 +42,9 @@ func _process(delta):
 		global.score[1]+=1;
 		global.set_timer=timer.get_time_left();
 		get_tree().reload_current_scene();
+		
 	if is_sv:
-		var msg =[];
-		var org =ball.get_transform().origin;
-		msg.append(org.x);
-		msg.append(org.y);
-		msg.append(org.z);
+		var msg =ball.get_transform();
 		Server.send([1,msg]);
 	else:
 		var msg = Server.receve();

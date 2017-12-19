@@ -9,7 +9,7 @@ func _ready():
 	
 func _process(delta):
 	var sv = Server.receve();
-	if sv!=[]:
+	while sv!=[]:
 		var pack = sv[0];
 		
 		if pack[0]==1:
@@ -25,9 +25,9 @@ func _process(delta):
 			if str(pack[1])=="4":
 				rotate(1);
 		
-		var org=Gk.get_transform().origin;
-		var msg =[org.x,org.y,org.z];
+		var msg=Gk.get_transform();
 		Server.send([2,msg]);
+		sv.pop_front();
 		
 
 func rotate(side):
