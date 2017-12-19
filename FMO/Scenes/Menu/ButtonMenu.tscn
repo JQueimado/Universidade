@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Scripts/Menus/ButtonMenu.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Menu/csdfjcnkr.jpg" type="Texture" id=2]
-[ext_resource path="res://Scenes/Menu/stock-vector-multimedia-hand-drawn-sketch-icons-set-vector-linear-illustrations-isolated-on-white-255127504.jpg" type="Texture" id=3]
+[ext_resource path="res://Scenes/Menu/stock-vector-multimedia-hand-drawn-sketch-icons-set-vector-linear-illustrations-isolated-on-white-255127504.jpg" type="Texture" id=2]
+[ext_resource path="res://Scenes/Menu/csdfjcnkr.jpg" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -25,25 +25,7 @@ button/min_button_size = -1.0
 button/align = 4
 script/script = ExtResource( 1 )
 
-[node name="Button" type="Button" parent="."]
-
-visibility/opacity = 0.76
-visibility/self_opacity = 0.65
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 383.0
-margin/top = 385.0
-margin/right = 507.0
-margin/bottom = 506.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-icon = ExtResource( 2 )
-flat = false
-
-[node name="TextureButton" type="Button" parent="."]
+[node name="Play" type="Button" parent="."]
 
 visibility/opacity = 0.38
 visibility/light_mask = 3
@@ -58,11 +40,44 @@ margin/bottom = 507.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+icon = ExtResource( 2 )
+flat = false
+
+[node name="Help" type="Button" parent="."]
+
+visibility/opacity = 0.76
+visibility/self_opacity = 0.65
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 383.0
+margin/top = 385.0
+margin/right = 507.0
+margin/bottom = 506.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 icon = ExtResource( 3 )
 flat = false
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="settings" type="Button" parent="."]
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+
+[connection signal="pressed" from="Play" to="." method="_on_TextureButton_pressed"]
+
+[connection signal="pressed" from="Help" to="." method="_on_Button_pressed"]
 
 
