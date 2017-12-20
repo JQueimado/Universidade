@@ -36,11 +36,13 @@ func _process(delta):
 	if(ball.get_transform().origin.x<=-3.6):
 		global.score[0]+=1;
 		global.set_timer=timer.get_time_left();
+		Server.send([3,global.score]);
 		get_tree().reload_current_scene();
 	
 	if(ball.get_transform().origin.x>=3.6):
 		global.score[1]+=1;
 		global.set_timer=timer.get_time_left();
+		Server.send([3,global.score]);
 		get_tree().reload_current_scene();
 		
 	if is_sv:

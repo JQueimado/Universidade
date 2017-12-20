@@ -20,6 +20,8 @@ func _process(delta):
 		elif unpack[0]==2:
 			var new_msg = Transform(unpack[1]).origin;
 			print ("Player:"," ",new_msg.x," ",new_msg.y," ",new_msg.z);
+		elif unpack[0]==3:
+			print ("Score: ",unpack[1]);
 		msg.pop_front();
 		
 func receve():
