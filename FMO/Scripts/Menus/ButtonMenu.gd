@@ -11,3 +11,8 @@ func _on_TextureButton_pressed():
 
 func _on_Button_pressed():
 	 get_tree().change_scene("res://Scenes/HowToPlay/HowToPlay.tscn")
+	
+	
+	
+func _on_settings_pressed():
+	get_tree().change_scene("res://Scenes/Settings")
