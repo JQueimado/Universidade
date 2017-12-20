@@ -11,6 +11,7 @@ shader/shading_mode = 0
 
 [node name="Node2D" type="Node2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 512.826, 299.9 )
 transform/scale = Vector2( 16.0258, 9.40313 )
 
