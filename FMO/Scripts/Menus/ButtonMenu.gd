@@ -15,4 +15,4 @@ func _on_Button_pressed():
 	
 	
 func _on_settings_pressed():
-	get_tree().change_scene("res://Scenes/Settings.tscn")
+	get_tree().change_scene("res://Scenes/Settings/Settings.tscn")

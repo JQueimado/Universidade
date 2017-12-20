@@ -11,23 +11,22 @@ shader/shading_mode = 0
 
 [node name="Node2D" type="Node2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 512.826, 299.9 )
 transform/scale = Vector2( 16.0258, 9.40313 )
 
 [node name="backgroud" type="Sprite" parent="Node2D"]
 
 transform/pos = Vector2( -32.032, -32.0772 )
-transform/scale = Vector2( 0.166701, 0.283775 )
+transform/scale = Vector2( 0.159829, 0.283775 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="ButtonMenu" parent="." instance=ExtResource( 2 )]
 
 material/material = SubResource( 1 )
-margin/left = 3.0
-margin/top = 61.0
-margin/right = 1067.0
+margin/left = -21.0
+margin/top = 66.0
+margin/bottom = 605.0
 button/align = 0
 
 
