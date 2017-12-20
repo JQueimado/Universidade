@@ -67,3 +67,5 @@ func _input(event):
 	if event.is_action_pressed("back"):
 		get_tree().change_scene("res://Scenes/Menu/MenuScene.tscn");
 		
+	if event.is_action_pressed("Test"):
+		get_tree().change_scene("res://Testes/tests.tscn");
