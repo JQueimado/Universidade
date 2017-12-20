@@ -9,20 +9,20 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 338.0
-margin/top = 226.0
-margin/right = 673.0
-margin/bottom = 399.0
+margin/left = 0.0
+margin/top = 25.0
+margin/right = 335.0
+margin/bottom = 198.0
 popup/exclusive = false
 window/title = ""
 script/script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-_run_on_load = true
+_run_on_load = false
 _select_script = null
 _tests_like = null
-_should_print_to_console = true
+_should_print_to_console = false
 _log_level = 1
 _yield_between_tests = true
 _disable_strict_datatype_checks = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://Scripts/Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Balls/BaseBall.scn" type="PackedScene" id=2]
@@ -10,7 +10,8 @@
 [ext_resource path="res://Scenes/Players/Strikers.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Game/2Player.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Menus/UI.gd" type="Script" id=10]
-[ext_resource path="res://Scripts/clientTest.gd" type="Script" id=11]
+[ext_resource path="res://Testes/tests.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scripts/clientTest.gd" type="Script" id=12]
 
 [node name="Game" type="Node"]
 
@@ -104,7 +105,6 @@ transform/local = Transform( -0.2303, 7.50413e-08, 0, 1.22258e-14, 3.75206e-08, 
 
 [node name="UI" type="TextureFrame" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -176,6 +176,10 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="Gut" parent="UI" instance=ExtResource( 11 )]
+
+visibility/visible = false
+
 [node name="Timer" type="Timer" parent="."]
 
 process_mode = 1
@@ -185,7 +189,7 @@ autostart = false
 
 [node name="ClientTest" type="Node" parent="."]
 
-script/script = ExtResource( 11 )
+script/script = ExtResource( 12 )
 
 [connection signal="input_event" from="BaseBall" to="FieldTest/P1" method="_on_BaseBall_input_event"]
 

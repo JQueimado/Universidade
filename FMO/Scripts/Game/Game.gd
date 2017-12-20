@@ -2,6 +2,7 @@ extends Node;
 
 const active_debug=true;
 const delay_time=1;
+var test;
 
 #SV
 var is_sv;
@@ -12,6 +13,9 @@ var timer;
 var start;
 
 func _ready():
+	test=get_node("UI/Gut");
+	test.hide();
+	
 	is_sv = global.ip=="localhost";
 	Server.start();
 	
@@ -58,6 +62,9 @@ func _process(delta):
 			var org = Vector3(arr[0],arr[1],arr[2]);
 			ball.set_transform(Transform(x,y,z,org));
 			
+	#tesing
+	global_test.ball_pos=ball.get_transform().origin;
+			
 	
 func _input(event):
 	
@@ -68,4 +75,7 @@ func _input(event):
 		get_tree().change_scene("res://Scenes/Menu/MenuScene.tscn");
 		
 	if event.is_action_pressed("Test"):
-		get_tree().change_scene("res://Testes/tests.tscn");
+		if test.is_visible():
+			test.hide();
+		else:
+			test.show();
