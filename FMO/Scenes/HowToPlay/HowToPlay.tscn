@@ -119,29 +119,29 @@ max_lines_visible = -1
 
 [node name="Gif 1" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 540.97, 166.857 )
+transform/pos = Vector2( 853.97, 118.857 )
 transform/scale = Vector2( 0.627216, 0.705607 )
 frames = SubResource( 1 )
 animation = "Frame1"
-frame = 16
+frame = 11
 playing = true
 
 [node name="Gif 2" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 267.502, 158.178 )
+transform/pos = Vector2( 863.502, 306.178 )
 transform/scale = Vector2( 0.563687, 0.693255 )
 frames = SubResource( 2 )
 animation = "Frame2"
-frame = 6
+frame = 1
 playing = true
 
 [node name="Gif 3" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 246.005, 427.678 )
+transform/pos = Vector2( 859.005, 491.678 )
 transform/scale = Vector2( 0.556628, 0.800731 )
 frames = SubResource( 3 )
 animation = "Frame3"
-frame = 19
+frame = 4
 playing = true
 
 
