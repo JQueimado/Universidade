@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Scripts/Menus/ButtonMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Menu/menucover.jpg" type="Texture" id=2]
-[ext_resource path="res://Scenes/Menu/jogar-triangular-simbolo-de-botao-em-um-circulo_318-53734.jpg" type="Texture" id=3]
+[ext_resource path="res://Scenes/Menu/PlayButton.jpg" type="Texture" id=3]
 [ext_resource path="res://Scenes/Menu/help.png" type="Texture" id=4]
+
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
