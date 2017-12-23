@@ -1,70 +1,79 @@
-[gd_scene load_steps=64 format=1]
+[gd_scene load_steps=73 format=1]
 
 [ext_resource path="res://Scenes/HowToPlay/HowToPlay.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/HowToPlay/ESC.jpg" type="Texture" id=2]
-[ext_resource path="res://Frames/frame1/01.png" type="Texture" id=3]
-[ext_resource path="res://Frames/frame1/02.png" type="Texture" id=4]
-[ext_resource path="res://Frames/frame1/03.png" type="Texture" id=5]
-[ext_resource path="res://Frames/frame1/04.png" type="Texture" id=6]
-[ext_resource path="res://Frames/frame1/05.png" type="Texture" id=7]
-[ext_resource path="res://Frames/frame1/06.png" type="Texture" id=8]
-[ext_resource path="res://Frames/frame1/07.png" type="Texture" id=9]
-[ext_resource path="res://Frames/frame1/08.png" type="Texture" id=10]
-[ext_resource path="res://Frames/frame1/09.png" type="Texture" id=11]
-[ext_resource path="res://Frames/frame1/10.png" type="Texture" id=12]
-[ext_resource path="res://Frames/frame1/11.png" type="Texture" id=13]
-[ext_resource path="res://Frames/frame1/12.png" type="Texture" id=14]
-[ext_resource path="res://Frames/frame1/13.png" type="Texture" id=15]
-[ext_resource path="res://Frames/frame1/14.png" type="Texture" id=16]
-[ext_resource path="res://Frames/frame1/15.png" type="Texture" id=17]
-[ext_resource path="res://Frames/frame1/16.png" type="Texture" id=18]
-[ext_resource path="res://Frames/frame1/17.png" type="Texture" id=19]
-[ext_resource path="res://Frames/frame1/18.png" type="Texture" id=20]
-[ext_resource path="res://Frames/frame2/01.png" type="Texture" id=21]
-[ext_resource path="res://Frames/frame2/02.png" type="Texture" id=22]
-[ext_resource path="res://Frames/frame2/03.png" type="Texture" id=23]
-[ext_resource path="res://Frames/frame2/04.png" type="Texture" id=24]
-[ext_resource path="res://Frames/frame2/05.png" type="Texture" id=25]
-[ext_resource path="res://Frames/frame2/06.png" type="Texture" id=26]
-[ext_resource path="res://Frames/frame2/07.png" type="Texture" id=27]
-[ext_resource path="res://Frames/frame2/08.png" type="Texture" id=28]
-[ext_resource path="res://Frames/frame2/09.png" type="Texture" id=29]
-[ext_resource path="res://Frames/frame2/10.png" type="Texture" id=30]
-[ext_resource path="res://Frames/frame2/11.png" type="Texture" id=31]
-[ext_resource path="res://Frames/frame2/12.png" type="Texture" id=32]
-[ext_resource path="res://Frames/frame2/13.png" type="Texture" id=33]
-[ext_resource path="res://Frames/frame2/14.png" type="Texture" id=34]
-[ext_resource path="res://Frames/frame2/15.png" type="Texture" id=35]
-[ext_resource path="res://Frames/frame2/16.png" type="Texture" id=36]
-[ext_resource path="res://Frames/frame2/17.png" type="Texture" id=37]
-[ext_resource path="res://Frames/frame2/18.png" type="Texture" id=38]
-[ext_resource path="res://Frames/frame3/01.png" type="Texture" id=39]
-[ext_resource path="res://Frames/frame3/02.png" type="Texture" id=40]
-[ext_resource path="res://Frames/frame3/03.png" type="Texture" id=41]
-[ext_resource path="res://Frames/frame3/04.png" type="Texture" id=42]
-[ext_resource path="res://Frames/frame3/05.png" type="Texture" id=43]
-[ext_resource path="res://Frames/frame3/06.png" type="Texture" id=44]
-[ext_resource path="res://Frames/frame3/07.png" type="Texture" id=45]
-[ext_resource path="res://Frames/frame3/08.png" type="Texture" id=46]
-[ext_resource path="res://Frames/frame3/09.png" type="Texture" id=47]
-[ext_resource path="res://Frames/frame3/10.png" type="Texture" id=48]
-[ext_resource path="res://Frames/frame3/11.png" type="Texture" id=49]
-[ext_resource path="res://Frames/frame3/12.png" type="Texture" id=50]
-[ext_resource path="res://Frames/frame3/13.png" type="Texture" id=51]
-[ext_resource path="res://Frames/frame3/14.png" type="Texture" id=52]
-[ext_resource path="res://Frames/frame3/15.png" type="Texture" id=53]
-[ext_resource path="res://Frames/frame3/16.png" type="Texture" id=54]
-[ext_resource path="res://Frames/frame3/17.png" type="Texture" id=55]
-[ext_resource path="res://Frames/frame3/18.png" type="Texture" id=56]
-[ext_resource path="res://Frames/frame3/19.png" type="Texture" id=57]
-[ext_resource path="res://Frames/frame3/20.png" type="Texture" id=58]
-[ext_resource path="res://Frames/frame3/21.png" type="Texture" id=59]
-[ext_resource path="res://Frames/frame3/22.png" type="Texture" id=60]
+[ext_resource path="res://Scenes/HowToPlay/fundo.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/HowToPlay/ESC.jpg" type="Texture" id=3]
+[ext_resource path="res://Scenes/HowToPlay/T.jpg" type="Texture" id=4]
+[ext_resource path="res://Scenes/HowToPlay/R.jpg" type="Texture" id=5]
+[ext_resource path="res://Scenes/HowToPlay/E.jpg" type="Texture" id=6]
+[ext_resource path="res://Scenes/HowToPlay/Q.jpg" type="Texture" id=7]
+[ext_resource path="res://Scenes/HowToPlay/A.jpg" type="Texture" id=8]
+[ext_resource path="res://Scenes/HowToPlay/D.jpg" type="Texture" id=9]
+[ext_resource path="res://Scenes/HowToPlay/W.jpg" type="Texture" id=10]
+[ext_resource path="res://Scenes/HowToPlay/S.jpg" type="Texture" id=11]
+[ext_resource path="res://Frames/frame1/01.png" type="Texture" id=12]
+[ext_resource path="res://Frames/frame1/02.png" type="Texture" id=13]
+[ext_resource path="res://Frames/frame1/03.png" type="Texture" id=14]
+[ext_resource path="res://Frames/frame1/04.png" type="Texture" id=15]
+[ext_resource path="res://Frames/frame1/05.png" type="Texture" id=16]
+[ext_resource path="res://Frames/frame1/06.png" type="Texture" id=17]
+[ext_resource path="res://Frames/frame1/07.png" type="Texture" id=18]
+[ext_resource path="res://Frames/frame1/08.png" type="Texture" id=19]
+[ext_resource path="res://Frames/frame1/09.png" type="Texture" id=20]
+[ext_resource path="res://Frames/frame1/10.png" type="Texture" id=21]
+[ext_resource path="res://Frames/frame1/11.png" type="Texture" id=22]
+[ext_resource path="res://Frames/frame1/12.png" type="Texture" id=23]
+[ext_resource path="res://Frames/frame1/13.png" type="Texture" id=24]
+[ext_resource path="res://Frames/frame1/14.png" type="Texture" id=25]
+[ext_resource path="res://Frames/frame1/15.png" type="Texture" id=26]
+[ext_resource path="res://Frames/frame1/16.png" type="Texture" id=27]
+[ext_resource path="res://Frames/frame1/17.png" type="Texture" id=28]
+[ext_resource path="res://Frames/frame1/18.png" type="Texture" id=29]
+[ext_resource path="res://Frames/frame2/01.png" type="Texture" id=30]
+[ext_resource path="res://Frames/frame2/02.png" type="Texture" id=31]
+[ext_resource path="res://Frames/frame2/03.png" type="Texture" id=32]
+[ext_resource path="res://Frames/frame2/04.png" type="Texture" id=33]
+[ext_resource path="res://Frames/frame2/05.png" type="Texture" id=34]
+[ext_resource path="res://Frames/frame2/06.png" type="Texture" id=35]
+[ext_resource path="res://Frames/frame2/07.png" type="Texture" id=36]
+[ext_resource path="res://Frames/frame2/08.png" type="Texture" id=37]
+[ext_resource path="res://Frames/frame2/09.png" type="Texture" id=38]
+[ext_resource path="res://Frames/frame2/10.png" type="Texture" id=39]
+[ext_resource path="res://Frames/frame2/11.png" type="Texture" id=40]
+[ext_resource path="res://Frames/frame2/12.png" type="Texture" id=41]
+[ext_resource path="res://Frames/frame2/13.png" type="Texture" id=42]
+[ext_resource path="res://Frames/frame2/14.png" type="Texture" id=43]
+[ext_resource path="res://Frames/frame2/15.png" type="Texture" id=44]
+[ext_resource path="res://Frames/frame2/16.png" type="Texture" id=45]
+[ext_resource path="res://Frames/frame2/17.png" type="Texture" id=46]
+[ext_resource path="res://Frames/frame2/18.png" type="Texture" id=47]
+[ext_resource path="res://Frames/frame3/01.png" type="Texture" id=48]
+[ext_resource path="res://Frames/frame3/02.png" type="Texture" id=49]
+[ext_resource path="res://Frames/frame3/03.png" type="Texture" id=50]
+[ext_resource path="res://Frames/frame3/04.png" type="Texture" id=51]
+[ext_resource path="res://Frames/frame3/05.png" type="Texture" id=52]
+[ext_resource path="res://Frames/frame3/06.png" type="Texture" id=53]
+[ext_resource path="res://Frames/frame3/07.png" type="Texture" id=54]
+[ext_resource path="res://Frames/frame3/08.png" type="Texture" id=55]
+[ext_resource path="res://Frames/frame3/09.png" type="Texture" id=56]
+[ext_resource path="res://Frames/frame3/10.png" type="Texture" id=57]
+[ext_resource path="res://Frames/frame3/11.png" type="Texture" id=58]
+[ext_resource path="res://Frames/frame3/12.png" type="Texture" id=59]
+[ext_resource path="res://Frames/frame3/13.png" type="Texture" id=60]
+[ext_resource path="res://Frames/frame3/14.png" type="Texture" id=61]
+[ext_resource path="res://Frames/frame3/15.png" type="Texture" id=62]
+[ext_resource path="res://Frames/frame3/16.png" type="Texture" id=63]
+[ext_resource path="res://Frames/frame3/17.png" type="Texture" id=64]
+[ext_resource path="res://Frames/frame3/18.png" type="Texture" id=65]
+[ext_resource path="res://Frames/frame3/19.png" type="Texture" id=66]
+[ext_resource path="res://Frames/frame3/20.png" type="Texture" id=67]
+[ext_resource path="res://Frames/frame3/21.png" type="Texture" id=68]
+[ext_resource path="res://Frames/frame3/22.png" type="Texture" id=69]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
 "loop": true,
 "name": "Frame1",
 "speed": 5.0
@@ -73,7 +82,7 @@ animations = [ {
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"frames": [ ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ) ],
 "loop": true,
 "name": "Frame2",
 "speed": 5.0
@@ -82,7 +91,7 @@ animations = [ {
 [sub_resource type="SpriteFrames" id=3]
 
 animations = [ {
-"frames": [ ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ) ],
+"frames": [ ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ) ],
 "loop": true,
 "name": "Frame3",
 "speed": 5.0
@@ -92,6 +101,12 @@ animations = [ {
 
 script/script = ExtResource( 1 )
 
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 511.163, 298.861 )
+transform/scale = Vector2( 1.29737, 1.28357 )
+texture = ExtResource( 2 )
+
 [node name="Controlos" type="Label" parent="."]
 
 focus/ignore_mouse = true
@@ -99,12 +114,12 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = -1.0
-margin/top = 0.0
-margin/right = 1022.0
-margin/bottom = 602.0
+margin/top = -1.0
+margin/right = 1025.0
+margin/bottom = 599.0
 text = "
 
-		                 CONTROLOS:
+		                																				 CONTROLOS:
 			
 			
 			
@@ -118,80 +133,338 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="TextureButton" type="TextureButton" parent="Controlos"]
+[node name="ESC" type="TextureButton" parent="Controlos"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 70.0
-margin/top = 88.0
-margin/right = 145.0
-margin/bottom = 167.0
+margin/left = 643.0
+margin/top = 465.0
+margin/right = 718.0
+margin/bottom = 544.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 2 )
+textures/normal = ExtResource( 3 )
 params/resize_mode = 0
 params/stretch_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Controlos"]
+[node name="ESC!" type="RichTextLabel" parent="Controlos/ESC"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 162.0
-margin/top = 96.0
-margin/right = 506.0
-margin/bottom = 153.0
+margin/left = -37.0
+margin/top = 81.0
+margin/right = 101.0
+margin/bottom = 120.0
 bbcode/enabled = false
 bbcode/bbcode = "
-Butão que Remete o Cliente para o Menu, em qualquer momento do Jogo ou Parte deste."
+BACK TO THE MENU"
 visible_characters = -1
 percent_visible = 1.0
 
-[node name="TextureButton 2" type="TextureButton" parent="Controlos"]
+[node name="T" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 226.0
+margin/top = 454.0
+margin/right = 301.0
+margin/bottom = 533.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="T!" type="RichTextLabel" parent="Controlos/T"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 69.0
-margin/top = 221.0
-margin/right = 149.0
-margin/bottom = 329.0
+margin/left = -8.0
+margin/top = 79.0
+margin/right = 82.0
+margin/bottom = 119.0
+bbcode/enabled = false
+bbcode/bbcode = "
+		TEST"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="R" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 33.0
+margin/top = 451.0
+margin/right = 108.0
+margin/bottom = 530.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+textures/normal = ExtResource( 5 )
 params/resize_mode = 0
 params/stretch_mode = 0
 
+[node name="R!" type="RichTextLabel" parent="Controlos/R"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -22.0
+margin/top = 83.0
+margin/right = 106.0
+margin/bottom = 118.0
+bbcode/enabled = false
+bbcode/bbcode = "
+RESTART BUTTON"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="E" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 227.0
+margin/top = 108.0
+margin/right = 302.0
+margin/bottom = 187.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 6 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="E!" type="RichTextLabel" parent="Controlos/E"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -20.0
+margin/top = 79.0
+margin/right = 103.0
+margin/bottom = 123.0
+bbcode/enabled = false
+bbcode/bbcode = "
+	LAST PLAYER"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="Q" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 41.0
+margin/top = 110.0
+margin/right = 116.0
+margin/bottom = 189.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 7 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="Q!" type="RichTextLabel" parent="Controlos/Q"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -27.0
+margin/top = 79.0
+margin/right = 98.0
+margin/bottom = 124.0
+bbcode/enabled = false
+bbcode/bbcode = "
+	NEXT PLAYER"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="A" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 913.0
+margin/top = 5.0
+margin/right = 988.0
+margin/bottom = 84.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 8 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="A!" type="RichTextLabel" parent="Controlos/A"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -24.0
+margin/top = 79.0
+margin/right = 91.0
+margin/bottom = 125.0
+bbcode/enabled = false
+bbcode/bbcode = "
+	ROTATE LEFT
+	"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="D" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 476.0
+margin/top = 5.0
+margin/right = 551.0
+margin/bottom = 84.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 9 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="D!" type="RichTextLabel" parent="Controlos/D"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -30.0
+margin/top = 79.0
+margin/right = 98.0
+margin/bottom = 119.0
+bbcode/enabled = false
+bbcode/bbcode = "
+	ROTATE RIGHT"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="W" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 471.0
+margin/top = 236.0
+margin/right = 546.0
+margin/bottom = 315.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 10 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="W!" type="RichTextLabel" parent="Controlos/W"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 79.0
+margin/right = 72.0
+margin/bottom = 119.0
+bbcode/enabled = false
+bbcode/bbcode = "
+	PULL"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="S" type="TextureButton" parent="Controlos"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 915.0
+margin/top = 238.0
+margin/right = 990.0
+margin/bottom = 317.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 11 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="S!" type="RichTextLabel" parent="Controlos/S"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 79.0
+margin/right = 81.0
+margin/bottom = 119.0
+bbcode/enabled = false
+bbcode/bbcode = "
+	PUSH"
+visible_characters = -1
+percent_visible = 1.0
+
 [node name="Gif 1" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 853.97, 118.857 )
-transform/scale = Vector2( 0.627216, 0.705607 )
+transform/pos = Vector2( 732.607, 145.646 )
+transform/scale = Vector2( 0.748146, 0.921845 )
 frames = SubResource( 1 )
 animation = "Frame1"
-frame = 13
+frame = 11
 playing = true
 
 [node name="Gif 2" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 863.502, 306.178 )
-transform/scale = Vector2( 0.563687, 0.693255 )
+transform/pos = Vector2( 884.847, 513.095 )
+transform/scale = Vector2( 0.603052, 0.698494 )
 frames = SubResource( 2 )
 animation = "Frame2"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Gif 3" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 859.005, 491.678 )
-transform/scale = Vector2( 0.556628, 0.800731 )
+transform/pos = Vector2( 167.013, 327.777 )
+transform/scale = Vector2( 0.646289, 0.876346 )
 frames = SubResource( 3 )
 animation = "Frame3"
-frame = 4
+frame = 8
 playing = true
 
 
