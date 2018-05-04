@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "Structs/Queue.c"
 int *extract(char *name){
 
 	FILE *inputFile;
