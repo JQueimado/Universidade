@@ -1,13 +1,22 @@
+/*Libs*/
 #include <stdio.h>
+#include <stdlib.h>
+
+/*Classes*/
 #include "Structs/Queue.c"
+
+/*Consts*/
+#define SIZE_FILE_lINE 200
+
+/*Funcs*/
 int *extract(char *name){
 
 	FILE *inputFile;
- 	inputFile = fopen(name, "r")  
+ 	inputFile = fopen(name, "r");
 
  	//Read File into array
 
-	int process[size_File_line];
+	int process[SIZE_FILE_lINE];
 	int i;
 
 	if (inputFile == NULL) {
@@ -24,10 +33,10 @@ int *extract(char *name){
 
 }
 
-
+/*main*/
 int main() {
     
-    int *file = extract("input_b.xpto");
+    int *file_array = extract("input_b.xpto");
 
     return 0;
 
