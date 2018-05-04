@@ -1,25 +1,34 @@
 #include <stdio.h>
 
+int *extract(char *name){
+
+	FILE *inputFile;
+ 	inputFile = fopen(name, "r")  
+
+ 	//Read File into array
+
+	int process[size_File_line];
+	int i;
+
+	if (inputFile == NULL) {
+		printf("Erro: Does not exist\n");
+	}
+	 
+ 	for (i = 0; i < 16; i++){
+        fscanf(inputFile, "%d,", &process[i] );
+    }
+
+	fclose(inputFile);
+    
+	return process;
+
+}
 
 
 int main() {
     
- FILE *inputFile;
- inputFile = fopen("input_b.xpto", "r")  
+    int *file = extract("input_b.xpto");
 
- //Read File into array
+    return 0;
 
-    int process[size_File_line];
-    int i;
-
- if (inputFile == NULL) {
-	printf("Erro: Does not exist\n");
- }
- 
- for (i = 0; i < 16; i++){
-        fscanf(inputFile, "%d,", &process[i] );
-
- fclose(myFile);
- return 0;    
-    
 }
