@@ -1,12 +1,20 @@
 /*Libs*/
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /*Classes*/
 #include "Structs/Queue.c"
+#include "Structs/Process.c"
 
 /*Consts*/
+
+/*Vars*/
 #define SIZE_FILE_lINE 200
+#define STANDARD_ARRAY_SIZE	200
+
+/*Scheduling*/
+#define QUANTUM 4
 
 /*Funcs*/
 int *extract(char *name){
@@ -36,7 +44,17 @@ int *extract(char *name){
 /*main*/
 int main() {
     
-    int *file_array = extract("input_b.xpto");
+    /*Lists*/
+    int *to_do_list = extract("input_b.xpto");
+    int ready[STANDARD_ARRAY_SIZE];
+
+    int time = 0;
+
+    while(true){
+
+
+
+    }
 
     return 0;
 
