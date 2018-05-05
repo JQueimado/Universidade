@@ -46,8 +46,12 @@ int main() {
     
     /*Lists*/
     int *to_do_list;
+
     struct Queue *ready = new_Queue();
-    int time = 0;
+    struct Queue *blocked = new_Queue();
+    struct Process *run = NULL;
+
+    int timer = 0;
 
     /*Extract file*/
     to_do_list = extract("input_b.xpto");
@@ -60,5 +64,5 @@ int main() {
     }
 
     return 0;
-    
+
 }
