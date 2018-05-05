@@ -4,8 +4,8 @@
 #include <stdbool.h>
 
 /*Classes*/
-#include "Structs/Queue.c"
-#include "Structs/Process.c"
+#include "Structs/Queue.h"
+#include "Structs/Process.h"
 
 /*Consts*/
 
@@ -24,7 +24,7 @@ int *extract(char *name){
 
  	//Read File into array
 
-	int process[SIZE_FILE_lINE];
+	static int process[SIZE_FILE_lINE];
 	int i;
 
 	if (inputFile == NULL) {
@@ -45,11 +45,14 @@ int *extract(char *name){
 int main() {
     
     /*Lists*/
-    int *to_do_list = extract("input_b.xpto");
-    int ready[STANDARD_ARRAY_SIZE];
-
+    int *to_do_list;
+    struct Queue *ready = new_Queue();
     int time = 0;
 
+    /*Extract file*/
+    to_do_list = extract("input_b.xpto");
+
+    /*Processor loop*/
     while(true){
 
 
@@ -57,5 +60,5 @@ int main() {
     }
 
     return 0;
-
+    
 }
