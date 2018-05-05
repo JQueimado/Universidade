@@ -61,3 +61,18 @@ struct Process{
 	struct Instructions_Queue *script;
 
 };
+
+/*Constructors*/
+struct Process *new_Process(){
+
+
+}
+
+struct Process *new_Process(int i, int arr_time, int inst[]){
+
+	
+}
+
+int run(struct Process *process){
+
+}
