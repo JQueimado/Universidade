@@ -8,7 +8,9 @@
 /*Instruction Testing*/
 void Instruction_Queue_Testing(){
 	
-	struct Instruction_Queue *temp = new_Instruction_Queue_2( [3,4,1,5] , 4 );
+	int test_arr[] = {3,4,1,5};
+
+	struct Instruction_Queue *temp = new_Instruction_Queue_2( test_arr, 4 );
 
 	/*Is Empty*/
 	puts("is_empty test:");
