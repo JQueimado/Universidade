@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "Structs/Instruction_Queue.h"
+#include "Structs/Process.h"
 
 /*Instruction Testing*/
 void Instruction_Queue_Testing(){
@@ -33,6 +34,30 @@ void Instruction_Queue_Testing(){
 	printf("1 -> %d\n",dequeue( temp ));
 	printf("5 -> %d\n",dequeue( temp ));
 	printf("-1 -> %d\n",dequeue( temp ));
+}
+
+void Process_Testing(){
+	/*Setup*/
+	int id = 325;
+	int t_arrival = 2;
+	int insts[] = {3,4,1,5};
+	int size = 4;
+
+	struct Process *temp = new_Process( id , t_arrival , insts , size );
+
+	/*Creaton*/
+	puts("Creaton test:");
+	printf("325 -> %d\n", temp->id );
+	printf("2 -> %d\n", temp->t_arrival );
+
+	/*Run*/
+	puts("run test:");
+	printf("3 -> %d\n", run( temp ) );
+	printf("4 -> %d\n", run( temp ) );
+	printf("1 -> %d\n", run( temp ) );
+	printf("5 -> %d\n", run( temp ) );
+	printf("-1 -> %d\n", run( temp ) );
+
 }
 
 /*Main*/
