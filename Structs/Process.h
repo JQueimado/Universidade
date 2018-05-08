@@ -10,6 +10,7 @@
 
 /*Define*/
 struct Process{
+	
 	int id;
 	int arrival_time;
 	int run_time;

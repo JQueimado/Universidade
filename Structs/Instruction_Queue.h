@@ -12,8 +12,8 @@
 
 /*Define*/
 struct Instruction_Queue{
-	int header;
 	int footer;
+	int size;
 	int script[Instruction_Queue_STD_SIZE];
 };
 
@@ -22,8 +22,8 @@ struct Instruction_Queue *new_Instruction_Queue_1(){
 
 	struct Instruction_Queue *temp = malloc(sizeof(struct Instruction_Queue));
 	
-	temp->header = 0;
 	temp->footer = 0;
+	temp->size = 0;
 	/*temp->script = EMPY*/
 
 	return temp;
@@ -40,17 +40,15 @@ struct Instruction_Queue *new_Instruction_Queue_2(int Instruction[],int n_inst){
 	
 	}
 
+	temp->size = n_inst;
+
 	return temp;
 
 }
 
 /*Methods*/
 void is_empty(struct Instruction_Queue *queue){
-
-}
-
-void enqueue(struct Instruction_Queue *queue, int item){
-
+	
 }
 
 int dequeue(struct Instruction_Queue *queue){
