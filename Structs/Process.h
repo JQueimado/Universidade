@@ -35,7 +35,7 @@ int run(struct Process *process){
 
 	struct Instruction_Queue *script = process->script;
 
-	return script->dequeue;
+	return dequeue(script);
 
 }
 
