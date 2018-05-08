@@ -13,23 +13,18 @@ struct Process{
 	
 	int id;
 	int arrival_time;
-	int run_time;
 	struct Instruction_Queue *script;
 
 };
 
 /*Constructors*/
-struct Process *new_Process_1(){
-
+struct Process *new_Process(int i, int arr_time, int inst[], int arr_size){
+	
 	struct Process *temp = malloc(sizeof(struct Process));
 
-	return temp;
-
-}
-
-struct Process *new_Process_2(int i, int arr_time, int inst[]){
-	
-	struct Process *temp = new_Process_1();
+	temp->id = i;
+	temp->arrival_time = arr_time;
+	temp->script = new_Instruction_Queue_2( inst , arr_size);	
 
 	return temp;
 
