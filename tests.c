@@ -37,6 +37,7 @@ void Instruction_Queue_Testing(){
 }
 
 void Process_Testing(){
+	
 	/*Setup*/
 	int id = 325;
 	int t_arrival = 2;
@@ -48,7 +49,7 @@ void Process_Testing(){
 	/*Creaton*/
 	puts("Creaton test:");
 	printf("325 -> %d\n", temp->id );
-	printf("2 -> %d\n", temp->t_arrival );
+	printf("2 -> %d\n", temp->arrival_time );
 
 	/*Run*/
 	puts("run test:");
@@ -64,5 +65,6 @@ void Process_Testing(){
 int main()
 {
 	Instruction_Queue_Testing();
+	Process_Testing();
 	return 0;
 }
