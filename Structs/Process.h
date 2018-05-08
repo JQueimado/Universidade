@@ -33,7 +33,9 @@ struct Process *new_Process(int i, int arr_time, int inst[], int arr_size){
 /*Methods*/
 int run(struct Process *process){
 
-	return 0;
+	struct Instruction_Queue *script = process->script;
+
+	return script->dequeue;
 
 }
 
