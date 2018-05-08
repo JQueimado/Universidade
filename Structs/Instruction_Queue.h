@@ -63,7 +63,7 @@ int dequeue(struct Instruction_Queue *queue){
 
 int next(struct Instruction_Queue *queue){
 
-	return 0;
+	return queue->script[queue->footer];
 
 }
 
