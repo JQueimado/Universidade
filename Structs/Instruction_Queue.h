@@ -55,7 +55,11 @@ bool is_empty(struct Instruction_Queue *queue){
 }
 
 int dequeue(struct Instruction_Queue *queue){
-
+	
+	if (is_empty(queue)){
+		return -1;
+	}
+	
 	int ret = queue->script[queue->footer];
 	queue->footer += 1;
 	return ret;
