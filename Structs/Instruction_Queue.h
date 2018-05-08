@@ -6,6 +6,7 @@
 
 /*Includes*/
 #include <stdlib.h>
+#include <stdbool.h>
 
 /*Consts*/
 #define Instruction_Queue_STD_SIZE 200
@@ -47,7 +48,7 @@ struct Instruction_Queue *new_Instruction_Queue_2(int Instruction[],int n_inst){
 }
 
 /*Methods*/
-void is_empty(struct Instruction_Queue *queue){
+bool is_empty(struct Instruction_Queue *queue){
 	
 	return queue->footer == queue->size;
 
