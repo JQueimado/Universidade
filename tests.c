@@ -17,7 +17,7 @@ void Instruction_Queue_Testing(){
 	puts("is_empty test:");
 	int res = 0;
 
-	if (is_empty(temp)){
+	if (IQ_is_empty(temp)){
 		res = 1;
 	}
 
@@ -25,15 +25,15 @@ void Instruction_Queue_Testing(){
 
 	/*Next*/
 	puts("next test:");
-	printf("3 -> %d\n",next( temp ));
+	printf("3 -> %d\n",IQ_next( temp ));
 
 	/*Dequeue*/
 	puts("dequeue test:");
-	printf("3 -> %d\n",dequeue( temp ));
-	printf("4 -> %d\n",dequeue( temp ));
-	printf("1 -> %d\n",dequeue( temp ));
-	printf("5 -> %d\n",dequeue( temp ));
-	printf("-1 -> %d\n",dequeue( temp ));
+	printf("3 -> %d\n",IQ_dequeue( temp ));
+	printf("4 -> %d\n",IQ_dequeue( temp ));
+	printf("1 -> %d\n",IQ_dequeue( temp ));
+	printf("5 -> %d\n",IQ_dequeue( temp ));
+	printf("-1 -> %d\n",IQ_dequeue( temp ));
 }
 
 void Process_Testing(){

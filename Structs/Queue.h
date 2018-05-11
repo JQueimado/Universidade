@@ -11,7 +11,7 @@
 #include "Process.h"
 
 /*Consts*/
-#define STD_Queue_size 50;
+#define STD_Queue_size 50
 
 /*Define*/
 struct Queue{
@@ -21,7 +21,7 @@ struct Queue{
 };
 
 /*Constructor*/
-struct Queue *new_Queue(/*args*/){
+struct Queue *new_Queue(){
 	struct Queue *temp = malloc(sizeof(struct Queue));
 
 	temp->header = 0;
@@ -36,7 +36,7 @@ bool is_empty(struct Queue *queue){
 }
 
 void enqueue(struct Queue *queue, struct Process *item){
-	queue->arr[q->footer] = item;
+	queue->arr[queue->footer] = item;
 	queue->footer += 1;
 }
 
