@@ -21,7 +21,7 @@ struct Process{
 	int inst_end;
 	
 	/*Memory*/
-	int MEM[MEM_SIZE]
+	int MEM[MEM_SIZE];
 
 };
 

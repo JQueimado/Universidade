@@ -23,12 +23,15 @@
 /*Extract Input File*/
 int *extract(char *name){
 
+    FILE * file_pointer;
+    file_pointer = fopen ("input_b.xpto","r");
+
 	FILE *inputFile;
  	inputFile = fopen(name, "r");
 
  	//Read File into array
 
-	static int process[SIZE_FILE_lINE];
+	int process[SIZE_FILE_LINE];
 	int i;
 
 
@@ -51,9 +54,6 @@ int *extract(char *name){
 
 /*main*/
 int main() {
- 
-    FILE * file_pointer;
-    file_pointer = fopen ("input_b.xpto","r");
     
     /*Lists*/
     struct Queue *to_do_list = new_Queue();
