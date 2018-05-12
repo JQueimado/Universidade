@@ -10,12 +10,13 @@
 /*Consts*/
 
 /*Vars*/
-#define SIZE_FILE_lINE 200
-#define STANDARD_ARRAY_SIZE	200
+#define SIZE_FILE_LINE 300
+#define STANDARD_ARRAY_SIZE 300
 
 /*Scheduling*/
 #define QUANTUM 4
 #define MAX_READY_SIZE 4
+
 
 /*Funcs*/
 
@@ -30,22 +31,29 @@ int *extract(char *name){
 	static int process[SIZE_FILE_lINE];
 	int i;
 
-	if (inputFile == NULL) {
-		printf("Erro: Does not exist\n");
-	}
-	 
- 	for (i = 0; i < 16; i++){
-        fscanf(inputFile, "%d,", &process[i] );
+
+    if (file_pointer == NULL) {
+        printf("Erro: Does not exist\n");
+    }
+     
+    int line = 0;
+    char Array[300];
+
+    while(fgets(Array, 300 , file_pointer)) {
+    line = line + 1;
+        printf("Line:%d -> %s",line, Array);
     }
 
-	fclose(inputFile);
-    
-	return process;
+    fclose(file_pointer);
 
+    return 0;
 }
 
 /*main*/
 int main() {
+ 
+    FILE * file_pointer;
+    file_pointer = fopen ("input_b.xpto","r");
     
     /*Lists*/
     struct Queue *to_do_list = new_Queue();
