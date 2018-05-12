@@ -10,39 +10,28 @@
 /*Consts*/
 
 /*Vars*/
-#define SIZE_FILE_lINE 200
-#define STANDARD_ARRAY_SIZE	200
+#define SIZE_FILE_lINE 300
+#define STANDARD_ARRAY_SIZE 300
 
 /*Scheduling*/
 #define QUANTUM 4
 
-/*Funcs*/
-int *extract(char *name){
-
-	FILE *inputFile;
- 	inputFile = fopen(name, "r");
-
- 	//Read File into array
-
-	static int process[SIZE_FILE_lINE];
-	int i;
-
-	if (inputFile == NULL) {
-		printf("Erro: Does not exist\n");
-	}
-	 
- 	for (i = 0; i < 16; i++){
-        fscanf(inputFile, "%d,", &process[i] );
-    }
-
-	fclose(inputFile);
-    
-	return process;
-
-}
-
 /*main*/
 int main() {
+ 
+ FILE * file_pointer;
+ file_pointer = fopen ("input_b.txt","r");
+
+ int line = 0;
+ int Array[300];
+ int i;
+
+ while(fscanf(file_pointer, "%d" , Array) && line<=8) {
+	line = line + 1;
+        for (i=0;i<=300;i++) {
+		printf("Line:%d -> %d",line, Array[i]);
+	}
+ }
     
     /*Lists*/
     int *to_do_list;
