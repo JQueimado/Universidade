@@ -8,12 +8,20 @@
 #include <stdlib.h>
 #include "Instruction_Queue.h"
 
+#define VAR_SIZE 10
+#define MEM_SIZE 300
+
 /*Define*/
 struct Process{
 	
+	/*PCB*/
 	int id;
 	int arrival_time;
-	struct Instruction_Queue *script;
+	int PC;
+	
+	/*Memory*/
+	int VAR[VAR_SIZE];
+	int MEM[MEM_SIZE];
 
 };
 
@@ -24,19 +32,17 @@ struct Process *new_Process(int i, int arr_time, int inst[], int arr_size){
 
 	temp->id = i;
 	temp->arrival_time = arr_time;
-	temp->script = new_Instruction_Queue_2( inst , arr_size);	
+	temp->PC = 0;
+
+	for (int i = 0; i < count; ++i){
+		
+		temp->MEM[i] = inst[i];
+	
+	}
 
 	return temp;
 
 }
 
-/*Methods*/
-int run(struct Process *process){
-
-	struct Instruction_Queue *script = process->script;
-
-	return IQ_dequeue(script);
-
-}
 
 #endif

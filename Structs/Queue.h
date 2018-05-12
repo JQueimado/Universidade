@@ -11,13 +11,13 @@
 #include "Process.h"
 
 /*Consts*/
-#define STD_Queue_size 50
+#define STD_QUEUE_SIZE 50
 
 /*Define*/
 struct Queue{
 	int header;
 	int footer;
-	struct Process *arr[STD_Queue_size];
+	struct Process *arr[STD_QUEUE_SIZE];
 };
 
 /*Constructor*/
