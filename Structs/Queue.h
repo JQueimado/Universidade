@@ -6,24 +6,50 @@
 
 /*Includes*/
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "Process.h"
 
-/*N Tenhas Medo isto é como as classes do java XD*/
+/*Consts*/
+#define STD_Queue_size 50
 
 /*Define*/
 struct Queue{
-	/*something*/
+	int header;
+	int footer;
+	struct Process *arr[STD_Queue_size];
 };
 
 /*Constructor*/
-struct Queue *new_Queue(/*args*/){
-	return NULL;
+struct Queue *new_Queue(){
+	struct Queue *temp = malloc(sizeof(struct Queue));
+
+	temp->header = 0;
+	temp->footer = 0;
+
+	return temp;
 }
 
 /*Methods*/
-void add(struct Queue *queue, struct Process *item){
+bool is_empty(struct Queue *queue){
+	return queue->header == queue->footer;
+}
 
+void enqueue(struct Queue *queue, struct Process *item){
+	queue->arr[queue->footer] = item;
+	queue->footer += 1;
+}
+
+struct Process *dequeue(struct Queue *queue){
+	if (is_empty(queue))
+		return NULL;
+
+	queue->header += 1;
+	return queue->arr[queue->header - 1];
+}
+
+struct Process *next(struct Queue *queue){
+	return queue->arr[queue->header];
 }
 
 #endif

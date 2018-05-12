@@ -48,15 +48,15 @@ struct Instruction_Queue *new_Instruction_Queue_2(int Instruction[],int n_inst){
 }
 
 /*Methods*/
-bool is_empty(struct Instruction_Queue *queue){
+bool IQ_is_empty(struct Instruction_Queue *queue){
 	
 	return queue->footer == queue->size;
 
 }
 
-int dequeue(struct Instruction_Queue *queue){
+int IQ_dequeue(struct Instruction_Queue *queue){
 	
-	if (is_empty(queue)){
+	if (IQ_is_empty(queue)){
 		return -1;
 	}
 	
@@ -66,7 +66,7 @@ int dequeue(struct Instruction_Queue *queue){
 
 }
 
-int next(struct Instruction_Queue *queue){
+int IQ_next(struct Instruction_Queue *queue){
 
 	return queue->script[queue->footer];
 

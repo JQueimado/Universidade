@@ -10,7 +10,7 @@
 /*Consts*/
 
 /*Vars*/
-#define SIZE_FILE_lINE 300
+#define SIZE_FILE_LINE 300
 #define STANDARD_ARRAY_SIZE 300
 
 /*Scheduling*/
@@ -20,18 +20,24 @@
 int main() {
  
  FILE * file_pointer;
- file_pointer = fopen ("input_b.txt","r");
+ file_pointer = fopen ("input_b.xpto","r");
 
- int line = 0;
- int Array[300];
- int i;
-
- while(fscanf(file_pointer, "%d" , Array) && line<=8) {
-	line = line + 1;
-        for (i=0;i<=300;i++) {
-		printf("Line:%d -> %d",line, Array[i]);
-	}
+ if (file_pointer == NULL) {
+     printf("Erro: Does not exist\n");
  }
+	 
+ int line = 0;
+ char Array[300];
+
+ while(fgets(Array, 300 , file_pointer)) {
+	line = line + 1;
+        printf("Line:%d -> %s",line, Array);
+ }
+
+ fclose(file_pointer);
+
+ return 0;
+
     
     /*Lists*/
     int *to_do_list;
