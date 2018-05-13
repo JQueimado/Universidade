@@ -17,8 +17,7 @@
 #define QUANTUM 4
 #define MAX_READY_SIZE 4
 
-
-/*main*/
+/***main***/
 int main() {
     
     FILE * file_pointer;
@@ -89,8 +88,41 @@ int main() {
 
         }
 
-        /**Next**/
+        /**Scheduling Call**/
+        if( (timer % QUANTUM == 0) || (run == NULL)){
 
+            /*Takes the process from RUN*/
+            if(run != NULL){
+
+                if(ready->size >= MAX_READY_SIZE){
+
+                    enqueue(blocked, run);
+
+                }else{
+
+                    enqueue(ready ,run);
+
+                }
+
+                run = NULL;
+
+            }
+
+            /*Puts next in line*/
+            if(!is_empty(ready)){
+
+                run = dequeue(ready);
+
+            }
+
+        }
+
+        /**CPU**/
+        if (run != NULL){
+
+
+
+        }
 
     }
 

@@ -34,7 +34,7 @@ struct Queue *new_Queue(){
 
 /*Methods*/
 bool is_empty(struct Queue *queue){
-	return queue->size = 0;
+	return queue->size == 0;
 }
 
 void enqueue(struct Queue *queue, struct Process *item){
