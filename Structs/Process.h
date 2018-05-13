@@ -33,7 +33,7 @@ struct Process *new_Process(int i, int arr_time, int inst[], int inst_size){
 	/*PCB*/
 	temp->id = i;
 	temp->arrival_time = arr_time;
-	temp->inst_time = 0;
+	temp->inst_time = -1;
 	temp->PC = INST_POINTER;
 	temp->inst_end = inst_size + INST_POINTER;
 

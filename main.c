@@ -119,10 +119,23 @@ int main() {
 
         /**CPU**/
         if (run != NULL){
+            
+            /*Run*/
+            if (run->inst_time != -1){
 
+                /*Inst handler*/
 
+            }
 
+            /*Check if process ended*/
+            if ( run->PC > run->inst_end ){
+
+                run = NULL;
+
+            }
         }
+
+        timer += 1;
 
     }
 
