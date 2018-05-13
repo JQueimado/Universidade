@@ -9,15 +9,28 @@ int main() {
  if (file_pointer == NULL) {
      printf("Erro: Does not exist\n");
  }
-	 
- int line = 0;
+
+
+ int i;	 
+ int line = 1;
+ int count = 0;
  char Array[300];
 
  while(fgets(Array, 300 , file_pointer)) {
-	line = line + 1;
-        printf("Line:%d -> %s",line, Array);
+     do{
+        for(i=0;Array[i];i++) {
+     		if(Array[i] != ' ') {
+        		Array[count] = Array[i];
+        		count++;
+     	        }
+        } 
+ 	Array[count] = '\0';
+        printf("Processo: %d  ||  Instante: %s \n", line, Array); 
+        line = line + 1;
+        } 
+     while(line <= 8);     
  }
-
+  
  fclose(file_pointer);
 
  return 0;
