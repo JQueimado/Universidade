@@ -60,9 +60,6 @@ int main() {
 
     int timer = 0;
 
-    /*Extract file*/
-    extract("input_b.xpto");
-
     /*Processor loop*/
     while( !( is_empty( to_do_list ) && is_empty(ready) && run == NULL) ){
         
