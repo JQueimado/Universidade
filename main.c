@@ -51,7 +51,6 @@ int main() {
     /*Lists*/
     struct Queue *to_do_list = new_Queue();
 
-    int ready_size = 0;
     struct Queue *ready = new_Queue();
     
     struct Queue *blocked = new_Queue();
@@ -60,43 +59,37 @@ int main() {
 
     int timer = 0;
 
-    /*Processor loop*/
+    /***Processor loop***/
     while( !( is_empty( to_do_list ) && is_empty(ready) && run == NULL) ){
         
-        /*Check Process Entry*/
-        struct Queue *temp = new_Queue();
+        /**Check Process Entry**/
         struct Process *cur_pro = NULL;
 
-        while (!is_empty(to_do_list)){
+        for (int i = 0; i < to_do_list->size; i++){
 
             cur_pro = dequeue(to_do_list);
-            
+
             if (cur_pro->arrival_time <= timer){
 
-                if(ready_size >= MAX_READY_SIZE){
-                    
-                    enqueue(blocked , cur_pro);
-                
+                if(ready->size >= MAX_READY_SIZE){
+
+                    enqueue(blocked, cur_pro);
+
                 }else{
-                
-                    enqueue(ready , cur_pro);
-                
+
+                    enqueue(ready, cur_pro);
+
                 }
 
             }else{
 
-                enqueue(temp, cur_pro);
+                enqueue(to_do_list, cur_pro);
 
             }
 
         }
 
-        while (!is_empty(temp)){
-
-            cur_pro = dequeue(temp);
-            enqueue(to_do_list , cur_pro);
-
-        }
+        /**Next**/
 
 
     }
