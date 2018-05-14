@@ -52,26 +52,20 @@ struct Process *new_Process(int i, int arr_time, int inst[], int inst_size){
 /*Methods*/
 int get_var(struct Process *process , int var_name){
 
-	if ( (var_name < 0) || (var_name >= INST_POINTER) )
-		return -1;
-
 	return process->MEM[var_name];
 
 }
 
-int set_var(struct Process *process , int var_name , int val){
-
-	if ( (var_name < 0) || (var_name >= INST_POINTER) )
-		return -1;
+void set_var(struct Process *process , int var_name , int val){
 
 	process->MEM[var_name] = val;
-
-	return 0;
 
 }
 
 int get_inst(struct Process *process){
+	
 	return process->MEM[process->PC];
+
 }
 
 #endif

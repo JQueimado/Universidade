@@ -39,25 +39,35 @@ struct Process *CPU(struct Process *process){
 
     if (i == ZERO){
 
-
+        set_var( process , v , 0 );
 
     }
 
     if (i == ADD){
-
         
+        int var = get_var( process , v);
+
+        var += 1;
+
+        set_var( process , v , var ); 
         
     }
 
     if (i == SUB){
 
-        
+        int var = get_var( process , v);
+
+        var -= 1;
+
+        set_var( process , v , var );
         
     }
 
     if (i == IF){
 
-        
+        if( get_var( process , v ) != 0 ){
+            process->PC += 1;
+        }
         
     }
 
