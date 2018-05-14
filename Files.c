@@ -17,17 +17,21 @@ int main() {
  char Array[300];
 
  while(fgets(Array, 300 , file_pointer)) {
+
      do{
-        for(i=0;Array[i];i++) {
+        for(i=0; Array[i]; i++) {
+            
      		if(Array[i] != ' ') {
         		Array[count] = Array[i];
         		count++;
-     	        }
+ 	        }
+        
         } 
- 	Array[count] = '\0';
+
+        Array[count] = '\0';
         printf("Processo: %d  ||  Instante: %s \n", line, Array); 
         line = line + 1;
-        } 
+     } 
      while(line <= 8);     
  }
   
@@ -36,4 +40,3 @@ int main() {
  return 0;
 
 }
-
