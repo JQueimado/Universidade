@@ -15,7 +15,7 @@ int main() {
  int line = 1;
  int count = 0;
  char Array[300];
-
+/*
  while(fgets(Array, 300 , file_pointer)) {
      do{
         for(i=0;Array[i];i++) {
@@ -24,13 +24,43 @@ int main() {
         		count++;
      	        }
         } 
- 	Array[count] = '\0';
+        Array[count] = '\0';
         printf("Processo: %d  ||  Instante: %s \n", line, Array); 
         line = line + 1;
         } 
      while(line <= 8);     
  }
-  
+*/
+
+ while ( fgets( Array , 300 , file_pointer ) ){
+    
+    count +=1;
+
+    char arr_time[3];
+
+    for ( i = 0; Array[i] != ' '; i++){
+
+        arr_time[i] = Array[i];
+
+    }
+
+    printf("Processo: %d || t_chegada->%s :", count, arr_time );
+
+    while ( Array[i] != '\n' ){
+
+        if ( Array[i] != ' ' ){
+
+            printf("%c", Array[i]);
+
+        }
+
+        i+=1;
+
+    }
+    printf("\n");
+
+ }
+
  fclose(file_pointer);
 
  return 0;
