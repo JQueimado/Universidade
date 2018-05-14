@@ -17,8 +17,93 @@
 #define QUANTUM 4
 #define MAX_READY_SIZE 4
 
+/*Functions*/
+#define ZERO 0
+#define ADD 1
+#define SUB 2
+#define IF 3
+#define BACK 4
+#define FORW 5
+#define FORK 6
+#define DISCK_SAVE 7
+#define COPY 8
+#define EXIT 9
 
-/*main*/
+/**CPU**/
+struct Process *CPU(struct Process *process){
+
+    int inst = process->MEM[process->PC];
+
+    int i = inst / 10;
+    int v = inst - i*10;
+
+    if (i == ZERO){
+
+
+
+    }
+
+    if (i == ADD){
+
+        
+        
+    }
+
+    if (i == SUB){
+
+        
+        
+    }
+
+    if (i == IF){
+
+        
+        
+    }
+
+    if (i == BACK){
+
+        
+        
+    }
+
+    if (i == FORW){
+
+        
+        
+    }
+
+    if (i == FORK){
+
+        
+        
+    }
+
+    if (i == DISCK_SAVE){
+
+        
+        
+    }
+
+    if (i == COPY){
+
+        
+        
+    }
+
+    if (i == EXIT){
+
+        
+        
+    }
+
+    process->PC += 1;
+
+    return process;
+
+}
+
+/***main***/
 int main() {
 
  /*Extract Input File*/
@@ -133,10 +218,21 @@ int main() {
 
                 /*Inst handler*/
 
+<<<<<<< HEAD
             }
 
             /*Check if process ended*/
             if ( run->PC > run->inst_end ){
+=======
+            run = CPU(run);
+
+            if (run->is_blocked){
+
+                enqueue(blocked, run);
+                run = NULL;
+
+            }
+>>>>>>> My-WorkSpace
 
                 run = NULL;
 

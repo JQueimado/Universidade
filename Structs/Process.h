@@ -17,6 +17,7 @@ struct Process{
 	int id;
 	int arrival_time;
 	int inst_time;
+	int is_blocked;
 	int PC;
 	int inst_end;
 	
