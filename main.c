@@ -15,7 +15,9 @@
 
 /*Scheduling*/
 #define QUANTUM 4
+#define MAX_READY_SIZE 4
 
+<<<<<<< HEAD
 /*main*/
 int main() {
  
@@ -45,27 +47,98 @@ int main() {
         } 
      while(line <= 8);     
  }
+=======
 
- fclose(file_pointer);
+/*Funcs*/
 
- return 0;
+/*Extract Input File*/
+int *extract(char *name){
 
+    FILE * file_pointer;
+    file_pointer = fopen ("input_b.xpto","r");
+
+	FILE *inputFile;
+ 	inputFile = fopen(name, "r");
+
+ 	//Read File into array
+
+	int process[SIZE_FILE_LINE];
+	int i;
+
+
+    if (file_pointer == NULL) {
+        printf("Erro: Does not exist\n");
+    }
+     
+    int line = 0;
+    char Array[300];
+
+    while(fgets(Array, 300 , file_pointer)) {
+    line = line + 1;
+        printf("Line:%d -> %s",line, Array);
+    }
+>>>>>>> 825b7e8b5be4a60e0a4f45af490ec1f90ea1a709
+
+    fclose(file_pointer);
+
+    return 0;
+}
+
+/*main*/
+int main() {
     
     /*Lists*/
-    int *to_do_list;
+    struct Queue *to_do_list = new_Queue();
 
+    int ready_size = 0;
     struct Queue *ready = new_Queue();
+    
     struct Queue *blocked = new_Queue();
+    
     struct Process *run = NULL;
 
     int timer = 0;
 
     /*Extract file*/
-    to_do_list = extract("input_b.xpto");
+    extract("input_b.xpto");
 
     /*Processor loop*/
-    while(true){
+    while( !( is_empty( to_do_list ) && is_empty(ready) && run == NULL) ){
+        
+        /*Check Process Entry*/
+        struct Queue *temp = new_Queue();
+        struct Process *cur_pro = NULL;
 
+        while (!is_empty(to_do_list)){
+
+            cur_pro = dequeue(to_do_list);
+            
+            if (cur_pro->arrival_time <= timer){
+
+                if(ready_size >= MAX_READY_SIZE){
+                    
+                    enqueue(blocked , cur_pro);
+                
+                }else{
+                
+                    enqueue(ready , cur_pro);
+                
+                }
+
+            }else{
+
+                enqueue(temp, cur_pro);
+
+            }
+
+        }
+
+        while (!is_empty(temp)){
+
+            cur_pro = dequeue(temp);
+            enqueue(to_do_list , cur_pro);
+
+        }
 
 
     }
