@@ -17,6 +17,7 @@
 struct Queue{
 	int header;
 	int footer;
+	int size;
 	struct Process *arr[STD_QUEUE_SIZE];
 };
 
@@ -26,18 +27,20 @@ struct Queue *new_Queue(){
 
 	temp->header = 0;
 	temp->footer = 0;
+	temp->size = 0;
 
 	return temp;
 }
 
 /*Methods*/
 bool is_empty(struct Queue *queue){
-	return queue->header == queue->footer;
+	return queue->size == 0;
 }
 
 void enqueue(struct Queue *queue, struct Process *item){
 	queue->arr[queue->footer] = item;
 	queue->footer += 1;
+	queue->size += 1;
 }
 
 struct Process *dequeue(struct Queue *queue){
@@ -45,6 +48,7 @@ struct Process *dequeue(struct Queue *queue){
 		return NULL;
 
 	queue->header += 1;
+	queue->size -= 1;
 	return queue->arr[queue->header - 1];
 }
 

@@ -17,17 +17,20 @@
 #define QUANTUM 4
 #define MAX_READY_SIZE 4
 
-<<<<<<< HEAD
+
 /*main*/
 int main() {
+
+ /*Extract Input File*/
  
+ 	
  FILE * file_pointer;
  file_pointer = fopen ("input_b.xpto","r");
 
  if (file_pointer == NULL) {
      printf("Erro: Does not exist\n");
  }
-	 
+
  int i;	 
  int line = 1;
  int count = 0;
@@ -47,50 +50,13 @@ int main() {
         } 
      while(line <= 8);     
  }
-=======
-
-/*Funcs*/
-
-/*Extract Input File*/
-int *extract(char *name){
-
-    FILE * file_pointer;
-    file_pointer = fopen ("input_b.xpto","r");
-
-	FILE *inputFile;
- 	inputFile = fopen(name, "r");
-
- 	//Read File into array
-
-	int process[SIZE_FILE_LINE];
-	int i;
+  
+ fclose(file_pointer);
 
 
-    if (file_pointer == NULL) {
-        printf("Erro: Does not exist\n");
-    }
-     
-    int line = 0;
-    char Array[300];
-
-    while(fgets(Array, 300 , file_pointer)) {
-    line = line + 1;
-        printf("Line:%d -> %s",line, Array);
-    }
->>>>>>> 825b7e8b5be4a60e0a4f45af490ec1f90ea1a709
-
-    fclose(file_pointer);
-
-    return 0;
-}
-
-/*main*/
-int main() {
-    
     /*Lists*/
     struct Queue *to_do_list = new_Queue();
 
-    int ready_size = 0;
     struct Queue *ready = new_Queue();
     
     struct Queue *blocked = new_Queue();
@@ -99,47 +65,84 @@ int main() {
 
     int timer = 0;
 
-    /*Extract file*/
-    extract("input_b.xpto");
-
-    /*Processor loop*/
+    /***Processor loop***/
     while( !( is_empty( to_do_list ) && is_empty(ready) && run == NULL) ){
         
-        /*Check Process Entry*/
-        struct Queue *temp = new_Queue();
+        /**Check Process Entry**/
         struct Process *cur_pro = NULL;
 
-        while (!is_empty(to_do_list)){
+        for (int i = 0; i < to_do_list->size; i++){
 
             cur_pro = dequeue(to_do_list);
-            
+
             if (cur_pro->arrival_time <= timer){
 
-                if(ready_size >= MAX_READY_SIZE){
-                    
-                    enqueue(blocked , cur_pro);
-                
+                if(ready->size >= MAX_READY_SIZE){
+
+                    enqueue(blocked, cur_pro);
+
                 }else{
-                
-                    enqueue(ready , cur_pro);
-                
+
+                    enqueue(ready, cur_pro);
+
                 }
 
             }else{
 
-                enqueue(temp, cur_pro);
+                enqueue(to_do_list, cur_pro);
 
             }
 
         }
 
-        while (!is_empty(temp)){
+        /**Scheduling Call**/
+        if( (timer % QUANTUM == 0) || (run == NULL)){
 
-            cur_pro = dequeue(temp);
-            enqueue(to_do_list , cur_pro);
+            /*Takes the process from RUN*/
+            if(run != NULL){
+
+                if(ready->size >= MAX_READY_SIZE){
+
+                    enqueue(blocked, run);
+
+                }else{
+
+                    enqueue(ready ,run);
+
+                }
+
+                run = NULL;
+
+            }
+
+            /*Puts next in line*/
+            if(!is_empty(ready)){
+
+                run = dequeue(ready);
+
+            }
 
         }
 
+        /**CPU**/
+        if (run != NULL){
+            
+            /*Run*/
+            if (run->inst_time != -1){
+
+                /*Inst handler*/
+
+            }
+
+            /*Check if process ended*/
+            if ( run->PC > run->inst_end ){
+
+                run = NULL;
+
+            }
+        }
+
+        timer += 1;
 
     }
 
