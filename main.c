@@ -31,25 +31,26 @@ int main() {
      printf("Erro: Does not exist\n");
  }
 
- int i;	 
- int line = 1;
- int count = 0;
- char Array[300];
+ int i=0, k=0;	 
+ int line = 0;
+ char Insts[300], Array[300];
 
  while(fgets(Array, 300 , file_pointer)) {
-     do{
-        for(i=0;Array[i];i++) {
-     		if(Array[i] != ' ') {
-        		Array[count] = Array[i];
-        		count++;
-     	        }
-        } 
- 	Array[count] = '\0';
-        printf("Processo: %d  ||  Instante: %s \n", line, Array); 
+	
+	while(line < 8) {
         line = line + 1;
-        } 
-     while(line <= 8);     
+		while(Array[i] != '\0') { 
+			if(!(Array[i] == ' ' && Array[i+1] != ' ')) {
+				Insts[k] = Array[i];
+				k++;
+			}
+			i++;
+		}
+		Insts[k]= '\0';
+        printf("Processo: %d  ||  Instante: %s \n", line, Insts); 	
+	}      
  }
+
   
  fclose(file_pointer);
 
