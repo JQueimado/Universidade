@@ -15,7 +15,6 @@ int main() {
  char Insts[300], Array[300];
 
  while(fgets(Array, 300 , file_pointer)) {
-	
 	while(line < 8) {
         line = line + 1;
 		while(Array[i] != '\0') { 
@@ -35,4 +34,3 @@ int main() {
  return 0;
 
 }
-
