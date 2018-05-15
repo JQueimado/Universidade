@@ -16,9 +16,8 @@ struct Process{
 	/*PCB*/
 	int id;
 	int arrival_time;
-	int inst_time;
-	int is_blocked;
-	int PC;
+	int block_time;
+	int pc;
 	int inst_end;
 	
 	/*Memory*/
@@ -34,8 +33,8 @@ struct Process *new_Process(int i, int arr_time, int inst[], int inst_size){
 	/*PCB*/
 	temp->id = i;
 	temp->arrival_time = arr_time;
-	temp->inst_time = -1;
-	temp->PC = INST_POINTER;
+	temp->block_time = -1;
+	temp->pc = INST_POINTER;
 	temp->inst_end = inst_size + INST_POINTER;
 
 	/*MEM*/
@@ -64,7 +63,28 @@ void set_var(struct Process *process , int var_name , int val){
 
 int get_inst(struct Process *process){
 	
-	return process->MEM[process->PC];
+	return process->MEM[process->pc];
+
+}
+
+void set_pc( struct Process *process , int val ){
+
+	if ( val < INST_POINTER ){
+
+		process->pc = INST_POINTER;
+		return;
+
+
+	}
+
+	if ( val >= process->inst_end ){
+
+		process->pc = process->inst_end;
+		return;
+
+	}
+
+	process->pc = val;
 
 }
 
