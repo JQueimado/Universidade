@@ -106,39 +106,53 @@ struct Process *CPU(struct Process *process){
 /***main***/
 int main() {
 
- /*Extract Input File*/
+ /*Extract From Input File*/
  
- 	
  FILE * file_pointer;
  file_pointer = fopen ("input_b.xpto","r");
-
+ 
  if (file_pointer == NULL) {
-     printf("Erro: Does not exist\n");
+	printf("Erro: Does not exist\n");
  }
 
- int i=0, k=0;	 
+ int i;	 
  int line = 0;
- char Insts[300], Array[300];
 
- while(fgets(Array, 300 , file_pointer)) {
-	
-	while(line < 8) {
-        line = line + 1;
-		while(Array[i] != '\0') { 
-			if(!(Array[i] == ' ' && Array[i+1] != ' ')) {
-				Insts[k] = Array[i];
-				k++;
-			}
-			i++;
-		}
-		Insts[k]= '\0';
-        printf("Processo: %d  ||  Instante: %s \n", line, Insts); 	
-	}      
+ char Arrival_Time[3];
+ char Instants_Array[300];
+ 
+ if (file_pointer != NULL) {
+	puts("\nProcesso:   ** Tempo de Chegada:  ** Instantes:     \n");
+ 	puts("**********************************************************");
  }
 
-  
- fclose(file_pointer);
+ //Inputs from file
 
+ while(fgets(Instants_Array, 300 , file_pointer)) {
+
+	line = line + 1;
+
+	for(i=0;Instants_Array[i] != ' ';i++) {	
+		Arrival_Time[i] = Instants_Array[i];
+        
+	}
+
+	printf("\nP%d          **   %d              **  Instants: ", line, atoi(Arrival_Time));
+	
+	while(Instants_Array[i] != '\n') {
+
+		if(Instants_Array[i] != ' ') {
+			printf("%c",Instants_Array[i]);
+		}
+		
+		i+=1;
+       	
+	} 
+	printf("\n");
+ }
+ 
+ /*Close Input File*/
+ fclose(file_pointer);
 
     /*Lists*/
     struct Queue *to_do_list = new_Queue();
@@ -218,12 +232,12 @@ int main() {
 
                 /*Inst handler*/
 
-<<<<<<< HEAD
+
             }
 
             /*Check if process ended*/
             if ( run->PC > run->inst_end ){
-=======
+
             run = CPU(run);
 
             if (run->is_blocked){
@@ -232,7 +246,7 @@ int main() {
                 run = NULL;
 
             }
->>>>>>> My-WorkSpace
+
 
                 run = NULL;
 
