@@ -12,6 +12,7 @@
 /*Vars*/
 #define SIZE_FILE_LINE 300
 #define STANDARD_ARRAY_SIZE 300
+#define DISCK_SAVE_TIME 3;
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -32,7 +33,7 @@
 /**CPU**/
 struct Process *CPU(struct Process *process){
 
-    int inst = process->MEM[process->PC];
+    int inst = get_inst( process );
 
     int i = inst / 10;
     int v = inst - i*10;
@@ -66,20 +67,22 @@ struct Process *CPU(struct Process *process){
     if (i == IF){
 
         if( get_var( process , v ) != 0 ){
-            process->PC += 1;
+            
+            set_pc( process , process->pc+1 );
+        
         }
         
     }
 
     if (i == BACK){
 
-        
+        set_pc( process , process->pc - v );
         
     }
 
     if (i == FORW){
 
-        
+        set_pc( process , process->pc + v );
         
     }
 
@@ -91,7 +94,11 @@ struct Process *CPU(struct Process *process){
 
     if (i == DISCK_SAVE){
 
-        
+        if ( process->block_time == -1 ){
+
+            process->block_time = 0;
+
+        }
         
     }
 
@@ -103,11 +110,11 @@ struct Process *CPU(struct Process *process){
 
     if (i == EXIT){
 
-        
+        set_pc( process , process->inst_end );
         
     }
 
-    process->PC += 1;
+    set_pc( process , process->pc+1 );
 
     return process;
 
@@ -230,33 +237,86 @@ int main() {
 
                 run = dequeue(ready);
 
+                if ( !is_empty(blocked) ){
+
+                    int i = 0;
+                    bool flag = FALSE;
+                    
+                    while(next(blocked)->block_time != -1){
+
+                        enqueue(blocked , dequeue(blocked));
+
+                        if ( i > blocked->size ){
+
+                            flag = TRUE;
+
+                            break;
+
+                        }
+
+                        i += 1;
+
+                    }
+
+                    if (!flag){
+                    
+                        enqueue(ready , dequeue(blocked));
+
+                    }
+                
+                }
+
+            }
+
+        }
+
+        /**Check for Blocked Mesage**/
+        for ( int count = 0; count < blocked->size; count++ ){
+
+            cur_pro = dequeue( blocked );
+
+            if( cur_pro >= DISCK_SAVE_TIME ){
+
+                cur_pro->block_time = -1;
+
+                if( ready->size >= MAX_READY_SIZE ){
+
+                    enqueue( blocked , cur_pro );
+
+                }else{
+
+                    enqueue( blocked , cur_pro );
+
+                }
+
+            }else{
+
+                if (cur_pro->block_time != -1){
+
+                    cur_pro->block_time += 1;
+                
+                }
+
+
             }
 
         }
 
         /**CPU**/
         if (run != NULL){
-            
-            /*Run*/
-            if (run->inst_time != -1){
-
-                /*Inst handler*/
-
-
-            }
-
-            /*Check if process ended*/
-            if ( run->PC > run->inst_end ){
 
             run = CPU(run);
 
-            if (run->is_blocked){
+            if (run->block_time != -1){
 
                 enqueue(blocked, run);
                 run = NULL;
 
             }
 
+
+            /*Check if process ended*/
+            if ( run->pc > run->inst_end ){
 
                 run = NULL;
 
