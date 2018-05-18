@@ -15,34 +15,25 @@ struct Process{
 	
 	/*PCB*/
 	int id;
-	int arrival_time;
 	int block_time;
 	int pc;
-	int inst_end;
 	
 	/*Memory*/
-	int MEM[MEM_SIZE];
-
+	int mem_str;
+	int mem_end;
+	int file_pos;
 };
 
 /*Constructors*/
-struct Process *new_Process(int i, int arr_time, int inst[], int inst_size){
+struct Process *new_Process(int i , int inst_size , int mem , int file ){
 	
 	struct Process *temp = malloc(sizeof(struct Process));
 
 	/*PCB*/
 	temp->id = i;
-	temp->arrival_time = arr_time;
 	temp->block_time = -1;
-	temp->pc = INST_POINTER;
-	temp->inst_end = inst_size + INST_POINTER;
-
-	/*MEM*/
-	for (int i = 0; i < inst_size; ++i){
-		
-		temp->MEM[ i + INST_POINTER ] = inst[ i ];
-	
-	}
+	temp->mem_str = mem;
+	temp->mem_end = 
 
 	return temp;
 

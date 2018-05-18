@@ -11,8 +11,8 @@
 
 /*Vars*/
 #define SIZE_FILE_LINE 300
-#define STANDARD_ARRAY_SIZE 300
 #define DISCK_SAVE_TIME 3;
+#define MEM_SIZE 300
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -171,8 +171,10 @@ int main() {
  /*Close Input File*/
  fclose(file_pointer);
 
+    int MEM[MEM_SIZE];
+
     /*Lists*/
-    struct Queue *to_do_list = new_Queue();
+    struct Queue *new = new_Queue();
 
     struct Queue *ready = new_Queue();
     
@@ -183,14 +185,14 @@ int main() {
     int timer = 0;
 
     /***Processor loop***/
-    while( !( is_empty( to_do_list ) && is_empty(ready) && run == NULL) ){
+    while( !( is_empty( new ) && is_empty(ready) && run == NULL) ){
         
         /**Check Process Entry**/
         struct Process *cur_pro = NULL;
 
-        for (int i = 0; i < to_do_list->size; i++){
+        for (int i = 0; i < new->size; i++){
 
-            cur_pro = dequeue(to_do_list);
+            cur_pro = dequeue(new);
 
             if (cur_pro->arrival_time <= timer){
 
@@ -206,7 +208,7 @@ int main() {
 
             }else{
 
-                enqueue(to_do_list, cur_pro);
+                enqueue(new, cur_pro);
 
             }
 
