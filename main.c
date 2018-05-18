@@ -128,8 +128,9 @@ int main() {
  FILE * file_pointer;
  file_pointer = fopen ("input_b.xpto","r");
  
- if (file_pointer == NULL) {
-	printf("Erro: Does not exist\n");
+ if (!file_pointer) {
+	perror("Error");
+	exit(0);
  }
 
  int i;	 
@@ -138,13 +139,12 @@ int main() {
  char Arrival_Time[3];
  char Instants_Array[300];
  
- if (file_pointer != NULL) {
+ if (file_pointer) {
 	puts("\nProcesso:   ** Tempo de Chegada:  ** Instantes:     \n");
  	puts("**********************************************************");
  }
 
- //Inputs from file
-
+ 
  while(fgets(Instants_Array, 300 , file_pointer)) {
 
 	line = line + 1;
@@ -167,7 +167,7 @@ int main() {
 	} 
 	printf("\n");
  }
- 
+
  /*Close Input File*/
  fclose(file_pointer);
 
