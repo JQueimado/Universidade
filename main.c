@@ -6,13 +6,15 @@
 /*Classes*/
 #include "Structs/Queue.h"
 #include "Structs/Process.h"
+#include "Structs/Pre_Process.h"
 
 /*Consts*/
 
 /*Vars*/
 #define SIZE_FILE_LINE 300
-#define STANDARD_ARRAY_SIZE 300
-#define DISCK_SAVE_TIME 3;
+#define DISCK_SAVE_TIME 3
+#define MEM_SIZE 300
+#define MAX_PROCESS 20
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -32,7 +34,7 @@
 
 /**CPU**/
 struct Process *CPU(struct Process *process){
-
+    /*
     int inst = get_inst( process );
 
     int i = inst / 10;
@@ -110,11 +112,12 @@ struct Process *CPU(struct Process *process){
 
     if (i == EXIT){
 
-        set_pc( process , process->inst_end );
+        set_pc( process , process->mem_end );
         
     }
 
     set_pc( process , process->pc+1 );
+    */
 
     return process;
 
@@ -124,7 +127,7 @@ struct Process *CPU(struct Process *process){
 int main() {
 
  /*Extract From Input File*/
- 
+ /*
  FILE * file_pointer;
  file_pointer = fopen ("input_b.xpto","r");
  
@@ -172,11 +175,20 @@ int main() {
 	printf("\n");
  }
 
- /*Close Input File*/
  fclose(file_pointer);
+    */
+
+    puts("start");
+    int mem_str = 0;
+    int mem_end = 0;
+    int mem_cur_size = 0;
+    int MEM[MEM_SIZE];
 
     /*Lists*/
-    struct Queue *to_do_list = new_Queue();
+    int arrival_process_end = 0;
+    struct Pre_Process *arrival_process[MAX_PROCESS];
+
+    struct Queue *new = new_Queue();
 
     struct Queue *ready = new_Queue();
     
@@ -185,50 +197,52 @@ int main() {
     struct Process *run = NULL;
 
     int timer = 0;
+    int ids = 0;
+
+    /*Testing*/
+
+    arrival_process[0] = new_Pre_Process( 0 , 0 , 3);
+    arrival_process[1] = new_Pre_Process( 2 , 1 , 1);
+    arrival_process[2] = new_Pre_Process( 3 , 2 , 4);
+
+    arrival_process_end = 3;
 
     /***Processor loop***/
-    while( !( is_empty( to_do_list ) && is_empty(ready) && run == NULL) ){
+    while( !(arrival_process_end == 0 && is_empty( new ) && is_empty(ready) && run == NULL) ){
+        
+        
         
         /**Check Process Entry**/
-        struct Process *cur_pro = NULL;
+        for (int i = 0; i < arrival_process_end; ++i){
 
-        for (int i = 0; i < to_do_list->size; i++){
+            struct Pre_Process *pre_temp = arrival_process[i];
 
-            cur_pro = dequeue(to_do_list);
+            if ( pre_temp->arrival <= timer && pre_temp->done == 0){
 
-            if (cur_pro->arrival_time <= timer){
+                ids += 1;
 
-                if(ready->size >= MAX_READY_SIZE){
+                struct Process *temp = new_Process( ids , pre_temp->size , pre_temp->file_pos );
 
-                    enqueue(blocked, cur_pro);
+                enqueue( new , temp );
 
-                }else{
-
-                    enqueue(ready, cur_pro);
-
-                }
-
-            }else{
-
-                enqueue(to_do_list, cur_pro);
+                pre_temp->done = 1;
 
             }
 
         }
-
+        
         /**Scheduling Call**/
         if( (timer % QUANTUM == 0) || (run == NULL)){
 
-            /*Takes the process from RUN*/
-            if(run != NULL){
+            if ( run != NULL ){
 
-                if(ready->size >= MAX_READY_SIZE){
+                if ( ready->size < MAX_READY_SIZE ){
 
-                    enqueue(blocked, run);
+                    enqueue( ready , run );
 
                 }else{
 
-                    enqueue(ready ,run);
+                    enqueue( blocked, run );
 
                 }
 
@@ -236,56 +250,38 @@ int main() {
 
             }
 
-            /*Puts next in line*/
-            if(!is_empty(ready)){
+            /*Process for Ready*/
+            if ( ready->size < MAX_READY_SIZE && !is_empty(new) ){
 
-                run = dequeue(ready);
+                enqueue( ready , dequeue( new ) );
 
-                if ( !is_empty(blocked) ){
+            }
 
-                    int i = 0;
-                    bool flag = FALSE;
-                    
-                    while(next(blocked)->block_time != -1){
+            /*NEXT*/
+            if( run == NULL){
 
-                        enqueue(blocked , dequeue(blocked));
+                if ( !is_empty(ready) ){
 
-                        if ( i > blocked->size ){
+                    run = dequeue(ready);
 
-                            flag = TRUE;
-
-                            break;
-
-                        }
-
-                        i += 1;
-
-                    }
-
-                    if (!flag){
-                    
-                        enqueue(ready , dequeue(blocked));
-
-                    }
-                
                 }
 
             }
 
-        }
+            if ( run == NULL )
+            {
+                puts("is_null");
+            } 
 
-        /**Check for Blocked Mesage**/
-        for ( int count = 0; count < blocked->size; count++ ){
+            /**Check for Blocked Mesages**/
+            for ( int count = 0; count < blocked->size; count++ ){
 
-            cur_pro = dequeue( blocked );
+                struct Process *cur_pro = dequeue( blocked );
 
-            if( cur_pro >= DISCK_SAVE_TIME ){
-
-                cur_pro->block_time = -1;
-
-                if( ready->size >= MAX_READY_SIZE ){
-
-                    enqueue( blocked , cur_pro );
+                /*Check for process to place in ready*/
+                if ( ready->size < MAX_READY_SIZE && cur_pro->block_time == -1){
+                    
+                    enqueue( ready , cur_pro );
 
                 }else{
 
@@ -293,16 +289,62 @@ int main() {
 
                 }
 
-            }else{
+            }
 
-                if (cur_pro->block_time != -1){
+            
 
-                    cur_pro->block_time += 1;
-                
+            /*MEM Management*/
+            /*
+            if (run->mem_str == -1){
+            
+                if( MEM_SIZE - mem_cur_size > run->size){
+
+                    struct Process *last_on_ram;
+
+                    for (int i = 0; i < ready->size; ++i){
+                    
+                        struct Process *cur_pro = dequeue(ready);
+
+                        if ( cur_pro->mem_str != -1 ){
+                            
+                            last_on_ram = cur_pro;
+
+                        }
+
+                        enqueue(ready, cur_pro);
+
+                    }
+
                 }
 
+            }
+            */
+            
+
+        }
+
+        
+
+        /*Disck acsses*/
+        for (int count = 0; count < blocked->size; count++ ){
+
+            struct Process *cur_pro = dequeue(blocked);
+
+            if ( cur_pro->block_time != -1 ){
+                
+                if ( cur_pro->block_time >= DISCK_SAVE_TIME ){
+
+                    cur_pro->block_time = -1;
+
+                }else{
+
+                    cur_pro->block_time += 1;
+
+                }
 
             }
+
+            enqueue(blocked , cur_pro);
 
         }
 
@@ -311,6 +353,7 @@ int main() {
 
             run = CPU(run);
 
+            /*Check if process is waiting for a message*/
             if (run->block_time != -1){
 
                 enqueue(blocked, run);
@@ -320,14 +363,30 @@ int main() {
 
 
             /*Check if process ended*/
-            if ( run->pc > run->inst_end ){
+            if ( run->pc >= run->mem_end ){
 
                 run = NULL;
 
             }
         }
 
+        if ( run != NULL ){
+            
+            printf("%d : %d\n" , timer , run->id );
+        
+        }else{
+        
+            printf("%d : 0\n", timer );
+        
+        }
+
         timer += 1;
+
+        if (timer == 10){
+
+            break;
+        
+        }
 
     }
 

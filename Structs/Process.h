@@ -15,71 +15,60 @@ struct Process{
 	
 	/*PCB*/
 	int id;
-	int arrival_time;
 	int block_time;
 	int pc;
-	int inst_end;
+	int size;
 	
 	/*Memory*/
-	int MEM[MEM_SIZE];
-
+	int mem_str;
+	int mem_end;
+	int file_pos;
 };
 
 /*Constructors*/
-struct Process *new_Process(int i, int arr_time, int inst[], int inst_size){
+struct Process *new_Process(int i , int inst_size , int file ){
 	
 	struct Process *temp = malloc(sizeof(struct Process));
 
 	/*PCB*/
 	temp->id = i;
-	temp->arrival_time = arr_time;
 	temp->block_time = -1;
-	temp->pc = INST_POINTER;
-	temp->inst_end = inst_size + INST_POINTER;
-
-	/*MEM*/
-	for (int i = 0; i < inst_size; ++i){
-		
-		temp->MEM[ i + INST_POINTER ] = inst[ i ];
-	
-	}
+	temp->pc = -1;
+	temp->size = inst_size;
+	temp->mem_str = -1;
+	temp->mem_end = -1;
+	temp->file_pos = file; 
 
 	return temp;
 
 }
 
 /*Methods*/
-int get_var(struct Process *process , int var_name){
 
-	return process->MEM[var_name];
+void set_process_ready(struct Process *process , int mem_pos , int size){
 
-}
-
-void set_var(struct Process *process , int var_name , int val){
-
-	process->MEM[var_name] = val;
-
-}
-
-int get_inst(struct Process *process){
-	
-	return process->MEM[process->pc];
+	process->pc = mem_pos + INST_POINTER;
+	process->mem_str = mem_pos;
+	process->mem_end = mem_pos + INST_POINTER +size;
 
 }
 
 void set_pc( struct Process *process , int val ){
 
-	if ( val < INST_POINTER ){
+	int inst_pointer_str = process->mem_str + INST_POINTER;
+	int inst_pointer_end = process->mem_end;
 
-		process->pc = INST_POINTER;
+	if ( val < inst_pointer_str ){
+
+		process->pc = inst_pointer_str;
 		return;
 
 
 	}
 
-	if ( val >= process->inst_end ){
+	if ( val >= inst_pointer_end ){
 
-		process->pc = process->inst_end;
+		process->pc = inst_pointer_end;
 		return;
 
 	}
