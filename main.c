@@ -90,7 +90,7 @@ struct Process *CPU(struct Process *process){
 
     if (i == FORK){
 
-        
+       
         
     }
 
@@ -124,10 +124,8 @@ struct Process *CPU(struct Process *process){
 }
 
 /***main***/
-int main() {
-
- /*Extract From Input File*/
- /*
+int main() {	
+	
  FILE * file_pointer;
  file_pointer = fopen ("input_b.xpto","r");
  
@@ -139,10 +137,10 @@ int main() {
  int i;	 
  int line = 0;
 
- int Arrival_Time[3];
- int Instants[SIZE_FILE_LINE];
+ int Arrival_Time;
+ int Instantes_size = 0;
+ int Instantes[SIZE_FILE_LINE];
 
- char Arrival[3];
  char Instants_Array[SIZE_FILE_LINE];
  
  if (file_pointer != NULL) {
@@ -150,33 +148,59 @@ int main() {
  	puts("**********************************************************");
  }
 
- 
  while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)) {
 
+ 	/*Arrival*/
 	line = line + 1;
 
-	for(i=0;Instants_Array[i] != ' ';i++) {	
-		Arrival[i] = Instants_Array[i];
-		Arrival_Time[i] = atoi(Arrival);	  
+	char arrival_str[5];
+
+	for( i=0; Instants_Array[i] != ' '; i++ ) {	
+		arrival_str[i] = Instants_Array[i];  
 	}
 
-	printf("\nP%d          **   %d              **  Instants: ", line, Arrival_Time[i]);
+	Arrival_Time = atoi(arrival_str);
+
+	printf("\nP%d          **   %d              **  Instants: ", line, Arrival_Time);
 	
-	while(Instants_Array[i] != '\n') {
+	char inst[5];
+	int inst_point = 0;
+	Instantes_size = 0;
+	i += 1;
 
-		if(Instants_Array[i] != ' ') {
-			// Converter os instnates para int. Não dá de nenhuma forma pela função atoi
-			printf("%c", Instants_Array[i]);
-		}
+	while( Instants_Array[i] != '\n' ){
 		
-		i+=1;
-       	
-	} 
-	printf("\n");
- }
+		if ( Instants_Array[i] == ' ' ){
+		
+			Instantes[Instantes_size] = atoi(inst);
+			Instantes_size += 1;
 
+			inst[0] = '\0';
+			inst_point = 0;
+		
+		}else{
+
+			inst[inst_point] = Instants_Array[i];
+			inst_point +=1;
+
+		}
+
+		i++;
+
+	}
+
+	for (int i = 0; i < Instantes_size; ++i){
+		printf( "%d " , Instantes[i] );
+	}
+
+	puts("");
+
+
+
+ }
+ 
  fclose(file_pointer);
-    */
+    
 
     puts("start");
     int mem_str = 0;
@@ -294,7 +318,9 @@ int main() {
             
 
             /*MEM Management*/
-            /*
+
+			
+            
             if (run->mem_str == -1){
             
                 if( MEM_SIZE - mem_cur_size > run->size){
@@ -318,14 +344,14 @@ int main() {
                 }
 
             }
-            */
+            
             
 
         }
 
         
 
-        /*Disck acsses*/
+        /*Disk acesses*/
         for (int count = 0; count < blocked->size; count++ ){
 
             struct Process *cur_pro = dequeue(blocked);

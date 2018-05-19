@@ -2,21 +2,7 @@
 #include <stdlib.h>
 
 #define SIZE_FILE_LINE 300
-/*
-int *extract(char arr[]){
 
-	static int ret[2];
-
-	char arrival[5];
-
-	for (int i = 0; arr[i] != ' '; ++i){
-		
-		arrival[i] = arr[i]
-
-	}
-
-}
-*/
 int main() {	
 	
  FILE * file_pointer;
