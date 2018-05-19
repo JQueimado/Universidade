@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define SIZE_FILE_LINE 300
+
 int main() {	
 	
  FILE * file_pointer;
@@ -14,30 +16,33 @@ int main() {
  int i;	 
  int line = 0;
 
- char Arrival_Time[3];
- char Instants_Array[300];
+ int Arrival_Time[3];
+ int Instants[SIZE_FILE_LINE];
+
+ char Arrival[3];
+ char Instants_Array[SIZE_FILE_LINE];
  
- if (file_pointer) {
+ if (file_pointer != NULL) {
 	puts("\nProcesso:   ** Tempo de Chegada:  ** Instantes:     \n");
  	puts("**********************************************************");
  }
 
- 
- while(fgets(Instants_Array, 300 , file_pointer)) {
+ while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)) {
 
 	line = line + 1;
 
 	for(i=0;Instants_Array[i] != ' ';i++) {	
-		Arrival_Time[i] = Instants_Array[i];
-        
+		Arrival[i] = Instants_Array[i];
+		Arrival_Time[i] = atoi(Arrival);	  
 	}
 
-	printf("\nP%d          **   %d              **  Instants: ", line, atoi(Arrival_Time));
+	printf("\nP%d          **   %d              **  Instants: ", line, Arrival_Time[i]);
 	
 	while(Instants_Array[i] != '\n') {
 
 		if(Instants_Array[i] != ' ') {
-			printf("%c",Instants_Array[i]);
+			// Converter os instnates para int. Não dá de nenhuma forma pela função atoi
+			printf("%c", Instants_Array[i]);
 		}
 		
 		i+=1;
