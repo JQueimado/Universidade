@@ -173,6 +173,8 @@ int main() {
 
  fclose(file_pointer);
     */
+
+    puts("start");
     int mem_str = 0;
     int mem_end = 0;
     int mem_cur_size = 0;
@@ -202,7 +204,9 @@ int main() {
     arrival_process_end = 3;
 
     /***Processor loop***/
-    while( !( is_empty( new ) && is_empty(ready) && run == NULL) ){
+    while( !(arrival_process_end == 0 && is_empty( new ) && is_empty(ready) && run == NULL) ){
+        
+        
         
         /**Check Process Entry**/
         for (int i = 0; i < arrival_process_end; ++i){
@@ -222,7 +226,7 @@ int main() {
             }
 
         }
-
+        
         /**Scheduling Call**/
         if( (timer % QUANTUM == 0) || (run == NULL)){
 
@@ -242,6 +246,13 @@ int main() {
 
             }
 
+            /*Process for Ready*/
+            if ( ready->size < MAX_READY_SIZE && !is_empty(new) ){
+
+                enqueue( ready , dequeue( new ) );
+
+            }
+
             /*NEXT*/
             if( run == NULL){
 
@@ -253,40 +264,15 @@ int main() {
 
             }
 
-            /*Process for Ready*/
-            if ( ready->size < MAX_READY_SIZE && !is_empty(new) ){
-
-                enqueue( ready , dequeue( new ) );
-
-            }
+            if ( run == NULL )
+            {
+                puts("is_null");
+            } 
 
             /**Check for Blocked Mesages**/
             for ( int count = 0; count < blocked->size; count++ ){
 
                 struct Process *cur_pro = dequeue( blocked );
-
-                /*Check for messages*/
-                if ( cur_pro->block_time != -1 ){
-                    
-                    if ( cur_pro->block_time >= DISCK_SAVE_TIME ){
-
-                        if ( ready->size < MAX_READY_SIZE ){
-
-                            enqueue( ready ,cur_pro );
-
-                        }else{
-
-                            cur_pro->block_time = -1;
-
-                        }
-
-                    }else{
-
-                        cur_pro->block_time += 1;
-
-                    }
-
-                }
 
                 /*Check for process to place in ready*/
                 if ( ready->size < MAX_READY_SIZE && cur_pro->block_time == -1){
@@ -301,8 +287,11 @@ int main() {
 
             }
 
+            
+
             /*MEM Management*/
-            if (run->meme_start == -1){
+            /*
+            if (run->mem_str == -1){
             
                 if( MEM_SIZE - mem_cur_size > run->size){
 
@@ -322,11 +311,36 @@ int main() {
 
                     }
 
+                }
 
+            }
+            */
+            
+
+        }
+
+        
+
+        /*Disck acsses*/
+        for (int count = 0; count < blocked->size; count++ ){
+
+            struct Process *cur_pro = dequeue(blocked);
+
+            if ( cur_pro->block_time != -1 ){
+                
+                if ( cur_pro->block_time >= DISCK_SAVE_TIME ){
+
+                    cur_pro->block_time = -1;
+
+                }else{
+
+                    cur_pro->block_time += 1;
 
                 }
 
             }
+
+            enqueue(blocked , cur_pro);
 
         }
 
@@ -352,7 +366,23 @@ int main() {
             }
         }
 
+        if ( run != NULL ){
+            
+            printf("%d : %d\n" , timer , run->id );
+        
+        }else{
+        
+            printf("%d : 0\n", timer );
+        
+        }
+
         timer += 1;
+
+        if (timer == 10){
+
+            break;
+        
+        }
 
     }
 
