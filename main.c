@@ -209,6 +209,7 @@ int main() {
 
     /*Lists*/
     int arrival_process_end = 0;
+    int arrival_process_count = 0;
     struct Pre_Process *arrival_process[MAX_PROCESS];
 
     struct Queue *new = new_Queue();
@@ -220,33 +221,35 @@ int main() {
     struct Process *run = NULL;
 
     int timer = 0;
+    int count = 0;
     int ids = 0;
 
     /*Testing*/
 
-    arrival_process[0] = new_Pre_Process( 1 , 0 , 3);
-    arrival_process[1] = new_Pre_Process( 0 , 1 , 1);
-    arrival_process[2] = new_Pre_Process( 3 , 2 , 4);
+    arrival_process[0] = new_Pre_Process( 0 , 0 , 20);
+    arrival_process[1] = new_Pre_Process( 1 , 1 , 1);
+    arrival_process[2] = new_Pre_Process( 7 , 2 , 2);
 
     arrival_process_end = 3;
+    arrival_process_count = 3;
 
     /***Processor loop***/
-    while( !(arrival_process_end == 0 && is_empty( new ) && is_empty(ready) && run == NULL) ){
-        
-        
-        
+    while( !(arrival_process_count == 0 && is_empty( new ) && is_empty( ready ) && run == NULL) ){
+             
         /**Check Process Entry**/
         for (int i = 0; i < arrival_process_end; ++i){
 
             struct Pre_Process *pre_temp = arrival_process[i];
 
-            if ( pre_temp->arrival <= timer && pre_temp->done == 0){
+            if ( pre_temp->arrival <= count && pre_temp->done == 0){
 
                 ids += 1;
 
                 struct Process *temp = new_Process( ids , pre_temp->size , pre_temp->file_pos );
 
                 enqueue( new , temp );
+
+                arrival_process_count -= 1;
 
                 pre_temp->done = 1;
 
@@ -255,7 +258,18 @@ int main() {
         }
         
         /**Scheduling Call**/
-        if( (timer % QUANTUM == 0) || (run == NULL)){
+        if( (timer == QUANTUM) || (run == NULL)){
+
+            puts("process changed");
+
+            timer = 0;
+
+            /*Process for Ready*/
+            if ( ready->size < MAX_READY_SIZE && !is_empty(new) ){
+
+                enqueue( ready , dequeue( new ) );
+
+            }
 
             if ( run != NULL ){
 
@@ -270,13 +284,6 @@ int main() {
                 }
 
                 run = NULL;
-
-            }
-
-            /*Process for Ready*/
-            if ( ready->size < MAX_READY_SIZE && !is_empty(new) ){
-
-                enqueue( ready , dequeue( new ) );
 
             }
 
@@ -340,11 +347,7 @@ int main() {
             }
             */
             
-            
-
         }
-
-        
 
         /*Disk acesses*/
         for (int count = 0; count < blocked->size; count++ ){
@@ -374,7 +377,7 @@ int main() {
 
             run = CPU(run);
 
-            printf("%d : %d\n" , timer , run->id );
+            printf("%d : %d\n" , count , run->id );
 
             /*Check if process is waiting for a message*/
             if (run->block_time != -1){
@@ -384,27 +387,33 @@ int main() {
 
             }
 
-
             /*Check if process ended*/
-            if ( run->pc >= run->mem_end ){
+
+            /*Testing*/
+            run->pc_aux += 1;
+
+            if( run->pc_aux >= run->size ){
 
                 run = NULL;
 
             }
 
+            /*
+            if ( run->pc >= run->mem_end ){
+
+                run = NULL;
+
+            }
+            */
+
         }else{
 
-            printf("%d : empty\n", timer );
+            printf("%d : empty\n", count );
 
         }
 
         timer += 1;
-
-        if (timer == 10){
-
-            break;
-        
-        }
+        count += 1;
 
     }
 
