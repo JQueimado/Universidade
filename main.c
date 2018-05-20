@@ -117,8 +117,9 @@ struct Process *CPU(struct Process *process){
         
     }
 
-    set_pc( process , process->pc+1 );
+
     */
+    set_pc( process , process->pc+1 );
 
     return process;
 
@@ -126,7 +127,7 @@ struct Process *CPU(struct Process *process){
 
 /***main***/
 int main() {	
-	
+/*	
  FILE * file_pointer;
  file_pointer = fopen ("input_b.xpto","r");
  
@@ -151,7 +152,6 @@ int main() {
 
  while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)) {
 
- 	/*Arrival*/
 	line = line + 1;
 
 	char arrival_str[5];
@@ -200,7 +200,7 @@ int main() {
  
  fclose(file_pointer);
     
-
+*/
     puts("start");
     int mem_str = 0;
     int mem_end = 0;
@@ -224,8 +224,8 @@ int main() {
 
     /*Testing*/
 
-    arrival_process[0] = new_Pre_Process( 0 , 0 , 3);
-    arrival_process[1] = new_Pre_Process( 2 , 1 , 1);
+    arrival_process[0] = new_Pre_Process( 1 , 0 , 3);
+    arrival_process[1] = new_Pre_Process( 0 , 1 , 1);
     arrival_process[2] = new_Pre_Process( 3 , 2 , 4);
 
     arrival_process_end = 3;
@@ -291,11 +291,6 @@ int main() {
 
             }
 
-            if ( run == NULL )
-            {
-                puts("is_null");
-            } 
-
             /**Check for Blocked Mesages**/
             for ( int count = 0; count < blocked->size; count++ ){
 
@@ -319,7 +314,7 @@ int main() {
             /*MEM Management*/
 
 			
-            
+            /*
             if (run->mem_str == -1){
             
                 if( MEM_SIZE - mem_cur_size > run->size){
@@ -343,6 +338,7 @@ int main() {
                 }
 
             }
+            */
             
             
 
@@ -378,6 +374,8 @@ int main() {
 
             run = CPU(run);
 
+            printf("%d : %d\n" , timer , run->id );
+
             /*Check if process is waiting for a message*/
             if (run->block_time != -1){
 
@@ -393,16 +391,11 @@ int main() {
                 run = NULL;
 
             }
-        }
 
-        if ( run != NULL ){
-            
-            printf("%d : %d\n" , timer , run->id );
-        
         }else{
-        
-            printf("%d : 0\n", timer );
-        
+
+            printf("%d : empty\n", timer );
+
         }
 
         timer += 1;
