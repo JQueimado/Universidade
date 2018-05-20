@@ -18,6 +18,9 @@ struct Process{
 	int block_time;
 	int pc;
 	int size;
+
+	/*Testing*/
+	int pc_aux;
 	
 	/*Memory*/
 	int mem_str;
@@ -38,6 +41,9 @@ struct Process *new_Process(int i , int inst_size , int file ){
 	temp->mem_str = -1;
 	temp->mem_end = -1;
 	temp->file_pos = file; 
+
+	/*Testing*/
+	temp->pc_aux = 0;
 
 	return temp;
 
