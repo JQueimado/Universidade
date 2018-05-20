@@ -107,7 +107,7 @@ struct Process *CPU(struct Process *process){
     if (i == COPY){
 
 		get_var( process, v);
-		set_var(process, v, var);        
+		set_var(process, process-> v = var);        
         
     }
 
