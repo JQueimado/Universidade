@@ -41,37 +41,45 @@ struct Process *CPU(struct Process *process , int MEM[]){
     int i = inst / 10;
     int v = inst - i*10;
 
+    printf("%d %d\n", i , v );
+
     if (i == ZERO){
 
-       
+       MEM[ process->mem_str + v ] = 0;
 
     }
 
     if (i == ADD){
         
-       
+        MEM[ process->mem_str + v ] += 1;
         
     }
 
     if (i == SUB){
 
-      
+       MEM[ process->mem_str + v ] -= 1;
         
     }
 
     if (i == IF){
+
+        if ( MEM[ process->mem_str + v ] != 0 ){
+
+            set_pc(process , process->pc + 1);
+
+        }
         
     }
 
     if (i == BACK){
 
-       
+       set_pc(process , process->pc - MEM[ process->mem_str + v ]);
         
     }
 
     if (i == FORW){
 
-       
+       set_pc(process , process->pc + MEM[ process->mem_str + v ]);
         
     }
 
@@ -83,17 +91,20 @@ struct Process *CPU(struct Process *process , int MEM[]){
 
     if (i == DISCK_SAVE){
 
-      
+      process->block_time = 0;
         
     }
 
     if (i == COPY){
 
+        MEM[ process->mem_str ] = MEM[ process->mem_str + v ];
+
     }
 
     if (i == EXIT){
 
-        
+        /*Tetsting*/
+        process->pc_aux = process->size;
         
     }
 
