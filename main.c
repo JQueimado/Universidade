@@ -34,58 +34,44 @@
 #define EXIT 9
 
 /**CPU**/
-struct Process *CPU(struct Process *process){
+struct Process *CPU(struct Process *process , int MEM[]){
 
-    int inst = get_inst( process );
+    int inst = MEM[process->pc];
 
     int i = inst / 10;
     int v = inst - i*10;
 
     if (i == ZERO){
 
-        set_var( process , v , 0 );
+       
 
     }
 
     if (i == ADD){
         
-        int var = get_var( process , v);
-
-        var += 1;
-
-        set_var( process , v , var ); 
+       
         
     }
 
     if (i == SUB){
 
-        int var = get_var( process , v);
-
-        var -= 1;
-
-        set_var( process , v , var );
+      
         
     }
 
     if (i == IF){
-
-        if( get_var( process , v ) != 0 ){
-            
-            set_pc( process , process->pc+1 );
-        
-        }
         
     }
 
     if (i == BACK){
 
-        set_pc( process , process->pc - v );
+       
         
     }
 
     if (i == FORW){
 
-        set_pc( process , process->pc + v );
+       
         
     }
 
@@ -97,24 +83,17 @@ struct Process *CPU(struct Process *process){
 
     if (i == DISCK_SAVE){
 
-        if ( process->block_time == -1 ){
-
-            process->block_time = 0;
-
-        }
+      
         
     }
 
     if (i == COPY){
 
-		get_var( process, v);
-		set_var(process, process-> v = var);        
-        
     }
 
     if (i == EXIT){
 
-        set_pc( process , process->mem_end );
+        
         
     }
 
@@ -208,7 +187,9 @@ int main() {
     int mem_str = 0;
     int mem_end = 0;
     int mem_cur_size = 0;
-    int MEM[MEM_SIZE];
+    
+    /*MEM*/
+    static int MEM[MEM_SIZE];
 
     /*Lists*/
 
@@ -369,7 +350,7 @@ int main() {
         /**CPU**/
         if (run != NULL){
 
-            run = CPU(run);
+            run = CPU(run , MEM);
 
             printf("%d : %d\n" , count , run->id );
 
