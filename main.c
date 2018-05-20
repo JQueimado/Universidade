@@ -90,7 +90,7 @@ struct Process *CPU(struct Process *process){
 
     if (i == FORK){
 
-       
+       //2ª parte do trabalho
         
     }
 
@@ -106,7 +106,8 @@ struct Process *CPU(struct Process *process){
 
     if (i == COPY){
 
-        
+		get_var( process, v);
+		set_var(process, v, var);        
         
     }
 
@@ -194,8 +195,6 @@ int main() {
 	}
 
 	puts("");
-
-
 
  }
  
