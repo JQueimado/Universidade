@@ -15,6 +15,7 @@
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
 #define MAX_PROCESS 20
+#define FILE_NAME "input_b.xpto"
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -34,7 +35,7 @@
 
 /**CPU**/
 struct Process *CPU(struct Process *process){
-    /*
+
     int inst = get_inst( process );
 
     int i = inst / 10;
@@ -117,8 +118,6 @@ struct Process *CPU(struct Process *process){
         
     }
 
-
-    */
     set_pc( process , process->pc+1 );
 
     return process;
@@ -127,80 +126,84 @@ struct Process *CPU(struct Process *process){
 
 /***main***/
 int main() {	
-/*	
- FILE * file_pointer;
- file_pointer = fopen ("input_b.xpto","r");
+
+    /**File Acess**/
+    FILE * file_pointer;
+    file_pointer = fopen ( FILE_NAME ,"r");
  
- if (!file_pointer) {
-	perror("Error");
-	exit(0);
- }
+    if (!file_pointer) {
+        perror("Error");
+        exit(0);
+    }
 
- int i;	 
- int line = 0;
+    int output_arr_pointer = 0;
+    static int output_arr[(MAX_PROCESS * 2)];
 
- int Arrival_Time;
- int Instantes_size = 0;
- int Instantes[SIZE_FILE_LINE];
+     int i;  
+     int line = 0;
 
- char Instants_Array[SIZE_FILE_LINE];
- 
- if (file_pointer != NULL) {
-	puts("\nProcesso:   ** Tempo de Chegada:  ** Instantes:     \n");
- 	puts("**********************************************************");
- }
+     int Arrival_Time;
 
- while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)) {
+     char Instants_Array[SIZE_FILE_LINE];
 
-	line = line + 1;
+     while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)) {
 
-	char arrival_str[5];
+        line = line + 1;
 
-	for( i=0; Instants_Array[i] != ' '; i++ ) {	
-		arrival_str[i] = Instants_Array[i];  
-	}
+        char arrival_str[5];
 
-	Arrival_Time = atoi(arrival_str);
+        for( i=0; Instants_Array[i] != ' '; i++ ) { 
+            arrival_str[i] = Instants_Array[i];  
+        }
 
-	printf("\nP%d          **   %d              **  Instants: ", line, Arrival_Time);
-	
-	char inst[5];
-	int inst_point = 0;
-	Instantes_size = 0;
-	i += 1;
+        Arrival_Time = atoi(arrival_str);
 
-	while( Instants_Array[i] != '\n' ){
-		
-		if ( Instants_Array[i] == ' ' ){
-		
-			Instantes[Instantes_size] = atoi(inst);
-			Instantes_size += 1;
+        output_arr[output_arr_pointer] = Arrival_Time;
+        output_arr_pointer += 1;
+        
+        i += 1;
 
-			inst[0] = '\0';
-			inst_point = 0;
-		
-		}else{
+        int Instantes_size = 0;
 
-			inst[inst_point] = Instants_Array[i];
-			inst_point +=1;
+        while( Instants_Array[i] != '\n' ){
+            
+            if ( Instants_Array[i] == ' ' ){
+            
+                Instantes_size += 1;
+            
+            }
 
-		}
+            i++;
 
-		i++;
+        }
 
-	}
+        output_arr[output_arr_pointer] = Instantes_size;
+        output_arr_pointer += 1;
 
-	for (int i = 0; i < Instantes_size; ++i){
-		printf( "%d " , Instantes[i] );
-	}
+     }
+     
+     fclose(file_pointer);
+     output_arr[output_arr_pointer] = -1;
 
-	puts("");
+     
+     /*Prepare arrival_process*/
 
- }
- 
- fclose(file_pointer);
+     int arrival_process_end = 0;
+     int arrival_process_count = 0;
+     struct Pre_Process *arrival_process[MAX_PROCESS];
+
+     for (int i = 0; output_arr[i] != -1 ; i += 2){
+
+        arrival_process[arrival_process_end] = new_Pre_Process( output_arr[i], arrival_process_end, output_arr[i + 1] );
+        arrival_process_end += 1;
+     
+     }
+
+     arrival_process_count = arrival_process_end;
     
-*/
+
+
+    /*prepare scheduel*/
     puts("start");
     int mem_str = 0;
     int mem_end = 0;
@@ -208,9 +211,6 @@ int main() {
     int MEM[MEM_SIZE];
 
     /*Lists*/
-    int arrival_process_end = 0;
-    int arrival_process_count = 0;
-    struct Pre_Process *arrival_process[MAX_PROCESS];
 
     struct Queue *new = new_Queue();
 
@@ -224,18 +224,9 @@ int main() {
     int count = 0;
     int ids = 0;
 
-    /*Testing*/
-
-    arrival_process[0] = new_Pre_Process( 0 , 0 , 20);
-    arrival_process[1] = new_Pre_Process( 1 , 1 , 1);
-    arrival_process[2] = new_Pre_Process( 7 , 2 , 2);
-
-    arrival_process_end = 3;
-    arrival_process_count = 3;
-
     /***Processor loop***/
     while( !(arrival_process_count == 0 && is_empty( new ) && is_empty( ready ) && run == NULL) ){
-             
+
         /**Check Process Entry**/
         for (int i = 0; i < arrival_process_end; ++i){
 
@@ -261,7 +252,6 @@ int main() {
         if( (timer == QUANTUM) || (run == NULL)){
 
             puts("process changed");
-
             timer = 0;
 
             /*Process for Ready*/
@@ -270,15 +260,15 @@ int main() {
                 enqueue( ready , dequeue( new ) );
 
             }
-
+            
             if ( run != NULL ){
 
                 if ( ready->size < MAX_READY_SIZE ){
-
+                    
                     enqueue( ready , run );
 
                 }else{
-
+                    
                     enqueue( blocked, run );
 
                 }
@@ -286,7 +276,7 @@ int main() {
                 run = NULL;
 
             }
-
+            
             /*NEXT*/
             if( run == NULL){
 
@@ -297,26 +287,28 @@ int main() {
                 }
 
             }
-
+            
             /**Check for Blocked Mesages**/
-            for ( int count = 0; count < blocked->size; count++ ){
+            if ( ( !is_empty( blocked ) ) && ready->size<MAX_READY_SIZE ){
 
-                struct Process *cur_pro = dequeue( blocked );
+                for ( int count = 0; count < blocked->size; count++ ){
 
-                /*Check for process to place in ready*/
-                if ( ready->size < MAX_READY_SIZE && cur_pro->block_time == -1){
-                    
-                    enqueue( ready , cur_pro );
+                    struct Process *cur_pro = dequeue( blocked );
 
-                }else{
+                    /*Check for process to place in ready*/
+                    if ( ready->size < MAX_READY_SIZE && cur_pro->block_time == -1){
+                        
+                        enqueue( ready , cur_pro );
 
-                    enqueue( blocked , cur_pro );
+                    }else{
+
+                        enqueue( blocked , cur_pro );
+
+                    }
 
                 }
 
             }
-
-            
 
             /*MEM Management*/
 
@@ -350,26 +342,28 @@ int main() {
         }
 
         /*Disk acesses*/
-        for (int count = 0; count < blocked->size; count++ ){
+        if ( !is_empty(blocked) ){
+            for (int count = 0; count < blocked->size; count++ ){
 
-            struct Process *cur_pro = dequeue(blocked);
+                struct Process *cur_pro = dequeue(blocked);
 
-            if ( cur_pro->block_time != -1 ){
-                
-                if ( cur_pro->block_time >= DISCK_SAVE_TIME ){
+                if ( cur_pro->block_time != -1 ){
+                    
+                    if ( cur_pro->block_time >= DISCK_SAVE_TIME ){
 
-                    cur_pro->block_time = -1;
+                        cur_pro->block_time = -1;
 
-                }else{
+                    }else{
 
-                    cur_pro->block_time += 1;
+                        cur_pro->block_time += 1;
+
+                    }
 
                 }
 
+                enqueue(blocked , cur_pro);
+
             }
-
-            enqueue(blocked , cur_pro);
-
         }
 
         /**CPU**/

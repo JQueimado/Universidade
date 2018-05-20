@@ -34,13 +34,20 @@ struct Queue *new_Queue(){
 
 /*Methods*/
 bool is_empty(struct Queue *queue){
-	return queue->size == 0;
+	return queue->header == queue->footer;
 }
 
 void enqueue(struct Queue *queue, struct Process *item){
 	queue->arr[queue->footer] = item;
 	queue->footer += 1;
 	queue->size += 1;
+
+	if ( queue->footer >=STD_QUEUE_SIZE ){
+
+		queue->footer = 0;
+
+	}
+
 }
 
 struct Process *dequeue(struct Queue *queue){
@@ -49,6 +56,13 @@ struct Process *dequeue(struct Queue *queue){
 
 	queue->header += 1;
 	queue->size -= 1;
+
+	if ( queue->header >=STD_QUEUE_SIZE ){
+
+		queue->header = 0;
+		
+	}
+
 	return queue->arr[queue->header - 1];
 }
 
