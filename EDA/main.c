@@ -16,9 +16,5 @@ int main()
     	{
     		scanf("%d",set_nick(user,nick));
     	}
-
-
-    }
-    return 0;
-
+    	return 0;
 }
