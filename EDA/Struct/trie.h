@@ -11,7 +11,8 @@ bool trie_empty(struct trie *);
 
 bool trie_find(struct trie *, char []);
 void trie_insert(struct trie *, char []);
-void trie_delete(struct trie *, char []);
+bool trie_delete(struct trie *, char []);
+
 
 int trie_count(struct trie *);
 

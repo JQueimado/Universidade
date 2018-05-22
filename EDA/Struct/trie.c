@@ -1,5 +1,5 @@
 /* trie implementation, with arrays */
-
+/* Fonte: slides do prof e http://www.techiedelight.com/trie-implementation-insert-search-delete/ */
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -18,6 +18,8 @@
 struct node {
   struct node *child[ALPHABET_SIZE];
   bool        word;
+  bool apagou;
+  struct node *parent;
 };
 
 /* trie */
@@ -121,55 +123,106 @@ void trie_insert(struct trie *t, char p[])
 
   n->word = true;
 }
-
-
 /*
-   Searches for word P in trie T.
+Searches for word P in trie T.
 
-   Returns true if it finds it, false otherwise.
-*/
-/*
-bool trie_find(struct trie *t, char p[])
+   Returns true if it finds it, false otherwise.*/
+bool trie_find(struct trie *t,char p[])
 {
-  2. Sugestao: compare o codigo dos slides para a pesquisa e para a
-     insercao
+  struct node *n;
+  int i=0;
+
+  n=t->root;
+
+  while(n!=NULL && p[i]!='\0')
+  {
+    n = n->child[POS(p[i])];
+      
+
+    i++;
+  }
+
+  return (n!=NULL && n->word);
+
+}
+/* Counts and returns the number of words in trie T */
+int trie_count(struct trie *t) 
+{
+  struct node *n;
+  int i;
+  int count=0;
+  n=t->root;
+  for(i=0;i<ALPHABET_SIZE;i++)
+    {
+      if(n->child[i])
+        count++;
+    }
+    return count;
+}
+
+/* Prints all words in trie T with prefix P */
+
+/*void trie_print_completions(struct trie *t, char p[])
+{
+
+  struct node *n;
+  int i=0;
+  if(search)
+  n=t->root
+  while(n!=NULL && p[i]!='\0')
+  {
+    if()
+    i++;
+  }
+
+
 }
 */
 
 
-/* Counts and returns the number of words in trie T. */
-/*
-int trie_count(struct trie *t)
-{
-  3.
-}
-*/
-
-
-/* Prints all words in trie T with prefix P. */
-/*
-void trie_print_completions(struct trie *t, char p[])
-{
-  4.
-}
-*/
 
 
 /* Removes word P from trie T. */
-/*
-void trie_delete(struct trie *t, char p[])
+
+bool trie_delete(struct trie *t, char p[])
 {
-  5. Comece por fazer uma versao que so' apaga a marca de fim de
-     palavra. Posteriormente, melhore-a para que apague os nos ja'
-     nao usados.
-}
-*/
+  struct node *n;
+  int i=0;
 
 
-/* Prints the full contents of trie T. */
-/*
-void trie_print(struct trie *t)
-{
-  6.
+  n = t->root;
+
+  while (p[i] != '\0' && n->child[POS(p[i])] != NULL)
+    {
+      n = n->child[POS(p[i])];
+      i++;
+    }
+
+  if(n!=NULL && n->word)
+  {
+    n->word=true;
+    n->apagou=true;
+
+  }
+  
+  return n->word;
+
+
+
 }
-*/
+
+
+
+
+
+
+/*void trie_print(struct trie *t)
+{
+  struct node *n;
+  int i=0;
+  n=t->root;
+
+  char temp[];
+
+}*/
+
