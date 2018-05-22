@@ -213,27 +213,7 @@ bool trie_delete(struct trie *t, char p[])
 
 
 
-/* Prints the full contents of trie T. */
-void printTrieHelper(TrieNode *root, char *buffer, int k)
-{
-    int i;
-    if (root == NULL)
-        return;
 
-    if (root->count > 0)
-        printf("%s (%d)\n", buffer, root->count);
-
-    buffer[k + 1] = '\0';
-
-    for (i = 0; i < 26; i++)
-    {
-        buffer[k] = 'a' + (i - 1);
-
-        printTrieHelper(root->children[i], buffer, k + 1);
-    }
-
-    buffer[k] = '\0';
-}
 
 
 /*void trie_print(struct trie *t)
