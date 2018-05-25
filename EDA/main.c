@@ -9,7 +9,7 @@ void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nom
     printf("consegui!\n");
     if(trie_find(tnick,nick)) //retorna 1 se o nick ja existir
     {
-        //printf("+ nick %s usado previamente",nick);
+        printf("+ nick %s usado previamente",nick);
     }
     else 
     {
@@ -21,10 +21,10 @@ void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nom
             printf("eu tb!");
             trie_insert(tnick,nick);
             trie_insert(tnome,nome);
-          //  printf("+ utilizador %s criado",nick); 
+            printf("+ utilizador %s criado",nick); 
         }
         else {
-            printf("Eu sou um conas!");
+            printf("conacrl");
         }
     }
 
@@ -42,7 +42,11 @@ int main()
     struct trie *tnick=trie_new();
     struct trie *tnome=trie_new();
 
-    criar_utilizador(tnick,tnome,nick,name,user);
+    //criar_utilizador(tnick,tnome,nick,name,user);
+    trie_insert(tnick,nick);
+    trie_insert(tnome,name);
+
+    trie_find(tnome,name);
     /*
     trie_insert(nick,"miguel");
     trie_insert(nick,"joaquim");
