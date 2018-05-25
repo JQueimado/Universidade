@@ -16,5 +16,4 @@ bool trie_delete(struct trie *, char []);
 
 int trie_count(struct trie *);
 
-void trie_print(struct trie *);
-void trie_print_completions(struct trie *, char []);
+

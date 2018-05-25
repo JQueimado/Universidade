@@ -160,25 +160,6 @@ int trie_count(struct trie *t)
     return count;
 }
 
-/* Prints all words in trie T with prefix P */
-
-/*void trie_print_completions(struct trie *t, char p[])
-{
-
-  struct node *n;
-  int i=0;
-  if(search)
-  n=t->root
-  while(n!=NULL && p[i]!='\0')
-  {
-    if()
-    i++;
-  }
-
-
-}
-*/
-
 
 
 
@@ -205,7 +186,7 @@ bool trie_delete(struct trie *t, char p[])
 
   }
   
-  return n->word;
+  return n->apagou;
 
 
 
@@ -216,13 +197,4 @@ bool trie_delete(struct trie *t, char p[])
 
 
 
-/*void trie_print(struct trie *t)
-{
-  struct node *n;
-  int i=0;
-  n=t->root;
-
-  char temp[];
-
-}*/
 
