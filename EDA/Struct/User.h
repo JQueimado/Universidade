@@ -22,17 +22,20 @@ int set_nick( struct User *user , char ni[] ){
 	bool hc_flag = false;
 	bool num_flag = false;
 
-	for (int i = 0; i < MAX_NICK_SIZE; i++){
+	for (int i = 0; i < MAX_NICK_SIZE; i++)
+	{
 
-		if ( (ni[ i ] == '\0') && ( i != MAX_NICK_SIZE ) ){
+		if ( (ni[ i ] == '\0') && ( i != MAX_NICK_SIZE ) )
+		{
 
 			return 1;
 
-}
+		}
+		
 		if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) ){
 
 			lc_flag = true;
-		
+
 		}
 
 		if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) ){
