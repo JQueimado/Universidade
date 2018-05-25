@@ -74,8 +74,7 @@ int set_nick( struct User *user , char ni[] ){
 
 }
 
-int set_name( struct User *user , char na[] )
-{
+int set_name( struct User *user , char na[] ){
 
 	for (int i = 0; na[ i ] != '\0' ; i++){
 		
