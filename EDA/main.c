@@ -6,25 +6,23 @@
 
 void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nome[],struct User *user)
 {
-    printf("consegui!\n");
     if(trie_find(tnick,nick)) //retorna 1 se o nick ja existir
     {
-        printf("+ nick %s usado previamente",nick);
+        printf("+ nick %s usado previamente\n",nick);
     }
     else 
     {
         // verifica as condicoes do nick e do nome
-        printf("tb consegui!\n");
-        if(set_nick(user , nick) && set_name(user, nome))
+        if(set_nick(user , nick)/* && set_name(user, nome)*/)
 
         {
-            printf("eu tb!");
+            printf("eu tb!\n");
             trie_insert(tnick,nick);
             trie_insert(tnome,nome);
-            printf("+ utilizador %s criado",nick); 
+            printf("+ utilizador %s criado\n",nick); 
         }
         else {
-            printf("Eu sou um conas!");
+            printf("Eu sou um conas!\n");
         }
     }
 
@@ -35,15 +33,17 @@ void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nom
 int main()
 {
 	//char input;
-	char nick[6]="miguel";
-	char name[7]="joaquim";
+	//char nick[5];
+	char name[25];
+    char nick[]="Zero7";
 	struct User *user=new_User(nick,name);
    
     struct trie *tnick=trie_new();
     struct trie *tnome=trie_new();
+    //scanf("%s %s",nick,name);
+    //criar_utilizador(tnick,tnome,nick,name,user);
 
-    criar_utilizador(tnick,tnome,nick,name,user);
-
+    printf("%d\n",set_nick(user,nick));
     /*
     trie_insert(nick,"miguel");
     trie_insert(nick,"joaquim");

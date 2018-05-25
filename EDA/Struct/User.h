@@ -28,12 +28,11 @@ int set_nick( struct User *user , char ni[] ){
 
 			return 1;
 
-
+}
 		if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) ){
 
 			lc_flag = true;
-
-		}
+		
 		}
 
 		if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) ){
@@ -72,8 +71,7 @@ int set_nick( struct User *user , char ni[] ){
 
 }
 
-int set_name( struct User *user , char na[] )
-{
+int set_name( struct User *user , char na[] ){
 
 	for (int i = 0; na[ i ] != '\0' ; i++){
 		
