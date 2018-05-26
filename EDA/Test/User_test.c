@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "Struct/trie.h"
 
-#include "Struct/User.h"
+
+#include "../Struct/User.h"
 
 void User_Testing(){
 
-	struct User *test_sub_1 = new_User( "Hwr69" , "i dont know" );
+	struct User *test_sub_1 = new_User( "miguel" , "i dont know" );
 
 	struct User *test_sub_2 = new_User( "Hwrld" , "i dont know" );
 
@@ -18,6 +18,8 @@ void User_Testing(){
 
 	struct User *test_sub_5 = new_User( "&&££@" , "i dont know" );
 
+	struct User *test_sub_7 = new_User( "miguel32" , "i dont know" );
+	
 	struct User *test_sub_6 = new_User( "Hwr69" , "i dont know and i dont care AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" );
 
 	if ( test_sub_1 != NULL){
