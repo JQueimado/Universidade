@@ -8,12 +8,15 @@
 #include <stdlib.h>
 
 /**Consts**/
-#define SIZE 20;
+#define SIZE 20
+#define MAX_USERS 1000000
+#define NORMAL 0
+#define ERROR 1
 
 /*Color*/
-#define WHITE 1;
-#define GRAY 0;
-#define BLACK -1;
+#define WHITE 1
+#define GRAY 0
+#define BLACK -1
 
 
 /****Class Vertice****/
@@ -21,63 +24,43 @@ struct Vertice
 {
 
 	int color;
+	int pos;
 	struct User *user;
 
 };
 
 /*Constructor*/
-struct Vertice *new_Vertice(struct User *user)
+struct Vertice *new_Vertice(struct User *user , int p )
 {
 
-	struct Vertice *temp = malloc(sizeof(struct Vertice));
+	struct Vertice *temp = malloc( sizeof( struct Vertice ) );
 
 	temp->color = WHITE;
+	temp->pos = p;
 	temp->user = user;
 
 	return temp;
 
 }
 
-/****Class SecondaryNode****/
-struct SecondaryNode
+/****Class Node****/
+struct Node
 {
 
-	struct SecondaryNode *next_node;
+	struct Node *next_node;
 	struct Vertice *ver;
 	bool end;
 
 };
 
 /*Constructor*/
-struct Vertice *new_SecondaryNode(struct Vertice *ver)
+struct Node *new_Node(struct Vertice *ver)
 {
 
-	struct SecondaryNode *temp = malloc(sizeof(struct SecondaryNode));
+	struct Node *temp = malloc(sizeof(struct Node));
 
 	temp->next_node = NULL;
 	temp->ver = ver;
-
-	return temp;
-
-}
-
-/****Class MainNode****/
-struct MainNode
-{
-	
-	struct MainNode *next_node;
-	struct SecondaryNode *elem;
-
-};
-
-/*Constructor*/
-struct Vertice *new_MainNode(struct MainNode *prev , struct Vertice *ver)
-{
-
-	struct Vertice *temp = malloc(sizeof(struct MainNode));
-
-	temp->next_node = prev;
-	temp->elem = new_SecondaryNode( ver );
 
 	return temp;
 
@@ -88,37 +71,82 @@ struct Grafo
 {
 	
 	int size;
-	struct MainNode *pointer_node;
+	struct Node *nodes[MAX_USERS];
 
 };
 
 /*Constructor*/
-struct Vertice *new_Grafo()
+struct Grafo *new_Grafo()
 {
 
-	struct Vertice *temp = malloc(sizeof(struct Grafo));
+	struct Grafo *temp = malloc(sizeof(struct Grafo));
 
 	temp->size = 0;
-	temp->pointer_node = new_MainNode(NULL, NULL);
 
 	return temp;
 
 }
 
 /*Methods*/
-int grafo_insert_vertice(struct Grafo *grafo , struct User *User)
+int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
+{	
+
+	/*Check if arg are given*/
+	if ( grafo == NULL || user == NULL )
+	{
+		return ERROR;
+	}
+
+	/*Check for free space*/
+	if ( grafo->size >= MAX_USERS )
+	{
+		return ERROR;
+	}
+
+	/*adds vertice*/
+	struct Node *temp = new_Node( new_Vertice( user , grafo->size ) );
+	grafo->nodes[ grafo->size ] = temp;
+	grafo->size += 1;
+
+	return NORMAL;
+
+}
+
+int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Vertice *v2 )
 {
 
-	struct MainLine *last = grafo->pointer_node;
+	/*Check if arg are given*/
+	if ( v1 == NULL || v2 == NULL )
+	{
+		return ERROR;
+	}
 
-	while( last->next_node != NULL )
+	if ( v1->pos >= grafo->size || v1->pos < 0 )
+	{
+		return ERROR;
+	}
+
+	if ( v2->pos >= grafo->size || v2->pos < 0 )
+	{
+		return ERROR;
+	}
+
+	/*vars*/
+	int pos = v1->pos;
+	struct Node *temp = grafo->nodes[ pos ];
+	
+	/*look for last node*/
+	while( temp->next_node != NULL )
 	{
 
-		last = last->next_node;
+		temp = temp->next_node;	
 
 	}
 
-	last->next_node = new_MainNode( NULL , new_Vertice( user ) );
+	/*add node*/
+	temp->next_node = new_Node( v2 );
+
+	return NORMAL;
 
 }
 

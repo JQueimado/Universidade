@@ -9,7 +9,8 @@
 #define MAX_NICK_SIZE 5
 #define MAX_USER_SIZE 25
 
-struct User{
+struct User
+{
 	
 	char nick[MAX_NICK_SIZE + 1];
 	char name[MAX_USER_SIZE];
@@ -32,25 +33,29 @@ int set_nick( struct User *user , char ni[] ){
 
 		}
 		
-		if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) ){
+		if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) )
+		{
 
 			lc_flag = true;
 
 		}
 
-		if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) ){
+		if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) )
+		{
 
 			hc_flag = true;
 
 		}
 
-		if ( !(num_flag) && ( ni[ i ] >= 48 && ni[ i ] <= 57) ){
+		if ( !(num_flag) && ( ni[ i ] >= 48 && ni[ i ] <= 57) )
+		{
 
 			num_flag = true;
 
 		}
 
-		if ( !( ( ni[ i ] >= 97 && ni[ i ] <= 122) || ( ni[ i ] >= 65 && ni[ i ] <= 90) || ( ni[ i ] >= 48 && ni[ i ] <= 57) ) ){
+		if ( !( ( ni[ i ] >= 97 && ni[ i ] <= 122) || ( ni[ i ] >= 65 && ni[ i ] <= 90) || ( ni[ i ] >= 48 && ni[ i ] <= 57) ) )
+		{
 			
 			return 1;
 
@@ -58,13 +63,15 @@ int set_nick( struct User *user , char ni[] ){
 
 	}
 
-	if ( !( lc_flag && hc_flag && num_flag ) ){
+	if ( !( lc_flag && hc_flag && num_flag ) )
+	{
 
 		return 1;
 
 	}
 
-	for( int i = 0; ni[ i ] != '\0'; i++ ){
+	for( int i = 0; ni[ i ] != '\0'; i++ )
+	{
 
 		user->nick[ i ] = ni[ i ];
 
@@ -74,16 +81,19 @@ int set_nick( struct User *user , char ni[] ){
 
 }
 
-int set_name( struct User *user , char na[] ){
+int set_name( struct User *user , char na[] )
+{
 
-	for (int i = 0; na[ i ] != '\0' ; i++){
+	for (int i = 0; na[ i ] != '\0' ; i++)
+	{
 		
 		if ( i > MAX_USER_SIZE)
 			return 1;
 
 	}
 
-	for( int i = 0; na[ i ] != '\0'; i++ ){
+	for( int i = 0; na[ i ] != '\0'; i++ )
+	{
 
 		user->name[ i ] = na[ i ];
 
@@ -93,7 +103,8 @@ int set_name( struct User *user , char na[] ){
 
 }
 
-struct User *new_User( char ni[] , char na[] ){
+struct User *new_User( char ni[] , char na[] )
+{
 
 	struct User *temp = malloc( sizeof( struct User ) );
 
