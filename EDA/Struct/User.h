@@ -9,6 +9,9 @@
 #define MAX_NICK_SIZE 5
 #define MAX_USER_SIZE 25
 
+#define ERROR 1
+#define NORMAL 0
+
 struct User
 {
 	
@@ -19,54 +22,26 @@ struct User
 
 int set_nick( struct User *user , char ni[] ){
 
-	bool lc_flag = false;
-	bool hc_flag = false;
-	bool num_flag = false;
+	int count = 0;
 
-	for (int i = 0; i < MAX_NICK_SIZE; i++)
+	for (int i = 0; ni[ i ] != '\0'; i++)
 	{
-
-		if ( (ni[ i ] == '\0') && ( i != MAX_NICK_SIZE ) )
-		{
-
-			return 1;
-
-		}
 		
-		if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) )
-		{
-
-			lc_flag = true;
-
-		}
-
-		if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) )
-		{
-
-			hc_flag = true;
-
-		}
-
-		if ( !(num_flag) && ( ni[ i ] >= 48 && ni[ i ] <= 57) )
-		{
-
-			num_flag = true;
-
-		}
-
 		if ( !( ( ni[ i ] >= 97 && ni[ i ] <= 122) || ( ni[ i ] >= 65 && ni[ i ] <= 90) || ( ni[ i ] >= 48 && ni[ i ] <= 57) ) )
 		{
 			
-			return 1;
+			return ERROR;
 
 		}
 
+		count += 1;
+
 	}
 
-	if ( !( lc_flag && hc_flag && num_flag ) )
+	if ( count > MAX_NICK_SIZE )
 	{
 
-		return 1;
+		return ERROR;
 
 	}
 
@@ -77,7 +52,7 @@ int set_nick( struct User *user , char ni[] ){
 
 	}
 
-	return 0;
+	return NORMAL;
 
 }
 
@@ -88,7 +63,11 @@ int set_name( struct User *user , char na[] )
 	{
 		
 		if ( i > MAX_USER_SIZE)
-			return 1;
+		{
+		
+			return ERROR;
+		
+		}
 
 	}
 
@@ -99,7 +78,7 @@ int set_name( struct User *user , char na[] )
 
 	}
 
-	return 0;
+	return NORMAL;
 
 }
 
