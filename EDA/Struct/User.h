@@ -28,36 +28,36 @@ int set_nick( struct User *user , char ni[] ){
 		if ( (ni[ i ] == '\0'))
 		{
 
-			
+			return 1;
 
+		}
 		
-		
-			if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) ){
+		if ( !(lc_flag) && ( ni[ i ] >= 97 && ni[ i ] <= 122) ){
 
-				lc_flag = true;
+			lc_flag = true;
 
-			}
+		}
 
-			if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) ){
+		if ( !(hc_flag) && ( ni[ i ] >= 65 && ni[ i ] <= 90) ){
 
-				hc_flag = true;
+			hc_flag = true;
 
-			}
+		}
 
-			if ( !(num_flag) && ( ni[ i ] >= 48 && ni[ i ] <= 57) ){
+		if ( !(num_flag) && ( ni[ i ] >= 48 && ni[ i ] <= 57) ){
 
-				num_flag = true;
+			num_flag = true;
 
-			}
+		}
 
-			if ( !( ( ni[ i ] >= 97 && ni[ i ] <= 122) || ( ni[ i ] >= 65 && ni[ i ] <= 90) || ( ni[ i ] >= 48 && ni[ i ] <= 57) ) ){
+		if ( !( ( ni[ i ] >= 97 && ni[ i ] <= 122) || ( ni[ i ] >= 65 && ni[ i ] <= 90) || ( ni[ i ] >= 48 && ni[ i ] <= 57) ) ){
 			
-				return 1;
+			return 1;
 
 		}
 
 	}
-}
+
 	if ( !( lc_flag && hc_flag && num_flag ) ){
 
 		return 1;
