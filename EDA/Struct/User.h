@@ -16,7 +16,7 @@
 struct User
 {
 	
-	char nick[MAX_NICK_SIZE + 1];
+	char nick[MAX_NICK_SIZE +1];
 	char name[MAX_USER_SIZE];
 
 };
@@ -38,13 +38,6 @@ int set_nick( struct User *user , char ni[] ){
 		}
 
 		count += 1;
-
-	}
-
-	if ( count > MAX_NICK_SIZE )
-	{
-
-		return ERROR;
 
 	}
 
