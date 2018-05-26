@@ -12,6 +12,7 @@
 #define ERROR 1
 #define NORMAL 0
 
+/**Class**/
 struct User
 {
 	
@@ -20,8 +21,10 @@ struct User
 
 };
 
+/**Methods**/
 int set_nick( struct User *user , char ni[] ){
 
+	/*Checks input nickname*/
 	int count = 0;
 
 	for (int i = 0; ni[ i ] != '\0'; i++)
@@ -45,6 +48,7 @@ int set_nick( struct User *user , char ni[] ){
 
 	}
 
+	/*sets User Nick*/
 	for( int i = 0; ni[ i ] != '\0'; i++ )
 	{
 
@@ -59,6 +63,7 @@ int set_nick( struct User *user , char ni[] ){
 int set_name( struct User *user , char na[] )
 {
 
+	/*Checks username size*/
 	for (int i = 0; na[ i ] != '\0' ; i++)
 	{
 		
@@ -71,6 +76,7 @@ int set_name( struct User *user , char na[] )
 
 	}
 
+	/*Sets Username*/
 	for( int i = 0; na[ i ] != '\0'; i++ )
 	{
 
