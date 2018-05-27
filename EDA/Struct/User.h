@@ -97,7 +97,8 @@ struct User *new_User( char ni[] , char na[] )
 	if( set_name( temp , na ) != 0 )
 		return NULL;
 
-	return temp;  
+	return temp; 
+
 
 }
 

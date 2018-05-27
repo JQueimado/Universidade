@@ -17,13 +17,13 @@ void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nom
         if(user!=NULL)
 
         {
-            printf("eu tb!\n");
+            //printf("eu tb!\n");
             trie_insert(tnick,nick);
             trie_insert(tnome,nome);
             printf("+ utilizador %s criado\n",nick); 
         }
         else {
-            printf("Eu sou um conas!\n");
+            printf("Verifica se o nick e o nome estao dentro das condições!\n");
         }
     }
 
@@ -31,21 +31,33 @@ void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nom
 }
 
 
+
+
 int main()
 {
 	//char input;
 	//char nick[5];
 	char name[25];
-    char nick[25];
+    char nick[5];
 	//struct User *user=new_User(nick,name);
-   
-   struct trie *tnick=trie_new();
+    char entrada;
+    struct trie *tnick=trie_new();
     struct trie *tnome=trie_new();
-    scanf("%s %s",nick,name);
-    struct User *user=new_User(nick,name);
-    criar_utilizador(tnick,tnome,nick,name,user);
+    while(scanf("%c",&entrada))
+    {
+        if(entrada=='U')
+        {
+            scanf("%s %s",nick,name);
+            struct User *user=new_User(nick,name);
+            criar_utilizador(tnick,tnome,nick,name,user); 
+        }
+        
+    } 
+    //scanf("%s %s",nick,name);
+    //struct User *user=new_User(nick,name);
+    //criar_utilizador(tnick,tnome,nick,name,user);
 
-    printf("%d\n",set_nick(user,nick));
+    //printf("%d\n",set_nick(user,nick));
     /*
     trie_insert(nick,"miguel");
     trie_insert(nick,"joaquim");
