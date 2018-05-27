@@ -3,7 +3,7 @@
 
 #include "Struct/trie.h"
 #include "Struct/User.h"
-
+//falta corrigir o segmentation fault qd se mete U Zero7 Spectre
 void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nome[],struct User *user)
 {
     user=new_User(nick,nome);
@@ -30,6 +30,22 @@ void criar_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nom
 
 }
 
+//resolver segmentation fault
+void remover_utilizador(struct trie *tnick,struct trie *tnome,char nick[],char nome[],struct User *user)
+{
+    user=new_User(nick,nome);
+    if(trie_find_removed(tnick,nick) || !trie_find(tnick,nick))
+    {
+        printf("+ utilizador %s inexistente\n",nick);
+    }
+    else 
+    {
+        trie_delete(tnick,nick);
+        printf("+ utilizador %s removido\n",nick);
+    }
+}
+
+
 
 
 
@@ -38,7 +54,7 @@ int main()
 	//char input;
 	//char nick[5];
 	char name[25];
-    char nick[5];
+    char nick[25];
 	//struct User *user=new_User(nick,name);
     char entrada;
     struct trie *tnick=trie_new();
@@ -50,6 +66,12 @@ int main()
             scanf("%s %s",nick,name);
             struct User *user=new_User(nick,name);
             criar_utilizador(tnick,tnome,nick,name,user); 
+        }
+        if(entrada=='R')
+        {
+            scanf("%s",nick);
+            struct User *user=new_User(nick,name);
+            remover_utilizador(tnick,tnome,nick,name,user);
         }
         
     } 
@@ -71,7 +93,7 @@ int main()
     */
 
 
-    
+    return 0;
 
 
 }

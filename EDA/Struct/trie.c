@@ -1,5 +1,5 @@
 /* trie implementation, with arrays */
-/* Fonte: slides do prof e http://www.techiedelight.com/trie-implementation-insert-search-delete/ */
+/* Fonte: slides do prof */
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -143,6 +143,25 @@ bool trie_find(struct trie *t,char p[])
   }
 
   return (n!=NULL && n->word);
+
+}
+ //Returns true if it finds a word that already was removed
+ bool trie_find_removed(struct trie *t,char p[])
+{
+  struct node *n;
+  int i=0;
+
+  n=t->root;
+
+  while(n!=NULL && p[i]!='\0')
+  {
+    n = n->child[POS(p[i])];
+      
+
+    i++;
+  }
+
+  return (n!=NULL && n->apagou);
 
 }
 /* Counts and returns the number of words in trie T */
