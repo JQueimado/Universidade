@@ -27,17 +27,6 @@ int set_nick( struct User *user , char ni[] ){
 	/*Checks input nickname*/
 	int count = 0;
 
-
-	for (int i = 0; i <=MAX_NICK_SIZE ; i++)
-	{
-
-		if ( (ni[ i ] == '\0') && ( i == MAX_NICK_SIZE  ) )
-		{
-
-			return 1;
-
-		}
-
 	for (int i = 0; ni[ i ] != '\0'; i++)
 	{
 		
@@ -47,10 +36,15 @@ int set_nick( struct User *user , char ni[] ){
 			return ERROR;
 
 		}
-
+		
 		count += 1;
 
 	}
+
+	if(count!=MAX_NICK_SIZE)
+		return ERROR;
+
+
 
 	/*sets User Nick*/
 	for( int i = 0; ni[ i ] != '\0'; i++ )

@@ -2,18 +2,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-<<<<<<< HEAD
-#include "../Struct/User.h"
 
-void User_Testing()
-{
-=======
 
 
 #include "../Struct/User.h"
 
 void User_Testing(){
->>>>>>> d4aadd2634b558251d3da182759b47429ae01eb7
 
 	struct User *test_sub_1 = new_User( "miguel" , "i dont know" );
 
@@ -25,7 +19,7 @@ void User_Testing(){
 
 	struct User *test_sub_5 = new_User( "&&££@" , "i dont know" );
 
-	struct User *test_sub_7 = new_User( "miguel32" , "i dont know" );
+	//struct User *test_sub_7 = new_User( "miguel32" , "i dont know" );
 	
 	struct User *test_sub_6 = new_User( "Hwr69" , "i dont know and i dont care AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" );
 
@@ -113,5 +107,6 @@ int main()
 {
 
 	User_Testing();
+	return 0;
 
 }
