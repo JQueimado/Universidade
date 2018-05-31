@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "User.h"
+
 /**Consts**/
 #define SIZE 20
 #define MAX_USERS 1000000
@@ -171,89 +173,66 @@ struct Vertice *grafo_get_vertice_at( struct Grafo *grafo , int position )
 
 }
 
-/*Depth search*/
-struct Vertice *grafo_depth_visit(struct Grafo *grafo , struct Vertice *u , char *name[] )
+/*Find user*/
+
+struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
 {
 
-	//time += 1;
-	//u->d = time;
-	u->color = GRAY;
-
-	struct Node *temp = grafo->nodes [ u->pos ]->next_node;
-
-	while ( temp != NULL)
+	for (int i = 0; i < grafo->size; ++i)
 	{
+		struct Vertice *v = grafo_get_vertice_at(grafo , i);
 
-		struct Vertice *v = temp->ver;
-		char *v_name = v->user->nick;
-
-		if ( strcmp(v_name , name) != 0)
+		if( strcmp( v->user->nick , name ) == 0 )
 		{
+
 			return v;
-		}
-
-		if (v->color == WHITE)
-		{	
-			
-			v->p = u;
-			
-			struct Vertice *check = grafo_depth_visit(grafo , v , name);
-			
-			if( check != NULL )
-			{
-
-				return check;
-
-			}
 
 		}
 
-		temp = temp->next_node;
-
-	}
-	
-	u->color = BLACK;
-	//time += 1;
-	//u->f = time;
-	return NULL;
-
-}
-
-struct User *grafo_depth_search( struct Grafo *grafo , char *name[] )
-{	
-
-	for (int i = 0; grafo->nodes[ i ] != NULL; ++i)
-	{
-		
-		grafo->nodes[ i ]->ver->color = WHITE;
-		grafo->nodes[ i ]->ver->p = NULL;
-	
-	}
-
-	//static int time = 0;
-
-	for (int i = 0; grafo->nodes[ i ] != NULL; ++i)
-	{
-		
-		if ( grafo->nodes[i]->ver->color == WHITE )
-		{
-
-			struct Vertice *check = grafo_depth_visit(grafo, grafo->nodes[ i ]->ver, name);
-			
-			if (check != NULL)
-			{
-				return check->user;
-			}
-
-		}
-	
 	}
 
 	return NULL;
 
 }
 
+/*print*/
+void grafo_print_all(struct Grafo *grafo)
+{
+	puts("start");
+	for (int i = 0; i < grafo->size; ++i)
+	{
+	
+		struct Vertice *v = grafo_get_vertice_at(grafo ,i);
+	
+		printf("user at %d is %s\n", i+1 , v->user->nick );
 
-/*Width search*/
+	}
+	puts("done");
+
+}
+
+void grafo_print_conections_at (struct Grafo *grafo, int i)
+{
+	struct Node *n = grafo->nodes[i];
+
+	printf("user %s folows: \n", n->ver->user->nick);
+
+	n = n->next_node;
+	
+	if (n == NULL)
+	{
+		puts("None");
+	}
+
+	while(n != NULL)
+	{
+
+		printf("%s\n", n->ver->user->nick);
+
+		n = n->next_node;
+
+	}
+
+}
 
 #endif
