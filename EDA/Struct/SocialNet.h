@@ -11,6 +11,8 @@
 #include "trie.c"
 
 /*consts*/
+#define NORMAL 0
+#define ERROR 1
 
 /****Class SocialNet****/
 struct SocialNet
@@ -78,5 +80,17 @@ void remover_utilizador(struct SocialNet *socialnet, char nick[],char nome[],str
     }
 }
 
+int export_to_file (struct SocialNet *socialnet , char * user_file_name , char * folows_file_name)
+{
+
+    /*export names and nicks */
+    for (int i = 0; i < count; ++i)
+    {
+        /* code */
+    }
+
+    return NORMAL;
+
+}
 
 #endif
