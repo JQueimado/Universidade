@@ -165,7 +165,7 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 
 }
 
-<<<<<<< HEAD
+
 int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
 
@@ -225,8 +225,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
-=======
->>>>>>> 53fe4a0e8549765c54f432d6e1d742156225a958
+
 /*Get Vertice from a given position*/
 struct Vertice *grafo_get_vertice_at( struct Grafo *grafo , int position )
 {
