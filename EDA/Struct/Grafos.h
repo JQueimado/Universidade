@@ -219,7 +219,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 	/*remove node*/
 	grafo->nodes[ v->pos ] = NULL;
-
+	grafo->size -= 1;
 	return NORMAL;
 
 }
@@ -258,12 +258,18 @@ struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
 void grafo_print_all(struct Grafo *grafo)
 {
 	puts("start");
-	for (int i = 0; i < grafo->size; ++i)
+	int sp = 0;
+	for (int i = 0; sp < grafo->size; ++i)
 	{
+		if (grafo->nodes[i] != NULL)
+		{
+		
+			struct Vertice *v = grafo_get_vertice_at(grafo ,i);
 	
-		struct Vertice *v = grafo_get_vertice_at(grafo ,i);
-	
-		printf("user at %d is %s\n", i+1 , v->user->nick );
+			printf("user at %d is %s\n", sp+1 , v->user->nick );
+		
+			sp += 1;
+		}
 
 	}
 	puts("done");
