@@ -24,7 +24,7 @@ int main()
             scanf("%s %[^\n]s",nick,name);
             //printf("Nick: %s Name:%s\n",nick,name);
             struct User *user=new_User(nick,name);
-            criar_utilizador( socialnet ,nick,name,user); 
+            criar_utilizador( socialnet,user); 
             //printf("Nick: %s Name:%s\n",nick,name);
         }
         if(entrada=='R')
@@ -32,24 +32,27 @@ int main()
             //printf("cona\n");
             scanf("%s",nick);
             struct User *user=new_User(nick,name);
-            remover_utilizador(socialnet,nick,name,user);
+            remover_utilizador(socialnet,user);
         }
         if(entrada=='S')
         {
             scanf("%s %s",nick,nicktemp);
             struct User *user1=new_User(nick,name);
             struct User *user2=new_User(nicktemp,nametemp);
-            seguir_utilizador(socialnet,nick,nicktemp,name,nametemp,user1,user2);
+            seguir_utilizador(socialnet,user1,user2);
         }
         if(entrada=='D')
         {
             scanf("%s %s",nick,nicktemp);
             struct User *user1=new_User(nick,name);
             struct User *user2=new_User(nicktemp,nametemp);
-            deixarseguir_utilizador(socialnet,nick,nicktemp,name,nametemp,user1,user2);
+            deixarseguir_utilizador(socialnet,user1,user2);
 
         }
-        
+        if(entrada=='P')
+        {
+            scanf("%s",nick);
+        }
         if (entrada=='X')
         {
             return 1;
