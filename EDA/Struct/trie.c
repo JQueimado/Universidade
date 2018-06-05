@@ -6,8 +6,8 @@
 
 #include "trie.h"
 
-#define ALPHABET_MIN 'a'
-#define ALPHABET_MAX 'z'
+#define ALPHABET_MIN 'A'
+#define ALPHABET_MAX 'Z'
 #define ALPHABET_SIZE (ALPHABET_MAX - ALPHABET_MIN + 1)
 
 #define POS(c)  ((c) - ALPHABET_MIN)	// character position in alphabet
