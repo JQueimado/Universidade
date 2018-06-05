@@ -105,8 +105,28 @@ void seguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2[],cha
         
         grafo_insert_conection(grafo,vertice1,vertice2);
         printf("+ utilizador %s segue %s\n",nick1,nick2);*/
-        printf("+ utilizador %s segue %s",nick1,nick2);
+        printf("+ utilizador %s segue %s\n",nick1,nick2);
     }
+    else if(grafo_connection_count_check(grafo,vertice1)) 
+    {
+        printf("+ utilizador %s segue o limite\n",nick1);
+    }
+    else {
+        
+        grafo_insert_vertice(grafo,user1);
+        //printf("%d\n",grafo_insert_vertice(grafo,user1));
+        grafo_insert_vertice(grafo,user2);
+        //printf("%d\n",grafo_insert_vertice(grafo,user2));
+        vertice1=grafo_get_vertice_by_name(grafo,nick1);
+        vertice2=grafo_get_vertice_by_name(grafo,nick2);
+        grafo_insert_conection(grafo,vertice1,vertice2);
+        printf("+  %s passou a seguir %s\n",nick1,nick2);
+        //grafo_print_connections_at(grafo,0);
+        
+    }
+    //grafo_print_conections_at(grafo,0);
+    //printf("%d\n",grafo_connection_count_check(grafo,vertice1));
+   // grafo_connection_count(grafo,vertice1);
 
 
 
@@ -115,7 +135,7 @@ void seguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2[],cha
 void deixarseguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2[],char nome1[],char nome2[],struct User *user1,struct User *user2)
 {
     struct trie *tnick=socialnet->tnick;
-    struct Grafo *grafo=socialnet->grafo;
+    //struct Grafo *grafo=socialnet->grafo;
     user1=new_User(nick1,nome1);
     user2=new_User(nick2,nome2);
     if(trie_find_removed(tnick,nick1))
