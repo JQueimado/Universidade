@@ -4,6 +4,7 @@
 
 /*includes*/
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 
@@ -11,6 +12,7 @@
 #include "trie.c"
 
 /*consts*/
+#define NET_FILE_NAME "Net.txt"
 
 /****Class SocialNet****/
 struct SocialNet
@@ -150,5 +152,23 @@ void deixarseguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2
    
 }
 
+bool dump(struct SocialNet *socialnet)
+{
+
+    if (socialnet == NULL)
+    {
+
+        return false;
+
+    }
+
+    struct Grafo *grafo = socialnet->grafo;
+
+    FILE *file_user = fopen(NET_FILE_NAME , "w");
+    grafo_dump_folows(grafo, file_user);
+    
+    return true;
+
+}
 
 #endif

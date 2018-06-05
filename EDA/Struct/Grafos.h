@@ -6,6 +6,7 @@
 /*Includes*/
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "User.h"
@@ -417,6 +418,45 @@ void grafo_print_conections_at (struct Grafo *grafo, int i)
 
 }
 
+/*dumps all user information to a file*/
+bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
+{
+	if (file == NULL)
+	{
+		return false;
+	}
+
+	int sp = 0;
+
+	for (int i = 0; sp < grafo->size; ++i)
+	{
+
+		struct Node *n = grafo->nodes[i];
+
+		if (n != NULL)
+		{
+
+			struct User *u1 = n->ver->user;
+			
+			n = n->next_node;
+
+			while (n->next_node != NULL)
+			{
+
+				struct User *u2 = n->ver->user;
+
+				fprintf(file, "%s->%s\n",u1->nick, u2->nick );
+
+			}
+
+			sp += 1;
+
+		}
+
+	}
+
+	return true;
+}
 
 
 #endif
