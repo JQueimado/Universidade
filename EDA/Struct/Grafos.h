@@ -117,9 +117,13 @@ int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
 		return ERROR;
 	}
 
+	int pos;
+
+	for (pos = 0; grafo->nodes[ pos ] != NULL; ++pos);
+
 	/*adds vertice*/
-	struct Node *temp = new_Node( new_Vertice( user , grafo->size ) );
-	grafo->nodes[ grafo->size ] = temp;
+	struct Node *temp = new_Node( new_Vertice( user , pos ) );
+	grafo->nodes[ pos ] = temp;
 	grafo->size += 1;
 
 	return NORMAL;
@@ -165,6 +169,64 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 
 }
 
+int grafo_remove_conection(struct Grafo *grafo_remove_conection, struct Vertice *v1, struct Vertice *v2)
+{
+
+	struct Node *n = grafo->nodes[ v1->pos ];
+	struct Node *p;
+	
+	p = n;
+	n = n->next_node;
+	
+	while(n != NULL)
+	{
+
+		if (n->ver->pos == v2->pos)
+		{
+
+			p->next_node = n->next_node;
+			return NORMAL;
+
+		}
+
+		p = n;
+		n->next_node;
+
+	}
+
+	return ERROR;
+
+}
+
+int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
+{
+
+	if (grafo == NULL)
+		return ERROR;
+
+	if (Vertice == NULL)
+		return NORMAL;
+
+	/*remove conections to vertice*/
+	for (int i = 0; sp <grafo->size ; ++i)
+	{
+		if (grafo->nodes != NULL)
+		{
+			
+			grafo_remove_conection(grafo , grafo->nodes[i]->ver, v);
+
+			sp +=1;
+		}
+
+	}
+
+	/*remove node*/
+	grafo->nodes[ v->pos ] == NULL;
+
+	return NORMAL;
+
+}
+
 /*Get Vertice from a given position*/
 struct Vertice *grafo_get_vertice_at( struct Grafo *grafo , int position )
 {
@@ -199,14 +261,28 @@ struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
 void grafo_print_all(struct Grafo *grafo)
 {
 	puts("start");
-	for (int i = 0; i < grafo->size; ++i)
+	
+	int sp = 0;
+	
+	for (int i = 0; sp < grafo->size; ++i)
 	{
+		
+		if (grafo->nodes[i] != NULL)
+		{
+
+			struct Vertice *v = grafo_get_vertice_at(grafo ,i);
 	
-		struct Vertice *v = grafo_get_vertice_at(grafo ,i);
-	
-		printf("user at %d is %s\n", i+1 , v->user->nick );
+			printf("user at %d is %s\n", i+1 , v->user->nick );
+			sp += 1;
+		}
+
+		if (i >= MAX_USERS)
+		{
+			break;
+		}
 
 	}
+	
 	puts("done");
 
 }
