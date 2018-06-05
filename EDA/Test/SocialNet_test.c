@@ -30,6 +30,22 @@ void Dump_test()
 	criar_utilizador(socialnet_test, "test9", "t9", u9);
 
 	seguir_utilizador(socialnet_test ,"test0","test1","t0","t1",u0,u1);
+	seguir_utilizador(socialnet_test ,"test0","test2","t0","t2",u0,u2);
+	seguir_utilizador(socialnet_test ,"test0","test3","t0","t3",u0,u3);
+	seguir_utilizador(socialnet_test ,"test0","test4","t0","t4",u0,u4);
+	seguir_utilizador(socialnet_test ,"test0","test5","t0","t5",u0,u5);
+	seguir_utilizador(socialnet_test ,"test0","test6","t0","t6",u0,u6);
+	seguir_utilizador(socialnet_test ,"test0","test7","t0","t7",u0,u7);
+	seguir_utilizador(socialnet_test ,"test0","test8","t0","t8",u0,u8);
+	seguir_utilizador(socialnet_test ,"test0","test9","t0","t9",u0,u9);
+	seguir_utilizador(socialnet_test ,"test1","test2","t1","t2",u1,u2);
+	seguir_utilizador(socialnet_test ,"test1","test4","t1","t4",u1,u4);
+	seguir_utilizador(socialnet_test ,"test2","test3","t2","t3",u2,u3);
+	seguir_utilizador(socialnet_test ,"test3","test1","t3","t1",u3,u1);
+	seguir_utilizador(socialnet_test ,"test4","test1","t4","t1",u4,u1);
+	seguir_utilizador(socialnet_test ,"test5","test1","t5","t1",u5,u1);
+	seguir_utilizador(socialnet_test ,"test6","test1","t6","t1",u6,u1);
+
 
 	dump(socialnet_test);
 }

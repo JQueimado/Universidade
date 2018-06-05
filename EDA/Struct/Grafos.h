@@ -431,21 +431,21 @@ bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
 	for (int i = 0; sp < grafo->size; ++i)
 	{
 
-		struct Node *n = grafo->nodes[i];
-
-		if (n != NULL)
+		if (grafo->nodes[i] != NULL)
 		{
 
-			struct User *u1 = n->ver->user;
-			
+			struct Node *n = grafo->nodes[i];
+			struct Node *cur_n = n;
 			n = n->next_node;
 
-			while (n->next_node != NULL)
+			while (n != NULL)
 			{
-
+				struct User *u1 = cur_n->ver->user;
 				struct User *u2 = n->ver->user;
 
-				fprintf(file, "%s->%s\n",u1->nick, u2->nick );
+				fprintf(file, "%s->%s\n", u1->nick , u2->nick);
+
+				n = n->next_node;
 
 			}
 
