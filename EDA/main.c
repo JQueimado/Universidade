@@ -47,7 +47,9 @@ int main()
             struct User *user1=new_User(nick,name);
             struct User *user2=new_User(nicktemp,nametemp);
             deixarseguir_utilizador(socialnet,nick,nicktemp,name,nametemp,user1,user2);
+
         }
+        
         if (entrada=='X')
         {
             return 1;

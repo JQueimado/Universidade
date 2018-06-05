@@ -128,4 +128,6 @@ void deixarseguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2
 }
 
 
+
+
 #endif
