@@ -169,7 +169,7 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 
 }
 
-int grafo_remove_conection(struct Grafo *grafo_remove_conection, struct Vertice *v1, struct Vertice *v2)
+int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
 
 	struct Node *n = grafo->nodes[ v1->pos ];
@@ -190,7 +190,7 @@ int grafo_remove_conection(struct Grafo *grafo_remove_conection, struct Vertice 
 		}
 
 		p = n;
-		n->next_node;
+		n = n->next_node;
 
 	}
 
@@ -204,10 +204,11 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 	if (grafo == NULL)
 		return ERROR;
 
-	if (Vertice == NULL)
+	if (v == NULL)
 		return NORMAL;
 
 	/*remove conections to vertice*/
+	int sp = 0;
 	for (int i = 0; sp <grafo->size ; ++i)
 	{
 		if (grafo->nodes != NULL)
@@ -221,7 +222,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 	}
 
 	/*remove node*/
-	grafo->nodes[ v->pos ] == NULL;
+	grafo->nodes[ v->pos ] = NULL;
 
 	return NORMAL;
 

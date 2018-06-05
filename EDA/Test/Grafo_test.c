@@ -54,6 +54,9 @@ void Grafo_Testing()
 	struct Vertice *v5 =  grafo_get_vertice_by_name( grafo_test, "Cona1");
 	printf("%s\n", v5->user->nick );
 
+	/*remove connection*/
+	puts("");
+	
 
 }
 
