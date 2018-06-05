@@ -56,7 +56,9 @@ void Grafo_Testing()
 
 	/*remove connection*/
 	puts("");
-	
+	grafo_remove_conection(grafo_test , v1 ,v2);
+	grafo_print_conections_at(grafo_test , v1);
+
 
 }
 
