@@ -21,7 +21,7 @@ struct SocialNet
 	struct trie *tnick;
 
 };
-
+/*Constructor*/
 struct SocialNet *new_SocialNet(){
 
     struct SocialNet *temp = malloc( sizeof( struct SocialNet ) );
@@ -126,8 +126,5 @@ void deixarseguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2
     //falta verificar se um utilizador segue outro(funcao da conexao entre 1 vertice e outro)
     
 }
-
-
-
 
 #endif
