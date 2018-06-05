@@ -93,7 +93,7 @@ void seguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2[],cha
         printf("+ utilizador %s inexistente\n",nick2);
     }
    // else if() //falta fazer uma função para verficar se há conexao entre o vertice 1 e o vertice 2
-    else if()
+    else
     {
         //cria vertice para nick1 e vertice para nick2
         grafo_insert_vertice(grafo,user1);
@@ -112,7 +112,7 @@ void seguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2[],cha
 void deixarseguir_utilizador(struct SocialNet *socialnet,char nick1[],char nick2[],char nome1[],char nome2[],struct User *user1,struct User *user2)
 {
     struct trie *tnick=socialnet->tnick;
-    struct Grafo *grafo=socialnet->grafo;
+    //struct Grafo *grafo=socialnet->grafo;
     user1=new_User(nick1,nome1);
     user2=new_User(nick2,nome2);
      if(trie_find_removed(tnick,nick1))
