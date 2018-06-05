@@ -32,6 +32,7 @@ void Grafo_Testing()
 	grafo_print_all(grafo_test);
 
 	/*Create conections*/
+	puts("");
 	struct Vertice *v1 = grafo_get_vertice_at(grafo_test , 0);
 	struct Vertice *v2 = grafo_get_vertice_at(grafo_test , 1);
 	struct Vertice *v3 = grafo_get_vertice_at(grafo_test , 2);
@@ -43,11 +44,31 @@ void Grafo_Testing()
 	grafo_insert_conection(grafo_test , v2 ,v1 );
 	grafo_insert_conection(grafo_test , v3 ,v2 );
 
+	puts("");
 	grafo_print_conections_at(grafo_test, 0);
 	grafo_print_conections_at(grafo_test, 1);
 	grafo_print_conections_at(grafo_test, 2);
 	grafo_print_conections_at(grafo_test, 3);
 	grafo_print_conections_at(grafo_test, 4);
+
+	/*check connection*/
+	puts("");
+	if (grafo_check_connection(grafo_test , v1, v2))
+	{
+
+		puts("It Works");
+	}
+
+	if (!grafo_check_connection(grafo_test, v2, v3))
+	{
+		puts("It Works");
+	}
+
+	/*check if exists*/
+	if (grafo_check_if_exists (grafo_test , v1))
+	{
+		puts("Is Works");
+	}
 
 	/*find user*/
 	puts("");

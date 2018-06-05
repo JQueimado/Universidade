@@ -55,6 +55,14 @@ struct Vertice *new_Vertice(struct User *user , int p )
 
 }
 
+/*Methods*/
+bool vertice_compare ( struct Vertice *v1 , struct Vertice *v2 )
+{
+
+	return compare_user(v1->user , v2->user);
+
+}
+
 /****Class Node****/
 struct Node
 {
@@ -100,6 +108,101 @@ struct Grafo *new_Grafo()
 }
 
 /*Methods*/
+
+/*Get Vertice from a given position*/
+struct Vertice *grafo_get_vertice_at( struct Grafo *grafo , int position )
+{
+
+	return grafo->nodes[ position ]->ver;	
+
+}
+
+/*Find user*/
+
+struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
+{
+
+	for (int i = 0; i < grafo->size; ++i)
+	{
+		struct Vertice *v = grafo_get_vertice_at(grafo , i);
+
+		if( strcmp( v->user->nick , name ) == 0 )
+		{
+
+			return v;
+
+		}
+
+	}
+
+	return NULL;
+
+}
+
+/*Checks if v is in grafo*/
+bool grafo_check_if_exists (struct Grafo *grafo , struct Vertice *v)
+{
+
+	int sp = 0;
+	for (int i = 0; sp < grafo->size; ++i)
+	{
+		
+		if (grafo->nodes[i] != NULL)
+		{
+		
+			if (vertice_compare( grafo_get_vertice_at(grafo , i) , v) )
+			{
+				return true;
+			}
+
+			sp += 1;
+		
+		}
+
+	}
+
+	return false;
+
+}
+
+/*Checks if v1 is connected to v2*/
+bool grafo_check_connection(struct Grafo * grafo, struct Vertice *v1 , struct Vertice *v2)
+{
+
+	if (grafo == NULL)
+	{
+		return NULL;
+	}
+
+	if (v1 == NULL)
+	{
+		return NULL;
+	}
+
+	if (v2 == NULL)
+	{
+		return NULL;
+	}
+
+	struct Node *n = grafo->nodes[ v1->pos ];
+
+	n = n->next_node;
+
+	while( n != NULL )
+	{
+
+		if ( vertice_compare (n->ver , v2) )
+		{
+			return true;
+		}
+
+		n = n->next_node;
+
+	}
+
+	return false;
+
+} 
 
 /*Add Vertice*/
 int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
@@ -177,7 +280,7 @@ int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Verti
 	while(n != NULL)
 	{
 
-		if (n->ver->pos == v2->pos)
+		if ( vertice_compare(n->ver , v2))
 		{
 
 			p->next_node = n->next_node;
@@ -201,7 +304,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 		return ERROR;
 
 	if (v == NULL)
-		return NORMAL;
+		return ERROR;
 
 	/*remove conections to vertice*/
 	int sp = 0;
@@ -224,37 +327,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
-/*Get Vertice from a given position*/
-struct Vertice *grafo_get_vertice_at( struct Grafo *grafo , int position )
-{
-
-	return grafo->nodes[ position ]->ver;	
-
-}
-
-/*Find user*/
-
-struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
-{
-
-	for (int i = 0; i < grafo->size; ++i)
-	{
-		struct Vertice *v = grafo_get_vertice_at(grafo , i);
-
-		if( strcmp( v->user->nick , name ) == 0 )
-		{
-
-			return v;
-
-		}
-
-	}
-
-	return NULL;
-
-}
-
-/*print*/
+/*Degug prints*/
 void grafo_print_all(struct Grafo *grafo)
 {
 	puts("start");

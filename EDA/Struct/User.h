@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define MAX_NICK_SIZE 5
 #define MAX_USER_SIZE 25
@@ -86,6 +87,14 @@ int set_name( struct User *user , char na[] )
 
 }
 
+/*compare 2 users*/
+bool compare_user(struct User *u1 , struct User *u2)
+{
+
+	return strcmp(u1->nick , u2->nick) == 0;
+}
+
+/*Construtor*/
 struct User *new_User( char ni[] , char na[] )
 {
 
