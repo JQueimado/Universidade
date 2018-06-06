@@ -212,13 +212,14 @@ bool trie_delete(struct trie *t, char p[])
 
 }
 
-void trie_dump_visit(struct node *n , char *name, FILE *file)
+void trie_dump_visit(struct node *n , char name[], FILE *file)
 {
 
   if (n->word)
   {
     
     fprintf(file, "%s\n", name);
+    return;
   
   }
 
@@ -227,9 +228,13 @@ void trie_dump_visit(struct node *n , char *name, FILE *file)
 
     if (n->child[i] != NULL)
     {
-      char c = (char) i + ALPHABET_MIN;
-      strcat(name , c);
+  
+      char test = CHAR(i);
 
+      strcat(name , &test);
+      
+      printf("%c\n", test);
+      
       trie_dump_visit(n->child[i], name, file);
 
     }
@@ -243,17 +248,23 @@ void trie_dump(struct trie *t , FILE *file)
 
   struct node *n = t->root;
 
+  char name[25];
+
   for (int i = 0; i < ALPHABET_SIZE; ++i)
   {
-    char name[25];
 
     if (n->child[i] != NULL)
     {
-      char *c = (char) CHAR( i );
-      strcat(name , c );
+      
+      char test = CHAR(i);
 
+      strcat(name , &test);
+      
+      printf("%c\n", test);
+      
       trie_dump_visit(n->child[i], name, file);
 
+      name[0] = '\0';
     }
 
   }

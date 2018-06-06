@@ -1,6 +1,7 @@
 
 #include "../Struct/SocialNet.h"
 #include "../Struct/User.h"
+#include "../Struct/trie.h"
 
 void Dump_test()
 {
@@ -46,6 +47,10 @@ void Dump_test()
 	seguir_utilizador(socialnet_test ,"test5","test1","t5","t1",u5,u1);
 	seguir_utilizador(socialnet_test ,"test6","test1","t6","t1",u6,u1);
 
+	struct trie *t = socialnet_test->tnome;
+
+	if(trie_find(t , "test0"))
+		puts("found");
 
 	dump(socialnet_test);
 }
