@@ -13,6 +13,8 @@
 
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
+#define NICK_FILE_NAME "Nick_data.txt"
+#define NAME_FILE_NAME "Name_data.txt"
 
 /****Class SocialNet****/
 struct SocialNet
@@ -175,10 +177,23 @@ bool dump(struct SocialNet *socialnet)
     }
 
     struct Grafo *grafo = socialnet->grafo;
+    struct trie *t_nick = socialnet->tnick;
+    struct trie *t_nome = socialnet->tnome;
 
-    FILE *file_user = fopen(NET_FILE_NAME , "w");
-    grafo_dump_folows(grafo, file_user);
-    
+    /*Dump Data*/
+    FILE *file_nick = fopen(NICK_FILE_NAME , "w");
+    trie_dump(t_nick , file_nick);
+    fclose(file_nick);
+
+    FILE *file_name = fopen(NAME_FILE_NAME , "w");
+    trie_dump(t_nome , file_name);
+    fclose(file_name);
+
+    /*Dump net*/
+    FILE *file_net = fopen(NET_FILE_NAME , "w");
+    grafo_dump_folows(grafo, file_net);
+    fclose(file_net);
+
     return true;
 
 }

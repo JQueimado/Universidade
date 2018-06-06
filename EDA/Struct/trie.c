@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "trie.h"
 
@@ -211,8 +212,53 @@ bool trie_delete(struct trie *t, char p[])
 
 }
 
+void trie_dump_visit(struct node *n , char *name, FILE *file)
+{
 
+  if (n->word)
+  {
+    
+    fprintf(file, "%s\n", name);
+  
+  }
 
+  for (int i = 0; i < ALPHABET_SIZE; ++i)
+  {
+
+    if (n->child[i] != NULL)
+    {
+      char c = (char) i + ALPHABET_MIN;
+      strcat(name , c);
+
+      trie_dump_visit(n->child[i], name, file);
+
+    }
+
+  }
+
+}
+
+void trie_dump(struct trie *t , FILE *file)
+{
+
+  struct node *n = t->root;
+
+  for (int i = 0; i < ALPHABET_SIZE; ++i)
+  {
+    char name[25];
+
+    if (n->child[i] != NULL)
+    {
+      char *c = (char) CHAR( i );
+      strcat(name , c );
+
+      trie_dump_visit(n->child[i], name, file);
+
+    }
+
+  }
+
+}
 
 
 

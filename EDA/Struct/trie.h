@@ -1,6 +1,7 @@
 /* trie interface */
 
 #include <stdbool.h>
+#include <stdio.h>
 
 struct trie;
 
@@ -16,4 +17,4 @@ bool trie_find_removed(struct trie *t,char p[]);
 
 int trie_count(struct trie *);
 
-
+void trie_dump(struct trie * , FILE *);
