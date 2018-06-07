@@ -26,5 +26,12 @@ int main()
 	if (trie_find(t, "EUQUEROECONASsssss07"))
 		puts("TA BOM CARALHO");
 
+
+	printf(" a pos de %d e %c\n", 29, to_char(29));
+	printf(" a pos de %c e %d\n", 't', pos('t'));
+
+
+
+
 	return 0;
 }

@@ -182,11 +182,11 @@ bool dump(struct SocialNet *socialnet)
     struct trie *t_nome = socialnet->tnome;
 
     /*Dump Data*/
-    /*
+
     FILE *file_nick = fopen(NICK_FILE_NAME , "w");
     trie_dump(t_nick , file_nick);
     fclose(file_nick);
-    */
+    
 
     FILE *file_name = fopen(NAME_FILE_NAME , "w");
     trie_dump(t_nome , file_name);

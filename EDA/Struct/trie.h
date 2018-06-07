@@ -21,11 +21,13 @@
 #define NUMBERS_MAX '9'
 #define NUMBERS_SIZE (NUMBERS_MAX - NUMBERS_MIN + 1)
 
+#define SPACE ' '
+
 #define NUMBER_MIN_POINT 0
 #define ALPHABET_MIN_LC_POINT 10
-#define ALPHABET_NIM_HC_POINT 26
+#define ALPHABET_NIM_HC_POINT 36
 
-#define ARRAY_SIZE (NUMBERS_SIZE + 2*ALPHABET_SIZE)
+#define ARRAY_SIZE (NUMBERS_SIZE + 2*ALPHABET_SIZE + 1 )
 
 /* trie node */
 struct node {
@@ -271,10 +273,53 @@ void my_strcat(char dest[], char src[])
 
 }
 
-void trie_dump_visit(struct node *n , char name[], FILE *file)
+void my_strcpy(char dest[], char src[])
+{
+  int i = 0;
+
+  while (src[i] != '\0')
+    {
+      dest[i] = src[i];
+
+      i++;
+    }
+
+  dest[i] = '\0';
+}
+
+
+void trie_dump_visit(struct node *n , char word[], FILE *file)
 {
 
-  
+  if(n->word)
+  {
+
+  	fprintf(file, "%s\n", word);
+  	return;
+
+  }
+
+  for (int i = 0; i < ARRAY_SIZE; ++i)
+  {
+  	
+  	if (n->child[i] != NULL)
+  	{	
+  		char temp [25];
+
+  		my_strcpy(temp , word);
+
+  		char c[2];
+  		c[0] = to_char(i);
+  		c[1] = '\0';
+
+  		my_strcat(word , c);
+
+  		trie_dump_visit(n->child[i] , word , file);
+
+  		my_strcpy(word , temp);
+  	}
+
+  }
 
 }
 
@@ -283,9 +328,24 @@ void trie_dump(struct trie *t , FILE *file)
 
   struct node *n = t->root; 
 
-  for (int i = 0; i < ALPHABET_SIZE; ++i)
+  char word[25];
+
+  for (int i = 0; i < ARRAY_SIZE; ++i)
   {
-    /* code */
+    
+  	if (n->child[i] != NULL)
+  	{
+  		char c[2];
+  		c[0] = to_char(i);
+  		c[1] = '\0';
+
+  		my_strcat(word , c);
+
+  		trie_dump_visit(n->child[i] , word , file);
+
+  		word[0] = '\0';
+  	}
+
   }
 
 }
