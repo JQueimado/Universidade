@@ -1,20 +1,258 @@
-/* trie interface */
+/* trie implementation, with arrays */
+/* Fonte: slides do prof */
 
-#include <stdbool.h>
+#ifndef _trie_
+#define _trie_
+
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 
-struct trie;
+#define ALPHABET_MIN 'A'
+#define ALPHABET_MAX 'Z'
+#define ALPHABET_SIZE (ALPHABET_MAX - ALPHABET_MIN + 1)
 
-struct trie *trie_new(void);
-void trie_destroy(struct trie *);
+#define POS(c)  ((c) - ALPHABET_MIN)	// character position in alphabet
+#define CHAR(n) ((n) + ALPHABET_MIN)	// n-th alphabet character
 
-bool trie_empty(struct trie *);
 
-bool trie_find(struct trie *, char []);
-void trie_insert(struct trie *, char []);
-bool trie_delete(struct trie *, char []);
-bool trie_find_removed(struct trie *t,char p[]);
+/* trie node */
+struct node {
+  struct node *child[ALPHABET_SIZE];
+  bool word;
+  bool apagou;
+  struct node *parent;
+};
 
-int trie_count(struct trie *);
+/* trie */
+struct trie {
+  struct node *root;
+};
 
-void trie_dump(struct trie * , FILE *);
+
+/*
+  Allocates and returns a new trie node.
+
+  Assumes it is always possible to allocate memory for a new node.
+*/
+static struct node *node_new()
+{
+  struct node *node = malloc(sizeof(*node));
+
+  node->word = false;
+  for (int i = 0; i < ALPHABET_SIZE; ++i)
+    node->child[i] = NULL;
+
+  return node;
+}
+
+
+/* Frees a trie NODE. */
+static void node_free(struct node *node)
+{
+  free(node);
+}
+
+
+/* Destroys the sub-trie with root NODE. */
+static void node_destroy(struct node *node)
+{
+  if (node == NULL)
+    return;
+
+  for (int i = 0; i < ALPHABET_SIZE; ++i)
+    node_destroy(node->child[i]);
+
+  node_free(node);
+}
+
+
+/* Creates a new, empty trie. */
+struct trie *trie_new()
+{
+  struct trie *trie = malloc(sizeof(struct trie));
+
+  if (trie)
+    trie->root = NULL;
+
+  return trie;
+}
+
+
+/* Destroys trie T, freeing the memory it occupies. */
+void trie_destroy(struct trie *t)
+{
+  node_destroy(t->root);
+
+  free(t);
+}
+
+
+/* Checks whether trie T is empty. */
+bool trie_empty(struct trie *t)
+{
+  return t->root == NULL;
+}
+
+
+/* Inserts word P into trie T. */
+void trie_insert(struct trie *t, char p[])
+{
+  struct node *n;
+  int i = 0;
+
+  if (t->root == NULL)
+    t->root = node_new();
+
+  n = t->root;
+
+  // follow the word down the trie as long as possible,
+  // taking care not to go to a nonexisting node
+  while (p[i] != '\0' && n->child[POS(p[i])] != NULL)
+    {
+      n = n->child[POS(p[i])];
+      i++;
+    }
+
+  // insert the new suffix into the trie
+  while (p[i] != '\0')
+    {
+      n->child[POS(p[i])] = node_new();
+      n = n->child[POS(p[i])];
+
+      i++;
+    }
+
+  n->word = true;
+}
+/*
+Searches for word P in trie T.
+
+   Returns true if it finds it, false otherwise.*/
+bool trie_find(struct trie *t,char p[])
+{
+  struct node *n;
+  int i=0;
+
+  n=t->root;
+
+  while(n!=NULL && p[i]!='\0')
+  {
+    n = n->child[POS(p[i])];
+      
+
+    i++;
+  }
+
+  return (n!=NULL && n->word);
+
+}
+ //Returns true if it finds a word that already was removed
+ bool trie_find_removed(struct trie *t,char p[])
+{
+  struct node *n;
+  int i=0;
+
+  n=t->root;
+
+  while(n!=NULL && p[i]!='\0')
+  {
+    n = n->child[POS(p[i])];
+      
+
+    i++;
+  }
+
+  return (n!=NULL && n->apagou);
+
+}
+/* Counts and returns the number of words in trie T */
+int trie_count(struct trie *t) 
+{
+  struct node *n;
+  int i;
+  int count=0;
+  n=t->root;
+  for(i=0;i<ALPHABET_SIZE;i++)
+    {
+      if(n->child[i])
+        count++;
+    }
+    return count;
+}
+
+
+
+
+/* Removes word P from trie T. */
+
+bool trie_delete(struct trie *t, char p[])
+{
+  struct node *n;
+  int i=0;
+
+
+  n = t->root;
+
+  while (p[i] != '\0' && n->child[POS(p[i])] != NULL)
+    {
+      n = n->child[POS(p[i])];
+      i++;
+    }
+
+  if(n!=NULL && n->word)
+  {
+    n->word=true;
+    n->apagou=true;
+
+  }
+  
+  return n->apagou;
+
+}
+
+void my_strcat(char dest[], char src[])
+{
+
+  int i = 0, j = 0;
+
+  // percorre a primeira string até ao fim
+  while (dest[i] != '\0')
+    i++;
+
+  // copia a segunda para o fim da primeira
+  while (src[j] != '\0')
+    {
+
+      dest[i] = src[j];
+
+      i++; j++;
+    }
+
+  // acrescenta o terminador
+  dest[i] = '\0';
+
+}
+
+void trie_dump_visit(struct node *n , char name[], FILE *file)
+{
+
+  
+
+}
+
+void trie_dump(struct trie *t , FILE *file)
+{
+
+  struct node *n = t->root; 
+
+  for (int i = 0; i < ALPHABET_SIZE; ++i)
+  {
+    /* code */
+  }
+
+}
+
+
+#endif

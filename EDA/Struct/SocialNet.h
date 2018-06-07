@@ -9,7 +9,7 @@
 #include <string.h>
 
 #include "Grafos.h"
-#include "trie.c"
+#include "trie.h"
 
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
