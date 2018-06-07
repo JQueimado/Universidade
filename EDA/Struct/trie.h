@@ -294,7 +294,7 @@ void trie_dump_visit(struct node *n , char word[], FILE *file)
   if(n->word)
   {
 
-  	fprintf(file, "%s\n", word);
+  	fprintf(file, "%s %s\n", word, n->user->name);
   	return;
 
   }

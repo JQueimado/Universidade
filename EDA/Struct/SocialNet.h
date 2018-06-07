@@ -179,18 +179,12 @@ bool dump(struct SocialNet *socialnet)
 
     struct Grafo *grafo = socialnet->grafo;
     struct trie *t_nick = socialnet->tnick;
-    struct trie *t_nome = socialnet->tnome;
 
     /*Dump Data*/
 
     FILE *file_nick = fopen(NICK_FILE_NAME , "w");
     trie_dump(t_nick , file_nick);
     fclose(file_nick);
-    
-
-    FILE *file_name = fopen(NAME_FILE_NAME , "w");
-    trie_dump(t_nome , file_name);
-    fclose(file_name);
 
     /*Dump net*/
     FILE *file_net = fopen(NET_FILE_NAME , "w");
