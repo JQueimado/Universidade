@@ -310,7 +310,7 @@ void my_strcpy(char dest[], char src[])
   dest[i] = '\0';
 }
 
-/*
+
 void trie_dump_visit(struct node *n , char word[], FILE *file)
 {
 
@@ -374,7 +374,7 @@ void trie_dump(struct trie *t , FILE *file)
 }
 
 /*Unpacks trie of Users from a file*/
-/*
+
 void trie_unpack(struct trie *t , FILE *file)
 {
 	
@@ -384,7 +384,7 @@ void trie_unpack(struct trie *t , FILE *file)
 	{
 
 		/*unpack nick*/
-	/*	
+
 		int i = 0;
 		
 		char ni[6];
@@ -403,7 +403,7 @@ void trie_unpack(struct trie *t , FILE *file)
 		i++;
 
 		/*unpack name*/
-/*
+
 		int j = 0;
 
 		char na[26];
@@ -423,12 +423,12 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		/*create user*/
 
-		//struct User *temp = new_User(ni , na);
+		struct User *temp = new_User(ni , na);
 
 		/*insert user*/
 
-		//trie_insert(t , ni , temp);
-/*
+		trie_insert(t , ni , temp);
+
 	}	
 
 }
