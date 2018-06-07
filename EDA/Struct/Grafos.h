@@ -18,11 +18,6 @@
 #define NORMAL 0
 #define ERROR 1
 
-/*Color*/
-#define WHITE 1
-#define GRAY 0
-#define BLACK -1
-
 /*
 
 Implementação de Grafos como uma listas de adjacências
@@ -36,11 +31,6 @@ struct Vertice
 	int pos;
 	struct User *user;
 	
-	int color;
-	struct Vertice *p;
-	int d;
-	int f;
-
 };
 
 /*Constructor*/
@@ -49,7 +39,6 @@ struct Vertice *new_Vertice(struct User *user , int p )
 
 	struct Vertice *temp = malloc( sizeof( struct Vertice ) );
 
-	temp->color = WHITE;
 	temp->pos = p;
 	temp->user = user;
 
@@ -248,6 +237,7 @@ bool grafo_connection_count_check(struct Grafo * grafo,struct Vertice *v1)
 
 } 
 
+/*counts all conections to a vertice*/
 int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
 {
 	
@@ -412,7 +402,27 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
-/*DB Storage*/
+void grafo_get_conected_to(struct Grafo *g , struct Vertice *v , struct User *arr[])
+{
+
+	struct Node *n = g->nodes[v->pos];
+
+	int i = 0;
+
+	n = n->next_node;
+
+	while (n != NULL)
+	{
+
+		arr[i] = n->ver->user;
+
+		i++;
+
+	}
+
+}
+
+/**DB Storage**/
 
 /*dumps all user information to a file*/
 bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
