@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Struct/trie.h"
 #include "Struct/User.h"
 #include "Struct/SocialNet.h"
 
