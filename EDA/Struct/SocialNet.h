@@ -41,6 +41,7 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
 	struct trie *tnome = socialnet->tnome;
 
     user=new_User(user->nick,user->name);
+
     if(trie_find(tnick,user->nick)) //retorna 1 se o nick ja existir
     {
         printf("+ nick %s usado previamente\n",user->nick);
@@ -51,6 +52,8 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
         if(user!=NULL)
 
         {
+            puts("Cona");
+            
             //printf("eu tb!\n");
             trie_insert(tnick,user->nick,user);
             trie_insert(tnome,user->name,user);
@@ -63,6 +66,7 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
 
 
 }
+
 
 
 void remover_utilizador(struct SocialNet *socialnet,struct User *user)
@@ -195,6 +199,11 @@ void ler_mensagem(struct SocialNet *socialnet,struct User *user)
     {
         printf("+ utilizador %s sem seguidos\n",user->nick);
     }
+}
+
+int terminar_execucao()
+{
+    return 0;
 }
 
 
