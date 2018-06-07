@@ -29,7 +29,7 @@
 
 /* trie node */
 struct node {
-  struct node *child[ALPHABET_SIZE];
+  struct node *child[ARRAY_SIZE];
   bool word;
   bool apagou;
   struct node *parent;
@@ -41,11 +41,6 @@ struct trie {
 };
 
 
-/*
-  Allocates and returns a new trie node.
-
-  Assumes it is always possible to allocate memory for a new node.
-*/
 static struct node *node_new()
 {
   struct node *node = malloc(sizeof(*node));
