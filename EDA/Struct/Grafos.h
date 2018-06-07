@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "User.h"
+#include "trie.h"
 
 /**Consts**/
 #define SIZE 20
@@ -372,6 +373,115 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
+/*DB Storage*/
+
+/*dumps all user information to a file*/
+bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
+{
+	if (file == NULL)
+	{
+		return false;
+	}
+
+	int sp = 0;
+
+	for (int i = 0; sp < grafo->size; ++i)
+	{
+
+		if (grafo->nodes[i] != NULL)
+		{
+
+			struct Node *n = grafo->nodes[i];
+			struct Node *cur_n = n;
+			n = n->next_node;
+
+			while (n != NULL)
+			{
+				struct User *u1 = cur_n->ver->user;
+				struct User *u2 = n->ver->user;
+
+				fprintf(file, "%s %s\n", u1->nick , u2->nick);
+
+				n = n->next_node;
+
+			}
+
+			sp += 1;
+
+		}
+
+	}
+
+	return true;
+}
+
+/*unpacks a Grafo from a file and links it to a trie*/
+void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
+{
+
+	char out[13];
+
+	while(fgets(out , 13 , file))
+	{
+
+		int i = 0;
+
+		char u1[6];
+
+		while(out[i] != ' ')
+		{
+
+			u1[i] = out[i];
+
+			i++;
+
+		}
+
+		u1[i] = '\0';
+
+		i++;
+
+		int j = 0;
+
+		char u2[6];
+
+		while(out[i] != '\n')
+		{
+
+			u2[j] = out[i];
+
+			j++;
+
+			i++;
+
+		}
+
+		u2[j] = '\0';
+
+		if (grafo_get_vertice_by_name(g , u1) == NULL)
+		{
+
+			struct User *temp = trie_find_user(t , u1);
+			grafo_insert_vertice(g , temp);
+
+		}
+
+		if (grafo_get_vertice_by_name(g , u2) == NULL)
+		{
+
+			struct User *temp = trie_find_user(t , u2);
+			grafo_insert_vertice(g , temp);
+
+		}
+
+		grafo_insert_conection(g , grafo_get_vertice_by_name(g ,u1) , grafo_get_vertice_by_name(g, u2));
+
+	}
+
+}
+
+
+
 /*Degug prints*/
 void grafo_print_all(struct Grafo *grafo)
 {
@@ -418,45 +528,6 @@ void grafo_print_conections_at (struct Grafo *grafo, int i)
 
 }
 
-/*dumps all user information to a file*/
-bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
-{
-	if (file == NULL)
-	{
-		return false;
-	}
-
-	int sp = 0;
-
-	for (int i = 0; sp < grafo->size; ++i)
-	{
-
-		if (grafo->nodes[i] != NULL)
-		{
-
-			struct Node *n = grafo->nodes[i];
-			struct Node *cur_n = n;
-			n = n->next_node;
-
-			while (n != NULL)
-			{
-				struct User *u1 = cur_n->ver->user;
-				struct User *u2 = n->ver->user;
-
-				fprintf(file, "%s->%s\n", u1->nick , u2->nick);
-
-				n = n->next_node;
-
-			}
-
-			sp += 1;
-
-		}
-
-	}
-
-	return true;
-}
 
 
 #endif
