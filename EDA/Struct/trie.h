@@ -24,8 +24,8 @@
 #define SPACE ' '
 
 #define NUMBER_MIN_POINT 0
-#define ALPHABET_MIN_LC_POINT 10
-#define ALPHABET_NIM_HC_POINT 36
+#define ALPHABET_MIN_HC_POINT 10
+#define ALPHABET_MIN_LC_POINT 36
 
 #define ARRAY_SIZE (NUMBERS_SIZE + 2*ALPHABET_SIZE + 1 )
 
@@ -77,10 +77,10 @@ char to_char(int i)
 	if( i >= NUMBER_MIN_POINT && i < ALPHABET_MIN_LC_POINT)
 		return i + NUMBERS_MIN;
 
-	if( i >= ALPHABET_MIN_LC_POINT && i < ALPHABET_NIM_HC_POINT)
+	if( i >= ALPHABET_MIN_LC_POINT && i < ALPHABET_MIN_HC_POINT)
 		return (i - NUMBERS_SIZE) + ALPHABET_MIN_LC;
 
-	if( i >= ALPHABET_NIM_HC_POINT && i < ARRAY_SIZE)
+	if( i >= ALPHABET_MIN_HC_POINT && i < ARRAY_SIZE)
 		return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_HC;
 
 	return '\0';
@@ -310,7 +310,7 @@ void my_strcpy(char dest[], char src[])
   dest[i] = '\0';
 }
 
-
+/*
 void trie_dump_visit(struct node *n , char word[], FILE *file)
 {
 
@@ -374,7 +374,7 @@ void trie_dump(struct trie *t , FILE *file)
 }
 
 /*Unpacks trie of Users from a file*/
-
+/*
 void trie_unpack(struct trie *t , FILE *file)
 {
 	
@@ -384,7 +384,7 @@ void trie_unpack(struct trie *t , FILE *file)
 	{
 
 		/*unpack nick*/
-		
+	/*	
 		int i = 0;
 		
 		char ni[6];
@@ -403,7 +403,7 @@ void trie_unpack(struct trie *t , FILE *file)
 		i++;
 
 		/*unpack name*/
-
+/*
 		int j = 0;
 
 		char na[26];
@@ -423,12 +423,12 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		/*create user*/
 
-		struct User *temp = new_User(ni , na);
+		//struct User *temp = new_User(ni , na);
 
 		/*insert user*/
 
-		trie_insert(t , ni , temp);
-
+		//trie_insert(t , ni , temp);
+/*
 	}	
 
 }
@@ -442,7 +442,7 @@ void trie_print_visit(struct node *n , char word[])
   if(n->word)
   {
 
-  	printf("%s %s\n", word, n->user->name);
+  	//printf("%s %s\n", word, n->user->name);
   	return;
 
   }

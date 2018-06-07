@@ -169,7 +169,7 @@ void enviar_mensagem(struct SocialNet *socialnet,struct User *user)
 {
     printf("user->nick: %s\n",user->nick);
     printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
-    if( trie_find_removed(socialnet->tnick,user->nick))
+    if( trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
     {
         printf("+ utilizador %s inexistente\n",user->nick);
     }
@@ -181,6 +181,22 @@ void enviar_mensagem(struct SocialNet *socialnet,struct User *user)
     printf("trie_find_user->mensagem: %d\n",trie_find_user(socialnet->tnick,user->nick)->mensagem);
 }
 
+
+void ler_mensagem(struct SocialNet *socialnet,struct User *user)
+{
+    if(trie_find_removed(socialnet->tnick,user->nick)) //falta fazer esta parte
+    {
+        printf("utilizador %s desativado\n",user->nick);
+    }
+    else if(!trie_find(socialnet->tnick,user->nick))
+    {
+        printf("+ utilizador %s inexistente\n",user->nick);
+    }
+    else if(grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick))==0)
+    {
+        printf("+ utilizador %s sem seguidos\n",user->nick);
+    }
+}
 
 
 bool dump(struct SocialNet *socialnet)

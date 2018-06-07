@@ -247,6 +247,45 @@ bool grafo_connection_count_check(struct Grafo * grafo,struct Vertice *v1)
 
 } 
 
+int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
+{
+	
+	int count=0;
+	if(grafo==NULL)
+		return false;
+	if(v1==NULL)
+		return false;
+	if(grafo->nodes[ v1->pos ]==NULL)
+		return false;
+
+	struct Node *n = grafo->nodes[ v1->pos ];
+
+	//printf("%s\n", n->ver->user->nick);
+
+
+
+
+	n = n->next_node;
+	
+	if (n == NULL)
+	{
+		puts("None");
+	}
+
+	while(n != NULL)
+	{
+
+		//printf("%s\n", n->ver->user->nick);
+
+		n = n->next_node;
+		count++;
+
+	}
+
+	return count;
+
+} 
+
 /*Add Vertice*/
 int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
 {	
