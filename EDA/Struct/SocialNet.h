@@ -13,8 +13,7 @@
 
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
-#define NICK_FILE_NAME "Nick_data.txt"
-#define NAME_FILE_NAME "Name_data.txt"
+#define USER_FILE_NAME "User_data.txt"
 
 /****Class SocialNet****/
 struct SocialNet
@@ -214,7 +213,7 @@ bool dump(struct SocialNet *socialnet)
 
     /*Dump Data*/
 
-    FILE *file_nick = fopen(NICK_FILE_NAME , "w");
+    FILE *file_nick = fopen(USER_FILE_NAME , "w");
     trie_dump(t_nick , file_nick);
     fclose(file_nick);
 
@@ -232,11 +231,21 @@ struct SocialNet *unpack()
 
     struct SocialNet *temp = new_SocialNet();
 
-    FILE *file_user = fopen(NICK_FILE_NAME , "r");
+    /*Unpack Trie*/
+
+    FILE *file_user = fopen(USER_FILE_NAME , "r");
 
     trie_unpack(temp->tnick , file_user);
 
     fclose(file_user);
+
+    /*Unpack Grafo*/
+
+    FILE *file_net = fopen(NET_FILE_NAME , "r" );
+
+    grafo_unpack(temp->grafo , file_net , temp->tnick);
+
+    fclose(file_net);
 
     return temp;
 }

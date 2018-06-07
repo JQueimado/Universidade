@@ -1,4 +1,7 @@
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "../Struct/SocialNet.h"
 #include "../Struct/User.h"
 #include "../Struct/trie.h"
@@ -47,16 +50,19 @@ void Dump_test()
 	seguir_utilizador(socialnet_test , u5, u1);
 	seguir_utilizador(socialnet_test , u6, u1);
 
-	struct trie *t = socialnet_test->tnome;
 
-	if(trie_find(t , "t0"))
-		puts("found");
+	puts("\n");
 
+	//trie_print(socialnet_test->tnick);
+	
 	dump(socialnet_test);
 
 	struct SocialNet * socialnet_test_2 = unpack();
 
-	trie_print(socialnet_test_2->tnick);
+	//grafo_print_all(socialnet_test_2->grafo);
+
+	//grafo_print_conections_at(socialnet_test_2->grafo, 0);
+
 
 }
 
