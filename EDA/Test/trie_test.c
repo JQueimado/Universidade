@@ -5,15 +5,18 @@ int main()
 {
 	
 
-	struct trie *t = trie_new();
+	printf(" a pos de %c e %d\n", '1', pos('1'));
+	printf(" a pos de %c e %d\n", 'a', pos('a'));
+	printf(" a pos de %c e %d\n", 'A', pos('A'));
+	printf(" a pos de %c e %d\n", 'D', pos('D'));
+	printf(" a pos de %c e %d\n", 'd', pos('d'));
+	printf(" a pos de %c e %d\n", '9', pos('9'));
 
-	trie_insert(t , "EUQUERO7CONAS");
+	printf("%d\n" , 'a');
 
-	if (trie_find(t, "EUQUERO7CONAS"))
-	{
-		puts("TA BOM CARALHO");
-	}
-
+	printf(" a pos de %d e %c\n", 1, to_char(1));
+	printf(" a pos de %d e %c\n", 0, to_char(0));
+	printf(" a pos de %d e %c\n", 10, to_char(10));
 
 	return 0;
 }

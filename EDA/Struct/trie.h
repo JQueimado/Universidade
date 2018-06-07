@@ -9,13 +9,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ALPHABET_MIN 'A'
-#define ALPHABET_MAX 'Z'
-#define ALPHABET_SIZE (ALPHABET_MAX - ALPHABET_MIN + 1)
+#define ALPHABET_MIN_HC 'A'
+#define ALPHABET_MAX_HC 'Z'
 
-#define POS(c)  ((c) - ALPHABET_MIN)	// character position in alphabet
-#define CHAR(n) ((n) + ALPHABET_MIN)	// n-th alphabet character
+#define ALPHABET_MIN_LC 'a'
+#define ALPHABET_MAX_LC 'z'
 
+#define ALPHABET_SIZE (ALPHABET_MAX_LC - ALPHABET_MIN_LC + 1)
+
+#define NUMBERS_MIN '0'
+#define NUMBERS_MAX '9'
+#define NUMBERS_SIZE (NUMBERS_MAX - NUMBERS_MIN + 1)
+
+#define NUMBER_MIN_POINT 0
+#define ALPHABET_MIN_LC_POINT 10
+#define ALPHABET_NIM_HC_POINT 26
+
+#define ARRAY_SIZE (NUMBERS_SIZE + 2*ALPHABET_SIZE)
 
 /* trie node */
 struct node {
@@ -47,6 +57,37 @@ static struct node *node_new()
   return node;
 }
 
+int pos(char c)
+{
+
+	if( c <= NUMBERS_MAX && c >= NUMBERS_MIN)
+		return c - NUMBERS_MIN;
+
+	if( c <= ALPHABET_MAX_LC && c >= ALPHABET_MIN_LC)
+		return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
+
+	if( c <= ALPHABET_MAX_HC && c >= ALPHABET_MIN_HC)
+		return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
+
+	return -1;
+
+}
+
+char to_char(int i)
+{
+
+	if( i >= NUMBER_MIN_POINT && i < ALPHABET_MIN_LC_POINT)
+		return i + NUMBERS_MIN;
+
+	if( i >= ALPHABET_MIN_LC_POINT && i < ALPHABET_NIM_HC_POINT)
+		return (i - NUMBERS_SIZE) + ALPHABET_MIN_LC;
+
+	if( i >= ALPHABET_NIM_HC_POINT && i < ARRAY_SIZE)
+		return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_HC;
+
+	return '\0';
+
+}
 
 /* Frees a trie NODE. */
 static void node_free(struct node *node)
@@ -109,17 +150,17 @@ void trie_insert(struct trie *t, char p[])
 
   // follow the word down the trie as long as possible,
   // taking care not to go to a nonexisting node
-  while (p[i] != '\0' && n->child[POS(p[i])] != NULL)
+  while (p[i] != '\0' && n->child[pos(p[i])] != NULL)
     {
-      n = n->child[POS(p[i])];
+      n = n->child[pos(p[i])];
       i++;
     }
 
   // insert the new suffix into the trie
   while (p[i] != '\0')
     {
-      n->child[POS(p[i])] = node_new();
-      n = n->child[POS(p[i])];
+      n->child[pos(p[i])] = node_new();
+      n = n->child[pos(p[i])];
 
       i++;
     }
@@ -139,7 +180,7 @@ bool trie_find(struct trie *t,char p[])
 
   while(n!=NULL && p[i]!='\0')
   {
-    n = n->child[POS(p[i])];
+    n = n->child[pos(p[i])];
       
 
     i++;
@@ -158,7 +199,7 @@ bool trie_find(struct trie *t,char p[])
 
   while(n!=NULL && p[i]!='\0')
   {
-    n = n->child[POS(p[i])];
+    n = n->child[pos(p[i])];
       
 
     i++;
@@ -195,9 +236,9 @@ bool trie_delete(struct trie *t, char p[])
 
   n = t->root;
 
-  while (p[i] != '\0' && n->child[POS(p[i])] != NULL)
+  while (p[i] != '\0' && n->child[pos(p[i])] != NULL)
     {
-      n = n->child[POS(p[i])];
+      n = n->child[pos(p[i])];
       i++;
     }
 
