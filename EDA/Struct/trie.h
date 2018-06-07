@@ -350,5 +350,63 @@ void trie_dump(struct trie *t , FILE *file)
 
 }
 
+void trie_unpack(struct trie *t , FILE *file)
+{
+	
+	char out[32];
+	
+	while(fgets(out , 32 , file))
+	{
+
+		/*unpack nick*/
+		
+		int i = 0;
+		
+		char ni[6];
+
+		while ( out[i] != ' ' )
+		{
+
+			ni[i] = out[i];
+
+			i++;
+		
+		}
+
+		ni[i] = '\0';
+
+		i++;
+
+		/*unpack name*/
+
+		int j = 0;
+
+		char na[26];
+
+		while ( out[i] != '\0' )
+		{
+
+			na[j] = out[i];
+
+			i++;
+
+			j++;
+
+		}
+
+		na[j] = '\0';
+
+		/*create user*/
+
+		struct User *temp = new_User(ni , na);
+
+		/*insert user*/
+
+		trie_insert(t , ni);
+
+	}	
+
+}
+
 
 #endif
