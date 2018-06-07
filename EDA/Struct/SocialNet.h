@@ -235,6 +235,11 @@ struct SocialNet *unpack()
 
     FILE *file_user = fopen(USER_FILE_NAME , "r");
 
+    if (file_user == NULL)
+    {
+        return temp;
+    }
+
     trie_unpack(temp->tnick , file_user);
 
     fclose(file_user);
@@ -242,6 +247,11 @@ struct SocialNet *unpack()
     /*Unpack Grafo*/
 
     FILE *file_net = fopen(NET_FILE_NAME , "r" );
+
+    if (file_net == NULL)
+    {
+        return new_SocialNet();
+    }
 
     grafo_unpack(temp->grafo , file_net , temp->tnick);
 
