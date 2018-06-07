@@ -206,7 +206,7 @@ struct SocialNet *unpack()
 
     fclose(file_user);
 
-
+    return temp;
 }
 
 #endif
