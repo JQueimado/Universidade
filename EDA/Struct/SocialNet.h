@@ -195,4 +195,18 @@ bool dump(struct SocialNet *socialnet)
 
 }
 
+struct SocialNet *unpack()
+{
+
+    static struct SocialNet *temp = new_SocialNet();
+
+    FILE *file_user = fopen(NICK_FILE_NAME , "r");
+
+    trie_unpack(temp->tnick , file_user);
+
+    fclose(file_user);
+
+
+}
+
 #endif
