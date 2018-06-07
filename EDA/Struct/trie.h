@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include "User.h"
 
 #define ALPHABET_MIN_HC 'A'
 #define ALPHABET_MAX_HC 'Z'
@@ -61,16 +62,36 @@ int pos(char c)
 	if( c <= NUMBERS_MAX && c >= NUMBERS_MIN)
 		return c - NUMBERS_MIN;
 
-	if( c <= ALPHABET_MAX_LC && c >= ALPHABET_MIN_LC)
-		return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
-
 	if( c <= ALPHABET_MAX_HC && c >= ALPHABET_MIN_HC)
-		return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
+		//return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
+   // return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
+    return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE;
+	if( c <= ALPHABET_MAX_LC && c >= ALPHABET_MIN_LC)
+		//return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
+    //return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
+    return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE +ALPHABET_SIZE;
 
 	return -1;
 
 }
+/*
+int pos(char c)
+{
 
+  if( c <= NUMBERS_MAX && c >= NUMBERS_MIN)
+    return c - NUMBERS_MIN;
+
+  if( c <= ALPHABET_MAX_LC && c >= ALPHABET_MIN_LC)
+    return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
+
+  if( c <= ALPHABET_MAX_HC && c >= ALPHABET_MIN_HC)
+    return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
+
+  return -1;
+
+}
+*/
+/*
 char to_char(int i)
 {
 
@@ -86,7 +107,23 @@ char to_char(int i)
 	return '\0';
 
 }
+*/
+char to_char(int i)
+{
 
+  if( i >= NUMBER_MIN_POINT && i < ALPHABET_MIN_HC_POINT)
+    return i + NUMBERS_MIN;
+
+  if( i >= ALPHABET_MIN_HC_POINT && i < ALPHABET_MIN_LC_POINT)
+    //return (i - NUMBERS_SIZE) + ALPHABET_MIN_HC;
+    return (i + NUMBERS_SIZE + ((ALPHABET_SIZE-1)) + 20);
+  if( i >= ALPHABET_MIN_LC_POINT && i < ARRAY_SIZE)
+    //return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_HC;
+    return (i - 2*NUMBERS_SIZE - 16) + ALPHABET_MIN_LC ;
+
+  return '\0';
+
+}
 /* Frees a trie NODE. */
 static void node_free(struct node *node)
 {

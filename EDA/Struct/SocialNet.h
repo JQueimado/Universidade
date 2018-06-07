@@ -65,6 +65,7 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
 }
 
 
+
 void remover_utilizador(struct SocialNet *socialnet,struct User *user)
 {
     struct trie *tnick = socialnet->tnick;
@@ -195,6 +196,11 @@ void ler_mensagem(struct SocialNet *socialnet,struct User *user)
     {
         printf("+ utilizador %s sem seguidos\n",user->nick);
     }
+}
+
+void terminar_execucao()
+{
+    return 1;
 }
 
 
