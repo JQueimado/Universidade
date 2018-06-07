@@ -53,6 +53,11 @@ void Dump_test()
 		puts("found");
 
 	dump(socialnet_test);
+
+	struct SocialNet * socialnet_test_2 = unpack();
+
+	trie_print(socialnet_test_2->tnick);
+
 }
 
 int main()

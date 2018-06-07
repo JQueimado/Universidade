@@ -425,9 +425,74 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		/*insert user*/
 
-		trie_insert(t , ni);
+		trie_insert(t , ni , temp);
 
 	}	
+
+}
+
+
+/*Debug*/
+
+void trie_print_visit(struct node *n , char word[])
+{
+
+  if(n->word)
+  {
+
+  	printf("%s %s\n", word, n->user->name);
+  	return;
+
+  }
+
+  for (int i = 0; i < ARRAY_SIZE; ++i)
+  {
+  	
+  	if (n->child[i] != NULL)
+  	{	
+  		char temp [25];
+
+  		my_strcpy(temp , word);
+
+  		char c[2];
+  		c[0] = to_char(i);
+  		c[1] = '\0';
+
+  		my_strcat(word , c);
+
+  		trie_print_visit(n->child[i] , word );
+
+  		my_strcpy(word , temp);
+  	}
+
+  }
+
+}
+
+void trie_print(struct trie *t )
+{
+
+  struct node *n = t->root; 
+
+  char word[25];
+
+  for (int i = 0; i < ARRAY_SIZE; ++i)
+  {
+    
+  	if (n->child[i] != NULL)
+  	{
+  		char c[2];
+  		c[0] = to_char(i);
+  		c[1] = '\0';
+
+  		my_strcat(word , c);
+
+  		trie_print_visit(n->child[i] , word );
+
+  		word[0] = '\0';
+  	}
+
+  }
 
 }
 
