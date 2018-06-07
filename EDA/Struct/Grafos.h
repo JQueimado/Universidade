@@ -531,7 +531,8 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 
 
 
-/*Degug prints*/
+/**Degug prints**/
+
 void grafo_print_all(struct Grafo *grafo)
 {
 	puts("start");
