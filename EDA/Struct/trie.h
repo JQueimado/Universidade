@@ -33,6 +33,7 @@ struct node {
   bool word;
   bool apagou;
   struct node *parent;
+  struct User *user;
 };
 
 /* trie */
@@ -133,7 +134,7 @@ bool trie_empty(struct trie *t)
 
 
 /* Inserts word P into trie T. */
-void trie_insert(struct trie *t, char p[])
+void trie_insert(struct trie *t, char p[],struct User *user)
 {
   struct node *n;
   int i = 0;
@@ -142,6 +143,7 @@ void trie_insert(struct trie *t, char p[])
     t->root = node_new();
 
   n = t->root;
+  //user=new_User(user->nick,user->name);
 
   // follow the word down the trie as long as possible,
   // taking care not to go to a nonexisting node
@@ -161,6 +163,7 @@ void trie_insert(struct trie *t, char p[])
     }
 
   n->word = true;
+  n->user=user;
 }
 /*
 Searches for word P in trie T.
@@ -182,6 +185,26 @@ bool trie_find(struct trie *t,char p[])
   }
 
   return (n!=NULL && n->word);
+
+}
+
+struct User * trie_find_user(struct trie *t,char p[])
+{
+  struct node *n;
+  int i=0;
+
+  n=t->root;
+
+  while(n!=NULL && p[i]!='\0')
+  {
+    n = n->child[pos(p[i])];
+      
+
+    i++;
+  }
+
+
+  return (n->user);
 
 }
  //Returns true if it finds a word that already was removed

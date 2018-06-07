@@ -19,6 +19,7 @@ struct User
 	
 	char nick[MAX_NICK_SIZE +1];
 	char name[MAX_USER_SIZE];
+	int mensagem;
 
 };
 

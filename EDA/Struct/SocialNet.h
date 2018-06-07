@@ -53,8 +53,8 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
 
         {
             //printf("eu tb!\n");
-            trie_insert(tnick,user->nick);
-            trie_insert(tnome,user->name);
+            trie_insert(tnick,user->nick,user);
+            trie_insert(tnome,user->name,user);
             printf("+ utilizador %s criado\n",user->nick); 
         }
         else {
@@ -163,6 +163,22 @@ void deixarseguir_utilizador(struct SocialNet *socialnet,struct User *user1,stru
     }
    
    
+}
+
+void enviar_mensagem(struct SocialNet *socialnet,struct User *user)
+{
+    printf("user->nick: %s\n",user->nick);
+    printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
+    if( trie_find_removed(socialnet->tnick,user->nick))
+    {
+        printf("+ utilizador %s inexistente\n",user->nick);
+    }
+    else 
+    {
+        trie_find_user(socialnet->tnick,user->nick)->mensagem++;
+    }
+
+    printf("trie_find_user->mensagem: %d\n",trie_find_user(socialnet->tnick,user->nick)->mensagem);
 }
 
 

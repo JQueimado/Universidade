@@ -22,8 +22,12 @@ int main()
 	struct trie *t = trie_new();
 
 	trie_insert(t , "EUQUEROECONASsssss07");
+	trie_insert(t , "n0000");
+	trie_insert(t,"vnXJm");
+	trie_insert(t,"76Tpz");
 
-	if (trie_find(t, "EUQUEROECONASsssss07"))
+
+	if (trie_find(t, "EUQUEROECONASsssss07") && trie_find(t,"n0000") && trie_find(t,"vnXJm") && trie_find(t,"76Tpz") )
 		puts("TA BOM CARALHO");
 
 	return 0;
