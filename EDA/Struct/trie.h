@@ -373,6 +373,8 @@ void trie_dump(struct trie *t , FILE *file)
 
 }
 
+/*Unpacks trie of Users from a file*/
+
 void trie_unpack(struct trie *t , FILE *file)
 {
 	
