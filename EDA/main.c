@@ -62,10 +62,12 @@ int main()
             ler_mensagem(socialnet,user);
         }
         if (entrada=='X')
-        {   
+
+        {
 
             dump(socialnet);
             return 0;
+
 
         }
         
