@@ -68,10 +68,13 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
 
 
 
-void remover_utilizador(struct SocialNet *socialnet,struct User *user)
+void remover_utilizador(struct SocialNet *socialnet, char nick[])
 {
     struct trie *tnick = socialnet->tnick;
-    user=new_User(user->nick,user->name);
+    struct User *user = trie_find_user(socialnet->tnick , nick);
+    
+    puts("Cona");
+
     if(trie_find_removed(tnick,user->nick)||!trie_find(tnick,user->nick))
     {
         printf("+ utilizador %s inexistente\n",user->nick);
@@ -219,7 +222,6 @@ int terminar_execucao()
 {
     return 0;
 }
-
 
 bool dump(struct SocialNet *socialnet)
 {

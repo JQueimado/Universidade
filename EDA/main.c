@@ -31,8 +31,7 @@ int main()
         {
             //printf("cona\n");
             scanf("%s",nick);
-            struct User *user=new_User(nick,name);
-            remover_utilizador(socialnet,user);
+            remover_utilizador(socialnet , nick);
         }
         if(entrada=='S')
         {
