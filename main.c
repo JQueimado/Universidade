@@ -92,7 +92,7 @@ struct Process *CPU(struct Process *process , int MEM[]){
     if (i == DISCK_SAVE){
 
       process->block_time = 0;
-        
+
     }
 
     if (i == COPY){
