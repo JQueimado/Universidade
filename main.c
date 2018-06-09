@@ -249,9 +249,11 @@ int main() {
             /*Process for Ready*/
             if ( ready->size < MAX_READY_SIZE && !is_empty(new) ){
 
-                enqueue( ready , dequeue( new ) );
+                enqueue( ready , dequeue(new) );
 
             }
+            
+			
             
             if ( run != NULL ){
 
@@ -269,7 +271,6 @@ int main() {
 
             }
             
-            /*NEXT*/
             if( run == NULL){
 
                 if ( !is_empty(ready) ){
@@ -280,6 +281,7 @@ int main() {
 
             }
             
+
             /**Check for Blocked Mesages**/
             if ( ( !is_empty( blocked ) ) && ready->size<MAX_READY_SIZE ){
 
@@ -287,14 +289,14 @@ int main() {
 
                     struct Process *cur_pro = dequeue( blocked );
 
-                    /*Check for process to place in ready*/
+                    /*Check for processes to place in ready*/
                     if ( ready->size < MAX_READY_SIZE && cur_pro->block_time == -1){
                         
-                        enqueue( ready , cur_pro );
+                        enqueue( blocked , cur_pro );
 
                     }else{
 
-                        enqueue( blocked , cur_pro );
+                        enqueue( new , cur_pro );
 
                     }
 
@@ -304,8 +306,7 @@ int main() {
 
             /*MEM Management*/
 
-			
-            /*
+			/*
             if (run->mem_str == -1){
             
                 if( MEM_SIZE - mem_cur_size > run->size){
@@ -384,13 +385,7 @@ int main() {
 
             }
 
-            /*
-            if ( run->pc >= run->mem_end ){
-
-                run = NULL;
-
-            }
-            */
+            
 
         }else{
 
