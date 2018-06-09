@@ -357,8 +357,13 @@ void trie_dump_visit(struct node *n , char word[], FILE *file)
 
   if(n->word)
   {
-  
-  	fprintf(file, "%s %s\n", word, n->user->name);
+    
+    int rem = 0;
+
+    if (n->apagou)
+      rem = 1;
+
+  	fprintf(file, "%s %s %d\n", word, n->user->name ,rem);
   	return;
 
   }
@@ -449,7 +454,7 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		char na[26];
 
-		while ( out[i] != '\0' )
+		while ( out[i] != ' ' )
 		{
 
 			na[j] = out[i];
@@ -459,6 +464,13 @@ void trie_unpack(struct trie *t , FILE *file)
 			j++;
 
 		}
+
+    i++;
+
+    if (out[i]== '1')
+    {
+      trie_delete(t , ni);
+    }
 
 		na[j] = '\0';
 
