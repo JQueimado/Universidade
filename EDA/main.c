@@ -6,7 +6,8 @@
 
 int main()
 {
-    struct SocialNet *socialnet = new_SocialNet();
+    struct SocialNet *socialnet = unpack();
+
 	//char input;
 	//char nick[5];
 	char name[25];
@@ -61,8 +62,16 @@ int main()
             ler_mensagem(socialnet,user);
         }
         if (entrada=='X')
+
         {
             return 0;
+=======
+        {   
+
+            dump(socialnet);
+            return 0;
+
+
         }
         
     } 
@@ -83,7 +92,7 @@ int main()
     printf("Apagou:%d\n",trie_delete(nick,"joaquim"));
     */
 
-
+    dump(socialnet);
     return 0;
 
 

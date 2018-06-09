@@ -108,6 +108,7 @@ char to_char(int i)
 
 }
 */
+
 char to_char(int i)
 {
 
@@ -115,15 +116,17 @@ char to_char(int i)
     return i + NUMBERS_MIN;
 
   if( i >= ALPHABET_MIN_HC_POINT && i < ALPHABET_MIN_LC_POINT)
-    //return (i - NUMBERS_SIZE) + ALPHABET_MIN_HC;
-    return (i + NUMBERS_SIZE + ((ALPHABET_SIZE-1)) + 20);
+    //return (i + NUMBERS_SIZE + ((ALPHABET_SIZE-1)) + 20);
+    return ( i - NUMBERS_SIZE ) + ALPHABET_MIN_HC;
+
   if( i >= ALPHABET_MIN_LC_POINT && i < ARRAY_SIZE)
-    //return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_HC;
-    return (i - 2*NUMBERS_SIZE - 16) + ALPHABET_MIN_LC ;
+    return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_LC;
+    //return (i - 2*NUMBERS_SIZE - 16) + ALPHABET_MIN_LC ;
 
   return '\0';
 
 }
+
 /* Frees a trie NODE. */
 static void node_free(struct node *node)
 {
@@ -217,10 +220,11 @@ bool trie_find(struct trie *t,char p[])
 
   while(n!=NULL && p[i]!='\0')
   {
+    
     n = n->child[pos(p[i])];
       
-
     i++;
+  
   }
 
   return (n!=NULL && n->word);
@@ -352,8 +356,13 @@ void trie_dump_visit(struct node *n , char word[], FILE *file)
 
   if(n->word)
   {
-  
-  	fprintf(file, "%s %s\n", word, n->user->name);
+    
+    int rem = 0;
+
+    if (n->apagou)
+      rem = 1;
+
+  	fprintf(file, "%s %s %d\n", word, n->user->name ,rem);
   	return;
 
   }
@@ -444,7 +453,7 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		char na[26];
 
-		while ( out[i] != '\0' )
+		while ( out[i] != ' ' )
 		{
 
 			na[j] = out[i];
@@ -454,6 +463,13 @@ void trie_unpack(struct trie *t , FILE *file)
 			j++;
 
 		}
+
+    i++;
+
+    if (out[i]== '1')
+    {
+      trie_delete(t , ni);
+    }
 
 		na[j] = '\0';
 
