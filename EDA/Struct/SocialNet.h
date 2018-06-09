@@ -167,7 +167,7 @@ void deixarseguir_utilizador(struct SocialNet *socialnet,struct User *user1,stru
 
 void enviar_mensagem(struct SocialNet *socialnet,struct User *user)
 {
-    printf("user->nick: %s\n",user->nick);
+    printf("user->nick: %s user name: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick,trie_find_user(socialnet->tnick,user->nick)->name);
     printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
     if( trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
     {
@@ -183,12 +183,25 @@ void enviar_mensagem(struct SocialNet *socialnet,struct User *user)
 
 
 void ler_mensagem(struct SocialNet *socialnet,struct User *user)
-{
-    if(trie_find_removed(socialnet->tnick,user->nick)) //falta fazer esta parte
+{   struct User *arr[10];
+    //puts("cona");
+    //grafo_get_conected_to(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick),arr);
+    //puts("cona2");
+    int connect_count=grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick));
+    if(connect_count>0) //falta fazer esta parte
     {
-        printf("utilizador %s desativado\n",user->nick);
+        grafo_get_conected_to(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick),arr);
+        for(int i=0;i<connect_count;i++)
+        {
+            if(trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem>0)
+                printf("mensagem nova de %s (%s): %d\n",arr[i]->nick,trie_find_user(socialnet->tnick,arr[i]->nick)->name,trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem);
+            else if(trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem==0)
+                printf("sem mensagens novas de %s (%s)\n",arr[i]->nick,trie_find_user(socialnet->tnick,arr[i]->nick)->name);
+            trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem--;
+        }
     }
-    else if(!trie_find(socialnet->tnick,user->nick))
+    
+    else if(trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
     {
         printf("+ utilizador %s inexistente\n",user->nick);
     }
@@ -196,11 +209,13 @@ void ler_mensagem(struct SocialNet *socialnet,struct User *user)
     {
         printf("+ utilizador %s sem seguidos\n",user->nick);
     }
+    
 }
 
-void terminar_execucao()
+
+int terminar_execucao()
 {
-    return 1;
+    return 0;
 }
 
 

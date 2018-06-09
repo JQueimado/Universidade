@@ -258,10 +258,7 @@ int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
 
 	n = n->next_node;
 	
-	if (n == NULL)
-	{
-		puts("None");
-	}
+	
 
 	while(n != NULL)
 	{
@@ -406,19 +403,21 @@ void grafo_get_conected_to(struct Grafo *g , struct Vertice *v , struct User *ar
 {
 
 	struct Node *n = g->nodes[v->pos];
-
+	//puts("coni");
 	int i = 0;
 
 	n = n->next_node;
-
+	//puts("con2");
 	while (n != NULL)
 	{
 
 		arr[i] = n->ver->user;
-
+		//puts("conseas");
+		n=n->next_node;
 		i++;
 
 	}
+	//puts("consegui");
 
 }
 

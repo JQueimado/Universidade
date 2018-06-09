@@ -258,7 +258,6 @@ struct User * trie_find_user(struct trie *t,char p[])
   {
     n = n->child[pos(p[i])];
       
-
     i++;
   }
 

@@ -62,7 +62,7 @@ int main()
         }
         if (entrada=='X')
         {
-            terminar_execucao();
+            return 0;
         }
         
     } 
