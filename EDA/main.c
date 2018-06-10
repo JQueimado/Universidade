@@ -63,6 +63,12 @@ int main()
             struct User *user=new_User(nick,name);
             ler_mensagem(socialnet,user);
         }
+        if(entrada=='I')
+        {
+            scanf("%s",nick);
+            struct User *user=new_User(nick,name);
+            informacao(socialnet,user);
+        }
         if (entrada=='X')
 
         {
