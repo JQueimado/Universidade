@@ -6,6 +6,9 @@
 
 int main()
 {
+
+    freopen("Testes/A_in.txt", "r", stdin);
+
     struct SocialNet *socialnet = unpack();
 
 	//char input;

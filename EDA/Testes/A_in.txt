@@ -1,0 +1,29 @@
+U zero7 James Bond
+U zero7 Spectre
+U Zero7 Spectre
+U MrPym A Perfect Spy
+R 00007
+R Zero7
+R Zero7
+S 00007 zero7
+S Zero7 00007
+S MrPym Zero7
+S zero7 MrPym
+S zero7 MrPym
+S zero7 zero7
+D zero7 zero7
+D zero7 zero7
+D Zero7 00007
+P Zero7
+P zero7
+P zero7
+P MrPym
+L 00007
+L zero7
+L zero7
+L MrPym
+I zero7
+I MrPym
+I 00007
+I Zero7
+X
