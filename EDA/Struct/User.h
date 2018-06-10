@@ -49,12 +49,18 @@ int set_nick( struct User *user , char ni[] ){
 
 
 	/*sets User Nick*/
-	for( int i = 0; ni[ i ] != '\0'; i++ )
+	int i = 0;
+
+	while( ni[ i ] != '\0' )
 	{
 
 		user->nick[ i ] = ni[ i ];
 
+		i++;
+
 	}
+
+	user->nick[i] = '\0'; 
 
 	return NORMAL;
 
@@ -77,12 +83,17 @@ int set_name( struct User *user , char na[] )
 	}
 
 	/*Sets Username*/
-	for( int i = 0; na[ i ] != '\0'; i++ )
+	int i = 0;
+	while( na[ i ] != '\0' )
 	{
 
 		user->name[ i ] = na[ i ];
 
+		i++;
+
 	}
+
+	user->name[i] = '\0';
 
 	return NORMAL;
 
@@ -108,7 +119,6 @@ struct User *new_User( char ni[] , char na[] )
 		return NULL;
 
 	return temp; 
-
 
 }
 

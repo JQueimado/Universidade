@@ -63,51 +63,14 @@ int pos(char c)
 		return c - NUMBERS_MIN;
 
 	if( c <= ALPHABET_MAX_HC && c >= ALPHABET_MIN_HC)
-		//return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
-   // return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
     return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE;
+
 	if( c <= ALPHABET_MAX_LC && c >= ALPHABET_MIN_LC)
-		//return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
-    //return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
-    return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE +ALPHABET_SIZE;
+    return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE + ALPHABET_SIZE;
 
 	return -1;
 
 }
-/*
-int pos(char c)
-{
-
-  if( c <= NUMBERS_MAX && c >= NUMBERS_MIN)
-    return c - NUMBERS_MIN;
-
-  if( c <= ALPHABET_MAX_LC && c >= ALPHABET_MIN_LC)
-    return (c - ALPHABET_MIN_LC) + NUMBERS_SIZE;
-
-  if( c <= ALPHABET_MAX_HC && c >= ALPHABET_MIN_HC)
-    return (c - ALPHABET_MIN_HC) + NUMBERS_SIZE +ALPHABET_SIZE;
-
-  return -1;
-
-}
-*/
-/*
-char to_char(int i)
-{
-
-	if( i >= NUMBER_MIN_POINT && i < ALPHABET_MIN_LC_POINT)
-		return i + NUMBERS_MIN;
-
-	if( i >= ALPHABET_MIN_LC_POINT && i < ALPHABET_MIN_HC_POINT)
-		return (i - NUMBERS_SIZE) + ALPHABET_MIN_LC;
-
-	if( i >= ALPHABET_MIN_HC_POINT && i < ARRAY_SIZE)
-		return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_HC;
-
-	return '\0';
-
-}
-*/
 
 char to_char(int i)
 {
@@ -116,12 +79,10 @@ char to_char(int i)
     return i + NUMBERS_MIN;
 
   if( i >= ALPHABET_MIN_HC_POINT && i < ALPHABET_MIN_LC_POINT)
-    //return (i + NUMBERS_SIZE + ((ALPHABET_SIZE-1)) + 20);
     return ( i - NUMBERS_SIZE ) + ALPHABET_MIN_HC;
 
   if( i >= ALPHABET_MIN_LC_POINT && i < ARRAY_SIZE)
     return (i - NUMBERS_SIZE - ALPHABET_SIZE) + ALPHABET_MIN_LC;
-    //return (i - 2*NUMBERS_SIZE - 16) + ALPHABET_MIN_LC ;
 
   return '\0';
 
@@ -180,7 +141,7 @@ void trie_insert(struct trie *t, char p[],struct User *user)
 {
   struct node *n;
   int i = 0;
-
+  
   if (t->root == NULL)
     t->root = node_new();
 
