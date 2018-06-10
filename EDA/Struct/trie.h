@@ -201,12 +201,15 @@ struct User * trie_find_user(struct trie *t,char p[])
 
   while(n!=NULL && p[i]!='\0')
   {
+  
     n = n->child[pos(p[i])];
       
-
     i++;
+  
   }
 
+  if (n == NULL)
+    return NULL;
 
   return (n->user);
 

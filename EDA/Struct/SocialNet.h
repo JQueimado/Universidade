@@ -86,10 +86,25 @@ void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[])
 {
     struct trie *tnick=socialnet->tnick;
     struct Grafo *grafo=socialnet->grafo;
+    
     struct User *user1 = trie_find_user(socialnet->tnick, u1);
     struct User *user2 = trie_find_user(socialnet->tnick, u2);
+
+    if (user1 == NULL)
+    {
+        printf("+ utilizador %s inexistente\n",u1);
+        return;
+    }
+
+    if (user2 == NULL)
+    {
+        printf("+ utilizador %s inexistente\n",u2);
+        return;
+    }
+
     struct Vertice *vertice1;
     struct Vertice *vertice2;
+    
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
     

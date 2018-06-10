@@ -112,16 +112,22 @@ struct Vertice *grafo_get_vertice_at( struct Grafo *grafo , int position )
 
 struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
 {
-
-	for (int i = 0; i < grafo->size; ++i)
-	{
-		struct Vertice *v = grafo_get_vertice_at(grafo , i);
-
-		if( strcmp( v->user->nick , name ) == 0 )
+	int sp = 0;
+	for (int i = 0; sp < grafo->size; ++i)
+	{	
+		if (grafo->nodes[i] != NULL)
 		{
+			
+			sp++;
 
-			return v;
+			struct Vertice *v = grafo_get_vertice_at(grafo , i);
 
+			if( strcmp( v->user->nick , name ) == 0 )
+			{
+
+				return v;
+
+			}
 		}
 
 	}
