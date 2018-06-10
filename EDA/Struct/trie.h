@@ -199,17 +199,17 @@ struct User * trie_find_user(struct trie *t,char p[])
 
   n=t->root;
 
+
+
   while(n!=NULL && p[i]!='\0')
   {
     n = n->child[pos(p[i])];
-      
-
     i++;
   }
 
+  
 
   return (n->user);
-
 }
  //Returns true if it finds a word that already was removed
  bool trie_find_removed(struct trie *t,char p[])
