@@ -240,7 +240,7 @@ void informacao(struct SocialNet *socialnet,struct User *user)
     else
     {
         printf("utilizador %s (%s)\n",user->nick,user->name);
-        printf("%d mensagens,%d seguidores,segue %d utilizadores\n",user->mensagem,grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)),grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)));
+        printf("%d mensagens,%d seguidores,segue %d utilizadores\n",trie_find_user(socialnet->tnick,user->nick)->mensagem,grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)),grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)));
     }
      
 }
