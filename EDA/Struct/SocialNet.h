@@ -59,7 +59,9 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
         }
     }
 
+    /*
     trie_print(socialnet->tnick);
+    */
 
 }
 
@@ -212,12 +214,6 @@ void ler_mensagem(struct SocialNet *socialnet,struct User *user)
     
 }
 
-
-int terminar_execucao()
-{
-    return 0;
-}
-
 bool dump(struct SocialNet *socialnet)
 {
 
@@ -230,6 +226,12 @@ bool dump(struct SocialNet *socialnet)
 
     struct Grafo *grafo = socialnet->grafo;
     struct trie *t_nick = socialnet->tnick;
+
+    /*
+    puts("trie to be writen");
+    trie_print(t_nick);
+    puts("done");
+    */
 
     /*Dump Data*/
     FILE *file_nick = fopen(USER_FILE_NAME , "w");
@@ -261,10 +263,13 @@ struct SocialNet *unpack()
 
     trie_unpack(temp->tnick , file_user);
 
-    fclose(file_user);
-
+    /*
+    puts("unpacked trie");
     trie_print(temp->tnick);
-    puts("nada");
+    puts("done");
+    */
+
+    fclose(file_user);
     
     /*Unpack Grafo*/
 

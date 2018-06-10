@@ -35,7 +35,7 @@ int set_nick( struct User *user , char ni[] ){
 		if ( !( ( ni[ i ] >= 97 && ni[ i ] <= 122) || ( ni[ i ] >= 65 && ni[ i ] <= 90) || ( ni[ i ] >= 48 && ni[ i ] <= 57) ) )
 		{
 			
-			reteurn ERROR;
+			return ERROR;
 
 		}
 		
