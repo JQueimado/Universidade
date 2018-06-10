@@ -7,7 +7,7 @@
 int main()
 {
 
-    freopen("Testes/A_in.txt", "r", stdin);
+    freopen("Testes/A2_in.txt", "r", stdin);
 
     struct SocialNet *socialnet = unpack();
 
