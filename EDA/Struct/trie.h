@@ -203,11 +203,22 @@ struct User * trie_find_user(struct trie *t,char p[])
 
   while(n!=NULL && p[i]!='\0')
   {
+  
     n = n->child[pos(p[i])];
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 265e8bc6566c58238323f55e2752bdce8d871ecc
     i++;
+  
   }
 
+<<<<<<< HEAD
   
+=======
+  if (n == NULL)
+    return NULL;
+>>>>>>> 265e8bc6566c58238323f55e2752bdce8d871ecc
 
   return (n->user);
 }
