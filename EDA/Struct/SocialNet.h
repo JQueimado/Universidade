@@ -20,7 +20,6 @@ struct SocialNet
 {
 	
 	struct Grafo *grafo;
-	struct trie *tnome;
 	struct trie *tnick;
 
 };
@@ -29,40 +28,38 @@ struct SocialNet *new_SocialNet(){
 
     struct SocialNet *temp = malloc( sizeof( struct SocialNet ) );
     temp->grafo = new_Grafo();
-    temp->tnome = trie_new();
     temp->tnick = trie_new();
     return temp;
 }
 
 //falta corrigir o segmentation fault qd se mete U Zero7 Spectre
-void criar_utilizador(struct SocialNet *socialnet,struct User *user)
+void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
 	struct trie *tnick = socialnet->tnick;
-	struct trie *tnome = socialnet->tnome;
 
-    user=new_User(user->nick,user->name);
+    struct User *user = new_User(nick , name);
 
-    if(trie_find(tnick,user->nick)) //retorna 1 se o nick ja existir
+    if(trie_find( socialnet->tnick , nick )) //retorna 1 se o nick ja existir
     {
-        printf("+ nick %s usado previamente\n",user->nick);
+        printf("+ nick %s usado previamente\n",nick);
     }
     else 
     {
         // verifica as condicoes do nick e do nome
         if(user!=NULL)
-
         {
 
             //printf("eu tb!\n");
-            trie_insert(tnick,user->nick,user);
-            trie_insert(tnome,user->name,user);
-            printf("+ utilizador %s criado\n",user->nick); 
+            trie_insert(tnick, nick, user);
+
+            printf("+ utilizador %s criado\n",nick); 
         }
         else {
             printf("Verifica se o nick e o nome estao dentro das condições!\n");
         }
     }
 
+    trie_print(socialnet->tnick);
 
 }
 
@@ -71,31 +68,29 @@ void criar_utilizador(struct SocialNet *socialnet,struct User *user)
 void remover_utilizador(struct SocialNet *socialnet, char nick[])
 {
     struct trie *tnick = socialnet->tnick;
-    struct User *user = trie_find_user(socialnet->tnick , nick);
-    
-    puts("Cona");
 
-    if(trie_find_removed(tnick,user->nick)||!trie_find(tnick,user->nick))
+    if(trie_find_removed(tnick , nick)||!trie_find(tnick , nick))
     {
-        printf("+ utilizador %s inexistente\n",user->nick);
+        printf("+ utilizador %s inexistente\n", nick);
     }
     else 
     {
-        printf("+ utilizador %s removido\n",user->nick);
-        trie_delete(tnick,user->nick);
+        printf("+ utilizador %s removido\n", nick);
+        trie_delete(tnick , nick);
     }
 }
 
-void seguir_utilizador(struct SocialNet *socialnet,struct User *user1,struct User *user2)
+void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[]) 
 {
     struct trie *tnick=socialnet->tnick;
     struct Grafo *grafo=socialnet->grafo;
-    user1=new_User(user1->nick,user1->name);
-    user2=new_User(user2->nick,user2->name);
+    struct User *user1 = trie_find_user(socialnet->tnick, u1);
+    struct User *user2 = trie_find_user(socialnet->tnick, u2);
     struct Vertice *vertice1;
     struct Vertice *vertice2;
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
+    
     if(trie_find_removed(tnick,user1->nick) || !trie_find(tnick,user1->nick))
     {
         printf("+ utilizador %s inexistente\n",user1->nick);
@@ -237,7 +232,6 @@ bool dump(struct SocialNet *socialnet)
     struct trie *t_nick = socialnet->tnick;
 
     /*Dump Data*/
-
     FILE *file_nick = fopen(USER_FILE_NAME , "w");
     trie_dump(t_nick , file_nick);
     fclose(file_nick);
@@ -269,6 +263,9 @@ struct SocialNet *unpack()
 
     fclose(file_user);
 
+    trie_print(temp->tnick);
+    puts("nada");
+    
     /*Unpack Grafo*/
 
     FILE *file_net = fopen(NET_FILE_NAME , "r" );

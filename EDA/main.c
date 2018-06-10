@@ -23,8 +23,7 @@ int main()
         {
             scanf("%s %[^\n]s",nick,name);
             //printf("Nick: %s Name:%s\n",nick,name);
-            struct User *user=new_User(nick,name);
-            criar_utilizador( socialnet,user); 
+            criar_utilizador( socialnet , nick , name ); 
             //printf("Nick: %s Name:%s\n",nick,name);
         }
         if(entrada=='R')
@@ -35,10 +34,11 @@ int main()
         }
         if(entrada=='S')
         {
+            
             scanf("%s %s",nick,nicktemp);
-            struct User *user1=new_User(nick,name);
-            struct User *user2=new_User(nicktemp,nametemp);
-            seguir_utilizador(socialnet,user1,user2);
+            
+            seguir_utilizador(socialnet, nick, nicktemp);
+        
         }
         if(entrada=='D')
         {

@@ -362,7 +362,8 @@ void trie_dump_visit(struct node *n , char word[], FILE *file)
     if (n->apagou)
       rem = 1;
 
-  	fprintf(file, "%s %s %d\n", word, n->user->name ,rem);
+  	fprintf(file, "%d %s %s\n", rem, word, n->user->name );
+
   	return;
 
   }
@@ -398,6 +399,8 @@ void trie_dump(struct trie *t , FILE *file)
 
   char word[25];
 
+  word[0] = '\0';
+
   for (int i = 0; i < ARRAY_SIZE; ++i)
   {
     
@@ -423,21 +426,24 @@ void trie_dump(struct trie *t , FILE *file)
 void trie_unpack(struct trie *t , FILE *file)
 {
 	
-	char out[32];
+	char out[34];
 	
-	while(fgets(out , 32 , file))
+	while(fgets(out , 34 , file))
 	{
+    
+    if(out[0] != '1' && out[0] != '0')
+      continue;
 
 		/*unpack nick*/
-
-		int i = 0;
 		
 		char ni[6];
+
+    int i = 2;
 
 		while ( out[i] != ' ' )
 		{
 
-			ni[i] = out[i];
+			ni[i-2] = out[i];
 
 			i++;
 		
@@ -453,7 +459,7 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		char na[26];
 
-		while ( out[i] != ' ' )
+		while ( out[i] != '\n' )
 		{
 
 			na[j] = out[i];
@@ -464,13 +470,6 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		}
 
-    i++;
-
-    if (out[i]== '1')
-    {
-      trie_delete(t , ni);
-    }
-
 		na[j] = '\0';
 
 		/*create user*/
@@ -480,6 +479,13 @@ void trie_unpack(struct trie *t , FILE *file)
 		/*insert user*/
 
 		trie_insert(t , ni , temp);
+
+    /*removes if it need to be removed*/
+
+    if (out[0] == '1')
+    {
+      trie_delete(t , ni);
+    }
 
 	}	
 
@@ -493,9 +499,6 @@ void trie_print_visit(struct node *n , char word[])
 
   if(n->word)
   {
-
-  	//printf("%s %s\n", word, n->user->name);
-  	return;
 
     printf("%s %s\n" , word, n->user->name);
     return;

@@ -53,7 +53,7 @@ void Dump_test()
 
 	puts("\n");
 
-	//trie_print(socialnet_test->tnick);
+	trie_print(socialnet_test->tnick);
 	
 	dump(socialnet_test);
 
