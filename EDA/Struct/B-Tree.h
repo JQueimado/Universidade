@@ -68,6 +68,8 @@ struct BTree *new_BTree()
 	return tree;
 }
 
+
+
 struct BTree *insert_BTree(struct BTree *tree,)
 {
 	r=tree->root;
