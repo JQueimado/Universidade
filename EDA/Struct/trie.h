@@ -435,6 +435,8 @@ void trie_unpack(struct trie *t , FILE *file)
 
 		na[j] = '\0';
 
+    printf("%s\n", ni);
+
 		/*create user*/
 
 		struct User *temp = new_User(ni , na);
