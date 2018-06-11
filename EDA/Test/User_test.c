@@ -21,6 +21,16 @@ void User_Testing(){
 
 	//struct User *test_sub_7 = new_User( "miguel32" , "i dont know" );
 	
+	new_User( "Puta1" , "Cona1" );
+	new_User( "Puta2" , "Cona2" );
+	new_User( "Puta3" , "Cona3" );
+	new_User( "Puta4" , "Pila1" );
+	new_User( "Puta5" , "Cona4" );
+	new_User( "Puta6" , "Cona5" );
+	new_User( "Puta7" , "Pila2" );
+	new_User( "Puta8" , "Cona6" );
+
+
 	struct User *test_sub_6 = new_User( "Hwr69" , "i dont know and i dont care AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" );
 
 	if ( test_sub_1 != NULL)
