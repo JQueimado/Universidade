@@ -60,7 +60,7 @@ struct Node
 
 	struct Node *next_node;
 	struct Vertice *ver;
-	bool end;
+	int mensagem;
 
 };
 
@@ -72,7 +72,7 @@ struct Node *new_Node(struct Vertice *ver)
 
 	temp->next_node = NULL;
 	temp->ver = ver;
-
+	temp->mensagem = 0;
 	return temp;
 
 }
@@ -534,7 +534,13 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 
 }
 
+bool send_msg (struct Grafo *grafo, struct Vertice *u1, struct Vertice *u2)
+{
 
+	struct Node *node = grafo->nodes[ u2->pos ];
+
+
+}
 
 /**Degug prints**/
 
