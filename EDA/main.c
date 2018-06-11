@@ -104,16 +104,16 @@ int main()
 /*
 int main()
 {
-    freopen("Testes/B1_in.txt", "r", stdin);
-
+    freopen("Testes/C1_in.txt", "r", stdin);
+    puts("1");
     main_1();
 
-    freopen("Testes/B2_in.txt", "r", stdin);
-
+    freopen("Testes/C2_in.txt", "r", stdin);
+    puts("2");
     main_1();
 
-    freopen("Testes/B3_in.txt", "r", stdin);
-
+    freopen("Testes/C3_in.txt", "r", stdin);
+    puts("3");
     main_1();
 
     return 0;
