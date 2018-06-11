@@ -4,7 +4,7 @@
 #include "User.h"
 #include "SocialNet.h"
 
-int main_1()
+int main()
 {
 
     struct SocialNet *socialnet = unpack();
@@ -101,7 +101,7 @@ int main_1()
 
 
 }
-
+/*
 int main()
 {
     freopen("Testes/C1_in.txt", "r", stdin);
@@ -119,3 +119,4 @@ int main()
     return 0;
 }
 
+*/
