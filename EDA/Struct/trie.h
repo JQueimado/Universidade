@@ -199,8 +199,6 @@ struct User * trie_find_user(struct trie *t,char p[])
 
   n=t->root;
 
-
-
   while(n!=NULL && p[i]!='\0')
   {
   
@@ -262,10 +260,10 @@ bool trie_delete(struct trie *t, char p[])
   n = t->root;
 
   while (p[i] != '\0' && n->child[pos(p[i])] != NULL)
-    {
-      n = n->child[pos(p[i])];
-      i++;
-    }
+  {
+    n = n->child[pos(p[i])];
+    i++;
+  }
 
   if(n!=NULL && n->word)
   {

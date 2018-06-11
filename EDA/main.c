@@ -4,12 +4,12 @@
 #include "Struct/User.h"
 #include "Struct/SocialNet.h"
 
-int main()
+int main_1()
 {
 
-    freopen("Testes/A2_in.txt", "r", stdin);
-
     struct SocialNet *socialnet = unpack();
+
+    puts("cona");
 
 	//char input;
 	//char nick[5];
@@ -54,8 +54,7 @@ int main()
         if(entrada=='P')
         {
             scanf("%s",nick);
-            struct User *user=new_User(nick,name);
-            enviar_mensagem(socialnet,user);
+            enviar_mensagem(socialnet, nick);
         }
         if(entrada=='L')
         {
@@ -102,3 +101,21 @@ int main()
 
 
 }
+
+int main()
+{
+    freopen("Testes/B1_in.txt", "r", stdin);
+
+    main_1();
+
+    freopen("Testes/B2_in.txt", "r", stdin);
+
+    main_1();
+
+    freopen("Testes/B3_in.txt", "r", stdin);
+
+    main_1();
+
+    return 0;
+}
+
