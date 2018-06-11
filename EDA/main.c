@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Struct/User.h"
-#include "Struct/SocialNet.h"
+#include "User.h"
+#include "SocialNet.h"
 
 int main()
 {
