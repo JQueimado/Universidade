@@ -14,8 +14,8 @@ int main()
 	struct User *user6=new_User("asd18","asd322");
 	struct User *user7=new_User("asd19","asd3222");
 	//struct User *item;
-	
-	dummyItem = (struct userdados*) malloc(sizeof(struct userdados));
+	dummyItem=new_hash();
+	//dummyItem = (struct userdados*) malloc(sizeof(struct userdados));
  
    	//printf("%s %d\n",dummyItem->user->nick,dummyItem->key);
    //puts("cona");

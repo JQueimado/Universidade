@@ -17,7 +17,14 @@ struct userdados
 	int key;
 
 };
+//hash construtor
 
+struct userdados *new_hash(){
+
+	struct userdados *temp= malloc (sizeof(struct userdados));
+    
+    return temp;
+}
 
 struct userdados *hashArray[SIZE];
 struct userdados *usuario;

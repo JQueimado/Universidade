@@ -9,7 +9,8 @@
 #include <string.h>
 #include <math.h>
 #include "Grafos.h"
-#include "trie.h"
+#include "hash.h"
+
 
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
@@ -20,7 +21,7 @@ struct SocialNet
 {
 	
 	struct Grafo *grafo;
-	struct trie *tnick;
+	struct userdados *hashnick;
 
 };
 /*Constructor*/
@@ -28,7 +29,7 @@ struct SocialNet *new_SocialNet(){
 
     struct SocialNet *temp = malloc( sizeof( struct SocialNet ) );
     temp->grafo = new_Grafo();
-    temp->tnick = trie_new();
+    temp->hashnick = trie_new();
     return temp;
 }
 
