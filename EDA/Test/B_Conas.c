@@ -4,7 +4,7 @@
 int main()
 {
 	
-	BTree *test_trie = new_BTree()
+	struct BTree *test_trie = new_BTree();
 	
 	return 0;
 
