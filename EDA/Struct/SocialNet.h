@@ -182,10 +182,21 @@ void deixarseguir_utilizador(struct SocialNet *socialnet,struct User *user1,stru
    
 }
 
-void enviar_mensagem(struct SocialNet *socialnet,struct User *user)
+void enviar_mensagem(struct SocialNet *socialnet, char ni[])
 {
     //printf("user->nick: %s user name: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick,trie_find_user(socialnet->tnick,user->nick)->name);
     //printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
+
+    struct User *user = trie_find_user(socialnet->tnick, ni);
+
+    if (user == NULL)
+    {
+
+        printf("+ utilizador %s inexistente\n",ni);
+        return;
+
+    }
+
     if( trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
     {
         printf("+ utilizador %s inexistente\n",user->nick);
