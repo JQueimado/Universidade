@@ -33,7 +33,7 @@ struct SocialNet *new_SocialNet(){
     
     temp->grafo = new_Grafo();
 
-    temp->pointer = fopen(User_Data_File, "w+");
+    temp->pointer = fopen(User_Data_File, "wb+");
 
     temp->hashnick = new_hash();
 
@@ -44,7 +44,6 @@ struct SocialNet *new_SocialNet(){
 void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
 
-    puts("cona");
     if(search(socialnet->hashnick, nick[0] , nick ) != NULL) //retorna 1 se o nick ja existir
 
     {
@@ -105,7 +104,6 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         {
 
             printf("+ utilizador %s inexistente\n",nick1);
-            return;
 
         }
 
@@ -114,9 +112,13 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         {
 
             printf("+ utilizador %s inexistente\n",nick2);
-            return;
 
         }
+
+    if (ud1 == NULL || ud2 == NULL)
+    {
+        return;
+    }
 
     struct User *user1 = ud1->user;
     struct User *user2 = ud2->user;

@@ -5,12 +5,10 @@
 #include "Struct/SocialNet.h"
 #include "Struct/hash.h"
 
-int main()
+int main_1()
 {
 
     struct SocialNet *socialnet = new_SocialNet();
-
-    puts("cona");
 
 	//char input;
 	//char nick[5];
@@ -76,7 +74,6 @@ int main()
         }
         
     }
-    } 
     //scanf("%s %s",nick,name);
     //struct User *user=new_User(nick,name);
     //criar_utilizador(tnick,tnome,nick,name,user);
@@ -94,30 +91,32 @@ int main()
     printf("Apagou:%d\n",trie_delete(nick,"joaquim"));
     */
 
-
-
-
-
-
-
-
-
-
-/*
-int main()
-{
-    freopen("Testes/C1_in.txt", "r", stdin);
-    puts("1");
-    main_1();
-
-    freopen("Testes/C2_in.txt", "r", stdin);
-    puts("2");
-    main_1();
-
-    freopen("Testes/C3_in.txt", "r", stdin);
-    puts("3");
-    main_1();
-
     return 0;
 }
-*/
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+    freopen("Testes/A_out.txt", "w", stdout);
+    freopen("Testes/A1_in.txt", "r", stdin);
+
+    main_1();
+
+    freopen("Testes/A2_in.txt", "r", stdin);
+
+    main_1();
+    /*
+    freopen("Testes/A3_in.txt", "r", stdin);
+    puts("3");
+    main_1();
+    */
+    return 0;
+}
