@@ -231,7 +231,7 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
 
     struct User *user = ud1->user;
 
-    send_msg(socialnet->grafo, u)
+    send_msg(socialnet->grafo, user);
 
 }
 
@@ -247,13 +247,9 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
         }
     
-    
 
-    if (!read_msg(socialnet->grafo, user,socialnet->pointer))
-    {
-        printf("sem mensagens novas de %s (%s)\n", nick );
-    }
-    read_msg(socialnet->grafo,user,socialnet->pointer);
+
+    read_msg(socialnet->grafo, ud1->user, socialnet->pointer);
     
 }
 
