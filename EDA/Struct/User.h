@@ -10,8 +10,6 @@
 #define MAX_NICK_SIZE 5
 #define MAX_USER_SIZE 25
 
-#define User_Data_File "User_Cache.txt"
-
 /**Class**/
 struct User
 {
@@ -78,18 +76,32 @@ bool compare_user(struct User *u1 , struct User *u2)
 }
 
 /*Writes User on file and returns file position*/
-void write_file(struct User *user, char name[])
+void write_file(struct User *user, char name[], FILE *pointer)
 {
 	
-	FILE *pointer = fopen(User_Data_File , "a");
+	fseek(pointer, 0, SEEK_END);
+
 	user->pos = ftell(pointer);
-	fprintf(pointer, "%d %d %s\n", 0, 0, name);
+	
+	fprintf(pointer, "%s\n", name);
+	
 	fclose(pointer);
 
 }
 
+char *get_name(struct User *user, FILE *pointer)
+{	
+	char name[MAX_USER_SIZE +1];
+
+	fseek(pointer, 0, user->pos);
+	
+	fgets(name , sizeof(name), pointer);
+	
+	fseek(pointer, 0, SEEK_END);
+}
+
 /*Construtor*/
-struct User *new_User( char ni[] , char na[] )
+struct User *new_User( char ni[] , char na[], FILE *pointer)
 {
 
 	struct User *temp = malloc( sizeof( struct User ) );
@@ -110,7 +122,7 @@ struct User *new_User( char ni[] , char na[] )
 	if (ver_name(na))
 	{
 		
-		write_file(temp , na);
+		write_file(temp , na ,pointer);
 
 	}
 	else

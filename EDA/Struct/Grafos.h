@@ -10,7 +10,7 @@
 #include <string.h>
 
 #include "User.h"
-#include "trie.h"
+//#include "trie.h"
 
 /**Consts**/
 #define SIZE 20
@@ -30,7 +30,9 @@ struct Vertice
 
 	int pos;
 	struct User *user;
-	
+	unsigned short msg_read;
+	unsigned short msg_end;
+
 };
 
 /*Constructor*/
@@ -41,7 +43,8 @@ struct Vertice *new_Vertice(struct User *user , int p )
 
 	temp->pos = p;
 	temp->user = user;
-
+	temp->msg_read = 0;
+	temp->msg_end = 0;
 	return temp;
 
 }
@@ -60,7 +63,6 @@ struct Node
 
 	struct Node *next_node;
 	struct Vertice *ver;
-	int mensagem;
 
 };
 
@@ -72,7 +74,6 @@ struct Node *new_Node(struct Vertice *ver)
 
 	temp->next_node = NULL;
 	temp->ver = ver;
-	temp->mensagem = 0;
 	return temp;
 
 }
@@ -534,11 +535,39 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 
 }
 
-bool send_msg (struct Grafo *grafo, struct Vertice *u1, struct Vertice *u2)
+bool send_msg(struct Grafo *grafo, struct User *u)
 {
 
-	struct Node *node = grafo->nodes[ u2->pos ];
+	struct Vertice *ver = grafo_get_vertice_by_name(grafo, u->nick);
 
+	if (ver == NULL)
+	{
+
+		return false;
+
+	}
+
+	ver->msg_end +=1;
+
+	return true;
+
+}
+
+bool read_msg(struct Grafo *grafo, struct User *u)
+{
+
+	struct Vertice *ver = grafo_get_vertice_by_name(grafo, u->nick);
+
+	if (ver == NULL)
+	{
+
+		return false;
+
+	}
+
+	ver->msg_read = ver->msg_end;
+
+	return true;
 
 }
 

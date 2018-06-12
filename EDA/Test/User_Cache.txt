@@ -1,12 +1,10 @@
-0 0 i dont know
-0 0 i dont know
-0 0 i dont know
-0 0 i dont know
-0 0 Cona1
-0 0 Cona2
-0 0 Cona3
-0 0 Pila1
-0 0 Cona4
-0 0 Cona5
-0 0 Pila2
-0 0 Cona6
+Mige3 i dont know
+HWR69 i dont know
+Puta1 Cona1
+Puta2 Cona2
+Puta3 Cona3
+Puta4 Pila1
+Puta5 Cona4
+Puta6 Cona5
+Puta7 Pila2
+Puta8 Cona6

@@ -9,16 +9,17 @@
 #include <string.h>
 #include <math.h>
 #include "Grafos.h"
-#include "trie.h"
+//#include "trie.h"
 
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
 #define USER_FILE_NAME "User_data.txt"
+#define User_Data_File "User_Cache.txt"
 
 /****Class SocialNet****/
 struct SocialNet
 {
-	
+    FILE *pointer;
 	struct Grafo *grafo;
 	struct trie *tnick;
 
@@ -27,8 +28,13 @@ struct SocialNet
 struct SocialNet *new_SocialNet(){
 
     struct SocialNet *temp = malloc( sizeof( struct SocialNet ) );
+    
     temp->grafo = new_Grafo();
+    
     temp->tnick = trie_new();
+
+    temp->pointer = fopen(User_Data_File, "w+");
+
     return temp;
 }
 
@@ -37,7 +43,7 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
 	struct trie *tnick = socialnet->tnick;
 
-    struct User *user = new_User(nick , name);
+    struct User *user = new_User(nick , name , socialnet->pointer);
 
     if(trie_find( socialnet->tnick , nick )) //retorna 1 se o nick ja existir
     {
@@ -152,12 +158,12 @@ void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[])
 
 }
 
-void deixarseguir_utilizador(struct SocialNet *socialnet,struct User *user1,struct User *user2)
+void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
 {
     struct trie *tnick=socialnet->tnick;
     struct Grafo *grafo=socialnet->grafo;
-    user1=new_User(user1->nick,user1->name);
-    user2=new_User(user2->nick,user2->name);
+    struct User *user1 = NULL; //procura merda
+    struct User *user2 = NULL; //procura merda
     struct Vertice *vertice1;
     struct Vertice *vertice2;
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
@@ -203,45 +209,38 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
     }
     else 
     {
-        trie_find_user(socialnet->tnick,user->nick)->mensagem++;
+       
+        send_msg(socialnet->grafo, user);
+
     }
 
 }
 
 
-void ler_mensagem(struct SocialNet *socialnet,struct User *user)
-{   struct User *arr[10];
-    //puts("cona");
-    //grafo_get_conected_to(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick),arr);
-    //puts("cona2");
-    int connect_count=grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick));
-    if(connect_count>0) //falta fazer esta parte
-    {
-        grafo_get_conected_to(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick),arr);
-        for(int i=0;i<connect_count;i++)
-        {
-            if(trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem>0)
-                printf("mensagem nova de %s (%s): %d\n",arr[i]->nick,trie_find_user(socialnet->tnick,arr[i]->nick)->name,trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem);
-            else if(trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem==0)
-                printf("sem mensagens novas de %s (%s)\n",arr[i]->nick,trie_find_user(socialnet->tnick,arr[i]->nick)->name);
-            trie_find_user(socialnet->tnick,arr[i]->nick)->mensagem--;
-        }
-    }
+void ler_mensagem(struct SocialNet *socialnet, char nick[])
+{   
     
-    else if(trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
-    {
-        printf("+ utilizador %s inexistente\n",user->nick);
-    }
-    else if(grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick))==0)
-    {
-        printf("+ utilizador %s sem seguidos\n",user->nick);
-    }
+    struct User *user = NULL; //merda de pesquisa
     
+    if ( user == NULL)
+    {
+
+        printf("+ utilizador %s inexistente\n", nick);
+
+    }
+
+    if (!read_msg(socialnet->grafo, user))
+    {
+        printf("sem mensagens novas de %s (%s)\n", nick );
+    }
+
 }
 
 
-void informacao(struct SocialNet *socialnet,struct User *user)
+void informacao(struct SocialNet *socialnet, char nick[])
 {
+    /*
+    struct User *user = NULL; //cona de procura
 
     if( trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
     {
@@ -252,7 +251,7 @@ void informacao(struct SocialNet *socialnet,struct User *user)
         printf("utilizador %s (%s)\n",user->nick,user->name);
         printf("%d mensagens,%d seguidores,segue %d utilizadores\n",trie_find_user(socialnet->tnick,user->nick)->mensagem,grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)),grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)));
     }
-     
+     */
 }
     
 

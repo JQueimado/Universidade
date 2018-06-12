@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "User.h"
-#include "SocialNet.h"
+#include "Struct/User.h"
+#include "Struct/SocialNet.h"
 
 int main()
 {
@@ -46,9 +46,7 @@ int main()
         if(entrada=='D')
         {
             scanf("%s %s",nick,nicktemp);
-            struct User *user1=new_User(nick,name);
-            struct User *user2=new_User(nicktemp,nametemp);
-            deixarseguir_utilizador(socialnet,user1,user2);
+            deixarseguir_utilizador(socialnet, nick, nicktemp);
 
         }
         if(entrada=='P')
@@ -59,14 +57,12 @@ int main()
         if(entrada=='L')
         {
             scanf("%s",nick);
-            struct User *user=new_User(nick,name);
-            ler_mensagem(socialnet,user);
+            ler_mensagem(socialnet, nick);
         }
         if(entrada=='I')
         {
             scanf("%s",nick);
-            struct User *user=new_User(nick,name);
-            informacao(socialnet,user);
+            informacao(socialnet,nick);
         }
         if (entrada=='X')
 
