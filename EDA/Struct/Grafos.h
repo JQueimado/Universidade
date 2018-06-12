@@ -338,6 +338,11 @@ int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
 		
 		return ERROR;
 	}
+	if( grafo_check_if_exists (grafo ,grafo_get_vertice_by_name(grafo, user->nick) ))
+	{
+		return ERROR;
+	}
+
 
 	/*adds vertice*/
 	struct Node *temp = new_Node( new_Vertice( user , grafo->size ) );
