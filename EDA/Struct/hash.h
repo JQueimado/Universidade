@@ -41,12 +41,16 @@ struct userdados *search(int key,char ni[])
 {
 	//index para a hash
 	int hashIndex = hashcode(key);
-
+	puts("cona3");
 	while(hashArray[hashIndex]!=NULL)
 	{
+		puts("cona2");
 		if(hashArray[hashIndex]->user->nick==ni)
+		{
+			puts("cona1")
 			return hashArray[hashIndex];
-
+		}
+		puts("cona4");
 		//vai para a proxima cela
 		++hashIndex;
 
