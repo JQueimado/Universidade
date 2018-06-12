@@ -43,11 +43,15 @@ struct SocialNet *new_SocialNet(){
 void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
 	//struct userdados *hashnick = socialnet->hashnick;
-    puts("cona");
-    printf("%d\n",socialnet->pointer);
+    
     struct User *user = new_User(nick , name , socialnet->pointer);
     puts("cona2");
-    if(search( nick[0] , nick )) //retorna 1 se o nick ja existir
+    insert(user,nick[0]);
+    printf("cona\n");
+
+    printf("%d%s\n",nick[0],nick);
+
+    if(search( nick[0] , nick )->user->nick==nick) //retorna 1 se o nick ja existir
     {
         printf("+ nick %s usado previamente\n",nick);
     }
@@ -189,7 +193,7 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
     //printf("user->nick: %s user name: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick,trie_find_user(socialnet->tnick,user->nick)->name);
     //printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
 
-    //struct User *user = trie_find_user(socialnet->tnick, ni);
+/*    //struct User *user = trie_find_user(socialnet->tnick, ni);
     struct User *user = search(ni[0], ni)->user;
     if (user == NULL)
     {
@@ -209,7 +213,7 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
         send_msg(socialnet->grafo, user);
 
     }
-
+*/
 }
 
 
