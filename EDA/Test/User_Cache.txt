@@ -1,10 +1,10 @@
-Mige3 i dont know
-HWR69 i dont know
-Puta1 Cona1
-Puta2 Cona2
-Puta3 Cona3
-Puta4 Pila1
-Puta5 Cona4
-Puta6 Cona5
-Puta7 Pila2
-Puta8 Cona6
+t0
+t1
+t2
+t3
+t4
+t5
+t6
+t7
+t8
+t9

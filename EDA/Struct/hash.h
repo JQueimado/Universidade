@@ -20,32 +20,47 @@ struct userdados
 };
 //hash construtor
 
+struct Hash
+{
+
+	struct userdados *hashArray[SIZE];
+	
+};
+
 struct userdados *new_hash(){
 
-	struct userdados *temp= malloc (sizeof(struct userdados));
-    
+	struct userdados *temp= malloc (sizeof(struct Hash));
+
     return temp;
 }
 
+/*
 struct userdados *hashArray[SIZE];
 struct userdados *usuario;
 struct userdados *tempdelete;
 struct userdados *dummyItem;
+*/
 
 int hashcode(int key)
 {
 	return key % SIZE;
 }
 
-struct userdados *search(int key,char ni[])
+struct userdados *search(struct Hash *hashtlb, int key,char ni[])
 {
+
 	//index para a hash
 	int hashIndex = hashcode(key);
+	
+	puts("as conas");
 
-	while(hashArray[hashIndex]!=NULL)
+	while(hashtlb->hashArray[hashIndex]!=NULL)
 	{
-		if(hashArray[hashIndex]->user->nick==ni)
-			return hashArray[hashIndex];
+		if(hashtlb->hashArray[hashIndex]->user->nick==ni){
+			puts("1");
+			return hashtlb->hashArray[hashIndex];
+			puts("2");
+		}
 
 		//vai para a proxima cela
 		++hashIndex;

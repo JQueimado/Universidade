@@ -22,6 +22,10 @@ void Dump_test()
 	criar_utilizador(socialnet_test, "Test8", "t8");
 	criar_utilizador(socialnet_test, "Test9", "t9");
 
+	criar_utilizador(socialnet_test, "Test0", "t0");
+
+	puts("CONAS");
+
 	seguir_utilizador(socialnet_test , "Test0", "Test1");
 	seguir_utilizador(socialnet_test , "Test0", "Test2");
 	seguir_utilizador(socialnet_test , "Test0", "Test3");
