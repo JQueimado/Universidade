@@ -345,7 +345,7 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 	/*look for last node*/
 	while(temp->next_node != NULL)
 	{
-		puts("cona2");
+		
 		if (strcmp(temp->ver->user->nick, v2->user->nick) < 0)
 		{
 			break;
