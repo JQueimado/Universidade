@@ -148,7 +148,6 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         grafo_insert_conection(grafo,vertice1,vertice2);
         printf("+ %s passou a seguir %s\n",user1->nick,user2->nick);
       
-        
     }
     
 
@@ -191,31 +190,21 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
     
     //printf("user->nick: %s user name: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick,trie_find_user(socialnet->tnick,user->nick)->name);
     //printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
-/*
-    struct User *user = trie_find_user(socialnet->tnick, ni);
-    struct User *user = search(socialnet->hashnick, ni[0], ni)->user;
 
-    struct User *user = trie_find_user(socialnet->tnick, ni);
-    struct User *user = search(ni[0], ni)->user;
+    struct userdados *ud1 = search(socialnet->hashnick, ni[0], ni);
 
-    if (user == NULL)
+    if(ud1 == NULL)
     {
 
-        printf("+ utilizador %s inexistente\n",ni);
+        printf("+ utilizador %s inexistente\n", ni);
         return;
 
     }
 
-    if( trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
-    {
-        printf("+ utilizador %s inexistente\n",user->nick);
-    }
-    else 
-    {
-       
-        send_msg(socialnet->grafo, user);
+    struct User *user = ud1->user;
 
-    }*/
+    send_msg(socialnet->grafo, u)
+
 }
 
 void ler_mensagem(struct SocialNet *socialnet, char nick[])
