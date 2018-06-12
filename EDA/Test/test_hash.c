@@ -5,7 +5,7 @@
 int main() 
 {
 	FILE *pointer = fopen("Cache.txt", "w+");
-	struct User *user=new_User( "asd12","asd12222", pointer);
+	struct User *user0=new_User( "asd12","asd12222", pointer);
 	struct User *user1=new_User( "asd13","asd222", pointer);
 	struct User *user2=new_User( "asd14","asd333", pointer);
 	struct User *user3=new_User( "asd15","asd444", pointer);
@@ -16,7 +16,7 @@ int main()
 	
    struct Hash *hash = new_hash();
 
-   insert(hash, user, user->nick[0]);
+   insert(hash, user0, user0->nick[0]);
    insert(hash, user1, user1->nick[0]);
    insert(hash, user2, user2->nick[0]);
    insert(hash, user3, user3->nick[0]);
@@ -27,7 +27,7 @@ int main()
 
    display(hash);
 
-   struct userdados *ud1 = search(hash, 'a', "asd13");
+   struct userdados *ud1 = search(hash, 'a', "asd24");
    
    if (ud1 != NULL)
    {
