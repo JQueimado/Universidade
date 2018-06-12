@@ -44,7 +44,7 @@ struct SocialNet *new_SocialNet(){
 void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
 
-
+    puts("cona");
     if(search(socialnet->hashnick, nick[0] , nick ) != NULL) //retorna 1 se o nick ja existir
 
     {
@@ -56,12 +56,12 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
         // verifica as condicoes do nick e do nome
         if(user!=NULL)
         {
-            puts("cona3");
+            //puts("cona3");
 
             //printf("eu tb!\n");
             //trie_insert(hashnick, nick, user);
             insert(socialnet->hashnick, user,nick[0]);
-            printf("%s\n",search(socialnet->hashnick, nick[0] , nick )->user->nick);
+            //printf("%s\n",search(socialnet->hashnick, nick[0] , nick )->user->nick);
             printf("+ utilizador %s criado\n",nick); 
         }
         else {
@@ -82,14 +82,16 @@ void remover_utilizador(struct SocialNet *socialnet, char nick[])
 {
     //struct userdados *hashnick = socialnet->hashnick;
 
-    if((search(socialnet->hashnick, nick[0],nick)->user->removed) || search(socialnet->hashnick, nick[0],nick))
-    {
-        printf("+ utilizador %s inexistente\n", nick);
-    }
-    else 
+    if( search(socialnet->hashnick, nick[0],nick)!=NULL && (search(socialnet->hashnick, nick[0],nick)->user->removed)==false)
     {
         printf("+ utilizador %s removido\n", nick);
         search(socialnet->hashnick, nick[0],nick)->user->removed=true;
+    }
+    else 
+    {
+        printf("+ utilizador %s inexistente\n", nick);
+        /*printf("+ utilizador %s removido\n", nick);
+        search(socialnet->hashnick, nick[0],nick)->user->removed=true;*/
     }
 }
 
@@ -98,20 +100,28 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
    // struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
     
-    struct User *user1 = search(socialnet->hashnick, nick1[0], nick1)->user;
-    struct User *user2 = search(socialnet->hashnick, nick2[0],nick2)->user;
+    struct userdados *ud1=search(socialnet->hashnick, nick1[0], nick1);
+    if(ud1 == NULL)
+        {
 
-    if (user1 == NULL)
-    {
-        printf("+ utilizador %s inexistente\n",nick1);
-        return;
-    }
+            printf("+ utilizador %s inexistente\n",nick1);
+            return;
 
-    if (user2 == NULL)
-    {
-        printf("+ utilizador %s inexistente\n",nick2);
-        return;
-    }
+        }
+
+    struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
+    if(ud2 == NULL)
+        {
+
+            printf("+ utilizador %s inexistente\n",nick2);
+            return;
+
+        }
+
+    struct User *user1 = ud1->user;
+    struct User *user2 = ud2->user;
+
+    
 
     struct Vertice *vertice1;
     struct Vertice *vertice2;
@@ -160,13 +170,31 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
 {
     //struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
-    struct User *user1 = NULL; //procura merda
-    struct User *user2 = NULL; //procura merda
+    struct userdados *ud1=search(socialnet->hashnick, nick1[0], nick1);
+    if(ud1 == NULL)
+        {
+
+            printf("+ utilizador %s inexistente\n",nick1);
+            return;
+
+        }
+
+    struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
+    if(ud2 == NULL)
+        {
+
+            printf("+ utilizador %s inexistente\n",nick2);
+            return;
+
+        }
+
+    struct User *user1 = ud1->user;
+    struct User *user2 = ud2->user;
     struct Vertice *vertice1;
     struct Vertice *vertice2;
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
-    if(search(socialnet->hashnick, nick1[0],nick1)->user->removed || search(socialnet->hashnick, nick1[0],nick1)==NULL)
+    if(search(socialnet->hashnick, nick1[0], nick1)->user->removed || search(socialnet->hashnick, nick1[0], nick1)==NULL)
     {
         printf("+ utilizador %s inexistente\n",user1->nick);
     }
