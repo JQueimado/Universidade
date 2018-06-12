@@ -42,7 +42,7 @@ struct Vertice *new_Vertice(struct User *user , int p )
 
 	temp->pos = p;
 	temp->user = user;
-	tem->msg_send;
+	temp->msg_send=0;
 
 	return temp;
 
@@ -517,7 +517,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct userdados *h)
 		if (grafo_get_vertice_by_name(g , u1) == NULL)
 		{
 
-			struct User *temp = search(u1[0]1 , u1)->user;
+			struct User *temp = search(u1[0] , u1)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
@@ -558,7 +558,7 @@ bool read_msg(struct Grafo *grafo, struct User *u)
 {
 	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
 
-	struct Node *node = grafo->nodes[v->pos];
+	struct Node *n = grafo->nodes[v->pos];
 
 	if (n->next_node == NULL)
 	{
@@ -572,7 +572,7 @@ bool read_msg(struct Grafo *grafo, struct User *u)
 
 		if (n->msg_rcv == n->ver->msg_send)
 		{
-			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user));
+			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user,pointer);
 			continue;
 		}
 

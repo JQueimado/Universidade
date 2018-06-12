@@ -235,25 +235,25 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
 void informacao(struct SocialNet *socialnet, char nick[])
 {
-<<<<<<< HEAD
+
   /*  
     struct User *user = NULL; //cona de procura
-=======
+
     
     struct Vertice *ver = grafo_get_vertice_by_name(nick);
->>>>>>> 62b2b0b4ebe8d65c0436b774156aec807a8b7226
+
 
     if ( ver == NULL)
     {
         
     }
-<<<<<<< HEAD
+
 */     
-=======
+
 
     
     
->>>>>>> 62b2b0b4ebe8d65c0436b774156aec807a8b7226
+
 }
   
 
@@ -270,7 +270,6 @@ bool dump(struct SocialNet *socialnet)
     struct Grafo *grafo = socialnet->grafo;
     struct trie *t_nick = socialnet->tnick;
 
-<<<<<<< HEAD
     /*
     puts("trie to be writen");
     trie_print(t_nick);
@@ -282,8 +281,7 @@ bool dump(struct SocialNet *socialnet)
     trie_dump(t_nick , file_nick);
     fclose(file_nick);
 
-=======
->>>>>>> 62b2b0b4ebe8d65c0436b774156aec807a8b7226
+
     /*Dump net*/
     /*FILE *file_net = fopen(NET_FILE_NAME , "w");
     grafo_dump_folows(grafo, file_net);
