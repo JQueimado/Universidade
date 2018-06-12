@@ -67,7 +67,7 @@ struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 		//vai para a proxima cela
 		++hashIndex;
 
-		//hashIndex%=SIZE;
+		hashIndex%=SIZE;
 	}
 
 	return NULL;
