@@ -13,9 +13,9 @@
 
 struct userdados
 {
+	
 	struct User *user;
 	int key;
-	
 
 };
 //hash construtor

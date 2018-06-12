@@ -554,7 +554,7 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 
 }
 
-bool read_msg(struct Grafo *grafo, struct User *u)
+bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
 {
 	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
 
@@ -572,18 +572,18 @@ bool read_msg(struct Grafo *grafo, struct User *u)
 
 		if (n->msg_rcv == n->ver->msg_send)
 		{
-			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user));
+			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user, pointer));
 			continue;
 		}
 
 		if ( n->ver->msg_send - n->msg_rcv == 1)
 		{
-			printf("mensagem nova de %s (%s): %d\n", n->ver->user->nick, get_name(n->ver->user), n->ver->msg_send);
+			printf("mensagem nova de %s (%s): %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->ver->msg_send);
 			n->msg_rcv = n->ver->msg_send;
 			continue;
 		}
 
-		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user), n->msg_rcv, n->ver->msg_send);
+		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv, n->ver->msg_send);
 		n->msg_rcv = n->ver->msg_send;
 	}
 

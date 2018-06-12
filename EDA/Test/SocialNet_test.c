@@ -3,66 +3,44 @@
 #include <stdio.h>
 
 #include "../Struct/SocialNet.h"
-#include "../Struct/User.h"
-#include "../Struct/trie.h"
+/*#include "../Struct/User.h"*/
+/*#include "../Struct/trie.h"*/
 
 void Dump_test()
 {
 
 	struct SocialNet *socialnet_test = new_SocialNet();
+	
+	criar_utilizador(socialnet_test, "Test0", "t0");
+	criar_utilizador(socialnet_test, "Test1", "t1");
+	criar_utilizador(socialnet_test, "Test2", "t2");
+	criar_utilizador(socialnet_test, "Test3", "t3");
+	criar_utilizador(socialnet_test, "Test4", "t4");
+	criar_utilizador(socialnet_test, "Test5", "t5");
+	criar_utilizador(socialnet_test, "Test6", "t6");
+	criar_utilizador(socialnet_test, "Test7", "t7");
+	criar_utilizador(socialnet_test, "Test8", "t8");
+	criar_utilizador(socialnet_test, "Test9", "t9");
 
-	struct User *u0 = new_User("Test0", "t0");
-	struct User *u1 = new_User("Test1", "t1");
-	struct User *u2 = new_User("Test2", "t2");
-	struct User *u3 = new_User("Test3", "t3");
-	struct User *u4 = new_User("Test4", "t4");
-	struct User *u5 = new_User("Test5", "t5");
-	struct User *u6 = new_User("Test6", "t6");
-	struct User *u7 = new_User("Test7", "t7");
-	struct User *u8 = new_User("Test8", "t8");
-	struct User *u9 = new_User("Test9", "t9");
-
-	criar_utilizador(socialnet_test, u0);
-	criar_utilizador(socialnet_test, u1);
-	criar_utilizador(socialnet_test, u2);
-	criar_utilizador(socialnet_test, u3);
-	criar_utilizador(socialnet_test, u4);
-	criar_utilizador(socialnet_test, u5);
-	criar_utilizador(socialnet_test, u6);
-	criar_utilizador(socialnet_test, u7);
-	criar_utilizador(socialnet_test, u8);
-	criar_utilizador(socialnet_test, u9);
-
-	seguir_utilizador(socialnet_test , u0, u1);
-	seguir_utilizador(socialnet_test , u0, u2);
-	seguir_utilizador(socialnet_test , u0, u3);
-	seguir_utilizador(socialnet_test , u0, u4);
-	seguir_utilizador(socialnet_test , u0, u5);
-	seguir_utilizador(socialnet_test , u0, u6);
-	seguir_utilizador(socialnet_test , u0, u7);
-	seguir_utilizador(socialnet_test , u0, u8);
-	seguir_utilizador(socialnet_test , u0, u9);
-	seguir_utilizador(socialnet_test , u1, u2);
-	seguir_utilizador(socialnet_test , u1, u4);
-	seguir_utilizador(socialnet_test , u2, u3);
-	seguir_utilizador(socialnet_test , u3, u1);
-	seguir_utilizador(socialnet_test , u4, u1);
-	seguir_utilizador(socialnet_test , u5, u1);
-	seguir_utilizador(socialnet_test , u6, u1);
+	seguir_utilizador(socialnet_test , "Test0", "Test1");
+	seguir_utilizador(socialnet_test , "Test0", "Test2");
+	seguir_utilizador(socialnet_test , "Test0", "Test3");
+	seguir_utilizador(socialnet_test , "Test0", "Test4");
+	seguir_utilizador(socialnet_test , "Test0", "Test5");
+	seguir_utilizador(socialnet_test , "Test0", "Test6");
+	seguir_utilizador(socialnet_test , "Test0", "Test7");
+	seguir_utilizador(socialnet_test , "Test0", "Test8");
+	seguir_utilizador(socialnet_test , "Test0", "Test9");
+	seguir_utilizador(socialnet_test , "Test1", "Test2");
+	seguir_utilizador(socialnet_test , "Test1", "Test4");
+	seguir_utilizador(socialnet_test , "Test2", "Test3");
+	seguir_utilizador(socialnet_test , "Test3", "Test1");
+	seguir_utilizador(socialnet_test , "Test4", "Test1");
+	seguir_utilizador(socialnet_test , "Test5", "Test1");
+	seguir_utilizador(socialnet_test , "Test6", "Test1");
 
 
 	puts("\n");
-
-	trie_print(socialnet_test->tnick);
-	
-	dump(socialnet_test);
-
-	struct SocialNet * socialnet_test_2 = unpack();
-
-	//grafo_print_all(socialnet_test_2->grafo);
-
-	//grafo_print_conections_at(socialnet_test_2->grafo, 0);
-
 
 }
 
