@@ -1,5 +1,5 @@
-#ifndef hash
-#define hash
+#ifndef _hash_
+#define _hash_
 
 /*Includes*/
 #include <stdbool.h>
@@ -56,18 +56,11 @@ struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 	//index para a hash
 	int hashIndex = hashcode(key);
 
-	puts("cona3");
-	
-
-	
-	puts("as conas");
-
 	while(hashtlb->hashArray[hashIndex]!=NULL)
 	{
+		
 		if(hashtlb->hashArray[hashIndex]->user->nick==ni){
-			puts("1");
 			return hashtlb->hashArray[hashIndex];
-			puts("2");
 		}
 
 

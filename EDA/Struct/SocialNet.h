@@ -44,7 +44,9 @@ struct SocialNet *new_SocialNet(){
 void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
 
-    if(search(socialnet->hashnick, nick[0] , nick )!=NULL) //retorna 1 se o nick ja existir
+
+    if(search(socialnet->hashnick, nick[0] , nick ) != NULL) //retorna 1 se o nick ja existir
+
     {
         printf("+ nick %s usado previamente\n",nick);
     }
