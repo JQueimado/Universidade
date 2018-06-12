@@ -25,6 +25,10 @@ struct Hash
 
 	struct userdados *hashArray[SIZE];
 	
+
+	struct userdados *tempdelete;
+
+
 };
 
 struct userdados *new_hash(){
@@ -37,7 +41,7 @@ struct userdados *new_hash(){
 /*
 struct userdados *hashArray[SIZE];
 struct userdados *usuario;
-struct userdados *tempdelete;
+struct userdados *hashtlb->tempdelete;
 struct userdados *dummyItem;
 */
 
@@ -46,7 +50,7 @@ int hashcode(int key)
 	return key % SIZE;
 }
 
-struct userdados *search(struct Hash *hashtlb, int key,char ni[])
+struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 {
 
 	//index para a hash
@@ -73,7 +77,7 @@ struct userdados *search(struct Hash *hashtlb, int key,char ni[])
 
 }
 
-void insert(struct User *user,int key)
+void insert(struct Hash *hashtlb, struct User *user,int key)
 {
 	struct userdados *usuario = (struct userdados*) malloc(sizeof(struct userdados));
 	usuario->user=user;
@@ -81,29 +85,29 @@ void insert(struct User *user,int key)
 
 	int hashIndex = hashcode(key);
 
-	while(hashArray[hashIndex]!= NULL)
+	while(hashtlb->hashArray[hashIndex]!= NULL)
 	{
 		++hashIndex;
 
 		hashIndex%=SIZE;
 	}
 
-	hashArray[hashIndex]=usuario;
+	hashtlb->hashArray[hashIndex]=usuario;
 }
 
 
-struct userdados *delete(struct userdados *usuario)
+struct userdados *hash_delete(struct Hash *hashtlb, struct userdados *usuario)
 {
 	int key=usuario->key;
 
 	int hashIndex=hashcode(key);
 
-	while(hashArray[hashIndex]!=NULL)
+	while(hashtlb->hashArray[hashIndex]!=NULL)
 	{
-		if(hashArray[hashIndex]->key==key)
+		if(hashtlb->hashArray[hashIndex]->key==key)
 		{
-			struct userdados *temp = hashArray[hashIndex];
-			hashArray[hashIndex]=tempdelete;
+			struct userdados *temp =hashtlb->hashArray[hashIndex];
+			hashtlb->hashArray[hashIndex]=hashtlb->tempdelete;
 			return temp;
 		}
 
@@ -115,13 +119,13 @@ struct userdados *delete(struct userdados *usuario)
 	return NULL;
 }
 
-void display() {
+void display(struct Hash *hashtlb) {
    int i = 0;
 	
    for(i = 0; i<SIZE; i++) {
 	
-      if(hashArray[i] != NULL)
-         printf(" (%d,%s)",hashArray[i]->key,hashArray[i]->user->nick);
+      if(hashtlb->hashArray[i] != NULL)
+         printf(" (%d,%s)", hashtlb->hashArray[i]->key, hashtlb->hashArray[i]->user->nick);
       else
          printf(" ~~ ");
    }

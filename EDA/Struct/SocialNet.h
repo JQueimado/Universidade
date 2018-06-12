@@ -58,7 +58,7 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 
             //printf("eu tb!\n");
             //trie_insert(hashnick, nick, user);
-            insert(user,nick[0]);
+            insert(socialnet->hashnick, user,nick[0]);
             printf("+ utilizador %s criado\n",nick); 
         }
         else {
@@ -78,7 +78,7 @@ void remover_utilizador(struct SocialNet *socialnet, char nick[])
 {
     //struct userdados *hashnick = socialnet->hashnick;
 
-    if((search(socialnet->hashnick, socialnet->hashnick nick[0],nick)->user->removed) || search(socialnet->hashnick, nick[0],nick))
+    if((search(socialnet->hashnick, nick[0],nick)->user->removed) || search(socialnet->hashnick, nick[0],nick))
     {
         printf("+ utilizador %s inexistente\n", nick);
     }
@@ -115,7 +115,7 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
     
-    if(search(socialnet->hashnick nick1[0],nick1)->user->removed || search(socialnet->hashnick, nick1[0],nick1)==NULL)
+    if(search(socialnet->hashnick, nick1[0], nick1)->user->removed || search(socialnet->hashnick, nick1[0], nick1)==NULL)
     {
         printf("+ utilizador %s inexistente\n",user1->nick);
     }
@@ -184,17 +184,16 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
 
 void enviar_mensagem(struct SocialNet *socialnet, char ni[])
 {
-    /*
+    
     //printf("user->nick: %s user name: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick,trie_find_user(socialnet->tnick,user->nick)->name);
     //printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
-
-<<<<<<< HEAD
-    //struct User *user = trie_find_user(socialnet->tnick, ni);
+/*
+    struct User *user = trie_find_user(socialnet->tnick, ni);
     struct User *user = search(socialnet->hashnick, ni[0], ni)->user;
-=======
-/*    //struct User *user = trie_find_user(socialnet->tnick, ni);
+
+    struct User *user = trie_find_user(socialnet->tnick, ni);
     struct User *user = search(ni[0], ni)->user;
->>>>>>> 49901be18dafb2ccf49faab17817896aae49de3e
+
     if (user == NULL)
     {
 
@@ -212,8 +211,8 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
        
         send_msg(socialnet->grafo, user);
 
-    }
-*/
+    }*/
+}
 
 void ler_mensagem(struct SocialNet *socialnet, char nick[])
 {   
