@@ -232,19 +232,16 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
 void informacao(struct SocialNet *socialnet, char nick[])
 {
-    /*
-    struct User *user = NULL; //cona de procura
+    
+    struct Vertice *ver = grafo_get_vertice_by_name(nick);
 
-    if( trie_find_removed(socialnet->tnick,user->nick) || !trie_find(socialnet->tnick,user->nick))
+    if ( ver == NULL)
     {
-        printf("+ utilizador %s inexistente\n",user->nick);
+        
     }
-    else
-    {
-        printf("utilizador %s (%s)\n",user->nick,user->name);
-        printf("%d mensagens,%d seguidores,segue %d utilizadores\n",trie_find_user(socialnet->tnick,user->nick)->mensagem,grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)),grafo_connection_count(socialnet->grafo,grafo_get_vertice_by_name(socialnet->grafo, user->nick)));
-    }
-     */
+
+    
+    
 }
     
 
@@ -260,17 +257,6 @@ bool dump(struct SocialNet *socialnet)
 
     struct Grafo *grafo = socialnet->grafo;
     struct trie *t_nick = socialnet->tnick;
-
-    /*
-    puts("trie to be writen");
-    trie_print(t_nick);
-    puts("done");
-    */
-
-    /*Dump Data*/
-    FILE *file_nick = fopen(USER_FILE_NAME , "w");
-    trie_dump(t_nick , file_nick);
-    fclose(file_nick);
 
     /*Dump net*/
     FILE *file_net = fopen(NET_FILE_NAME , "w");

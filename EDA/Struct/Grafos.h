@@ -30,8 +30,7 @@ struct Vertice
 
 	int pos;
 	struct User *user;
-	unsigned short msg_read;
-	unsigned short msg_end;
+	unsigned short msg_send;
 
 };
 
@@ -43,8 +42,8 @@ struct Vertice *new_Vertice(struct User *user , int p )
 
 	temp->pos = p;
 	temp->user = user;
-	temp->msg_read = 0;
-	temp->msg_end = 0;
+	tem->msg_send;
+
 	return temp;
 
 }
@@ -63,6 +62,7 @@ struct Node
 
 	struct Node *next_node;
 	struct Vertice *ver;
+	unsigned short msg_rcv;
 
 };
 
@@ -74,6 +74,7 @@ struct Node *new_Node(struct Vertice *ver)
 
 	temp->next_node = NULL;
 	temp->ver = ver;
+	temp->msg_rcv = 0;
 	return temp;
 
 }
@@ -547,7 +548,7 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 
 	}
 
-	ver->msg_end +=1;
+	ver->msg_send+=1;
 
 	return true;
 
@@ -555,17 +556,36 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 
 bool read_msg(struct Grafo *grafo, struct User *u)
 {
+	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
 
-	struct Vertice *ver = grafo_get_vertice_by_name(grafo, u->nick);
+	struct Node *node = grafo->nodes[v->pos];
 
-	if (ver == NULL)
+	if (n->next_node == NULL)
 	{
-
-		return false;
-
+		printf("+ utilizador %s sem seguidos\n", u->nick);
 	}
 
-	ver->msg_read = ver->msg_end;
+	while(n->next_node != NULL)
+	{
+
+		n = n->next_node;
+
+		if (n->msg_rcv == n->ver->msg_send)
+		{
+			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user));
+			continue;
+		}
+
+		if ( n->ver->msg_send - n->msg_rcv == 1)
+		{
+			printf("mensagem nova de %s (%s): %d\n", n->ver->user->nick, get_name(n->ver->user), n->ver->msg_send);
+			n->msg_rcv = n->ver->msg_send;
+			continue;
+		}
+
+		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user), n->msg_rcv, n->ver->msg_send);
+		n->msg_rcv = n->ver->msg_send;
+	}
 
 	return true;
 

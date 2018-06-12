@@ -85,19 +85,20 @@ void write_file(struct User *user, char name[], FILE *pointer)
 	
 	fprintf(pointer, "%s\n", name);
 	
-	fclose(pointer);
 
 }
 
 char *get_name(struct User *user, FILE *pointer)
 {	
-	char name[MAX_USER_SIZE +1];
+	static char name[MAX_USER_SIZE +1];
 
 	fseek(pointer, 0, user->pos);
 	
 	fgets(name , sizeof(name), pointer);
 	
 	fseek(pointer, 0, SEEK_END);
+
+	return name;
 }
 
 /*Construtor*/
@@ -118,7 +119,7 @@ struct User *new_User( char ni[] , char na[], FILE *pointer)
 		return NULL;
 
 	}
-
+	
 	if (ver_name(na))
 	{
 		
@@ -131,7 +132,7 @@ struct User *new_User( char ni[] , char na[], FILE *pointer)
 		return NULL;
 
 	}
-	
+
 	return temp; 
 
 }
