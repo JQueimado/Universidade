@@ -29,13 +29,16 @@ Implementação de Grafos como uma listas de adjacências
 
 void swap_str_ptrs(struct User *arg1, struct User *arg2)
 {
+/*
     struct User tmp = *arg1;
     *arg1 = *arg2;
     *arg2 = tmp;
+    */
 }
 
 void quicksort_strs(struct User args[], unsigned int len)
 {
+	/*
     unsigned int i, pvt=0;
 
     if (len <= 1)
@@ -57,6 +60,7 @@ void quicksort_strs(struct User args[], unsigned int len)
     // and invoke on the subsequences. does NOT include the pivot-slot
     quicksort_strs(args, pvt++);
     quicksort_strs(args+pvt, len - pvt);
+*/
 }
 
 /****Class Vertice****/
@@ -461,8 +465,8 @@ void grafo_get_conected_to(struct Grafo *g , struct Vertice *v , struct User *ar
 		i++;
 
 	}
-	quicksort_strs(arr, grafo_connection_count(g,v));
-    print_list(arr,grafo_connection_count(g,v)) ;
+	//quicksort_strs(arr, grafo_connection_count(g,v));
+    //print_list(arr,grafo_connection_count(g,v)) ;
 	//puts("consegui");
 
 }

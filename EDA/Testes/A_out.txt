@@ -6,37 +6,43 @@
 + utilizador Zero7 removido
 + utilizador Zero7 inexistente
 + utilizador 00007 inexistente
-+ utilizador 00007 inexistente
++ utilizador Zero7 inexistente
 + utilizador Zero7 inexistente
 + zero7 passou a seguir MrPym
 + utilizador zero7 segue MrPym
 + zero7 passou a seguir zero7
 + zero7 deixou de seguir zero7
 + utilizador zero7 nao segue zero7
-+ utilizador 00007 inexistente
++ utilizador Zero7 inexistente
++ utilizador Zero7 inexistente
 + utilizador 00007 inexistente
 mensagem nova de MrPym (A Perfect Spy): 1
 sem mensagens novas de MrPym (A Perfect Spy)
+sem mensagens novas de MrPym (A Perfect Spy)
+sem mensagens novas de MrPym (A Perfect Spy)
++ utilizador MrPym sem seguidos
 + utilizador MrPym sem seguidos
 + utilizador Zero7 criado
 + utilizador zsq4r criado
++ utilizador zsq4r inexistente
 + utilizador MrPym inexistente
++ utilizador zsq4r inexistente
 + utilizador zero7 inexistente
 + utilizador zero7 inexistente
++ utilizador zsq4r inexistente
 + utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
++ utilizador zsq4r inexistente
 + utilizador zero7 inexistente
 + utilizador zeze7 criado
 + utilizador zero7 inexistente
++ utilizador zeze7 inexistente
 + utilizador zeze7 removido
 + utilizador zero7 inexistente
 + utilizador MrPym inexistente
 + utilizador zero7 inexistente
-+ utilizador zero7 inexistente
 + utilizador MrPym inexistente
 + utilizador MrPym inexistente
-+ utilizador zero7 inexistente
 + utilizador AlecS criado
 + utilizador MrPym inexistente
++ utilizador AlecS inexistente
 + utilizador MrPym inexistente
