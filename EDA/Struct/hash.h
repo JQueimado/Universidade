@@ -17,7 +17,14 @@ struct userdados
 	int key;
 
 };
+//hash construtor
 
+struct userdados *new_hash(){
+
+	struct userdados *temp= malloc (sizeof(struct userdados));
+    
+    return temp;
+}
 
 struct userdados *hashArray[SIZE];
 struct userdados *usuario;
@@ -29,14 +36,14 @@ int hashcode(int key)
 	return key % SIZE;
 }
 
-struct userdados *search(int key)
+struct userdados *search(int key,char ni[])
 {
 	//index para a hash
 	int hashIndex = hashcode(key);
 
 	while(hashArray[hashIndex]!=NULL)
 	{
-		if(hashArray[hashIndex]->key==key)
+		if(hashArray[hashIndex]->user->nick==ni)
 			return hashArray[hashIndex];
 
 		//vai para a proxima cela

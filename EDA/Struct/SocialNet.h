@@ -9,7 +9,7 @@
 #include <string.h>
 #include <math.h>
 #include "Grafos.h"
-//#include "trie.h"
+#include "hash.h"
 
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
@@ -21,7 +21,7 @@ struct SocialNet
 {
     FILE *pointer;
 	struct Grafo *grafo;
-	struct trie *tnick;
+	struct userdados *hashnick;
 
 };
 /*Constructor*/
@@ -30,10 +30,10 @@ struct SocialNet *new_SocialNet(){
     struct SocialNet *temp = malloc( sizeof( struct SocialNet ) );
     
     temp->grafo = new_Grafo();
-    
-    temp->tnick = trie_new();
 
     temp->pointer = fopen(User_Data_File, "w+");
+
+    temp->hashnick = trie_new();
 
     return temp;
 }
@@ -41,11 +41,11 @@ struct SocialNet *new_SocialNet(){
 //falta corrigir o segmentation fault qd se mete U Zero7 Spectre
 void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
-	struct trie *tnick = socialnet->tnick;
+	struct userdados *hashnick = socialnet->hashnick;
 
     struct User *user = new_User(nick , name , socialnet->pointer);
 
-    if(trie_find( socialnet->tnick , nick )) //retorna 1 se o nick ja existir
+    if(search( hashnick , nick )) //retorna 1 se o nick ja existir
     {
         printf("+ nick %s usado previamente\n",nick);
     }
@@ -56,8 +56,8 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
         {
 
             //printf("eu tb!\n");
-            trie_insert(tnick, nick, user);
-
+            //trie_insert(hashnick, nick, user);
+            insert(user,nick[0]);
             printf("+ utilizador %s criado\n",nick); 
         }
         else {
@@ -75,36 +75,36 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 
 void remover_utilizador(struct SocialNet *socialnet, char nick[])
 {
-    struct trie *tnick = socialnet->tnick;
+    struct userdados *hashnick = socialnet->hashnick;
 
-    if(trie_find_removed(tnick , nick)||!trie_find(tnick , nick))
+    if((search(hashnick,nick)->user->removed) || search(hashnick,nick))
     {
         printf("+ utilizador %s inexistente\n", nick);
     }
     else 
     {
         printf("+ utilizador %s removido\n", nick);
-        trie_delete(tnick , nick);
+        search(hashnick,nick)->user->removed=true;
     }
 }
 
-void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[]) 
+void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[]) 
 {
-    struct trie *tnick=socialnet->tnick;
+    struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
     
-    struct User *user1 = trie_find_user(socialnet->tnick, u1);
-    struct User *user2 = trie_find_user(socialnet->tnick, u2);
+    struct User *user1 = search(hashnick, nick1)->user;
+    struct User *user2 = search(hashnick,nick2)->user;
 
     if (user1 == NULL)
     {
-        printf("+ utilizador %s inexistente\n",u1);
+        printf("+ utilizador %s inexistente\n",nick1);
         return;
     }
 
     if (user2 == NULL)
     {
-        printf("+ utilizador %s inexistente\n",u2);
+        printf("+ utilizador %s inexistente\n",nick2);
         return;
     }
 
@@ -114,23 +114,18 @@ void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[])
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
     
-    if(trie_find_removed(tnick,user1->nick) || !trie_find(tnick,user1->nick))
+    if(search(hashnick,nick)->user1->removed || search(hashnick,nick1)==NULL)
     {
         printf("+ utilizador %s inexistente\n",user1->nick);
     }
-    else if(trie_find_removed(tnick,user2->nick) || !trie_find(tnick,user2->nick))
+    else if(search(hashnick,nick)->user2->removed || search(hashnick,nick2)==NULL)
     {
         printf("+ utilizador %s inexistente\n",user2->nick);
     }
-   // else if() //falta fazer uma função para verficar se há conexao entre o vertice 1 e o vertice 2
+ 
     else if(grafo_check_connection(grafo,vertice1,vertice2))
     {
-        //cria vertice para nick1 e vertice para nick2
-       /* grafo_insert_vertice(grafo,user1);
-        grafo_insert_vertice(grafo,user2);
         
-        grafo_insert_conection(grafo,vertice1,vertice2);
-        printf("+ utilizador %s segue %s\n",nick1,nick2);*/
         printf("+ utilizador %s segue %s\n",user1->nick,user2->nick);
     }
     else if(grafo_connection_count_check(grafo,vertice1)) 
@@ -147,12 +142,10 @@ void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[])
         vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
         grafo_insert_conection(grafo,vertice1,vertice2);
         printf("+ %s passou a seguir %s\n",user1->nick,user2->nick);
-        //grafo_print_connections_at(grafo,0);
+      
         
     }
-    //grafo_print_conections_at(grafo,0);
-    //printf("%d\n",grafo_connection_count_check(grafo,vertice1));
-   // grafo_connection_count(grafo,vertice1);
+    
 
 
 
@@ -160,7 +153,7 @@ void seguir_utilizador(struct SocialNet *socialnet, char u1[], char u2[])
 
 void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
 {
-    struct trie *tnick=socialnet->tnick;
+    struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
     struct User *user1 = NULL; //procura merda
     struct User *user2 = NULL; //procura merda
@@ -168,11 +161,11 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
     struct Vertice *vertice2;
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
-    if(trie_find_removed(tnick,user1->nick))
+    if(search(hashnick,nick)->user1->removed || search(hashnick,nick1)==NULL)
     {
         printf("+ utilizador %s inexistente\n",user1->nick);
     }
-    else if(trie_find_removed(tnick,user2->nick))
+    else if(search(hashnick,nick)->user2->removed || search(hashnick,nick2)==NULL)
     {
         printf("+ utilizador %s inexistente\n",user2->nick);
     }

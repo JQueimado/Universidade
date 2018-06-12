@@ -7,7 +7,7 @@
 int main()
 {
 
-    struct SocialNet *socialnet = unpack();
+    struct SocialNet *socialnet = new_SocialNet();
 
     puts("cona");
 
