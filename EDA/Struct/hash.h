@@ -31,9 +31,9 @@ struct Hash
 
 };
 
-struct userdados *new_hash(){
+struct Hash *new_hash(){
 
-	struct userdados *temp= malloc (sizeof(struct Hash));
+	struct Hash *temp= malloc (sizeof(struct Hash));
 
     return temp;
 }
