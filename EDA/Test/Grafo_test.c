@@ -10,12 +10,12 @@ void Grafo_Testing()
 	struct Grafo *grafo_test = new_Grafo();
 
 	/*insert users*/
-
-	struct User *user1 = new_User( "Cona1" , "cona" );
-	struct User *user2 = new_User( "Cona2" , "cona" );
-	struct User *user3 = new_User( "Cona3" , "cona" );
-	struct User *user4 = new_User( "Cona4" , "cona" );
-	struct User *user5 = new_User( "Cona5" , "cona" );
+	FILE *pointer = fopen("Cache.txt", "wb+");
+	struct User *user1 = new_User( "Cona1" , "cona", pointer);
+	struct User *user2 = new_User( "Cona2" , "cona", pointer );
+	struct User *user3 = new_User( "Cona3" , "cona", pointer );
+	struct User *user4 = new_User( "Cona4" , "cona", pointer );
+	struct User *user5 = new_User( "Cona5" , "cona", pointer );
 
 	int i = grafo_insert_vertice( grafo_test , user1);
 	i += grafo_insert_vertice( grafo_test , user2);

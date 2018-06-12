@@ -251,12 +251,10 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
     
 
 
-    if (!read_msg(socialnet->grafo, ud1,socialnet->pointer))
+    if (!read_msg(socialnet->grafo, ud1->user, socialnet->pointer))
     {
         printf("sem mensagens novas de %s (%s)\n", nick , nick);
     }
-    read_msg(socialnet->grafo,ud1,socialnet->pointer);
-
 
     read_msg(socialnet->grafo, ud1->user, socialnet->pointer);
 
@@ -266,6 +264,7 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
 void informacao(struct SocialNet *socialnet, char nick[])
 {
+    /*
     struct User arr[100];
     struct Grafo *grafo=socialnet->grafo;
     struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
@@ -279,10 +278,7 @@ void informacao(struct SocialNet *socialnet, char nick[])
 
 
     struct User *user1 = ud1->user;
-    struct Vertice *vertice1;
-    vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
-    grafo_get_conected(socialnet->grafo,vertice1,arr);
-  /*  
+ 
     struct User *user = NULL; //cona de procura
     
     struct Vertice *ver = grafo_get_vertice_by_name(nick);

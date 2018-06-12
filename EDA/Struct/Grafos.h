@@ -25,39 +25,6 @@
 Implementação de Grafos como uma listas de adjacências
 
 */
-/**QUICKSORT**/
-
-void swap_str_ptrs(struct User *arg1, struct User *arg2)
-{
-    struct User tmp = *arg1;
-    *arg1 = *arg2;
-    *arg2 = tmp;
-}
-
-void quicksort_strs(struct User args[], unsigned int len)
-{
-    unsigned int i, pvt=0;
-
-    if (len <= 1)
-        return;
-
-    // swap a randomly selected value to the last node
-    swap_str_ptrs(args+((unsigned int)rand() % len), args+len-1);
-
-    // reset the pivot index to zero, then scan
-    for (i=0;i<len-1;++i)
-    {
-        if (strcmp(args[i]->nick, args[len-1]->nick) < 0)
-            swap_str_ptrs(args+i, args+pvt++);
-    }
-
-    // move the pivot value into its place
-    swap_str_ptrs(args+pvt, args+len-1);
-
-    // and invoke on the subsequences. does NOT include the pivot-slot
-    quicksort_strs(args, pvt++);
-    quicksort_strs(args+pvt, len - pvt);
-}
 
 /****Class Vertice****/
 struct Vertice 
@@ -367,17 +334,26 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 	/*vars*/
 	int pos = v1->pos;
 	struct Node *temp = grafo->nodes[ pos ];
-	
+
+	puts("cona1");
+
 	/*look for last node*/
-	while( temp->next_node != NULL )
+	while(temp->next_node != NULL)
 	{
+		puts("cona2");
+		if (strcmp(temp->ver->user->nick, v2->user->nick) < 0)
+		{
+			break;
+		}
 
 		temp = temp->next_node;	
 
 	}
 
 	/*add node*/
-	temp->next_node = new_Node( v2 );
+	struct Node *n = temp->next_node;
+	temp->next_node = new_Node(v2);
+	temp->next_node->next_node = n;
 
 	return NORMAL;
 
@@ -461,9 +437,6 @@ void grafo_get_conected_to(struct Grafo *g , struct Vertice *v , struct User *ar
 		i++;
 
 	}
-	quicksort_strs(arr, grafo_connection_count(g,v));
-    print_list(arr,grafo_connection_count(g,v)) ;
-	//puts("consegui");
 
 }
 
