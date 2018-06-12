@@ -96,9 +96,14 @@ int main()
 
 
 
+<<<<<<< HEAD
 
 
 /*
+=======
+}
+
+>>>>>>> 62b2b0b4ebe8d65c0436b774156aec807a8b7226
 int main()
 {
     freopen("Testes/C1_in.txt", "r", stdin);
@@ -115,5 +120,3 @@ int main()
 
     return 0;
 }
-
-*/
