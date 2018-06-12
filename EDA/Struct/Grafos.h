@@ -11,6 +11,7 @@
 
 #include "User.h"
 #include "hash.h"
+#include "SocialNet.h"
 
 /**Consts**/
 
@@ -472,9 +473,9 @@ bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
 }
 
 /*unpacks a Grafo from a file and links it to a trie*/
-void grafo_unpack ( struct Grafo *g , FILE *file , struct userdados *h)
+void grafo_unpack (struct Grafo *g , FILE *file )
 {
-
+/*
 	char out[13];
 
 	while(fgets(out , 13 , file))
@@ -517,7 +518,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct userdados *h)
 		if (grafo_get_vertice_by_name(g , u1) == NULL)
 		{
 
-			struct User *temp = search(u1[0] , u1)->user;
+			struct User *temp = search(socialnet->hashnick,u1[0] , u1)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
@@ -525,7 +526,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct userdados *h)
 		if (grafo_get_vertice_by_name(g , u2) == NULL)
 		{
 
-			struct User *temp = search(u2[0],u2)->user;
+			struct User *temp = search(socialnet->u2[0],u2)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
@@ -533,7 +534,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct userdados *h)
 		grafo_insert_conection(g , grafo_get_vertice_by_name(g ,u1) , grafo_get_vertice_by_name(g, u2));
 
 	}
-
+*/
 }
 
 bool send_msg(struct Grafo *grafo, struct User *u)
