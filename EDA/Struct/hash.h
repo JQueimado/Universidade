@@ -90,6 +90,8 @@ void insert(struct Hash *hashtlb, struct User *user,int key)
 	}
 
 	hashtlb->hashArray[hashIndex]=usuario;
+
+	
 }
 
 
