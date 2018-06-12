@@ -25,4 +25,17 @@ int main()
    insert(hash, user6, user6->nick[0]);
    insert(hash, user7, user7->nick[0]);
 
+   display(hash);
+
+   struct userdados *ud1 = search(hash, 'a', "asd13");
+   
+   if (ud1 != NULL)
+   {
+      printf("%s\n", ud1->user->nick);
+   }
+   else
+   {
+      puts("not found");
+   }
+
 }

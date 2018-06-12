@@ -9,7 +9,7 @@
 
 #include "User.h"
 
-#define SIZE 100000
+#define SIZE 100
 
 struct userdados
 {
@@ -59,15 +59,14 @@ struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 	while(hashtlb->hashArray[hashIndex]!=NULL)
 	{
 		
-		if(hashtlb->hashArray[hashIndex]->user->nick==ni){
+		if(strcmp( hashtlb->hashArray[hashIndex]->user->nick, ni) == 0){
 			return hashtlb->hashArray[hashIndex];
 		}
-
 
 		//vai para a proxima cela
 		++hashIndex;
 
-		hashIndex%=SIZE;
+		hashIndex = hashcode(hashIndex);
 	}
 
 	return NULL;
@@ -87,7 +86,7 @@ void insert(struct Hash *hashtlb, struct User *user,int key)
 	{
 		++hashIndex;
 
-		hashIndex%=SIZE;
+		hashIndex = hashcode(hashIndex);
 	}
 
 	hashtlb->hashArray[hashIndex]=usuario;
