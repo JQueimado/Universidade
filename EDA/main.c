@@ -3,6 +3,7 @@
 
 #include "Struct/User.h"
 #include "Struct/SocialNet.h"
+#include "Struct/hash.h"
 
 int main()
 {
@@ -74,6 +75,7 @@ int main()
 
         }
         
+    }
     } 
     //scanf("%s %s",nick,name);
     //struct User *user=new_User(nick,name);
@@ -92,11 +94,10 @@ int main()
     printf("Apagou:%d\n",trie_delete(nick,"joaquim"));
     */
 
-    dump(socialnet);
-    return 0;
 
 
-}
+
+
 /*
 int main()
 {

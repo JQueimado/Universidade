@@ -10,10 +10,10 @@
 #include <string.h>
 
 #include "User.h"
-//#include "trie.h"
+#include "hash.h"
 
 /**Consts**/
-#define SIZE 20
+
 #define MAX_USERS 1000000
 #define NORMAL 0
 #define ERROR 1
@@ -471,7 +471,7 @@ bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
 }
 
 /*unpacks a Grafo from a file and links it to a trie*/
-void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
+void grafo_unpack ( struct Grafo *g , FILE *file , struct userdados *h)
 {
 
 	char out[13];
@@ -516,7 +516,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 		if (grafo_get_vertice_by_name(g , u1) == NULL)
 		{
 
-			struct User *temp = trie_find_user(t , u1);
+			struct User *temp = search(u1[0]1 , u1)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
@@ -524,7 +524,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 		if (grafo_get_vertice_by_name(g , u2) == NULL)
 		{
 
-			struct User *temp = trie_find_user(t , u2);
+			struct User *temp = search(u2[0],u2)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
