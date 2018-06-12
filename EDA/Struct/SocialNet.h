@@ -248,21 +248,24 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
 
 void ler_mensagem(struct SocialNet *socialnet, char nick[])
 {   
-  /*  
-    struct User *user = NULL; //merda de pesquisa
     
-    if ( user == NULL)
-    {
+    struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
+    if(ud1 == NULL)
+        {
 
-        printf("+ utilizador %s inexistente\n", nick);
+            printf("+ utilizador %s inexistente\n",nick);
+            return;
 
-    }
+        }
+    
+    
 
-    if (!read_msg(socialnet->grafo, user))
+    if (!read_msg(socialnet->grafo, user,socialnet->pointer))
     {
         printf("sem mensagens novas de %s (%s)\n", nick );
     }
-    */
+    read_msg(socialnet->grafo,user,socialnet->pointer);
+    
 }
 
 
