@@ -55,6 +55,10 @@ struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 
 	//index para a hash
 	int hashIndex = hashcode(key);
+
+	puts("cona3");
+	
+
 	
 	puts("as conas");
 
@@ -65,6 +69,7 @@ struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 			return hashtlb->hashArray[hashIndex];
 			puts("2");
 		}
+
 
 		//vai para a proxima cela
 		++hashIndex;
