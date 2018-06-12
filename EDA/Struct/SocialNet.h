@@ -247,13 +247,17 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
         }
     
-    
 
+<<<<<<< HEAD
     if (!read_msg(socialnet->grafo, ud1,socialnet->pointer))
     {
         printf("sem mensagens novas de %s (%s)\n", nick , nick);
     }
     read_msg(socialnet->grafo,ud1,socialnet->pointer);
+=======
+
+    read_msg(socialnet->grafo, ud1->user, socialnet->pointer);
+>>>>>>> 10d289497afca2d62e49a2715b0e6802384bbaf5
     
 }
 
