@@ -188,8 +188,13 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
     //printf("user->nick: %s user name: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick,trie_find_user(socialnet->tnick,user->nick)->name);
     //printf("trie_find_user: %s\n",trie_find_user(socialnet->tnick,user->nick)->nick);
 
+<<<<<<< HEAD
     //struct User *user = trie_find_user(socialnet->tnick, ni);
     struct User *user = search(socialnet->hashnick, ni[0], ni)->user;
+=======
+/*    //struct User *user = trie_find_user(socialnet->tnick, ni);
+    struct User *user = search(ni[0], ni)->user;
+>>>>>>> 49901be18dafb2ccf49faab17817896aae49de3e
     if (user == NULL)
     {
 
@@ -208,9 +213,7 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
         send_msg(socialnet->grafo, user);
 
     }
-    */
-}
-
+*/
 
 void ler_mensagem(struct SocialNet *socialnet, char nick[])
 {   

@@ -99,11 +99,11 @@ int main()
 
 
 
+
+
+
+
 /*
-=======
-}
-
-
 int main()
 {
     freopen("Testes/C1_in.txt", "r", stdin);
@@ -120,3 +120,4 @@ int main()
 
     return 0;
 }
+*/

@@ -6,7 +6,7 @@ int main()
 {
 	
 	struct User *user=new_User("asd12","asd12222");
-	struct User *user1=new_User("asd13","asd222");
+	struct User *user1=new_User("asd13","asd222",);
 	struct User *user2=new_User("asd14","asd333");
 	struct User *user3=new_User("asd15","asd444");
 	struct User *user4=new_User("asd16","asd444");
