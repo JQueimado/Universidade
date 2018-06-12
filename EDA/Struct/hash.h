@@ -1,5 +1,5 @@
-#ifndef hash
-#define hash
+#ifndef _hash_
+#define _hash_
 
 /*Includes*/
 #include <stdbool.h>
