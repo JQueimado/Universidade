@@ -235,8 +235,11 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
 void informacao(struct SocialNet *socialnet, char nick[])
 {
+
   /*  
     struct User *user = NULL; //cona de procura
+    
+    struct Vertice *ver = grafo_get_vertice_by_name(nick);
     
     struct Vertice *ver = grafo_get_vertice_by_name(nick);
 
@@ -244,7 +247,10 @@ void informacao(struct SocialNet *socialnet, char nick[])
     {
         
     }
+
 */     
+    
+
 }
   
 
@@ -260,7 +266,6 @@ void dump(struct SocialNet *socialnet)
 
     struct Grafo *grafo = socialnet->grafo;
     struct trie *t_nick = socialnet->tnick;
-
 
     /*
     puts("trie to be writen");

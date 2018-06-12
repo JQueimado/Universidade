@@ -27,29 +27,25 @@ struct userdados *new_hash(){
     return temp;
 }
 
-struct hash_table {
-	
-	struct userdados *hashArray[SIZE];
-
-	struct userdados *tempdelete;
-
-}
+struct userdados *hashArray[SIZE];
+struct userdados *usuario;
+struct userdados *tempdelete;
+struct userdados *dummyItem;
 
 int hashcode(int key)
 {
 	return key % SIZE;
 }
 
-struct userdados *search(struct hash *hash, int key,char ni[])
+struct userdados *search(int key,char ni[])
 {
-
 	//index para a hash
 	int hashIndex = hashcode(key);
 
-	while(hash->hashArray[hashIndex]!=NULL)
+	while(hashArray[hashIndex]!=NULL)
 	{
-		if(hash->hashArray[hashIndex]->user->nick==ni)
-			return hash->hashArray[hashIndex];
+		if(hashArray[hashIndex]->user->nick==ni)
+			return hashArray[hashIndex];
 
 		//vai para a proxima cela
 		++hashIndex;
@@ -118,13 +114,6 @@ void display() {
    printf("\n");
 }
 
-
-void hash_dump( struct userdados *hash[] )
-{
-
-	
-	
-}
 
 
 #endif
