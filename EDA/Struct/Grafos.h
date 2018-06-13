@@ -577,7 +577,7 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 
 bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
 {	
-	struct Grafo *grafo=socialnet->grafo;
+	struct Grafo *grafo = socialnet->grafo;
 	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
 
 	struct Node *n = grafo->nodes[v->pos];
