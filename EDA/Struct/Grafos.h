@@ -411,7 +411,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 	int sp = 0;
 	for (int i = 0; sp <grafo->size ; ++i)
 	{
-		if (grafo->nodes != NULL)
+		if (grafo->nodes[i] != NULL)
 		{
 			
 			grafo_remove_conection(grafo , grafo->nodes[i]->ver, v);
