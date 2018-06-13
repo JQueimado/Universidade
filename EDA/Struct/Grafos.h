@@ -406,10 +406,12 @@ int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Verti
 	
 	p = n;
 	n = n->next_node;
+
 	
 	while(n != NULL)
 	{
-
+		if(n==NULL)
+			return false;
 		if ( vertice_compare(n->ver , v2))
 		{
 
