@@ -10,13 +10,15 @@
 #include <string.h>
 
 #include "User.h"
-#include "trie.h"
+#include "hash.h"
+#include "SocialNet.h"
 
 /**Consts**/
-#define SIZE 20
+
 #define MAX_USERS 1000000
 #define NORMAL 0
 #define ERROR 1
+#define LEN 100
 
 /*
 
@@ -30,7 +32,8 @@ struct Vertice
 
 	int pos;
 	struct User *user;
-	
+	unsigned short msg_send;
+
 };
 
 /*Constructor*/
@@ -41,6 +44,7 @@ struct Vertice *new_Vertice(struct User *user , int p )
 
 	temp->pos = p;
 	temp->user = user;
+	temp->msg_send=0;
 
 	return temp;
 
@@ -60,7 +64,7 @@ struct Node
 
 	struct Node *next_node;
 	struct Vertice *ver;
-	bool end;
+	unsigned short msg_rcv;
 
 };
 
@@ -72,7 +76,7 @@ struct Node *new_Node(struct Vertice *ver)
 
 	temp->next_node = NULL;
 	temp->ver = ver;
-
+	temp->msg_rcv = 0;
 	return temp;
 
 }
@@ -140,6 +144,15 @@ struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
 bool grafo_check_if_exists (struct Grafo *grafo , struct Vertice *v)
 {
 
+	if (grafo == NULL)
+	{
+		return NULL;
+	}
+
+	if (v == NULL)
+	{
+		return NULL;
+	}
 	int sp = 0;
 	for (int i = 0; sp < grafo->size; ++i)
 	{
@@ -220,11 +233,6 @@ bool grafo_connection_count_check(struct Grafo * grafo,struct Vertice *v1)
 
 
 	n = n->next_node;
-	
-	if (n == NULL)
-	{
-		puts("None");
-	}
 
 	while(n != NULL)
 	{
@@ -297,6 +305,11 @@ int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
 		
 		return ERROR;
 	}
+	if( grafo_check_if_exists (grafo ,grafo_get_vertice_by_name(grafo, user->nick) ))
+	{
+		return ERROR;
+	}
+
 
 	/*adds vertice*/
 	struct Node *temp = new_Node( new_Vertice( user , grafo->size ) );
@@ -330,18 +343,36 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 	/*vars*/
 	int pos = v1->pos;
 	struct Node *temp = grafo->nodes[ pos ];
-	
+
 	/*look for last node*/
-	while( temp->next_node != NULL )
+	while(temp->next_node != NULL)
 	{
+
+		if (strcmp(temp->ver->user->nick, v2->user->nick) >= 0)
+		{
+			break;
+		}
 
 		temp = temp->next_node;	
 
 	}
 
 	/*add node*/
-	temp->next_node = new_Node( v2 );
+	if (temp->next_node == NULL)
+	{
 
+		temp->next_node = new_Node(v2);
+
+	}
+	else
+	{
+		
+		struct Node *n = new_Node(v2);
+		n->next_node = temp->next_node;
+		temp->next_node = n;
+	
+	}
+	
 	return NORMAL;
 
 }
@@ -405,25 +436,25 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
-void grafo_get_conected_to(struct Grafo *g , struct Vertice *v , struct User *arr[])
+void grafo_get_conected_to(struct Grafo *g , struct Vertice *v,struct User *arr[])
 {
 
 	struct Node *n = g->nodes[v->pos];
-	//puts("coni");
+	
 	int i = 0;
 
 	n = n->next_node;
-	//puts("con2");
+	
 	while (n != NULL)
 	{
 
 		arr[i] = n->ver->user;
+
 		//puts("conseas");
 		n=n->next_node;
 		i++;
 
 	}
-	//puts("consegui");
 
 }
 
@@ -470,9 +501,9 @@ bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
 }
 
 /*unpacks a Grafo from a file and links it to a trie*/
-void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
+void grafo_unpack (struct Grafo *g , FILE *file )
 {
-
+/*
 	char out[13];
 
 	while(fgets(out , 13 , file))
@@ -515,7 +546,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 		if (grafo_get_vertice_by_name(g , u1) == NULL)
 		{
 
-			struct User *temp = trie_find_user(t , u1);
+			struct User *temp = search(socialnet->hashnick,u1[0] , u1)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
@@ -523,7 +554,7 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 		if (grafo_get_vertice_by_name(g , u2) == NULL)
 		{
 
-			struct User *temp = trie_find_user(t , u2);
+			struct User *temp = search(socialnet->u2[0],u2)->user;
 			grafo_insert_vertice(g , temp);
 
 		}
@@ -531,10 +562,130 @@ void grafo_unpack ( struct Grafo *g , FILE *file , struct trie *t)
 		grafo_insert_conection(g , grafo_get_vertice_by_name(g ,u1) , grafo_get_vertice_by_name(g, u2));
 
 	}
-
+*/
 }
 
 
+int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
+{
+	int count=0;
+	if(grafo==NULL)
+		return false;
+	if(v1==NULL)
+		return false;
+	if(grafo->nodes[ v1->pos ]==NULL)
+		return false;
+
+
+	//printf("%s\n", n->ver->user->nick);
+	
+
+	int sp = 0;
+	for (int i = 0; sp < grafo->size; ++i)
+	{
+		
+		if (grafo->nodes[i] != NULL)
+		{
+			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1))
+			{
+				count++;
+			}
+
+			sp+=1;
+
+		
+		}
+
+	}
+
+
+	return count;
+
+}
+
+bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
+
+{
+	//puts("cona");
+	struct Vertice *v=grafo_get_vertice_by_name(grafo,user->nick);
+	if (v == NULL)
+	{
+
+		return false;
+
+	}	
+	struct Node *n=grafo->nodes[v->pos];
+	if(n==NULL)
+		return false;
+
+	printf("utilizador %s (%s)\n",user->nick,get_name(n->ver->user, pointer));
+	printf("%d mensagens, %d seguidores, segue %d utilizadores\n",n->ver->msg_send,count_conection_seguidores(grafo,n->ver),grafo_connection_count(grafo,n->ver));
+	while(n->next_node != NULL)
+	{
+
+		n = n->next_node;
+		printf("%s (%d lidas)\n",n->ver->user->nick,n->msg_rcv);
+
+		
+	}
+
+	return true;
+}
+
+bool send_msg(struct Grafo *grafo, struct User *u)
+{
+
+	struct Vertice *ver = grafo_get_vertice_by_name(grafo, u->nick);
+
+	if (ver == NULL)
+	{
+
+		return false;
+
+	}
+
+	ver->msg_send+=1;
+
+	return true;
+
+}
+
+bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
+{
+	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
+
+	struct Node *n = grafo->nodes[v->pos];
+
+	if (n->next_node == NULL)
+	{
+		printf("+ utilizador %s sem seguidos\n", u->nick);
+	}
+
+	while(n->next_node != NULL)
+	{
+
+		n = n->next_node;
+
+		if (n->msg_rcv == n->ver->msg_send)
+		{
+			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user, pointer));
+			continue;
+		}
+
+		if ( n->ver->msg_send - n->msg_rcv == 1)
+		{
+			printf("mensagem nova de %s (%s): %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->ver->msg_send);
+			n->msg_rcv = n->ver->msg_send;
+			continue;
+		}
+
+		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv, n->ver->msg_send);
+		n->msg_rcv = n->ver->msg_send;
+	}
+
+	return true;
+
+}
 
 /**Degug prints**/
 
