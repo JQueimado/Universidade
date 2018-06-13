@@ -272,6 +272,8 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
 void ler_mensagem(struct SocialNet *socialnet, char nick[])
 {   
     
+    //grafo_print_conections_at(socialnet->grafo, grafo_get_vertice_by_name(socialnet->grafo,nick)->pos);
+
     struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
     if(ud1 == NULL)
         {
@@ -280,11 +282,6 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
             return;
 
         }
-    
-    if (!read_msg(socialnet->grafo, ud1->user,socialnet->pointer))
-    {
-        printf("sem mensagens novas de %s (%s)\n", nick , nick);
-    }
 
     read_msg(socialnet->grafo, ud1->user, socialnet->pointer);
 

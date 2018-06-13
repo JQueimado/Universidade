@@ -349,13 +349,11 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 	int pos = v1->pos;
 	struct Node *temp = grafo->nodes[ pos ];
 
-	puts("cona1");
-
 	/*look for last node*/
 	while(temp->next_node != NULL)
 	{
-		
-		if (strcmp(temp->ver->user->nick, v2->user->nick) < 0)
+
+		if (strcmp(temp->ver->user->nick, v2->user->nick) >= 0)
 		{
 			break;
 		}
@@ -365,10 +363,21 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 	}
 
 	/*add node*/
-	struct Node *n = temp->next_node;
-	temp->next_node = new_Node(v2);
-	temp->next_node->next_node = n;
+	if (temp->next_node == NULL)
+	{
 
+		temp->next_node = new_Node(v2);
+
+	}
+	else
+	{
+		
+		struct Node *n = new_Node(v2);
+		n->next_node = temp->next_node;
+		temp->next_node = n;
+	
+	}
+	
 	return NORMAL;
 
 }
