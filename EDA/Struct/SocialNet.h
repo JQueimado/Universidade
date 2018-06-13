@@ -127,9 +127,10 @@ void remover_utilizador(struct SocialNet *socialnet, char nick[])
 
     if( search(socialnet->hashnick, nick[0],nick)!=NULL && (search(socialnet->hashnick, nick[0],nick)->user->removed)==false)
     {
-        printf("+ utilizador %s removido\n", nick);
+        //printf("+ utilizador %s removido\n", nick);
         search(socialnet->hashnick, nick[0],nick)->user->removed=true;
         grafo_remove_vertice(socialnet->grafo ,grafo_get_vertice_by_name(socialnet->grafo,nick));
+        printf("+ utilizador %s removido\n", nick);
     }
     else 
     {
