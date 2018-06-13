@@ -267,22 +267,34 @@ int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
 
 	//printf("%s\n", n->ver->user->nick);
 
-
-
-
-	n = n->next_node;
 	
 	
-
+	n=n->next_node;
 	while(n != NULL)
 	{
-
+	
 		//printf("%s\n", n->ver->user->nick);
-
-		n = n->next_node;
+		//n = n->next_node;
 		
-		if (!n->ver->user->removed)
+		if(n->ver->user==NULL)
+			{
+				return false;
+			}
+		
+		//if(n->ver->user->removed==false)
 			count++;
+		n=n->next_node;
+		
+		/*if (!n->ver->user->removed)
+		{
+			count++;
+			puts("cona2");
+		}*/
+		
+		//if(!(n->ver->user->removed))
+			
+		//count++;
+		
 
 	}
 
@@ -381,7 +393,6 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 
 }
 
-<<<<<<< HEAD
 int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
 
@@ -427,7 +438,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 		if (grafo->nodes != NULL)
 		{
 			
-			grafo_remove_conection(grafo , grafo->nodes[i]->ver, v);
+			//grafo_remove_conection(grafo , grafo->nodes[i]->ver, v);
 
 			sp +=1;
 		}
@@ -441,8 +452,7 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
-=======
->>>>>>> 9f7b940b4583dfd92901bf319cfaada2433c98a9
+
 void grafo_get_conected_to(struct Grafo *g , struct Vertice *v,struct User *arr[])
 {
 
@@ -527,7 +537,7 @@ int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 		
 		if (grafo->nodes[i] != NULL)
 		{
-			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1) && !)
+			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1) )
 			{
 				count++;
 			}
@@ -566,8 +576,8 @@ bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
 	{
 
 		n = n->next_node;
-		if (!n->ver->user->removed)
-			printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv );
+		
+		printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv );
 		
 	}
 
@@ -610,6 +620,8 @@ bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
 
 		if (n->ver->user->removed)
 		{
+			printf("utilizador %s desactivado\n",n->ver->user->nick);
+			deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
 			continue;
 		}
 
@@ -625,6 +637,7 @@ bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
 			n->msg_rcv = n->ver->msg_send;
 			continue;
 		}
+
 
 		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv+1, n->ver->msg_send);
 		n->msg_rcv = n->ver->msg_send;
