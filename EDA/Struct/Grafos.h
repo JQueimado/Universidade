@@ -144,6 +144,15 @@ struct Vertice *grafo_get_vertice_by_name(struct Grafo *grafo, char *name)
 bool grafo_check_if_exists (struct Grafo *grafo , struct Vertice *v)
 {
 
+	if (grafo == NULL)
+	{
+		return NULL;
+	}
+
+	if (v == NULL)
+	{
+		return NULL;
+	}
 	int sp = 0;
 	for (int i = 0; sp < grafo->size; ++i)
 	{
