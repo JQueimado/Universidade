@@ -398,6 +398,7 @@ void dump_connections(struct Grafo *grafo , struct Node *n, FILE *pointer)
     {
 
         strcpy(Dc->nick2, n->ver->user->nick);
+        
         Dc->msg_rcv = n->msg_rcv;
 
         fwrite(Dc, sizeof(struct DataConection), 1, pointer);
@@ -475,7 +476,7 @@ void grafo_unpack(struct Grafo *grafo , struct SocialNet *socialnet, FILE *point
         struct User *u1 = search(socialnet->hashnick, Dc->nick1[0], Dc->nick1)->user;
 
         struct Vertice *v1 = grafo_get_vertice_by_name(grafo , Dc->nick1);
-
+        
         if(v1 == NULL)
             v1 = grafo_insert_vertice(grafo, u1);
 
@@ -486,10 +487,11 @@ void grafo_unpack(struct Grafo *grafo , struct SocialNet *socialnet, FILE *point
 
         if(v1 == NULL)
             v2 = grafo_insert_vertice(grafo, u2);
-
+        
         /*cria conection*/
         struct Node *n = grafo_insert_conection(grafo, v1, v2);
         n->msg_rcv = Dc->msg_rcv;
+       
 
     }
 
@@ -509,15 +511,15 @@ void unpack(struct SocialNet *socialnet)
 
     fclose(userdata);
 
-    FILE *conectdata = fopen(CONE_FILE_NAME, "wb");
+    FILE *conectdata = fopen(CONE_FILE_NAME, "rb");
 
     if (conectdata == NULL)
     {
         return;
     }
-
+    puts("cona");
     grafo_unpack(socialnet->grafo, socialnet, conectdata);
-
+    puts("cona2");
     fclose(conectdata);
 
 }
