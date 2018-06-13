@@ -151,81 +151,74 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
     //puts("cona4");
     struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
     //puts("cona5");
-    if(ud1 == NULL)
-        {
-            //puts("cona6");
-            printf("+ utilizador %s inexistente\n",nick1);
-            return ;
-
-        }
-    //struct User *user1 = ud1->user;
-    else if(search(socialnet->hashnick, nick1[0], nick1)->user->removed)
+    if(ud1 == NULL || ud1->user->removed)
     {
         
-    
+        //puts("cona6");
         printf("+ utilizador %s inexistente\n",nick1);
-        return;
+        return ;
+
     }
+    //struct User *user1 = ud1->user;
 
     //struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
     //puts("cona6");
-    if(ud2 == NULL)
-        {
-            
-            printf("+ utilizador %s inexistente\n",nick2);
-            return;      
-
-         }
-
-    else if(search(socialnet->hashnick, nick2[0],nick2)->user->removed)
+    if(ud2 == NULL || ud2->user->removed)
     {
-        //struct User *user2 = ud2->user;
         
         printf("+ utilizador %s inexistente\n",nick2);
-        return ;
-    }
+        return;      
 
-    //puts("cona7");
+     }
 
     struct User *user1 = ud1->user;
-    struct User *user2 = ud2->user;
-    //puts("cona8");
-    
+    struct User *user2 = ud2->user;    
 
     struct Vertice *vertice1;
     struct Vertice *vertice2;
-    //puts("cona9");
+
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
    
    
- 
     if(grafo_check_connection(grafo,vertice1,vertice2))
-    {
-             
+    {   
         printf("+ utilizador %s segue %s\n",user1->nick,user2->nick);
     }
     else if(grafo_connection_count_check(grafo,vertice1)) 
     {
         printf("+ utilizador %s segue o limite\n",user1->nick);
     }
-    else {
-       
-        grafo_insert_vertice(grafo,user1);
+    else 
+    {
         
-        //printf("%d\n",grafo_insert_vertice(grafo,user1));
-        grafo_insert_vertice(grafo,user2);
+        if (vertice1 == NULL)
+        {
+            vertice1 = grafo_insert_vertice(grafo, user1);
+        }
+
+        if (vertice2 == NULL)
+        {
+            vertice2 = grafo_insert_vertice(grafo, user2);
+        }
         
-        //printf("%d\n",grafo_insert_vertice(grafo,user2));
-        vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
-        vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
         struct Node *n = grafo_insert_conection(grafo,vertice1,vertice2);
+
+        if (n == NULL)
+        {
+            puts("cona1");
+        }
+
+        if (vertice2 == NULL)
+        {
+            puts("cona2");
+        }
+
         n->msg_rcv = vertice2->msg_send;
+
         printf("+ %s passou a seguir %s\n",user1->nick,user2->nick);
       
     }
-    
-
 
 
 }
@@ -324,9 +317,16 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
 {   
     struct Grafo *grafo=socialnet->grafo;
     struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
+    
+    if (v == NULL)
+    {
+        return false;
+    }
 
     struct Node *n = grafo->nodes[v->pos];
-
+    
+    puts("conas");
+    
     if (n->next_node == NULL)
     {
         printf("+ utilizador %s sem seguidos\n", u->nick);
@@ -359,9 +359,9 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
             continue;
         }
 
-
         printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv+1, n->ver->msg_send);
         n->msg_rcv = n->ver->msg_send;
+  
     }
 
     return true;
