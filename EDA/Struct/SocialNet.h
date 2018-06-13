@@ -98,14 +98,14 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
 {
    // struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
-    puts("cona1");
+    //puts("cona1");
     struct userdados *ud1=search(socialnet->hashnick, nick1[0], nick1);
-    puts("cona4");
+    //puts("cona4");
     struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
-    puts("cona5");
+    //puts("cona5");
     if(ud1 == NULL)
         {
-            puts("cona6");
+            //puts("cona6");
             printf("+ utilizador %s inexistente\n",nick1);
             return ;
 
@@ -120,7 +120,7 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
     }
 
     //struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
-    puts("cona6");
+    //puts("cona6");
     if(ud2 == NULL)
         {
             
@@ -137,19 +137,19 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         return ;
     }
 
-    puts("cona7");
+    //puts("cona7");
 
     struct User *user1 = ud1->user;
     struct User *user2 = ud2->user;
-    puts("cona8");
+    //puts("cona8");
     
 
     struct Vertice *vertice1;
     struct Vertice *vertice2;
-    puts("cona9");
+    //puts("cona9");
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
-    puts("cona10");
+   
    
  
     if(grafo_check_connection(grafo,vertice1,vertice2))
@@ -162,12 +162,12 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         printf("+ utilizador %s segue o limite\n",user1->nick);
     }
     else {
-        puts("cona11");
+       
         grafo_insert_vertice(grafo,user1);
-        puts("cona12");
+        
         //printf("%d\n",grafo_insert_vertice(grafo,user1));
         grafo_insert_vertice(grafo,user2);
-        puts("cona13");
+        
         //printf("%d\n",grafo_insert_vertice(grafo,user2));
         vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
         vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
@@ -185,10 +185,10 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
 {
     //struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
-    puts("cona");
+    
     struct userdados *ud1=search(socialnet->hashnick, nick1[0], nick1);
     struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
-    puts("cona3");
+    
     if(ud1 == NULL)
         {
             
@@ -222,12 +222,12 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
         return ;
     }
 
-    puts("cona3");
+
     struct User *user1 = ud1->user;
     struct User *user2 = ud2->user;
     struct Vertice *vertice1;
     struct Vertice *vertice2;
-    puts("cona4");
+    
     vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
     vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
     
