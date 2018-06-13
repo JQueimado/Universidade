@@ -86,7 +86,7 @@ int main()
     //puts("1");
     //main_1();
     //puts("2");
-    freopen("Testes/A2_in.txt", "r", stdin);
+    freopen("Testes/A1_in.txt", "r", stdin);
 
     main_1();
     
