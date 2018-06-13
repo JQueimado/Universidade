@@ -333,8 +333,8 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
         }
 
-    
-    read_msg(socialnet->grafo, ud1->user, socialnet->pointer);
+
+    read_msg(socialnet->grafo, socialnet, ud1->user, socialnet->pointer);
 
     
 }

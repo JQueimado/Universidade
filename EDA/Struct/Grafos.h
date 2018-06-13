@@ -602,7 +602,7 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 
 }
 
-bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
+bool read_msg(struct Grafo *grafo, struct SocialNet *socialnet, struct User *u , FILE *pointer)
 {
 	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
 
