@@ -334,11 +334,40 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
         }
 
 
-    read_msg(socialnet->grafo, socialnet, ud1->user, socialnet->pointer);
+    read_msg(socialnet, ud1->user, socialnet->pointer);
 
     
 }
 
+bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
+
+{
+    //puts("cona");
+    struct Vertice *v=grafo_get_vertice_by_name(grafo,user->nick);
+    if (v == NULL)
+    {
+
+        return false;
+
+    }   
+    struct Node *n=grafo->nodes[v->pos];
+    if(n==NULL)
+        return false;
+
+    printf("utilizador %s (%s)\n",user->nick,get_name(n->ver->user, pointer));
+    printf("%d mensagens, %d seguidores, segue %d utilizadores\n",n->ver->msg_send,count_conection_seguidores(grafo,n->ver),grafo_connection_count(grafo,n->ver));
+    
+    while(n->next_node != NULL)
+    {
+
+        n = n->next_node;
+        
+        printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv );
+        
+    }
+
+    return true;
+   
 
 void informacao(struct SocialNet *socialnet, char nick[])
 {
