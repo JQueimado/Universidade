@@ -102,7 +102,7 @@ char *get_name(struct User *user, FILE *pointer)
 }
 
 /*Construtor*/
-struct User *new_User( char ni[] , char na[], FILE *pointer)
+struct User *new_User( char ni[] , char na[], FILE *pointer, bool remv)
 {
 
 	struct User *temp = malloc( sizeof( struct User ) );
@@ -122,8 +122,10 @@ struct User *new_User( char ni[] , char na[], FILE *pointer)
 	
 	if (ver_name(na))
 	{
-		
-		write_file(temp , na ,pointer);
+		if (!remv)
+			write_file(temp , na ,pointer);
+		else
+			temp->pos = -1;
 
 	}
 	else
@@ -133,6 +135,7 @@ struct User *new_User( char ni[] , char na[], FILE *pointer)
 
 	}
 
+	temp->removed = remv;
 	return temp; 
 
 }
