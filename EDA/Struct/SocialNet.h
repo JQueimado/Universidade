@@ -45,24 +45,37 @@ struct SocialNet *new_SocialNet(){
 struct DataUser 
 {
 
-    int msg_send;
+    unsigned int msg_send;
     char nick[6];
     char name[26];
 
 };
 
-struct DataUser new_DataUser(struct SocialNet *socialnet, struct User *user)
+struct DataUser *new_DataUser(struct SocialNet *socialnet, struct User *user)
 {
 
     struct DataUser *temp = malloc(sizeof(struct DataUser));
 
     strcpy(temp->nick, user->nick);
 
-    strcpy(temp->name, get_name(user, socialnet->pointer) );
+    if(user->removed)
+    {
 
-    temp->msg_send = grafo_get_vertice_by_name(user->nick)->msg_send;
+        temp->name[0] = '\0';
 
-    return *temp;
+        temp->msg_send = -1;
+
+    }
+    else
+    {
+
+        strcpy(temp->name, get_name(user, socialnet->pointer) );
+
+        temp->msg_send = grafo_get_vertice_by_name(socialnet->grafo, user->nick)->msg_send;
+
+    }
+
+    return temp;
 }
 
 
@@ -77,7 +90,7 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
     }
     else 
     {
-        struct User *user = new_User(nick , name , socialnet->pointer);
+        struct User *user = new_User(nick , name , socialnet->pointer, false);
         // verifica as condicoes do nick e do nome
         if(user!=NULL)
         {
@@ -339,6 +352,24 @@ void informacao(struct SocialNet *socialnet, char nick[])
 
 }
   
+void hash_dump (struct Hash *hashtlb , struct SocialNet *socialnet, FILE *pointer){
+
+    struct DataUser *duser;
+
+    for(int i = 0; i<SIZE; i++) {
+    
+        if(hashtlb->hashArray[i] != NULL)
+        {
+
+            duser = new_DataUser(socialnet, hashtlb->hashArray[i]->user);
+
+            fwrite(duser, sizeof(struct DataUser), 1, pointer);
+
+        }
+   
+    }
+
+}
 
 void dump(struct SocialNet *socialnet)
 {
@@ -347,18 +378,34 @@ void dump(struct SocialNet *socialnet)
 
     hash_dump(socialnet->hashnick, socialnet, userdata);
 
-    fclose(USER_FILE_NAME);
+    fclose(userdata);
 
 }
 
-void unpack()
+void hash_unpack(struct Hash *hashtlb , struct SocialNet *socialnet, FILE *in_pointer, FILE *cache_pointer)
+{
+
+    struct DataUser *temp = NULL; 
+
+    while(fread(temp, sizeof(temp), 1, in_pointer))
+    {
+
+        struct User *tempU = new_User(temp->nick, temp->name, cache_pointer, temp->msg_send == -1);
+
+        insert(hashtlb, tempU, tempU->nick[0]);
+
+    }
+
+}
+
+void unpack(struct SocialNet *socialnet)
 {
 
     FILE *userdata = fopen(USER_FILE_NAME, "rb");
 
-    hash_unpack(socialnet->hashnick, socialnet, userdata);
+    hash_unpack(socialnet->hashnick, socialnet, userdata, socialnet->pointer);
 
-    fclose(USER_FILE_NAME);
+    fclose(userdata);
 
 }
 
