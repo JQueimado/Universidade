@@ -83,6 +83,8 @@ void write_file(struct User *user, char name[], FILE *pointer)
 
 	user->pos = ftell(pointer);
 	
+	printf("%s\n", name);
+
 	fwrite(name , MAX_USER_SIZE, 1, pointer);
 	
 
