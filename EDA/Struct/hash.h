@@ -25,10 +25,6 @@ struct Hash
 {
 
 	struct userdados *hashArray[SIZE];
-	
-
-	struct userdados *tempdelete;
-
 
 };
 
@@ -75,6 +71,20 @@ struct userdados *search(struct Hash *hashtlb, int key, char ni[])
 
 }
 
+void display(struct Hash *hashtlb) {
+   int i = 0;
+	
+   for(i = 0; i<SIZE; i++) {
+	
+      if(hashtlb->hashArray[i] != NULL)
+         printf(" (%d,%s)", hashtlb->hashArray[i]->key, hashtlb->hashArray[i]->user->nick);
+      else
+         printf(" ~~ ");
+   }
+	
+   printf("\n");
+}
+
 void insert(struct Hash *hashtlb, struct User *user,int key)
 {
 	struct userdados *usuario = (struct userdados*) malloc(sizeof(struct userdados));
@@ -91,48 +101,7 @@ void insert(struct Hash *hashtlb, struct User *user,int key)
 	}
 
 	hashtlb->hashArray[hashIndex]=usuario;
-
 	
 }
-
-
-struct userdados *hash_delete(struct Hash *hashtlb, struct userdados *usuario)
-{
-	int key=usuario->key;
-
-	int hashIndex=hashcode(key);
-
-	while(hashtlb->hashArray[hashIndex]!=NULL)
-	{
-		if(hashtlb->hashArray[hashIndex]->key==key)
-		{
-			struct userdados *temp =hashtlb->hashArray[hashIndex];
-			hashtlb->hashArray[hashIndex]=hashtlb->tempdelete;
-			return temp;
-		}
-
-		//vai para a proxima cela
-		++hashIndex;
-
-		hashIndex%=SIZE;
-	}
-	return NULL;
-}
-
-void display(struct Hash *hashtlb) {
-   int i = 0;
-	
-   for(i = 0; i<SIZE; i++) {
-	
-      if(hashtlb->hashArray[i] != NULL)
-         printf(" (%d,%s)", hashtlb->hashArray[i]->key, hashtlb->hashArray[i]->user->nick);
-      else
-         printf(" ~~ ");
-   }
-	
-   printf("\n");
-}
-
-
 
 #endif

@@ -10,6 +10,8 @@ int main_1()
 
     struct SocialNet *socialnet = new_SocialNet();
 
+    unpack(socialnet);
+
 	//char input;
 	//char nick[5];
 	char name[25];
@@ -97,9 +99,9 @@ int main()
 {
     //freopen("Testes/A_out.txt", "w", stdout);
     freopen("Testes/A1_in.txt", "r", stdin);
-
+    puts("1");
     main_1();
-    
+    puts("2");
     freopen("Testes/A2_in.txt", "r", stdin);
 
     main_1();

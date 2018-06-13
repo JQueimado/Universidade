@@ -108,10 +108,6 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
     }
         //printf("Nick:%s\n",search(socialnet->hashnick, nick[0] , nick )->user->nick);
 
-    /*
-    trie_print(socialnet->tnick);
-    */
-
 }
 
 
@@ -385,9 +381,9 @@ void dump(struct SocialNet *socialnet)
 void hash_unpack(struct Hash *hashtlb , struct SocialNet *socialnet, FILE *in_pointer, FILE *cache_pointer)
 {
 
-    struct DataUser *temp = NULL; 
-
-    while(fread(temp, sizeof(temp), 1, in_pointer))
+    struct DataUser *temp = malloc(sizeof(struct DataUser)); 
+    
+    while(fread(temp, sizeof(struct DataUser), 1, in_pointer) == 1)
     {
 
         struct User *tempU = new_User(temp->nick, temp->name, cache_pointer, temp->msg_send == -1);
@@ -400,12 +396,22 @@ void hash_unpack(struct Hash *hashtlb , struct SocialNet *socialnet, FILE *in_po
 
 void unpack(struct SocialNet *socialnet)
 {
+    puts("bf_unpack");
+    display(socialnet->hashnick);
 
     FILE *userdata = fopen(USER_FILE_NAME, "rb");
+
+    if (userdata == NULL)
+    {
+        return;
+    }
 
     hash_unpack(socialnet->hashnick, socialnet, userdata, socialnet->pointer);
 
     fclose(userdata);
+
+    puts("af_unpack");
+    display(socialnet->hashnick);
 
 }
 
