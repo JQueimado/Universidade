@@ -15,7 +15,7 @@
 
 /**Consts**/
 
-#define MAX_USERS 1000000
+#define MAX_USERS 10000000
 #define NORMAL 0
 #define ERROR 1
 #define LEN 100
@@ -53,6 +53,11 @@ struct Vertice *new_Vertice(struct User *user , int p )
 /*Methods*/
 bool vertice_compare ( struct Vertice *v1 , struct Vertice *v2 )
 {
+
+	if (v1 == NULL || v2 == NULL)
+	{
+		return false;
+	}
 
 	return compare_user(v1->user , v2->user);
 
@@ -574,31 +579,6 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 	return true;
 
 }
-
-bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
-{	
-	struct Grafo *grafo = socialnet->grafo;
-	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
-
-	struct Node *n = grafo->nodes[v->pos];
-
-	if (n->next_node == NULL)
-	{
-		printf("+ utilizador %s sem seguidos\n", u->nick);
-	}
-
-	while(n->next_node != NULL)
-	{
-
-		n = n->next_node;
-
-		if (n->ver->user->removed)
-		{
-			printf("utilizador %s desactivado\n",n->ver->user->nick);
-			deixarseguir_utilizador(socialnet, u->nick, n->ver->user->nick);
-			continue;
-		}
-
 
 /**Degug prints**/
 
