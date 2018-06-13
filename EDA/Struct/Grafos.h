@@ -599,27 +599,6 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
 			continue;
 		}
 
-		if (n->msg_rcv == n->ver->msg_send)
-		{
-			printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user, pointer));
-			continue;
-		}
-
-		if ( n->ver->msg_send - n->msg_rcv == 1)
-		{
-			printf("mensagem nova de %s (%s): %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->ver->msg_send);
-			n->msg_rcv = n->ver->msg_send;
-			continue;
-		}
-
-
-		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv+1, n->ver->msg_send);
-		n->msg_rcv = n->ver->msg_send;
-	}
-
-	return true;
-
-}
 
 /**Degug prints**/
 

@@ -319,6 +319,53 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
 
 }
 
+
+bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
+{   
+    struct Grafo *grafo=socialnet->grafo;
+    struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
+
+    struct Node *n = grafo->nodes[v->pos];
+
+    if (n->next_node == NULL)
+    {
+        printf("+ utilizador %s sem seguidos\n", u->nick);
+    }
+
+    while(n->next_node != NULL)
+    {
+
+        n = n->next_node;
+
+        if (n->ver->user->removed)
+        {
+            printf("utilizador %s desactivado\n",n->ver->user->nick);
+            deixarseguir_utilizador(socialnet, u->nick, n->ver->user->nick);
+            continue;
+        }
+
+        if (n->msg_rcv == n->ver->msg_send)
+        {
+            printf("sem mensagens novas de %s (%s)\n", n->ver->user->nick, get_name(n->ver->user, pointer));
+            continue;
+        }
+
+        if ( n->ver->msg_send - n->msg_rcv == 1)
+        {
+            printf("mensagem nova de %s (%s): %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->ver->msg_send);
+            n->msg_rcv = n->ver->msg_send;
+            continue;
+        }
+
+
+        printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv+1, n->ver->msg_send);
+        n->msg_rcv = n->ver->msg_send;
+    }
+
+    return true;
+
+}
+
 void ler_mensagem(struct SocialNet *socialnet, char nick[])
 {   
     
