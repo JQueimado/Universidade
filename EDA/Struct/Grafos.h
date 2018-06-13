@@ -346,10 +346,10 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 	struct Node *temp = grafo->nodes[ pos ];
 
 	/*look for last node*/
-	while(temp != NULL)
+	while(temp->next_node != NULL)
 	{
 
-		if (strcmp(temp->ver->user->nick, v2->user->nick) > 0)
+		if (strcmp(temp->next_node->ver->user->nick, v2->user->nick) > 0)
 		{
 			break;
 		}
