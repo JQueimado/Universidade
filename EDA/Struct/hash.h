@@ -10,11 +10,9 @@
 #include "User.h"
 #include "SocialNet.h"
 
-<<<<<<< HEAD
+
 #define SIZE 200000
-=======
-#define SIZE 100000
->>>>>>> 83b83e056f2c2a9f2a766a36ee572e27221b8158
+
 
 struct userdados
 {

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Struct/User.h"
-#include "Struct/SocialNet.h"
-#include "Struct/hash.h"
+#include "User.h"
+#include "SocialNet.h"
+#include "hash.h"
 
 int main()
 {
