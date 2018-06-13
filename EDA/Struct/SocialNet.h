@@ -415,7 +415,7 @@ void dump_connections(struct Grafo *grafo , struct Node *n, FILE *pointer)
 void grafo_dump (struct Grafo *grafo , struct SocialNet *socialnet, FILE *pointer)
 {
 
-    grafo_print_all(grafo);
+    //grafo_print_all(grafo);
 
     int sp = 0;
 
