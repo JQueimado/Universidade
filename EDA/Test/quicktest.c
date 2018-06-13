@@ -46,7 +46,7 @@ int main()
 {
     char const *args[] =
     {
-        "this", "is", "a", "test", "of", "quicksort", "with", "strings","00005","12223","AASDA"
+        "0aaaa","12345","Zyxvu","aBcde","abCde"
     };
 
     //srand((unsigned)time(NULL));
