@@ -55,6 +55,7 @@ zsq4r (3 lidas)
 sem mensagens novas de MrPym (A Perfect Spy)
 sem mensagens novas de zero7 (James Bond)
 utilizador zeze7 desactivado
++ utilizador zeze7 inexistente
 sem mensagens novas de zsq4r (Pseu Donym)
 utilizador zero7 (James Bond)
 3 mensagens, 2 seguidores, segue 4 utilizadores
@@ -76,27 +77,3 @@ utilizador AlecS (He Who Came from the Cold)
 mensagem nova de AlecS (He Who Came from the Cold): 1
 sem mensagens novas de zero7 (James Bond)
 mensagens novas de zsq4r (Pseu Donym): 2 a 3
-+ utilizador Zero7 criado
-+ utilizador zsq4r criado
-+ utilizador MrPym inexistente
-+ utilizador MrPym inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zeze7 criado
-+ utilizador zero7 inexistente
-+ utilizador zeze7 removido
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador zero7 inexistente
-+ utilizador MrPym inexistente
-+ utilizador zero7 inexistente
-+ utilizador MrPym inexistente
-+ utilizador MrPym inexistente
-+ utilizador MrPym inexistente
-+ utilizador AlecS criado
-+ utilizador MrPym inexistente
-+ utilizador MrPym inexistente
