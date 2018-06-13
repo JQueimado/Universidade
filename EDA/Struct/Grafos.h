@@ -441,15 +441,15 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
-void grafo_get_conected_to(struct Grafo *g , struct Vertice *v , struct User *arr[])
+void grafo_get_conected_to(struct Grafo *g , struct Vertice *v,struct User *arr[])
 {
 
 	struct Node *n = g->nodes[v->pos];
-	//puts("coni");
+	
 	int i = 0;
 
 	n = n->next_node;
-	//puts("con2");
+	
 	while (n != NULL)
 	{
 
@@ -568,6 +568,72 @@ void grafo_unpack (struct Grafo *g , FILE *file )
 
 	}
 */
+}
+
+
+int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
+{
+	int count=0;
+	if(grafo==NULL)
+		return false;
+	if(v1==NULL)
+		return false;
+	if(grafo->nodes[ v1->pos ]==NULL)
+		return false;
+
+
+	struct Node *n = grafo->nodes[ v1->pos ];
+
+	//printf("%s\n", n->ver->user->nick);
+
+
+
+
+	n = n->next_node;
+	
+	
+
+	while(n != NULL)
+	{
+
+		
+
+		n = n->next_node;
+		count++;
+
+	}
+
+	return count;
+
+}
+
+bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
+
+{
+	//puts("cona");
+	struct Vertice *v=grafo_get_vertice_by_name(grafo,user->nick);
+	if (v == NULL)
+	{
+
+		return false;
+
+	}	
+	struct Node *n=grafo->nodes[v->pos];
+	if(n==NULL)
+		return false;
+
+	printf("utilizador %s (%s)\n",user->nick,get_name(n->ver->user, pointer));
+	printf("%d mensagens, %d seguidores, segue %d utilizadores\n",n->ver->msg_send,grafo_connection_count(grafo,n->ver),grafo_connection_count(grafo,n->ver));
+	while(n->next_node != NULL)
+	{
+
+		n = n->next_node;
+		printf("%s (%d lidas)\n",n->ver->user->nick,n->msg_rcv);
+
+		
+	}
+
+	return true;
 }
 
 bool send_msg(struct Grafo *grafo, struct User *u)

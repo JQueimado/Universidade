@@ -291,9 +291,7 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
 void informacao(struct SocialNet *socialnet, char nick[])
 {
-    /*
-    struct User arr[100];
-    struct Grafo *grafo=socialnet->grafo;
+    
     struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
     if(ud1 == NULL)
         {
@@ -302,24 +300,9 @@ void informacao(struct SocialNet *socialnet, char nick[])
             return;
 
         }
+   infor(socialnet->grafo,ud1->user,socialnet->pointer);
 
-    struct User *user1 = ud1->user;
-
-    struct Vertice *vertice1;
-    vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
-     grafo_get_conected_to(socialnet->grafo,vertice1,arr);
-    struct User *user = NULL; //cona de procura
     
-    struct Vertice *ver = grafo_get_vertice_by_name(nick);
-    
-    struct Vertice *ver = grafo_get_vertice_by_name(nick);
-
-    if ( ver == NULL)
-    {
-        
-    }
-
-*/     
     
 
 }
