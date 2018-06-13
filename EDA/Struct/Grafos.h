@@ -233,11 +233,6 @@ bool grafo_connection_count_check(struct Grafo * grafo,struct Vertice *v1)
 
 
 	n = n->next_node;
-	
-	if (n == NULL)
-	{
-		puts("None");
-	}
 
 	while(n != NULL)
 	{
