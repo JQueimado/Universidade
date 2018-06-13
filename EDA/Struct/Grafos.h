@@ -582,26 +582,27 @@ int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 		return false;
 
 
-	struct Node *n = grafo->nodes[ v1->pos ];
-
 	//printf("%s\n", n->ver->user->nick);
-
-
-
-
-	n = n->next_node;
-	
 	
 
-	while(n != NULL)
+	int sp = 0;
+	for (int i = 0; sp < grafo->size; ++i)
 	{
+		
+		if (grafo->nodes[i] != NULL)
+		{
+			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1))
+			{
+				count++;
+			}
+
+			sp+=1;
 
 		
-
-		n = n->next_node;
-		count++;
+		}
 
 	}
+
 
 	return count;
 
@@ -623,7 +624,7 @@ bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
 		return false;
 
 	printf("utilizador %s (%s)\n",user->nick,get_name(n->ver->user, pointer));
-	printf("%d mensagens, %d seguidores, segue %d utilizadores\n",n->ver->msg_send,grafo_connection_count(grafo,n->ver),grafo_connection_count(grafo,n->ver));
+	printf("%d mensagens, %d seguidores, segue %d utilizadores\n",n->ver->msg_send,count_conection_seguidores(grafo,n->ver),grafo_connection_count(grafo,n->ver));
 	while(n->next_node != NULL)
 	{
 

@@ -283,6 +283,7 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 
         }
 
+
     read_msg(socialnet->grafo, ud1->user, socialnet->pointer);
 
     
@@ -300,6 +301,11 @@ void informacao(struct SocialNet *socialnet, char nick[])
             return;
 
         }
+    if(search(socialnet->hashnick, nick[0], nick)->user->removed)
+    {
+        printf("+ utilizador %s inexistente\n",nick);
+        return;
+    }
    infor(socialnet->grafo,ud1->user,socialnet->pointer);
 
     
