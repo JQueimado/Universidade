@@ -339,8 +339,10 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
 
         if (n->ver->user->removed)
         {
+            grafo_remove_conection(grafo,v, grafo_get_vertice_by_name(grafo,n->ver->user->nick ));
+
             printf("utilizador %s desactivado\n",n->ver->user->nick);
-            deixarseguir_utilizador(socialnet, u->nick, n->ver->user->nick);
+            
             continue;
         }
 
