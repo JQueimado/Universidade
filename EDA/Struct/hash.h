@@ -141,8 +141,10 @@ void hash_dump (struct Hash *hashtlb , struct SocialNet *socialnet, FILE *pointe
 void hash_unpack(struct Hash *hashtlb , struct SocialNet *socialnet, FILE *pointer)
 {
 
+	struct DataUse *temp; 
+
 	
-	
+
 }
 
 void display(struct Hash *hashtlb) {

@@ -95,7 +95,7 @@ int main_1()
 
 int main()
 {
-    freopen("Testes/A_out.txt", "w", stdout);
+    //freopen("Testes/A_out.txt", "w", stdout);
     freopen("Testes/A1_in.txt", "r", stdin);
 
     main_1();
