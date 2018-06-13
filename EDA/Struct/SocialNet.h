@@ -339,11 +339,13 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
     
 }
 
-bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
+bool infor(struct SocialNet *socialnet,struct User *user, FILE *pointer)
 
 {
     //puts("cona");
+    struct Grafo *grafo=socialnet->grafo;
     struct Vertice *v=grafo_get_vertice_by_name(grafo,user->nick);
+    st
     if (v == NULL)
     {
 
@@ -368,9 +370,11 @@ bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
 
     return true;
    
-
+}
 void informacao(struct SocialNet *socialnet, char nick[])
 {
+
+    struct Grafo *grafo=socialnet->grafo;
     
     struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
     if(ud1 == NULL)

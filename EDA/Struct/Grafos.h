@@ -550,6 +550,7 @@ int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 	}
 
 
+
 	return count;
 
 }
