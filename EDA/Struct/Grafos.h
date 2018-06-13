@@ -280,7 +280,9 @@ int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
 		//printf("%s\n", n->ver->user->nick);
 
 		n = n->next_node;
-		count++;
+		
+		if (!n->ver->user->removed)
+			count++;
 
 	}
 
@@ -379,6 +381,7 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 
 }
 
+<<<<<<< HEAD
 int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
 
@@ -438,6 +441,8 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 }
 
+=======
+>>>>>>> 9f7b940b4583dfd92901bf319cfaada2433c98a9
 void grafo_get_conected_to(struct Grafo *g , struct Vertice *v,struct User *arr[])
 {
 
@@ -522,7 +527,7 @@ int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 		
 		if (grafo->nodes[i] != NULL)
 		{
-			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1))
+			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1) && !)
 			{
 				count++;
 			}
@@ -561,7 +566,8 @@ bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
 	{
 
 		n = n->next_node;
-		printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv );
+		if (!n->ver->user->removed)
+			printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv );
 		
 	}
 
@@ -601,6 +607,11 @@ bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
 	{
 
 		n = n->next_node;
+
+		if (n->ver->user->removed)
+		{
+			continue;
+		}
 
 		if (n->msg_rcv == n->ver->msg_send)
 		{
