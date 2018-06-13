@@ -349,13 +349,11 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 	{
 		return NULL;
 	}
-
-	if ( v1->pos >= grafo->size || v1->pos < 0 )
+	if ( v1->pos >= MAX_USERS || v1->pos < 0 )
 	{
 		return NULL;
 	}
-
-	if ( v2->pos >= grafo->size || v2->pos < 0 )
+	if ( v2->pos >= MAX_USERS || v2->pos < 0 )
 	{
 		return NULL;
 	}

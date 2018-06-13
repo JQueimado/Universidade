@@ -54,6 +54,7 @@ zeze7 (0 lidas)
 zsq4r (3 lidas)
 sem mensagens novas de MrPym (A Perfect Spy)
 sem mensagens novas de zero7 (James Bond)
+<<<<<<< HEAD
 zeze7:1
 user MrPym folows: 
 zsq4r
@@ -66,6 +67,8 @@ zeze7
 zsq4r
 user zsq4r folows: 
 zero7
+=======
+>>>>>>> 154c4ad331136da4d259d147953b79272d598dab
 utilizador zeze7 desactivado
 sem mensagens novas de zsq4r (Pseu Donym)
 utilizador zero7 (James Bond)
