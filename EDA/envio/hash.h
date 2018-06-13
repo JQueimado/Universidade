@@ -10,7 +10,7 @@
 #include "User.h"
 #include "SocialNet.h"
 
-#define SIZE 200000
+#define SIZE 100
 
 struct userdados
 {
