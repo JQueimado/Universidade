@@ -216,7 +216,7 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
         vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
         struct Node *n = grafo_insert_conection(grafo,vertice1,vertice2);
-        n->msg_rcv = v2->msg_send;
+        n->msg_rcv = vertice2->msg_send;
         printf("+ %s passou a seguir %s\n",user1->nick,user2->nick);
       
     }
@@ -404,7 +404,7 @@ void dump_connections(struct Grafo *grafo , struct Node *n, FILE *pointer)
         Dc->msg_rcv = n->msg_rcv;
 
         fwrite(Dc, sizeof(struct DataConection), 1, pointer);
-        printf("%s %s %d\n", Dc->nick1, Dc->nick2, Dc->msg_rcv);
+        //printf("%s %s %d\n", Dc->nick1, Dc->nick2, Dc->msg_rcv);
 
         n = n->next_node;
 
@@ -477,7 +477,7 @@ void grafo_unpack(struct Grafo *grafo , struct SocialNet *socialnet, FILE *point
     while(fread(Dc, sizeof(struct DataConection), 1, pointer) == 1)
     {
         /*procura 1*/
-        printf("%s %s %d\n", Dc->nick1, Dc->nick2, Dc->msg_rcv);
+        
         struct User *u1 = search(socialnet->hashnick, Dc->nick1[0], Dc->nick1)->user;
 
         struct Vertice *v1 = grafo_get_vertice_by_name(grafo , Dc->nick1);
