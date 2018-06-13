@@ -216,7 +216,7 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
         vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
         struct Node *n = grafo_insert_conection(grafo,vertice1,vertice2);
-        n->msg_rcv = v2->msg_send;
+        n->msg_rcv = vertice2->msg_send;
         printf("+ %s passou a seguir %s\n",user1->nick,user2->nick);
       
     }
