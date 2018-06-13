@@ -396,34 +396,31 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 
 }
 
-int grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
+bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
 
-	struct Node *n = grafo->nodes[ v1->pos ];
-	struct Node *p;
-	
-	p = n;
-	n = n->next_node;
+	struct Node *node = grafo->nodes[v1->pos]->next_node;
+	struct Node *temp_node;
 
-	
-	while(n != NULL)
+	while(!vertice_compare(node->ver, v2))
 	{
-		if(n==NULL)
-			return false;
-		if ( vertice_compare(n->ver , v2))
+
+		if(node->next_node == NULL)
 		{
-
-			p->next_node = n->next_node;
-			return NORMAL;
-
+			return false;
 		}
 
-		p = n;
-		n = n->next_node;
+		node = node->next_node;
 
 	}
 
-	return ERROR;
+	temp_node = node->next_node;
+
+	node->next_node = temp_node->next_node;
+
+	free(temp_node);
+
+	return true;
 
 }
 
