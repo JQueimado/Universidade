@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include "User.h"
+#include "SocialNet.h"
 
 #define SIZE 100
 
@@ -116,6 +117,34 @@ struct userdados *hash_delete(struct Hash *hashtlb, struct userdados *usuario)
 		hashIndex%=SIZE;
 	}
 	return NULL;
+}
+
+void hash_dump (struct Hash *hashtlb , struct SocialNet *socialnet, FILE *pointer){
+
+	struct DataUser *duser;
+
+    for(int i = 0; i<SIZE; i++) {
+	
+       	if(hashtlb->hashArray[i] != NULL)
+		{
+
+			duser = new_User(socialnet, hashtlb->hashArray[i]->user);
+
+			fwrite(&duser, sizeof(struct DataUser), 1, pointer);
+
+		}
+   
+    }
+
+}
+
+void hash_unpack(struct Hash *hashtlb , struct SocialNet *socialnet, FILE *pointer)
+{
+
+	struct DataUse *temp; 
+
+	
+
 }
 
 void display(struct Hash *hashtlb) {

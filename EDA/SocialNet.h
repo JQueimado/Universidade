@@ -259,33 +259,7 @@ void informacao(struct SocialNet *socialnet,struct User *user)
 bool dump(struct SocialNet *socialnet)
 {
 
-    if (socialnet == NULL)
-    {
-
-        return false;
-
-    }
-
-    struct Grafo *grafo = socialnet->grafo;
-    struct trie *t_nick = socialnet->tnick;
-
-    /*
-    puts("trie to be writen");
-    trie_print(t_nick);
-    puts("done");
-    */
-
-    /*Dump Data*/
-    FILE *file_nick = fopen(USER_FILE_NAME , "w");
-    trie_dump(t_nick , file_nick);
-    fclose(file_nick);
-
-    /*Dump net*/
-    FILE *file_net = fopen(NET_FILE_NAME , "w");
-    grafo_dump_folows(grafo, file_net);
-    fclose(file_net);
-
-    return true;
+   FILE *user_data = fopen(US)
 
 }
 
@@ -303,13 +277,7 @@ struct SocialNet *unpack()
         return temp;
     }
 
-    trie_unpack(temp->tnick , file_user);
 
-    /*
-    puts("unpacked trie");
-    trie_print(temp->tnick);
-    puts("done");
-    */
 
     fclose(file_user);
     
