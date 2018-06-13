@@ -471,6 +471,7 @@ void grafo_unpack(struct Grafo *grafo , struct SocialNet *socialnet, FILE *point
     while(fread(Dc, sizeof(struct DataConection), 1, pointer) == 1)
     {
         /*procura 1*/
+        printf("%s %s %d\n", );
         struct User *u1 = search(socialnet->hashnick, Dc->nick1[0], Dc->nick1)->user;
 
         struct Vertice *v1 = grafo_get_vertice_by_name(grafo , Dc->nick1);
