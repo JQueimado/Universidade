@@ -40,6 +40,32 @@ struct SocialNet *new_SocialNet(){
     return temp;
 }
 
+
+/*Data User*/
+struct DataUser 
+{
+
+    int msg_send;
+    char nick[6];
+    char name[26];
+
+};
+
+struct DataUser new_DataUser(struct SocialNet *socialnet, struct User *user)
+{
+
+    struct DataUser *temp = malloc(sizeof(struct DataUser));
+
+    strcpy(temp->nick, user->nick);
+
+    strcpy(temp->name, get_name(user, socialnet->pointer) );
+
+    temp->msg_send = grafo_get_vertice_by_name(user->nick)->msg_send;
+
+    return *temp;
+}
+
+
 //Segmentation fault com o user
 void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
 {
@@ -327,66 +353,24 @@ void informacao(struct SocialNet *socialnet, char nick[])
 
 void dump(struct SocialNet *socialnet)
 {
-/*
-    if (socialnet == NULL)
-    {
 
-        return false;
+    FILE *userdata = fopen(USER_FILE_NAME, "wb");
 
-    }
+    hash_dump(socialnet->hashnick, socialnet, userdata);
 
-    struct Grafo *grafo = socialnet->grafo;
-    struct trie *t_nick = socialnet->tnick;
+    fclose(USER_FILE_NAME);
 
-    puts("trie to be writen");
-    trie_print(t_nick);
-    puts("done");
-
-    FILE *file_nick = fopen(USER_FILE_NAME , "w");
-    trie_dump(t_nick , file_nick);
-    fclose(file_nick);
-
-    FILE *file_net = fopen(NET_FILE_NAME , "w");
-    grafo_dump_folows(grafo, file_net);
-    fclose(file_net);
-
-    return true;
-*/
 }
 
 void unpack()
 {
-/*
-    struct SocialNet *temp = new_SocialNet();
 
-    FILE *file_user = fopen(USER_FILE_NAME , "r");
+    FILE *userdata = fopen(USER_FILE_NAME, "rb");
 
-    if (file_user == NULL)
-    {
-        return temp;
-    }
+    hash_unpack(socialnet->hashnick, socialnet, userdata);
 
-    trie_unpack(temp->tnick , file_user);
+    fclose(USER_FILE_NAME);
 
-    puts("unpacked trie");
-    trie_print(temp->tnick);
-    puts("done");
-
-    fclose(file_user);
-
-    FILE *file_net = fopen(NET_FILE_NAME , "r" );
-
-    if (file_net == NULL)
-    {
-        return new_SocialNet();
-    }
-
-    grafo_unpack(temp->grafo , file_net , temp->tnick);
-
-    fclose(file_net);
-
-    return temp;
-*/
 }
 
 #endif
