@@ -81,14 +81,14 @@ int main_1()
 
 int main()
 {
-    //freopen("Testes/A_out.txt", "w", stdout);
+    freopen("Testes/A_out.txt", "a", stdout);
     freopen("Testes/A2_in.txt", "r", stdin);
     //puts("1");
-    //main_1();
+    main_1();
     //puts("2");
     //freopen("Testes/A2_in.txt", "r", stdin);
 
-    main_1();
+    //main_1();
     
     //freopen("Testes/A2_in.txt", "r", stdin);
     //puts("3");
