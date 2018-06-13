@@ -621,7 +621,7 @@ bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
 		if (n->ver->user->removed)
 		{
 			printf("utilizador %s desactivado\n",n->ver->user->nick);
-			deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
+			deixarseguir_utilizador(socialnet, u->nick, n->ver->user->nick);
 			continue;
 		}
 
