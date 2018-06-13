@@ -82,7 +82,7 @@ void write_file(struct User *user, char name[], FILE *pointer)
 	fseek(pointer, 0, SEEK_END);
 
 	user->pos = ftell(pointer);
-	
+
 	fwrite(name , MAX_USER_SIZE, 1, pointer);
 	
 
@@ -90,11 +90,11 @@ void write_file(struct User *user, char name[], FILE *pointer)
 
 char *get_name(struct User *user, FILE *pointer)
 {	
-	static char name[MAX_USER_SIZE +1];
+	static char name[MAX_USER_SIZE];
 
 	fseek(pointer, user->pos, SEEK_SET);
 
-	fread(name , MAX_USER_SIZE + 1, 1, pointer);
+	fread(name , MAX_USER_SIZE , 1, pointer);
 	
 	fseek(pointer, 0, SEEK_END);
 
