@@ -302,11 +302,12 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
         return;
 
     }
-    if(search(socialnet->hashnick, ni[0], ni)->user->removed)
+    else if (ud1->user->removed)
     {
         printf("+ utilizador %s inexistente\n",ni);
         return;
     }
+    
     struct User *user = ud1->user;
 
     send_msg(socialnet->grafo, user);

@@ -561,7 +561,7 @@ bool infor(struct Grafo *grafo,struct User *user, FILE *pointer)
 	{
 
 		n = n->next_node;
-		printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv + 1);
+		printf("%s (%d lidas)\n",n->ver->user->nick, n->msg_rcv );
 		
 	}
 
@@ -576,7 +576,7 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 	if (ver == NULL)
 	{
 
-		return false;
+		ver = grafo_insert_vertice(grafo, u);
 
 	}
 
@@ -615,7 +615,7 @@ bool read_msg(struct Grafo *grafo, struct User *u , FILE *pointer)
 			continue;
 		}
 
-		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv +1, n->ver->msg_send);
+		printf("mensagens novas de %s (%s): %d a %d\n", n->ver->user->nick, get_name(n->ver->user, pointer), n->msg_rcv, n->ver->msg_send);
 		n->msg_rcv = n->ver->msg_send;
 	}
 
