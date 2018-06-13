@@ -402,18 +402,19 @@ bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vert
 	struct Node *node = grafo->nodes[v1->pos]->next_node;
 	struct Node *temp_node;
 
-	while(!vertice_compare(node->ver, v2))
+	while(!vertice_compare(node->next_node->ver, v2))
 	{
-
+		puts("cona");
 		if(node->next_node == NULL)
 		{
+			puts("cona");
 			return false;
 		}
-
+		puts("cona");
 		node = node->next_node;
 
 	}
-
+	puts("cona");
 	temp_node = node->next_node;
 
 	node->next_node = temp_node->next_node;
