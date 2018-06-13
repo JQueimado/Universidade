@@ -289,55 +289,56 @@ int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
 } 
 
 /*Add Vertice*/
-int grafo_insert_vertice(struct Grafo *grafo , struct User *user)
+struct Vertice *grafo_insert_vertice(struct Grafo *grafo , struct User *user)
 {	
 
 	/*Check if arg are given*/
 	if ( grafo == NULL || user == NULL )
 	{
 
-		return ERROR;
+		return NULL;
 	}
 
 	/*Check for free space*/
 	if ( grafo->size >= MAX_USERS )
 	{
 		
-		return ERROR;
+		return NULL;
 	}
 	if( grafo_check_if_exists (grafo ,grafo_get_vertice_by_name(grafo, user->nick) ))
 	{
-		return ERROR;
+		return NULL;
 	}
 
 
 	/*adds vertice*/
-	struct Node *temp = new_Node( new_Vertice( user , grafo->size ) );
+	struct Vertice *v = new_Vertice( user , grafo->size );
+	struct Node *temp = new_Node( v );
 	grafo->nodes[ grafo->size ] = temp;
 	grafo->size += 1;
 
-	return NORMAL;
+	return v;
 
 }
 
 /*Add Conection*/
-int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Vertice *v2 )
+struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Vertice *v2 )
 {
 
 	/*Check if arg are given*/
 	if ( v1 == NULL || v2 == NULL )
 	{
-		return ERROR;
+		return NULL;
 	}
 
 	if ( v1->pos >= grafo->size || v1->pos < 0 )
 	{
-		return ERROR;
+		return NULL;
 	}
 
 	if ( v2->pos >= grafo->size || v2->pos < 0 )
 	{
-		return ERROR;
+		return NULL;
 	}
 
 	/*vars*/
@@ -358,22 +359,23 @@ int grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , struct Ver
 	}
 
 	/*add node*/
+	struct Node *n = new_Node(v2);
+
 	if (temp->next_node == NULL)
 	{
 
-		temp->next_node = new_Node(v2);
+		temp->next_node = n;
 
 	}
 	else
 	{
 		
-		struct Node *n = new_Node(v2);
 		n->next_node = temp->next_node;
 		temp->next_node = n;
 	
 	}
 	
-	return NORMAL;
+	return n;
 
 }
 
@@ -499,72 +501,6 @@ bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
 
 	return true;
 }
-
-/*unpacks a Grafo from a file and links it to a trie*/
-void grafo_unpack (struct Grafo *g , FILE *file )
-{
-/*
-	char out[13];
-
-	while(fgets(out , 13 , file))
-	{
-
-		int i = 0;
-
-		char u1[6];
-
-		while(out[i] != ' ')
-		{
-
-			u1[i] = out[i];
-
-			i++;
-
-		}
-
-		u1[i] = '\0';
-
-		i++;
-
-		int j = 0;
-
-		char u2[6];
-
-		while(out[i] != '\n')
-		{
-
-			u2[j] = out[i];
-
-			j++;
-
-			i++;
-
-		}
-
-		u2[j] = '\0';
-
-		if (grafo_get_vertice_by_name(g , u1) == NULL)
-		{
-
-			struct User *temp = search(socialnet->hashnick,u1[0] , u1)->user;
-			grafo_insert_vertice(g , temp);
-
-		}
-
-		if (grafo_get_vertice_by_name(g , u2) == NULL)
-		{
-
-			struct User *temp = search(socialnet->u2[0],u2)->user;
-			grafo_insert_vertice(g , temp);
-
-		}
-
-		grafo_insert_conection(g , grafo_get_vertice_by_name(g ,u1) , grafo_get_vertice_by_name(g, u2));
-
-	}
-*/
-}
-
 
 int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 {
