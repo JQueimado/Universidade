@@ -575,29 +575,6 @@ bool send_msg(struct Grafo *grafo, struct User *u)
 
 }
 
-bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
-{	
-	struct Grafo *grafo = socialnet->grafo;
-	struct Vertice *v = grafo_get_vertice_by_name(grafo, u->nick);
-
-	struct Node *n = grafo->nodes[v->pos];
-
-	if (n->next_node == NULL)
-	{
-		printf("+ utilizador %s sem seguidos\n", u->nick);
-	}
-
-	while(n->next_node != NULL)
-	{
-
-		n = n->next_node;
-
-		if (n->ver->user->removed)
-		{
-			printf("utilizador %s desactivado\n",n->ver->user->nick);
-			deixarseguir_utilizador(socialnet, u->nick, n->ver->user->nick);
-			continue;
-		}
 
 
 /**Degug prints**/
