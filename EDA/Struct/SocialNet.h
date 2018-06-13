@@ -215,7 +215,8 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
         //printf("%d\n",grafo_insert_vertice(grafo,user2));
         vertice1=grafo_get_vertice_by_name(grafo,user1->nick);
         vertice2=grafo_get_vertice_by_name(grafo,user2->nick);
-        grafo_insert_conection(grafo,vertice1,vertice2);
+        struct Node *n = grafo_insert_conection(grafo,vertice1,vertice2);
+        n->msg_rcv = v2->msg_send;
         printf("+ %s passou a seguir %s\n",user1->nick,user2->nick);
       
     }
@@ -307,7 +308,7 @@ void enviar_mensagem(struct SocialNet *socialnet, char ni[])
         printf("+ utilizador %s inexistente\n",ni);
         return;
     }
-    
+
     struct User *user = ud1->user;
 
     send_msg(socialnet->grafo, user);
