@@ -16,6 +16,7 @@
 /*consts*/
 #define NET_FILE_NAME "Net.txt"
 #define USER_FILE_NAME "User_data.txt"
+#define CONE_FILE_NAME "Conect_data.txt"
 #define User_Data_File "User_Cache.txt"
 
 /****Class SocialNet****/
@@ -432,6 +433,12 @@ void dump(struct SocialNet *socialnet)
 
     fclose(userdata);
 
+    FILE *conectdata = fopen(CONE_FILE_NAME, "wb");
+
+    grafo_dump(socialnet->grafo, socialnet, conectdata);
+
+    fclose(conectdata);
+
 }
 
 void hash_unpack(struct Hash *hashtlb , struct SocialNet *socialnet, FILE *in_pointer, FILE *cache_pointer)
@@ -500,6 +507,17 @@ void unpack(struct SocialNet *socialnet)
     hash_unpack(socialnet->hashnick, socialnet, userdata, socialnet->pointer);
 
     fclose(userdata);
+
+    FILE *conectdata = fopen(CONE_FILE_NAME, "wb");
+
+    if (conectdata == NULL)
+    {
+        return;
+    }
+
+    grafo_unpack(socialnet->grafo, socialnet, conectdata);
+
+    fclose(conectdata);
 
 }
 

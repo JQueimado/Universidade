@@ -81,7 +81,6 @@ int main_1()
 
 int main()
 {
-
     //freopen("Testes/A_out.txt", "w", stdout);
     //freopen("Testes/A1_in.txt", "r", stdin);
     //puts("1");
@@ -94,10 +93,12 @@ int main()
     freopen("Testes/A2_in.txt", "r", stdin);
     //puts("3");
 
+
     //freopen("Testes/B_out.txt", "a", stdout);
     //freopen("Testes/B1_in.txt", "r", stdin);
 
     main_1();
     
     return 0;
+    
 }
