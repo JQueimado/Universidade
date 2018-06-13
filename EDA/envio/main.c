@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Struct/User.h"
-#include "Struct/SocialNet.h"
-#include "Struct/hash.h"
+#include "User.h"
+#include "SocialNet.h"
+#include "hash.h"
 
 int main_1()
 {
@@ -75,30 +75,40 @@ int main_1()
         }
         
     }
+    //scanf("%s %s",nick,name);
+    //struct User *user=new_User(nick,name);
+    //criar_utilizador(tnick,tnome,nick,name,user);
+
+    //printf("%d\n",set_nick(user,nick));
+    /*
+    trie_insert(nick,"miguel");
+    trie_insert(nick,"joaquim");
+    trie_insert(nick,"asd");
+    printf("%d\n",trie_find(nick,"miguel"));
+    printf("%d\n",trie_find(nick,"asd"));
+    printf("%d\n",trie_find(nick,"cona"));
+    printf("%d\n",trie_count(nick));
+    printf("%d\n",trie_count(nick));
+    printf("Apagou:%d\n",trie_delete(nick,"joaquim"));
+    */
 
     return 0;
 }
 
 int main()
 {
-<<<<<<< HEAD
     //freopen("Testes/A_out.txt", "w", stdout);
     freopen("Testes/B1_in.txt", "r", stdin);
     //puts("1");
-    main_1();
-    //puts("2");
-    //freopen("Testes/A2_in.txt", "r", stdin);
-
     //main_1();
+    puts("2");
+    freopen("Testes/A2_in.txt", "r", stdin);
+
+    main_1();
     /*
     freopen("Testes/A3_in.txt", "r", stdin);
     puts("3");
-=======
-    freopen("Testes/B_out.txt", "a", stdout);
-    freopen("Testes/B1_in.txt", "r", stdin);
-    
->>>>>>> 83b83e056f2c2a9f2a766a36ee572e27221b8158
     main_1();
-    
+    */
     return 0;
 }
