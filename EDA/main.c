@@ -13,7 +13,6 @@ int main_1()
 	//char input;
 	//char nick[5];
 	char name[25];
-    char nametemp[25];
     char nick[5];
     char nicktemp[25];
 	//struct User *user=new_User(nick,name);
