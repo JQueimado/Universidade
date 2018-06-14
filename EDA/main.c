@@ -5,7 +5,7 @@
 #include "Struct/SocialNet.h"
 #include "Struct/hash.h"
 
-int main_1()
+int main()
 {
 
     struct SocialNet *socialnet = new_SocialNet();
@@ -79,7 +79,7 @@ int main_1()
     return 0;
 }
 
-int main()
+/*int main()
 {
 
     freopen("Testes/A_out.txt", "a", stdout);
@@ -92,3 +92,4 @@ int main()
     return 0;
     
 }
+*/
