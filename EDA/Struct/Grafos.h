@@ -184,21 +184,6 @@ bool grafo_check_if_exists (struct Grafo *grafo , struct Vertice *v)
 bool grafo_check_connection(struct Grafo * grafo, struct Vertice *v1 , struct Vertice *v2)
 {
 
-	if (grafo == NULL)
-	{
-		return NULL;
-	}
-
-	if (v1 == NULL)
-	{
-		return NULL;
-	}
-
-	if (v2 == NULL)
-	{
-		return NULL;
-	}
-
 	struct Node *n = grafo->nodes[ v1->pos ];
 
 	n = n->next_node;
@@ -533,18 +518,9 @@ bool grafo_dump_folows(struct Grafo *grafo, FILE *file)
 int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 {
 	int count=0;
-	if(grafo==NULL)
-		return false;
-	if(v1==NULL)
-		return false;
-	if(grafo->nodes[ v1->pos ]==NULL)
-		return false;
-
-
-	//printf("%s\n", n->ver->user->nick);
-	
 
 	int sp = 0;
+	
 	for (int i = 0; sp < grafo->size; ++i)
 	{
 		
@@ -556,7 +532,6 @@ int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 			}
 
 			sp+=1;
-
 		
 		}
 

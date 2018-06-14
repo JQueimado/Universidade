@@ -419,7 +419,9 @@ bool infor(struct SocialNet *socialnet,struct User *user, FILE *pointer)
         return false;
 
     }   
+    
     struct Node *n=grafo->nodes[v->pos];
+    
     if(n==NULL)
         return false;
 
@@ -441,25 +443,29 @@ bool infor(struct SocialNet *socialnet,struct User *user, FILE *pointer)
 void informacao(struct SocialNet *socialnet, char nick[])
 {
 
-
-    
     struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
+    
     if(ud1 == NULL)
-        {
+    {
 
-            printf("+ utilizador %s inexistente\n",nick);
-            return;
+        printf("+ utilizador %s inexistente\n",nick);
+        return;
 
-        }
-    if(search(socialnet->hashnick, nick[0], nick)->user->removed)
+    }
+
+    if(ud1->user->removed)
     {
         printf("+ utilizador %s inexistente\n",nick);
         return;
     }
-   infor(socialnet,ud1->user,socialnet->pointer);
+   
+   if (!infor(socialnet,ud1->user,socialnet->pointer))
+   {
+    
+        printf("utilizador %s (%s)", ud1->user->nick, get_name(ud1->user, socialnet->pointer));
+        puts("0 mensagens, 0 seguidores, segue 0 utilizadores");
 
-    
-    
+   }
 
 }
   
