@@ -293,7 +293,7 @@ int grafo_connection_count(struct Grafo * grafo,struct Vertice *v1)
 		/*if (!n->ver->user->removed)
 		{
 			count++;
-			puts("cona2");
+			
 		}*/
 		
 		//if(!(n->ver->user->removed))
@@ -399,34 +399,36 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
 
-	struct Node *node = grafo->nodes[v1->pos];
-	struct Node *temp_node;
 
-	if (node->next_node == NULL)
-	{
+	struct Node *n = grafo->nodes[ v1->pos ];
+	struct Node *p;
+
+	if(n->next_node ==NULL)
 		return false;
-	}
 
-	while(!vertice_compare(node->ver, v2))
+	p = n;
+	n = n->next_node;
+
+
+	while(n != NULL)
 	{
-		puts("cona1");
-		if(node->next_node == NULL)
-		{
-			return false;
-		}
-		node = node->next_node;
-		puts("cona2");
-	}
+		
+    	if ( vertice_compare(n->ver , v2))
+    	{
+    		
+        	p->next_node = n->next_node;
+        	return NORMAL;
 
-	puts("cona3");
-	temp_node = node->next_node;
+    	}
 
-	node->next_node = temp_node->next_node;
+    	p = n;
+    	n = n->next_node;
 
-	free(temp_node);
+}
 
-	return true;
+	return ERROR;
 
+     
 }
 
 int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)

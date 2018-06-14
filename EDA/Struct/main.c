@@ -31,7 +31,7 @@ int main()
         }
         if(entrada=='R')
         {
-            //printf("cona\n");
+            
             scanf("%s",nick);
             remover_utilizador(socialnet , nick);
         }

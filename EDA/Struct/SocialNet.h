@@ -103,7 +103,7 @@ void criar_utilizador(struct SocialNet *socialnet , char nick[] , char name[])
         // verifica as condicoes do nick e do nome
         if(user!=NULL)
         {
-            //puts("cona3");
+            
 
             //printf("eu tb!\n");
             //trie_insert(hashnick, nick, user);
@@ -146,15 +146,15 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
 {
    // struct userdados *hashnick=socialnet->hashnick;
     struct Grafo *grafo=socialnet->grafo;
-    //puts("cona1");
+    
     struct userdados *ud1=search(socialnet->hashnick, nick1[0], nick1);
-    //puts("cona4");
+    
     struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
-    //puts("cona5");
+    
     if(ud1 == NULL || ud1->user->removed)
     {
         
-        //puts("cona6");
+      
         printf("+ utilizador %s inexistente\n",nick1);
         return ;
 
@@ -162,7 +162,7 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
     //struct User *user1 = ud1->user;
 
     //struct userdados *ud2 = search(socialnet->hashnick, nick2[0],nick2);
-    //puts("cona6");
+   
     if(ud2 == NULL || ud2->user->removed)
     {
         
@@ -206,12 +206,12 @@ void seguir_utilizador(struct SocialNet *socialnet, char nick1[], char nick2[])
 
         if (n == NULL)
         {
-            puts("cona1");
+            
         }
 
         if (vertice2 == NULL)
         {
-            puts("cona2");
+           
         }
 
         n->msg_rcv = vertice2->msg_send;
@@ -325,7 +325,7 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
 
     struct Node *n = grafo->nodes[v->pos];
     
-    puts("conas");
+    
     
     if (n->next_node == NULL)
     {
@@ -396,7 +396,7 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
 bool infor(struct SocialNet *socialnet,struct User *user, FILE *pointer)
 
 {
-    //puts("cona");
+   
     struct Grafo *grafo=socialnet->grafo;
     struct Vertice *v=grafo_get_vertice_by_name(grafo,user->nick);
     
