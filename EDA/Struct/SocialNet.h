@@ -340,7 +340,9 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
         if (n->ver->user->removed)
         {
             printf("%s:%d\n",n->ver->user->nick,n->ver->user->removed);
-            grafo_remove_conection(grafo,v, grafo_get_vertice_by_name(grafo,n->ver->user->nick ));
+            
+            grafo_remove_conection(grafo,v, n->ver);
+            
             grafo_print_conections_at (grafo, 0);
             grafo_print_conections_at (grafo, 1);
             grafo_print_conections_at (grafo, 2);
