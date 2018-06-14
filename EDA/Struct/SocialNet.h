@@ -324,8 +324,9 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
     }
 
     struct Node *n = grafo->nodes[v->pos];
-    
-    
+    //struct userdados *ud1 = search(socialnet->hashnick, u->nick[0], u->nick);
+
+
     
     if (n->next_node == NULL)
     {
@@ -339,16 +340,18 @@ bool read_msg(struct SocialNet *socialnet, struct User *u , FILE *pointer)
 
         if (n->ver->user->removed)
         {
-            grafo_print_conections_at (grafo, 0);
-            grafo_print_conections_at (grafo, 1);
-            grafo_print_conections_at (grafo, 2);
-            grafo_print_conections_at (grafo, 3);
-            printf("%s:%d\n",n->ver->user->nick,n->ver->user->removed);
-            grafo_remove_conection(grafo,v, grafo_get_vertice_by_name(grafo,n->ver->user->nick ));
-            grafo_print_conections_at (grafo, 0);
-            grafo_print_conections_at (grafo, 1);
-            grafo_print_conections_at (grafo, 2);
-            grafo_print_conections_at (grafo, 3);
+            //grafo_print_conections_at (grafo, 0);
+            //grafo_print_conections_at (grafo, 1);
+            //grafo_print_conections_at (grafo, 2);
+            //grafo_print_conections_at (grafo, 3);
+            //printf("%s:%d\n",n->ver->user->nick,n->ver->user->removed);
+            
+            grafo_remove_conection(grafo,v, n->ver);
+            
+            //grafo_print_conections_at (grafo, 0);
+            //grafo_print_conections_at (grafo, 1);
+            //grafo_print_conections_at (grafo, 2);
+            //grafo_print_conections_at (grafo, 3);
 
             printf("utilizador %s desactivado\n",n->ver->user->nick);
             
@@ -382,6 +385,7 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
     
     //grafo_print_conections_at(socialnet->grafo, grafo_get_vertice_by_name(socialnet->grafo,nick)->pos);
 
+    
     struct userdados *ud1=search(socialnet->hashnick, nick[0], nick);
     if(ud1 == NULL)
         {
@@ -390,6 +394,11 @@ void ler_mensagem(struct SocialNet *socialnet, char nick[])
             return;
 
         }
+    if(search(socialnet->hashnick, nick[0], nick)->user->removed)
+    {
+        printf("+ utilizador %s inexistente\n",nick);
+        return;
+    }
 
 
     read_msg(socialnet, ud1->user, socialnet->pointer);

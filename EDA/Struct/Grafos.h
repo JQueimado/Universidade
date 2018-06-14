@@ -398,6 +398,13 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 
 bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
+	
+	/*
+	if(v1 == NULL || v2 == NULL)
+	{
+		return false;
+	}
+	*/
 
 	struct Node *n = grafo->nodes[ v1->pos ];
 	struct Node *p;

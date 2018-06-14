@@ -1208,3 +1208,1226 @@
 + nick n0997 usado previamente
 + nick n0395 usado previamente
 + nick n0700 usado previamente
++ n0100 passou a seguir n0340
++ n0100 passou a seguir n0144
++ n0100 passou a seguir n0529
++ n0100 passou a seguir n0216
++ n0100 passou a seguir n0848
++ n0100 passou a seguir n0668
++ n0100 passou a seguir n0093
++ n0100 passou a seguir n0942
++ n0100 passou a seguir n0961
++ n0100 passou a seguir n1035
++ n0100 passou a seguir n0013
++ utilizador n0482 inexistente
++ n0100 passou a seguir n0185
++ n0100 passou a seguir n0243
++ n0100 passou a seguir n0027
++ n0100 passou a seguir n0317
++ n0100 passou a seguir n0456
++ n0100 passou a seguir n0962
++ n0100 passou a seguir n0220
++ utilizador n0186 inexistente
++ n0100 passou a seguir n0368
++ n0100 passou a seguir n0363
++ n0100 passou a seguir n1032
++ n0100 passou a seguir n1098
++ n0100 passou a seguir n0815
++ n0100 passou a seguir n0693
++ n0100 passou a seguir n0655
++ n0100 passou a seguir n0325
++ n0100 passou a seguir n1062
++ n0100 passou a seguir n0382
++ n0100 passou a seguir n0966
++ n0100 passou a seguir n0055
++ n0100 passou a seguir n0106
++ utilizador n0665 inexistente
++ n0100 passou a seguir n0889
++ n0100 passou a seguir n0603
++ n0100 passou a seguir n0174
++ n0100 passou a seguir n0199
++ n0100 passou a seguir n0354
++ n0100 passou a seguir n0480
++ n0100 passou a seguir n0551
++ n0100 passou a seguir n0060
++ n0100 passou a seguir n0316
++ n0100 passou a seguir n0082
++ utilizador n0836 inexistente
++ n0100 passou a seguir n0628
++ n0100 passou a seguir n0791
++ n0100 passou a seguir n0663
++ n0100 passou a seguir n0081
++ n0100 passou a seguir n0499
++ utilizador n0326 inexistente
++ n0100 passou a seguir n0744
++ n0100 passou a seguir n0959
++ n0100 passou a seguir n0535
++ n0100 passou a seguir n0245
++ n0100 passou a seguir n0064
++ n0100 passou a seguir n1065
++ n0100 passou a seguir n0165
++ n0100 passou a seguir n0776
++ n0100 passou a seguir n0949
++ utilizador n0787 inexistente
++ utilizador n0397 inexistente
++ n0100 passou a seguir n0281
++ n0100 passou a seguir n0943
++ n0100 passou a seguir n0548
++ n0100 passou a seguir n0472
++ n0100 passou a seguir n0172
++ n0100 passou a seguir n0073
++ n0100 passou a seguir n0884
++ n0100 passou a seguir n0858
++ n0100 passou a seguir n0268
++ n0100 passou a seguir n0812
++ n0100 passou a seguir n0203
++ n0100 passou a seguir n0103
++ n0100 passou a seguir n0034
++ n0100 passou a seguir n0625
++ n0100 passou a seguir n0824
++ n0100 passou a seguir n0211
++ n0100 passou a seguir n1015
++ n0100 passou a seguir n1041
++ n0100 passou a seguir n0918
++ n0100 passou a seguir n0890
++ n0100 passou a seguir n1093
++ n0100 passou a seguir n0373
++ n0100 passou a seguir n0683
++ n0100 passou a seguir n0988
++ n0100 passou a seguir n0152
++ n0100 passou a seguir n0387
++ n0100 passou a seguir n0124
++ utilizador n0653 inexistente
++ n0100 passou a seguir n0773
++ n0100 passou a seguir n0606
++ n0100 passou a seguir n0516
++ n0100 passou a seguir n0620
++ n0100 passou a seguir n0100
++ n0100 passou a seguir n0800
++ n0100 passou a seguir n0599
++ n0100 passou a seguir n1000
++ n0100 passou a seguir n0863
++ n0100 passou a seguir n0040
++ n0100 passou a seguir n0852
++ n0100 passou a seguir n0760
++ n0100 passou a seguir n0381
++ n0100 passou a seguir n0255
++ n0100 passou a seguir n0453
++ n0100 passou a seguir n1080
++ n0100 passou a seguir n1081
++ n0100 passou a seguir n1082
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue n1093
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue o limite
++ utilizador n0100 segue n1098
++ utilizador n0100 segue o limite
++ utilizador n0086 inexistente
++ utilizador n0399 inexistente
++ utilizador n0564 inexistente
++ utilizador n0048 inexistente
++ utilizador n0169 inexistente
++ utilizador n0562 inexistente
++ utilizador n0509 inexistente
++ utilizador n0017 inexistente
++ utilizador n0600 inexistente
++ utilizador n0137 inexistente
++ utilizador n0497 inexistente
++ utilizador n0088 inexistente
++ utilizador n0248 inexistente
++ utilizador n0630 inexistente
++ utilizador n0397 inexistente
++ utilizador n0811 inexistente
++ utilizador n0271 inexistente
++ utilizador n0787 inexistente
++ utilizador n0017 inexistente
++ utilizador n0304 inexistente
++ utilizador n0895 inexistente
++ utilizador n0594 inexistente
++ utilizador n0665 inexistente
++ utilizador n0860 inexistente
++ utilizador n0534 inexistente
++ utilizador n0686 inexistente
++ utilizador n0542 inexistente
++ utilizador n0088 inexistente
++ utilizador n0271 inexistente
++ utilizador n0572 inexistente
++ utilizador n0811 inexistente
++ utilizador n0665 inexistente
++ utilizador n0326 inexistente
++ utilizador n0286 inexistente
++ utilizador n0482 inexistente
++ utilizador n0441 inexistente
++ utilizador n0137 inexistente
++ utilizador n0377 inexistente
++ utilizador n0819 inexistente
++ utilizador n0398 inexistente
++ utilizador n0036 inexistente
++ utilizador n0630 inexistente
++ utilizador n0596 inexistente
++ utilizador n0742 inexistente
++ utilizador n0818 inexistente
++ utilizador n0836 inexistente
++ utilizador n0338 inexistente
++ utilizador n0286 inexistente
++ utilizador n0122 inexistente
++ utilizador n0665 inexistente
++ utilizador n0042 inexistente
++ utilizador n0509 inexistente
++ utilizador n0186 inexistente
++ utilizador n0321 inexistente
++ utilizador n0209 inexistente
++ utilizador n0542 inexistente
++ utilizador n0503 inexistente
++ utilizador n0398 inexistente
++ utilizador n0392 inexistente
++ utilizador n0187 inexistente
++ utilizador n0191 inexistente
++ utilizador n0374 inexistente
++ utilizador n0564 inexistente
++ utilizador n0542 inexistente
++ utilizador n0471 inexistente
++ utilizador n0439 inexistente
++ utilizador n0326 inexistente
++ utilizador n0191 inexistente
++ utilizador n0622 inexistente
++ utilizador n0819 inexistente
++ utilizador n0365 inexistente
++ utilizador n0564 inexistente
++ utilizador n0747 inexistente
++ utilizador n0186 inexistente
++ utilizador n0110 inexistente
++ utilizador n0497 inexistente
++ utilizador n0006 inexistente
++ utilizador n0238 inexistente
++ utilizador n0866 inexistente
++ utilizador n0028 inexistente
++ utilizador n0169 inexistente
++ utilizador n0289 inexistente
++ utilizador n0333 inexistente
++ utilizador n0509 inexistente
++ utilizador n0137 inexistente
++ utilizador n0338 inexistente
++ utilizador n0079 inexistente
++ utilizador n0562 inexistente
++ utilizador n0764 inexistente
+mensagem nova de n0013 (Utilizador 13): 1
+mensagens novas de n0027 (Utilizador 27): 1 a 6
+sem mensagens novas de n0034 (Utilizador 34)
+mensagem nova de n0040 (Utilizador 40): 1
+sem mensagens novas de n0055 (Utilizador 55)
+sem mensagens novas de n0060 (Utilizador 60)
+mensagens novas de n0064 (Utilizador 64): 1 a 2
+sem mensagens novas de n0073 (Utilizador 73)
+mensagem nova de n0081 (Utilizador 81): 1
+mensagem nova de n0082 (Utilizador 82): 1
+mensagem nova de n0093 (Utilizador 93): 1
+sem mensagens novas de n0100 (Utilizador 100)
+sem mensagens novas de n0103 (Utilizador 103)
+mensagens novas de n0106 (Utilizador 106): 1 a 2
+sem mensagens novas de n0124 (Utilizador 124)
+mensagens novas de n0144 (Utilizador 144): 1 a 2
+sem mensagens novas de n0152 (Utilizador 152)
+mensagem nova de n0165 (Utilizador 165): 1
+mensagens novas de n0172 (Utilizador 172): 1 a 3
+sem mensagens novas de n0174 (Utilizador 174)
+mensagem nova de n0185 (Utilizador 185): 1
+mensagem nova de n0199 (Utilizador 199): 1
+mensagens novas de n0203 (Utilizador 203): 1 a 2
+mensagens novas de n0211 (Utilizador 211): 1 a 3
+mensagem nova de n0216 (Utilizador 216): 1
+sem mensagens novas de n0220 (Utilizador 220)
+mensagem nova de n0243 (Utilizador 243): 1
+sem mensagens novas de n0245 (Utilizador 245)
+sem mensagens novas de n0255 (Utilizador 255)
+mensagens novas de n0268 (Utilizador 268): 1 a 2
+mensagem nova de n0281 (Utilizador 281): 1
+sem mensagens novas de n0316 (Utilizador 316)
+mensagem nova de n0317 (Utilizador 317): 1
+mensagem nova de n0325 (Utilizador 325): 1
+sem mensagens novas de n0340 (Utilizador 340)
+mensagens novas de n0354 (Utilizador 354): 1 a 2
+sem mensagens novas de n0363 (Utilizador 363)
+sem mensagens novas de n0368 (Utilizador 368)
+sem mensagens novas de n0373 (Utilizador 373)
+mensagem nova de n0381 (Utilizador 381): 1
+sem mensagens novas de n0382 (Utilizador 382)
+mensagens novas de n0387 (Utilizador 387): 1 a 2
+mensagem nova de n0453 (Utilizador 453): 1
+sem mensagens novas de n0456 (Utilizador 456)
+mensagem nova de n0472 (Utilizador 472): 1
+sem mensagens novas de n0480 (Utilizador 480)
+sem mensagens novas de n0499 (Utilizador 499)
+mensagem nova de n0516 (Utilizador 516): 1
+sem mensagens novas de n0529 (Utilizador 529)
+mensagem nova de n0535 (Utilizador 535): 1
+mensagem nova de n0548 (Utilizador 548): 1
+mensagem nova de n0551 (Utilizador 551): 1
+sem mensagens novas de n0599 (Utilizador 599)
+mensagens novas de n0603 (Utilizador 603): 1 a 3
+mensagem nova de n0606 (Utilizador 606): 1
+mensagem nova de n0620 (Utilizador 620): 1
+sem mensagens novas de n0625 (Utilizador 625)
+sem mensagens novas de n0628 (Utilizador 628)
+sem mensagens novas de n0655 (Utilizador 655)
+mensagem nova de n0663 (Utilizador 663): 1
+mensagens novas de n0668 (Utilizador 668): 1 a 2
+sem mensagens novas de n0683 (Utilizador 683)
+mensagens novas de n0693 (Utilizador 693): 1 a 2
+mensagem nova de n0744 (Utilizador 744): 1
+mensagem nova de n0760 (Utilizador 760): 1
+sem mensagens novas de n0773 (Utilizador 773)
+mensagem nova de n0776 (Utilizador 776): 1
+mensagens novas de n0791 (Utilizador 791): 1 a 2
+mensagem nova de n0800 (Utilizador 800): 1
+mensagem nova de n0812 (Utilizador 812): 1
+mensagem nova de n0815 (Utilizador 815): 1
+mensagens novas de n0824 (Utilizador 824): 1 a 2
+mensagens novas de n0848 (Utilizador 848): 1 a 3
+mensagens novas de n0852 (Utilizador 852): 1 a 2
+sem mensagens novas de n0858 (Utilizador 858)
+mensagens novas de n0863 (Utilizador 863): 1 a 2
+sem mensagens novas de n0884 (Utilizador 884)
+sem mensagens novas de n0889 (Utilizador 889)
+sem mensagens novas de n0890 (Utilizador 890)
+mensagem nova de n0918 (Utilizador 918): 1
+sem mensagens novas de n0942 (Utilizador 942)
+sem mensagens novas de n0943 (Utilizador 943)
+mensagem nova de n0949 (Utilizador 949): 1
+sem mensagens novas de n0959 (Utilizador 959)
+mensagens novas de n0961 (Utilizador 961): 1 a 3
+mensagem nova de n0962 (Utilizador 962): 1
+sem mensagens novas de n0966 (Utilizador 966)
+mensagem nova de n0988 (Utilizador 988): 1
+sem mensagens novas de n1000 (Utilizador 1000)
+mensagem nova de n1015 (Utilizador 1015): 1
+sem mensagens novas de n1032 (Utilizador 1032)
+mensagens novas de n1035 (Utilizador 1035): 1 a 4
+mensagens novas de n1041 (Utilizador 1041): 1 a 2
+mensagem nova de n1062 (Utilizador 1062): 1
+mensagens novas de n1065 (Utilizador 1065): 1 a 2
+sem mensagens novas de n1080 (Utilizador 1080)
+sem mensagens novas de n1081 (Utilizador 1081)
+mensagem nova de n1082 (Utilizador 1082): 1
+mensagem nova de n1093 (Utilizador 1093): 1
+sem mensagens novas de n1098 (Utilizador 1098)
+utilizador n0100 (Utilizador 100)
+0 mensagens, 1 seguidores, segue 100 utilizadores
+n0013 (1 lidas)
+n0027 (6 lidas)
+n0034 (0 lidas)
+n0040 (1 lidas)
+n0055 (0 lidas)
+n0060 (0 lidas)
+n0064 (2 lidas)
+n0073 (0 lidas)
+n0081 (1 lidas)
+n0082 (1 lidas)
+n0093 (1 lidas)
+n0100 (0 lidas)
+n0103 (0 lidas)
+n0106 (2 lidas)
+n0124 (0 lidas)
+n0144 (2 lidas)
+n0152 (0 lidas)
+n0165 (1 lidas)
+n0172 (3 lidas)
+n0174 (0 lidas)
+n0185 (1 lidas)
+n0199 (1 lidas)
+n0203 (2 lidas)
+n0211 (3 lidas)
+n0216 (1 lidas)
+n0220 (0 lidas)
+n0243 (1 lidas)
+n0245 (0 lidas)
+n0255 (0 lidas)
+n0268 (2 lidas)
+n0281 (1 lidas)
+n0316 (0 lidas)
+n0317 (1 lidas)
+n0325 (1 lidas)
+n0340 (0 lidas)
+n0354 (2 lidas)
+n0363 (0 lidas)
+n0368 (0 lidas)
+n0373 (0 lidas)
+n0381 (1 lidas)
+n0382 (0 lidas)
+n0387 (2 lidas)
+n0453 (1 lidas)
+n0456 (0 lidas)
+n0472 (1 lidas)
+n0480 (0 lidas)
+n0499 (0 lidas)
+n0516 (1 lidas)
+n0529 (0 lidas)
+n0535 (1 lidas)
+n0548 (1 lidas)
+n0551 (1 lidas)
+n0599 (0 lidas)
+n0603 (3 lidas)
+n0606 (1 lidas)
+n0620 (1 lidas)
+n0625 (0 lidas)
+n0628 (0 lidas)
+n0655 (0 lidas)
+n0663 (1 lidas)
+n0668 (2 lidas)
+n0683 (0 lidas)
+n0693 (2 lidas)
+n0744 (1 lidas)
+n0760 (1 lidas)
+n0773 (0 lidas)
+n0776 (1 lidas)
+n0791 (2 lidas)
+n0800 (1 lidas)
+n0812 (1 lidas)
+n0815 (1 lidas)
+n0824 (2 lidas)
+n0848 (3 lidas)
+n0852 (2 lidas)
+n0858 (0 lidas)
+n0863 (2 lidas)
+n0884 (0 lidas)
+n0889 (0 lidas)
+n0890 (0 lidas)
+n0918 (1 lidas)
+n0942 (0 lidas)
+n0943 (0 lidas)
+n0949 (1 lidas)
+n0959 (0 lidas)
+n0961 (3 lidas)
+n0962 (1 lidas)
+n0966 (0 lidas)
+n0988 (1 lidas)
+n1000 (0 lidas)
+n1015 (1 lidas)
+n1032 (0 lidas)
+n1035 (4 lidas)
+n1041 (2 lidas)
+n1062 (1 lidas)
+n1065 (2 lidas)
+n1080 (0 lidas)
+n1081 (0 lidas)
+n1082 (1 lidas)
+n1093 (1 lidas)
+n1098 (0 lidas)
++ utilizador n0148 inexistente
++ utilizador n0023 inexistente
++ utilizador n0572 inexistente
++ utilizador n0086 inexistente
++ utilizador n0137 inexistente
++ utilizador n0169 inexistente
++ utilizador n0075 inexistente
++ utilizador n0622 inexistente
++ utilizador n0439 inexistente
++ utilizador n0086 inexistente
++ utilizador n0148 inexistente
++ utilizador n0818 inexistente
++ utilizador n0398 inexistente
++ utilizador n0137 inexistente
++ utilizador n0392 inexistente
++ utilizador n0923 inexistente
++ utilizador n0399 inexistente
++ utilizador n0308 inexistente
++ utilizador n0382 removido
++ utilizador n0152 removido
++ utilizador n0663 removido
++ utilizador n0144 removido
++ utilizador n0603 removido
++ utilizador n0325 removido
++ utilizador n0363 removido
++ utilizador n0918 removido
++ utilizador n0368 removido
++ utilizador n1035 removido
+utilizador n0100 (Utilizador 100)
+0 mensagens, 1 seguidores, segue 100 utilizadores
+n0013 (1 lidas)
+n0027 (6 lidas)
+n0034 (0 lidas)
+n0040 (1 lidas)
+n0055 (0 lidas)
+n0060 (0 lidas)
+n0064 (2 lidas)
+n0073 (0 lidas)
+n0081 (1 lidas)
+n0082 (1 lidas)
+n0093 (1 lidas)
+n0100 (0 lidas)
+n0103 (0 lidas)
+n0106 (2 lidas)
+n0124 (0 lidas)
+n0144 (2 lidas)
+n0152 (0 lidas)
+n0165 (1 lidas)
+n0172 (3 lidas)
+n0174 (0 lidas)
+n0185 (1 lidas)
+n0199 (1 lidas)
+n0203 (2 lidas)
+n0211 (3 lidas)
+n0216 (1 lidas)
+n0220 (0 lidas)
+n0243 (1 lidas)
+n0245 (0 lidas)
+n0255 (0 lidas)
+n0268 (2 lidas)
+n0281 (1 lidas)
+n0316 (0 lidas)
+n0317 (1 lidas)
+n0325 (1 lidas)
+n0340 (0 lidas)
+n0354 (2 lidas)
+n0363 (0 lidas)
+n0368 (0 lidas)
+n0373 (0 lidas)
+n0381 (1 lidas)
+n0382 (0 lidas)
+n0387 (2 lidas)
+n0453 (1 lidas)
+n0456 (0 lidas)
+n0472 (1 lidas)
+n0480 (0 lidas)
+n0499 (0 lidas)
+n0516 (1 lidas)
+n0529 (0 lidas)
+n0535 (1 lidas)
+n0548 (1 lidas)
+n0551 (1 lidas)
+n0599 (0 lidas)
+n0603 (3 lidas)
+n0606 (1 lidas)
+n0620 (1 lidas)
+n0625 (0 lidas)
+n0628 (0 lidas)
+n0655 (0 lidas)
+n0663 (1 lidas)
+n0668 (2 lidas)
+n0683 (0 lidas)
+n0693 (2 lidas)
+n0744 (1 lidas)
+n0760 (1 lidas)
+n0773 (0 lidas)
+n0776 (1 lidas)
+n0791 (2 lidas)
+n0800 (1 lidas)
+n0812 (1 lidas)
+n0815 (1 lidas)
+n0824 (2 lidas)
+n0848 (3 lidas)
+n0852 (2 lidas)
+n0858 (0 lidas)
+n0863 (2 lidas)
+n0884 (0 lidas)
+n0889 (0 lidas)
+n0890 (0 lidas)
+n0918 (1 lidas)
+n0942 (0 lidas)
+n0943 (0 lidas)
+n0949 (1 lidas)
+n0959 (0 lidas)
+n0961 (3 lidas)
+n0962 (1 lidas)
+n0966 (0 lidas)
+n0988 (1 lidas)
+n1000 (0 lidas)
+n1015 (1 lidas)
+n1032 (0 lidas)
+n1035 (4 lidas)
+n1041 (2 lidas)
+n1062 (1 lidas)
+n1065 (2 lidas)
+n1080 (0 lidas)
+n1081 (0 lidas)
+n1082 (1 lidas)
+n1093 (1 lidas)
+n1098 (0 lidas)
+mensagens novas de n0013 (Utilizador 13): 2 a 3
+mensagem nova de n0027 (Utilizador 27): 7
+sem mensagens novas de n0034 (Utilizador 34)
+sem mensagens novas de n0040 (Utilizador 40)
+sem mensagens novas de n0055 (Utilizador 55)
+sem mensagens novas de n0060 (Utilizador 60)
+sem mensagens novas de n0064 (Utilizador 64)
+sem mensagens novas de n0073 (Utilizador 73)
+sem mensagens novas de n0081 (Utilizador 81)
+sem mensagens novas de n0082 (Utilizador 82)
+sem mensagens novas de n0093 (Utilizador 93)
+sem mensagens novas de n0100 (Utilizador 100)
+mensagens novas de n0103 (Utilizador 103): 1 a 2
+sem mensagens novas de n0106 (Utilizador 106)
+sem mensagens novas de n0124 (Utilizador 124)
+utilizador n0144 desactivado
+utilizador n0152 desactivado
+sem mensagens novas de n0165 (Utilizador 165)
+sem mensagens novas de n0172 (Utilizador 172)
+mensagem nova de n0174 (Utilizador 174): 1
+sem mensagens novas de n0185 (Utilizador 185)
+sem mensagens novas de n0199 (Utilizador 199)
+sem mensagens novas de n0203 (Utilizador 203)
+sem mensagens novas de n0211 (Utilizador 211)
+sem mensagens novas de n0216 (Utilizador 216)
+sem mensagens novas de n0220 (Utilizador 220)
+mensagem nova de n0243 (Utilizador 243): 2
+sem mensagens novas de n0245 (Utilizador 245)
+sem mensagens novas de n0255 (Utilizador 255)
+sem mensagens novas de n0268 (Utilizador 268)
+mensagem nova de n0281 (Utilizador 281): 2
+mensagem nova de n0316 (Utilizador 316): 1
+sem mensagens novas de n0317 (Utilizador 317)
+utilizador n0325 desactivado
+sem mensagens novas de n0340 (Utilizador 340)
+sem mensagens novas de n0354 (Utilizador 354)
+utilizador n0363 desactivado
+utilizador n0368 desactivado
+mensagem nova de n0373 (Utilizador 373): 1
+sem mensagens novas de n0381 (Utilizador 381)
+utilizador n0382 desactivado
+sem mensagens novas de n0387 (Utilizador 387)
+mensagem nova de n0453 (Utilizador 453): 2
+sem mensagens novas de n0456 (Utilizador 456)
+sem mensagens novas de n0472 (Utilizador 472)
+mensagem nova de n0480 (Utilizador 480): 1
+sem mensagens novas de n0499 (Utilizador 499)
+sem mensagens novas de n0516 (Utilizador 516)
+sem mensagens novas de n0529 (Utilizador 529)
+sem mensagens novas de n0535 (Utilizador 535)
+sem mensagens novas de n0548 (Utilizador 548)
+sem mensagens novas de n0551 (Utilizador 551)
+sem mensagens novas de n0599 (Utilizador 599)
+utilizador n0603 desactivado
+sem mensagens novas de n0606 (Utilizador 606)
+sem mensagens novas de n0620 (Utilizador 620)
+sem mensagens novas de n0625 (Utilizador 625)
+sem mensagens novas de n0628 (Utilizador 628)
+sem mensagens novas de n0655 (Utilizador 655)
+utilizador n0663 desactivado
+sem mensagens novas de n0668 (Utilizador 668)
+sem mensagens novas de n0683 (Utilizador 683)
+sem mensagens novas de n0693 (Utilizador 693)
+sem mensagens novas de n0744 (Utilizador 744)
+sem mensagens novas de n0760 (Utilizador 760)
+sem mensagens novas de n0773 (Utilizador 773)
+sem mensagens novas de n0776 (Utilizador 776)
+sem mensagens novas de n0791 (Utilizador 791)
+sem mensagens novas de n0800 (Utilizador 800)
+mensagem nova de n0812 (Utilizador 812): 2
+sem mensagens novas de n0815 (Utilizador 815)
+sem mensagens novas de n0824 (Utilizador 824)
+sem mensagens novas de n0848 (Utilizador 848)
+sem mensagens novas de n0852 (Utilizador 852)
+sem mensagens novas de n0858 (Utilizador 858)
+sem mensagens novas de n0863 (Utilizador 863)
+sem mensagens novas de n0884 (Utilizador 884)
+sem mensagens novas de n0889 (Utilizador 889)
+sem mensagens novas de n0890 (Utilizador 890)
+utilizador n0918 desactivado
+sem mensagens novas de n0942 (Utilizador 942)
+sem mensagens novas de n0943 (Utilizador 943)
+sem mensagens novas de n0949 (Utilizador 949)
+sem mensagens novas de n0959 (Utilizador 959)
+sem mensagens novas de n0961 (Utilizador 961)
+mensagem nova de n0962 (Utilizador 962): 2
+sem mensagens novas de n0966 (Utilizador 966)
+sem mensagens novas de n0988 (Utilizador 988)
+sem mensagens novas de n1000 (Utilizador 1000)
+sem mensagens novas de n1015 (Utilizador 1015)
+sem mensagens novas de n1032 (Utilizador 1032)
+utilizador n1035 desactivado
+sem mensagens novas de n1041 (Utilizador 1041)
+sem mensagens novas de n1062 (Utilizador 1062)
+sem mensagens novas de n1065 (Utilizador 1065)
+sem mensagens novas de n1080 (Utilizador 1080)
+sem mensagens novas de n1081 (Utilizador 1081)
+sem mensagens novas de n1082 (Utilizador 1082)
+sem mensagens novas de n1093 (Utilizador 1093)
+sem mensagens novas de n1098 (Utilizador 1098)
+utilizador n0100 (Utilizador 100)
+0 mensagens, 1 seguidores, segue 90 utilizadores
+n0013 (3 lidas)
+n0027 (7 lidas)
+n0034 (0 lidas)
+n0040 (1 lidas)
+n0055 (0 lidas)
+n0060 (0 lidas)
+n0064 (2 lidas)
+n0073 (0 lidas)
+n0081 (1 lidas)
+n0082 (1 lidas)
+n0093 (1 lidas)
+n0100 (0 lidas)
+n0103 (2 lidas)
+n0106 (2 lidas)
+n0124 (0 lidas)
+n0165 (1 lidas)
+n0172 (3 lidas)
+n0174 (1 lidas)
+n0185 (1 lidas)
+n0199 (1 lidas)
+n0203 (2 lidas)
+n0211 (3 lidas)
+n0216 (1 lidas)
+n0220 (0 lidas)
+n0243 (2 lidas)
+n0245 (0 lidas)
+n0255 (0 lidas)
+n0268 (2 lidas)
+n0281 (2 lidas)
+n0316 (1 lidas)
+n0317 (1 lidas)
+n0340 (0 lidas)
+n0354 (2 lidas)
+n0373 (1 lidas)
+n0381 (1 lidas)
+n0387 (2 lidas)
+n0453 (2 lidas)
+n0456 (0 lidas)
+n0472 (1 lidas)
+n0480 (1 lidas)
+n0499 (0 lidas)
+n0516 (1 lidas)
+n0529 (0 lidas)
+n0535 (1 lidas)
+n0548 (1 lidas)
+n0551 (1 lidas)
+n0599 (0 lidas)
+n0606 (1 lidas)
+n0620 (1 lidas)
+n0625 (0 lidas)
+n0628 (0 lidas)
+n0655 (0 lidas)
+n0668 (2 lidas)
+n0683 (0 lidas)
+n0693 (2 lidas)
+n0744 (1 lidas)
+n0760 (1 lidas)
+n0773 (0 lidas)
+n0776 (1 lidas)
+n0791 (2 lidas)
+n0800 (1 lidas)
+n0812 (2 lidas)
+n0815 (1 lidas)
+n0824 (2 lidas)
+n0848 (3 lidas)
+n0852 (2 lidas)
+n0858 (0 lidas)
+n0863 (2 lidas)
+n0884 (0 lidas)
+n0889 (0 lidas)
+n0890 (0 lidas)
+n0942 (0 lidas)
+n0943 (0 lidas)
+n0949 (1 lidas)
+n0959 (0 lidas)
+n0961 (3 lidas)
+n0962 (2 lidas)
+n0966 (0 lidas)
+n0988 (1 lidas)
+n1000 (0 lidas)
+n1015 (1 lidas)
+n1032 (0 lidas)
+n1041 (2 lidas)
+n1062 (1 lidas)
+n1065 (2 lidas)
+n1080 (0 lidas)
+n1081 (0 lidas)
+n1082 (1 lidas)
+n1093 (1 lidas)
+n1098 (0 lidas)
++ n0598 passou a seguir n1001
++ utilizador n0603 inexistente
++ utilizador n0304 inexistente
++ n0598 passou a seguir n0919
++ n0598 passou a seguir n0150
++ n0598 passou a seguir n1030
++ utilizador n0398 inexistente
++ n0598 passou a seguir n0965
++ utilizador n0545 inexistente
++ n0598 passou a seguir n0199
++ n0528 passou a seguir n0815
++ n0528 passou a seguir n0731
++ n0528 passou a seguir n0456
++ n0528 passou a seguir n0114
++ n0528 passou a seguir n0245
++ utilizador n0787 inexistente
++ n0528 passou a seguir n0487
++ n0528 passou a seguir n0520
++ n0528 passou a seguir n0989
++ n0528 passou a seguir n0539
++ n0733 passou a seguir n0772
++ n0733 passou a seguir n0082
++ n0733 passou a seguir n0875
++ n0733 passou a seguir n0768
++ n0733 passou a seguir n0388
++ n0733 passou a seguir n0093
++ n0733 passou a seguir n0192
++ n0733 passou a seguir n0078
++ n0733 passou a seguir n0132
++ n0733 passou a seguir n0713
++ n0040 passou a seguir n0670
++ n0040 passou a seguir n0387
++ n0040 passou a seguir n0556
++ n0040 passou a seguir n0673
++ n0040 passou a seguir n1088
++ n0040 passou a seguir n0406
++ n0040 passou a seguir n0026
++ n0040 passou a seguir n0943
++ utilizador n0534 inexistente
++ n0040 passou a seguir n0076
++ n0167 passou a seguir n0234
++ n0167 passou a seguir n0172
++ n0167 passou a seguir n1032
++ n0167 passou a seguir n0121
++ n0167 passou a seguir n0650
++ n0167 passou a seguir n0807
++ n0167 passou a seguir n0492
++ n0167 passou a seguir n0135
++ n0167 passou a seguir n0260
++ n0167 passou a seguir n0947
++ n0879 passou a seguir n0716
++ n0879 passou a seguir n0587
++ utilizador n0152 inexistente
++ n0879 passou a seguir n0147
++ n0879 passou a seguir n0126
++ n0879 passou a seguir n0196
++ n0879 passou a seguir n0320
++ n0879 passou a seguir n0728
++ n0879 passou a seguir n0280
++ n0879 passou a seguir n0752
++ utilizador n0764 inexistente
++ n0369 passou a seguir n0371
++ n0369 passou a seguir n0116
++ n0369 passou a seguir n0310
++ n0369 passou a seguir n0452
++ n0369 passou a seguir n0943
++ n0369 passou a seguir n0129
++ n0369 passou a seguir n0394
++ n0369 passou a seguir n0335
++ n0369 passou a seguir n0846
++ n0924 passou a seguir n0061
++ n0924 passou a seguir n0090
++ n0924 passou a seguir n0190
++ n0924 passou a seguir n0502
++ utilizador n0895 inexistente
++ n0924 passou a seguir n0803
++ n0924 passou a seguir n0978
++ n0924 passou a seguir n0263
++ utilizador n0747 inexistente
++ n0924 passou a seguir n0030
++ utilizador n0596 inexistente
++ n0077 passou a seguir n0172
++ n0077 passou a seguir n0800
++ n0077 passou a seguir n0565
++ n0077 passou a seguir n0504
++ n0077 passou a seguir n0691
++ n0077 passou a seguir n0313
++ n0077 passou a seguir n0857
++ n0077 passou a seguir n0149
++ n0077 passou a seguir n0419
++ n0628 passou a seguir n0303
++ utilizador n0764 inexistente
++ n0628 passou a seguir n0682
++ n0628 passou a seguir n0146
++ n0628 passou a seguir n0898
++ n0628 passou a seguir n0786
++ n0628 passou a seguir n1022
++ n0628 passou a seguir n0739
++ n0628 passou a seguir n0062
++ n0628 passou a seguir n0107
++ utilizador n0737 inexistente
++ utilizador n0737 inexistente
++ utilizador n0747 inexistente
++ utilizador n0787 inexistente
++ utilizador n0392 inexistente
+utilizador n0598 (Utilizador 598)
+0 mensagens, 0 seguidores, segue 6 utilizadores
+n0150 (1 lidas)
+n0199 (1 lidas)
+n0919 (1 lidas)
+n0965 (0 lidas)
+n1001 (0 lidas)
+n1030 (0 lidas)
+sem mensagens novas de n0150 (Utilizador 150)
+mensagens novas de n0199 (Utilizador 199): 2 a 4
+sem mensagens novas de n0919 (Utilizador 919)
+mensagem nova de n0965 (Utilizador 965): 1
+sem mensagens novas de n1001 (Utilizador 1001)
+sem mensagens novas de n1030 (Utilizador 1030)
+utilizador n0528 (Utilizador 528)
+0 mensagens, 0 seguidores, segue 9 utilizadores
+n0114 (4 lidas)
+n0245 (0 lidas)
+n0456 (0 lidas)
+n0487 (2 lidas)
+n0520 (1 lidas)
+n0539 (0 lidas)
+n0731 (0 lidas)
+n0815 (1 lidas)
+n0989 (0 lidas)
+sem mensagens novas de n0114 (Utilizador 114)
+sem mensagens novas de n0245 (Utilizador 245)
+mensagem nova de n0456 (Utilizador 456): 1
+sem mensagens novas de n0487 (Utilizador 487)
+sem mensagens novas de n0520 (Utilizador 520)
+sem mensagens novas de n0539 (Utilizador 539)
+sem mensagens novas de n0731 (Utilizador 731)
+mensagem nova de n0815 (Utilizador 815): 2
+mensagem nova de n0989 (Utilizador 989): 1
+utilizador n0733 (Utilizador 733)
+0 mensagens, 0 seguidores, segue 10 utilizadores
+n0078 (1 lidas)
+n0082 (1 lidas)
+n0093 (1 lidas)
+n0132 (0 lidas)
+n0192 (1 lidas)
+n0388 (0 lidas)
+n0713 (0 lidas)
+n0768 (0 lidas)
+n0772 (1 lidas)
+n0875 (1 lidas)
+mensagens novas de n0078 (Utilizador 78): 2 a 3
+sem mensagens novas de n0082 (Utilizador 82)
+sem mensagens novas de n0093 (Utilizador 93)
+sem mensagens novas de n0132 (Utilizador 132)
+mensagem nova de n0192 (Utilizador 192): 2
+sem mensagens novas de n0388 (Utilizador 388)
+sem mensagens novas de n0713 (Utilizador 713)
+sem mensagens novas de n0768 (Utilizador 768)
+mensagens novas de n0772 (Utilizador 772): 2 a 4
+sem mensagens novas de n0875 (Utilizador 875)
+utilizador n0040 (Utilizador 40)
+1 mensagens, 1 seguidores, segue 9 utilizadores
+n0026 (1 lidas)
+n0076 (3 lidas)
+n0387 (2 lidas)
+n0406 (1 lidas)
+n0556 (1 lidas)
+n0670 (1 lidas)
+n0673 (1 lidas)
+n0943 (0 lidas)
+n1088 (4 lidas)
+mensagens novas de n0026 (Utilizador 26): 2 a 4
+mensagem nova de n0076 (Utilizador 76): 4
+mensagens novas de n0387 (Utilizador 387): 3 a 4
+mensagem nova de n0406 (Utilizador 406): 2
+sem mensagens novas de n0556 (Utilizador 556)
+sem mensagens novas de n0670 (Utilizador 670)
+mensagem nova de n0673 (Utilizador 673): 2
+mensagem nova de n0943 (Utilizador 943): 1
+sem mensagens novas de n1088 (Utilizador 1088)
+utilizador n0167 (Utilizador 167)
+0 mensagens, 0 seguidores, segue 10 utilizadores
+n0121 (1 lidas)
+n0135 (0 lidas)
+n0172 (3 lidas)
+n0234 (0 lidas)
+n0260 (3 lidas)
+n0492 (0 lidas)
+n0650 (1 lidas)
+n0807 (2 lidas)
+n0947 (0 lidas)
+n1032 (0 lidas)
+sem mensagens novas de n0121 (Utilizador 121)
+mensagem nova de n0135 (Utilizador 135): 1
+sem mensagens novas de n0172 (Utilizador 172)
+sem mensagens novas de n0234 (Utilizador 234)
+mensagens novas de n0260 (Utilizador 260): 4 a 5
+mensagem nova de n0492 (Utilizador 492): 1
+mensagens novas de n0650 (Utilizador 650): 2 a 3
+sem mensagens novas de n0807 (Utilizador 807)
+sem mensagens novas de n0947 (Utilizador 947)
+sem mensagens novas de n1032 (Utilizador 1032)
+utilizador n0879 (Utilizador 879)
+0 mensagens, 0 seguidores, segue 9 utilizadores
+n0126 (0 lidas)
+n0147 (1 lidas)
+n0196 (1 lidas)
+n0280 (5 lidas)
+n0320 (0 lidas)
+n0587 (1 lidas)
+n0716 (0 lidas)
+n0728 (2 lidas)
+n0752 (1 lidas)
+mensagens novas de n0126 (Utilizador 126): 1 a 2
+sem mensagens novas de n0147 (Utilizador 147)
+sem mensagens novas de n0196 (Utilizador 196)
+sem mensagens novas de n0280 (Utilizador 280)
+mensagens novas de n0320 (Utilizador 320): 1 a 2
+mensagem nova de n0587 (Utilizador 587): 2
+sem mensagens novas de n0716 (Utilizador 716)
+sem mensagens novas de n0728 (Utilizador 728)
+mensagens novas de n0752 (Utilizador 752): 2 a 4
+utilizador n0369 (Utilizador 369)
+0 mensagens, 0 seguidores, segue 9 utilizadores
+n0116 (0 lidas)
+n0129 (0 lidas)
+n0310 (1 lidas)
+n0335 (0 lidas)
+n0371 (0 lidas)
+n0394 (2 lidas)
+n0452 (1 lidas)
+n0846 (1 lidas)
+n0943 (0 lidas)
+sem mensagens novas de n0116 (Utilizador 116)
+sem mensagens novas de n0129 (Utilizador 129)
+mensagem nova de n0310 (Utilizador 310): 2
+mensagem nova de n0335 (Utilizador 335): 1
+sem mensagens novas de n0371 (Utilizador 371)
+sem mensagens novas de n0394 (Utilizador 394)
+sem mensagens novas de n0452 (Utilizador 452)
+sem mensagens novas de n0846 (Utilizador 846)
+mensagem nova de n0943 (Utilizador 943): 1
+utilizador n0924 (Utilizador 924)
+2 mensagens, 0 seguidores, segue 8 utilizadores
+n0030 (0 lidas)
+n0061 (1 lidas)
+n0090 (2 lidas)
+n0190 (0 lidas)
+n0263 (4 lidas)
+n0502 (2 lidas)
+n0803 (2 lidas)
+n0978 (0 lidas)
+mensagem nova de n0030 (Utilizador 30): 1
+sem mensagens novas de n0061 (Utilizador 61)
+mensagem nova de n0090 (Utilizador 90): 3
+sem mensagens novas de n0190 (Utilizador 190)
+sem mensagens novas de n0263 (Utilizador 263)
+sem mensagens novas de n0502 (Utilizador 502)
+mensagem nova de n0803 (Utilizador 803): 3
+mensagens novas de n0978 (Utilizador 978): 1 a 2
+utilizador n0077 (Utilizador 77)
+1 mensagens, 0 seguidores, segue 9 utilizadores
+n0149 (0 lidas)
+n0172 (3 lidas)
+n0313 (1 lidas)
+n0419 (0 lidas)
+n0504 (2 lidas)
+n0565 (0 lidas)
+n0691 (2 lidas)
+n0800 (1 lidas)
+n0857 (0 lidas)
+sem mensagens novas de n0149 (Utilizador 149)
+sem mensagens novas de n0172 (Utilizador 172)
+sem mensagens novas de n0313 (Utilizador 313)
+sem mensagens novas de n0419 (Utilizador 419)
+sem mensagens novas de n0504 (Utilizador 504)
+sem mensagens novas de n0565 (Utilizador 565)
+sem mensagens novas de n0691 (Utilizador 691)
+sem mensagens novas de n0800 (Utilizador 800)
+sem mensagens novas de n0857 (Utilizador 857)
+utilizador n0628 (Utilizador 628)
+0 mensagens, 1 seguidores, segue 9 utilizadores
+n0062 (0 lidas)
+n0107 (1 lidas)
+n0146 (1 lidas)
+n0303 (2 lidas)
+n0682 (1 lidas)
+n0739 (0 lidas)
+n0786 (0 lidas)
+n0898 (1 lidas)
+n1022 (2 lidas)
+mensagem nova de n0062 (Utilizador 62): 1
+sem mensagens novas de n0107 (Utilizador 107)
+sem mensagens novas de n0146 (Utilizador 146)
+mensagem nova de n0303 (Utilizador 303): 3
+mensagem nova de n0682 (Utilizador 682): 2
+mensagem nova de n0739 (Utilizador 739): 1
+sem mensagens novas de n0786 (Utilizador 786)
+sem mensagens novas de n0898 (Utilizador 898)
+sem mensagens novas de n1022 (Utilizador 1022)
++ utilizador n0737 inexistente
++ utilizador n0737 inexistente
+sem mensagens novas de n0013 (Utilizador 13)
+sem mensagens novas de n0027 (Utilizador 27)
+sem mensagens novas de n0034 (Utilizador 34)
+sem mensagens novas de n0040 (Utilizador 40)
+sem mensagens novas de n0055 (Utilizador 55)
+sem mensagens novas de n0060 (Utilizador 60)
+sem mensagens novas de n0064 (Utilizador 64)
+sem mensagens novas de n0073 (Utilizador 73)
+sem mensagens novas de n0081 (Utilizador 81)
+sem mensagens novas de n0082 (Utilizador 82)
+sem mensagens novas de n0093 (Utilizador 93)
+sem mensagens novas de n0100 (Utilizador 100)
+sem mensagens novas de n0103 (Utilizador 103)
+sem mensagens novas de n0106 (Utilizador 106)
+sem mensagens novas de n0124 (Utilizador 124)
+sem mensagens novas de n0165 (Utilizador 165)
+sem mensagens novas de n0172 (Utilizador 172)
+sem mensagens novas de n0174 (Utilizador 174)
+sem mensagens novas de n0185 (Utilizador 185)
+mensagens novas de n0199 (Utilizador 199): 2 a 4
+sem mensagens novas de n0203 (Utilizador 203)
+sem mensagens novas de n0211 (Utilizador 211)
+sem mensagens novas de n0216 (Utilizador 216)
+sem mensagens novas de n0220 (Utilizador 220)
+sem mensagens novas de n0243 (Utilizador 243)
+sem mensagens novas de n0245 (Utilizador 245)
+sem mensagens novas de n0255 (Utilizador 255)
+sem mensagens novas de n0268 (Utilizador 268)
+sem mensagens novas de n0281 (Utilizador 281)
+sem mensagens novas de n0316 (Utilizador 316)
+sem mensagens novas de n0317 (Utilizador 317)
+sem mensagens novas de n0340 (Utilizador 340)
+sem mensagens novas de n0354 (Utilizador 354)
+sem mensagens novas de n0373 (Utilizador 373)
+sem mensagens novas de n0381 (Utilizador 381)
+mensagens novas de n0387 (Utilizador 387): 3 a 4
+sem mensagens novas de n0453 (Utilizador 453)
+mensagem nova de n0456 (Utilizador 456): 1
+sem mensagens novas de n0472 (Utilizador 472)
+sem mensagens novas de n0480 (Utilizador 480)
+sem mensagens novas de n0499 (Utilizador 499)
+sem mensagens novas de n0516 (Utilizador 516)
+sem mensagens novas de n0529 (Utilizador 529)
+sem mensagens novas de n0535 (Utilizador 535)
+sem mensagens novas de n0548 (Utilizador 548)
+sem mensagens novas de n0551 (Utilizador 551)
+sem mensagens novas de n0599 (Utilizador 599)
+sem mensagens novas de n0606 (Utilizador 606)
+sem mensagens novas de n0620 (Utilizador 620)
+sem mensagens novas de n0625 (Utilizador 625)
+sem mensagens novas de n0628 (Utilizador 628)
+sem mensagens novas de n0655 (Utilizador 655)
+sem mensagens novas de n0668 (Utilizador 668)
+sem mensagens novas de n0683 (Utilizador 683)
+sem mensagens novas de n0693 (Utilizador 693)
+sem mensagens novas de n0744 (Utilizador 744)
+sem mensagens novas de n0760 (Utilizador 760)
+sem mensagens novas de n0773 (Utilizador 773)
+sem mensagens novas de n0776 (Utilizador 776)
+sem mensagens novas de n0791 (Utilizador 791)
+sem mensagens novas de n0800 (Utilizador 800)
+sem mensagens novas de n0812 (Utilizador 812)
+mensagem nova de n0815 (Utilizador 815): 2
+sem mensagens novas de n0824 (Utilizador 824)
+sem mensagens novas de n0848 (Utilizador 848)
+sem mensagens novas de n0852 (Utilizador 852)
+sem mensagens novas de n0858 (Utilizador 858)
+sem mensagens novas de n0863 (Utilizador 863)
+sem mensagens novas de n0884 (Utilizador 884)
+sem mensagens novas de n0889 (Utilizador 889)
+sem mensagens novas de n0890 (Utilizador 890)
+sem mensagens novas de n0942 (Utilizador 942)
+mensagem nova de n0943 (Utilizador 943): 1
+sem mensagens novas de n0949 (Utilizador 949)
+sem mensagens novas de n0959 (Utilizador 959)
+sem mensagens novas de n0961 (Utilizador 961)
+sem mensagens novas de n0962 (Utilizador 962)
+sem mensagens novas de n0966 (Utilizador 966)
+sem mensagens novas de n0988 (Utilizador 988)
+sem mensagens novas de n1000 (Utilizador 1000)
+sem mensagens novas de n1015 (Utilizador 1015)
+sem mensagens novas de n1032 (Utilizador 1032)
+sem mensagens novas de n1041 (Utilizador 1041)
+sem mensagens novas de n1062 (Utilizador 1062)
+sem mensagens novas de n1065 (Utilizador 1065)
+sem mensagens novas de n1080 (Utilizador 1080)
+sem mensagens novas de n1081 (Utilizador 1081)
+sem mensagens novas de n1082 (Utilizador 1082)
+sem mensagens novas de n1093 (Utilizador 1093)
+sem mensagens novas de n1098 (Utilizador 1098)
+utilizador n0100 (Utilizador 100)
+0 mensagens, 1 seguidores, segue 90 utilizadores
+n0013 (3 lidas)
+n0027 (7 lidas)
+n0034 (0 lidas)
+n0040 (1 lidas)
+n0055 (0 lidas)
+n0060 (0 lidas)
+n0064 (2 lidas)
+n0073 (0 lidas)
+n0081 (1 lidas)
+n0082 (1 lidas)
+n0093 (1 lidas)
+n0100 (0 lidas)
+n0103 (2 lidas)
+n0106 (2 lidas)
+n0124 (0 lidas)
+n0165 (1 lidas)
+n0172 (3 lidas)
+n0174 (1 lidas)
+n0185 (1 lidas)
+n0199 (4 lidas)
+n0203 (2 lidas)
+n0211 (3 lidas)
+n0216 (1 lidas)
+n0220 (0 lidas)
+n0243 (2 lidas)
+n0245 (0 lidas)
+n0255 (0 lidas)
+n0268 (2 lidas)
+n0281 (2 lidas)
+n0316 (1 lidas)
+n0317 (1 lidas)
+n0340 (0 lidas)
+n0354 (2 lidas)
+n0373 (1 lidas)
+n0381 (1 lidas)
+n0387 (4 lidas)
+n0453 (2 lidas)
+n0456 (1 lidas)
+n0472 (1 lidas)
+n0480 (1 lidas)
+n0499 (0 lidas)
+n0516 (1 lidas)
+n0529 (0 lidas)
+n0535 (1 lidas)
+n0548 (1 lidas)
+n0551 (1 lidas)
+n0599 (0 lidas)
+n0606 (1 lidas)
+n0620 (1 lidas)
+n0625 (0 lidas)
+n0628 (0 lidas)
+n0655 (0 lidas)
+n0668 (2 lidas)
+n0683 (0 lidas)
+n0693 (2 lidas)
+n0744 (1 lidas)
+n0760 (1 lidas)
+n0773 (0 lidas)
+n0776 (1 lidas)
+n0791 (2 lidas)
+n0800 (1 lidas)
+n0812 (2 lidas)
+n0815 (2 lidas)
+n0824 (2 lidas)
+n0848 (3 lidas)
+n0852 (2 lidas)
+n0858 (0 lidas)
+n0863 (2 lidas)
+n0884 (0 lidas)
+n0889 (0 lidas)
+n0890 (0 lidas)
+n0942 (0 lidas)
+n0943 (1 lidas)
+n0949 (1 lidas)
+n0959 (0 lidas)
+n0961 (3 lidas)
+n0962 (2 lidas)
+n0966 (0 lidas)
+n0988 (1 lidas)
+n1000 (0 lidas)
+n1015 (1 lidas)
+n1032 (0 lidas)
+n1041 (2 lidas)
+n1062 (1 lidas)
+n1065 (2 lidas)
+n1080 (0 lidas)
+n1081 (0 lidas)
+n1082 (1 lidas)
+n1093 (1 lidas)
+n1098 (0 lidas)
