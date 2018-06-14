@@ -1,0 +1,101 @@
++ utilizador zero7 criado
++ nick zero7 usado previamente
++ utilizador Zero7 criado
++ utilizador MrPym criado
++ utilizador 00007 inexistente
++ utilizador Zero7 removido
++ utilizador Zero7 inexistente
++ utilizador 00007 inexistente
++ utilizador Zero7 inexistente
++ utilizador Zero7 inexistente
++ zero7 passou a seguir MrPym
++ utilizador zero7 segue MrPym
++ zero7 passou a seguir zero7
++ zero7 deixou de seguir zero7
++ utilizador zero7 nao segue zero7
++ utilizador Zero7 inexistente
++ utilizador Zero7 inexistente
++ utilizador 00007 inexistente
+mensagem nova de MrPym (A Perfect Spy): 1
+sem mensagens novas de MrPym (A Perfect Spy)
++ utilizador MrPym sem seguidos
+utilizador zero7 (James Bond)
+2 mensagens, 0 seguidores, segue 1 utilizadores
+MrPym (1 lidas)
+utilizador MrPym (A Perfect Spy)
+1 mensagens, 1 seguidores, segue 0 utilizadores
++ utilizador 00007 inexistente
++ utilizador Zero7 inexistente
++ nick Zero7 usado previamente
++ utilizador zsq4r criado
++ MrPym passou a seguir zsq4r
+utilizador MrPym (A Perfect Spy)
+1 mensagens, 1 seguidores, segue 1 utilizadores
+zsq4r (1 lidas)
++ zsq4r passou a seguir zero7
++ zero7 passou a seguir zero7
++ zero7 passou a seguir zsq4r
+utilizador zero7 (James Bond)
+2 mensagens, 2 seguidores, segue 3 utilizadores
+MrPym (1 lidas)
+zero7 (2 lidas)
+zsq4r (1 lidas)
+sem mensagens novas de MrPym (A Perfect Spy)
+mensagem nova de zero7 (James Bond): 3
+mensagens novas de zsq4r (Pseu Donym): 2 a 3
++ utilizador zeze7 criado
++ zero7 passou a seguir zeze7
++ utilizador zeze7 removido
+utilizador zero7 (James Bond)
+3 mensagens, 2 seguidores, segue 4 utilizadores
+MrPym (1 lidas)
+zero7 (3 lidas)
+zeze7 (0 lidas)
+zsq4r (3 lidas)
+sem mensagens novas de MrPym (A Perfect Spy)
+sem mensagens novas de zero7 (James Bond)
+user MrPym folows: 
+zsq4r
+user Zero7 folows: 
+None
+user zero7 folows: 
+MrPym
+zero7
+zeze7
+zsq4r
+user zsq4r folows: 
+zero7
+zeze7:1
+user MrPym folows: 
+zsq4r
+user Zero7 folows: 
+None
+user zero7 folows: 
+MrPym
+zero7
+zeze7
+zsq4r
+user zsq4r folows: 
+zero7
+utilizador zeze7 desactivado
+sem mensagens novas de zsq4r (Pseu Donym)
+utilizador zero7 (James Bond)
+3 mensagens, 2 seguidores, segue 4 utilizadores
+MrPym (1 lidas)
+zero7 (3 lidas)
+zeze7 (0 lidas)
+zsq4r (3 lidas)
++ MrPym passou a seguir zero7
++ MrPym deixou de seguir zero7
++ MrPym passou a seguir zero7
+utilizador MrPym (A Perfect Spy)
+1 mensagens, 1 seguidores, segue 2 utilizadores
+zero7 (4 lidas)
+zsq4r (1 lidas)
++ utilizador AlecS criado
++ MrPym passou a seguir AlecS
+utilizador AlecS (He Who Came from the Cold)
+0 mensagens, 1 seguidores, segue 0 utilizadores
+mensagem nova de AlecS (He Who Came from the Cold): 1
+sem mensagens novas de zero7 (James Bond)
+mensagens novas de zsq4r (Pseu Donym): 2 a 3

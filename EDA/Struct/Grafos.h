@@ -426,8 +426,6 @@ bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vert
 }
 
 	return ERROR;
-
-     
 }
 
 int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
