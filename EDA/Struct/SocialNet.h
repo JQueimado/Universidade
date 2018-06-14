@@ -239,7 +239,7 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
 
         }
     //struct User *user1 = ud1->user;
-    else if(search(socialnet->hashnick, nick1[0], nick1)->user->removed)
+    else if(ud1->user->removed)
     {
         
     
@@ -256,7 +256,7 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
 
          }
 
-    else if(search(socialnet->hashnick, nick2[0],nick2)->user->removed)
+    else if(ud2->user->removed)
     {
         //struct User *user2 = ud2->user;
         
@@ -281,7 +281,6 @@ void deixarseguir_utilizador(struct SocialNet *socialnet, char nick1[], char nic
     else {
         printf("+ utilizador %s nao segue %s\n",user1->nick,user2->nick);
     }
-   
    
 }
 

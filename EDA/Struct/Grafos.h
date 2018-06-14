@@ -15,10 +15,9 @@
 
 /**Consts**/
 
-#define MAX_USERS 10000000
+#define MAX_USERS 1000000
 #define NORMAL 0
 #define ERROR 1
-#define LEN 100
 
 /*
 
@@ -53,11 +52,6 @@ struct Vertice *new_Vertice(struct User *user , int p )
 /*Methods*/
 bool vertice_compare ( struct Vertice *v1 , struct Vertice *v2 )
 {
-
-	if (v1 == NULL || v2 == NULL)
-	{
-		return false;
-	}
 
 	return compare_user(v1->user , v2->user);
 
@@ -184,9 +178,10 @@ bool grafo_check_if_exists (struct Grafo *grafo , struct Vertice *v)
 bool grafo_check_connection(struct Grafo * grafo, struct Vertice *v1 , struct Vertice *v2)
 {
 
-	struct Node *n = grafo->nodes[ v1->pos ];
+	if(v1 == NULL || v2 == NULL)
+		return false;
 
-	n = n->next_node;
+	struct Node *n = grafo->nodes[ v1->pos ]->next_node;
 
 	while( n != NULL )
 	{
@@ -383,13 +378,6 @@ struct Node *grafo_insert_conection(struct Grafo *grafo , struct Vertice *v1 , s
 
 bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vertice *v2)
 {
-	
-	/*
-	if(v1 == NULL || v2 == NULL)
-	{
-		return false;
-	}
-	*/
 
 	struct Node *n = grafo->nodes[ v1->pos ];
 	struct Node *p;
@@ -400,24 +388,27 @@ bool grafo_remove_conection(struct Grafo *grafo, struct Vertice *v1, struct Vert
 	p = n;
 	n = n->next_node;
 
-
 	while(n != NULL)
 	{
-		
+    	
     	if ( vertice_compare(n->ver , v2))
     	{
-    		
+    
         	p->next_node = n->next_node;
-        	return NORMAL;
+
+        	free(n);
+
+        	return true;
 
     	}
 
     	p = n;
+
     	n = n->next_node;
 
-}
+	}
 
-	return ERROR;
+	return false;
 }
 
 int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
@@ -431,21 +422,27 @@ int grafo_remove_vertice(struct Grafo *grafo , struct Vertice *v)
 
 	/*remove conections to vertice*/
 	int sp = 0;
-	for (int i = 0; sp <grafo->size ; ++i)
+	for (int i = 0; sp < grafo->size ; ++i)
 	{
-		if (grafo->nodes != NULL)
+		if (grafo->nodes[i] != NULL)
 		{
-			
-			//grafo_remove_conection(grafo , grafo->nodes[i]->ver, v);
 
+			grafo_remove_conection(grafo , grafo->nodes[i]->ver, v);
 			sp +=1;
+		
 		}
 
 	}
 
 	/*remove node*/
+	struct Vertice *d_v = grafo->nodes[ v->pos ]->ver;
+	struct Node * d_n = grafo->nodes[ v->pos ];
 	grafo->nodes[ v->pos ] = NULL;
 	grafo->size -= 1;
+
+	free(d_v);
+	free(d_n);
+
 	return NORMAL;
 
 }
@@ -526,7 +523,7 @@ int count_conection_seguidores(struct Grafo * grafo,struct Vertice *v1)
 		
 		if (grafo->nodes[i] != NULL)
 		{
-			if(grafo_check_connection(grafo,grafo_get_vertice_at(grafo , i)  , v1) )
+			if(grafo_check_connection(grafo, grafo->nodes[i]->ver, v1) )
 			{
 				count++;
 			}

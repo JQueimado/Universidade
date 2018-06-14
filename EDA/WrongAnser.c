@@ -32,6 +32,7 @@ int main(int argc, char const *argv[])
 		if (strcmp(out1, out2) != 0)
 		{
 			printf("WrongAnser %d\n", count);
+			return 0;
 		}
 
 	}
