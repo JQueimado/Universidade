@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define FILE1 "Testes/A_out.txt"
-#define FILE2 "Testes/A_cor.txt"
+#define FILE1 "Testes/C_out.txt"
+#define FILE2 "Testes/C_cor.txt"
 
 int main(int argc, char const *argv[])
 {
