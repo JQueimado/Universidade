@@ -1,5 +1,5 @@
 (*funcao que compara dois sectores do mesmo tamanho*)
-let rec match_sector s1 s2 = match s1 with []->true | x::s -> (match s2 with [] -> true | y::ss -> (if x=y then (match_sector s ss) else (false) ));;
+let rec find_equal = function l -> function [] -> false | s::sl -> if s=l then true else find_equal l sl;;
 
 let rec lenght = function [] -> 0 | _::x -> 1+(lenght x);; 
 
@@ -17,6 +17,16 @@ let rec sector l s i = match s with [] -> [] | x::ss -> if i=0 then ( ( find_dif
 let rec rand_sec n l = if n=0 then [] else (get_colour_at (Random.int (lenght l)) l )::(rand_sec (n-1) l ) ;;
 
 (*funcao que pinta um circulo de varios sectores*)
-let rec pintar_rec n m k s = if m=0 then [] else let x = ( sector k s (Random.int n ) ) in x::( pintar_rec n (m-1) k x );;
+let rec pintar_rec n m k l = 
+  if m=0 then 
+    [] 
+  else 
+    match l with 
+      [] -> let x = rand_sec n k in pintar_rec n (m-1) k [x] 
+      | s::sl -> let x = sector k s (Random.int n) in 
+        if find_equal x l then 
+          pintar_rec n m k l 
+        else 
+          pintar_rec n (m-1) k [x]::l;;
 
-let pintar n m k = pintar_rec n m k (rand_sec n k);;
+let pintar n m k = pintar_rec n m k [];;
