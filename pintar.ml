@@ -3,12 +3,18 @@ let rec match_sector s1 s2 = match s1 with []->true | x::s -> (match s2 with [] 
 
 let rec lenght = function [] -> 0 | _::x -> 1+(lenght x);; 
 
-let rec get_colour_at i l = match l with c::cl -> if i=0 then c else get_colour_at (i-1) cl ;;
+let rec get_colour_at = function i -> function c::[] -> c | c::cl -> if i=0 then c else get_colour_at (i-1) cl ;;
 
-let rec find_different_colour c l = let cc = get_colour_at (Random.int ( lenght l ) ) in (if cc = c then find_different_colour c l else cc );;
+let pick_colour l = get_colour_at (Random.int ( lenght l ) );;
+
+let rec pop_element = function c -> function [] -> [] | cc::cl -> if c = cc then cl else cc::(pop_element c cl) ;;
+
+let find_different_colour c l = get_colour_at ( Random.int (lenght l)-1 ) ( pop_element c l );;
 
 (*funcao que cria um sector baseado em s com alteracao na posicao i*)
-let rec sector l s i = match s with [] -> [] | x::ss -> if i=1 then ( ( find_different_colour l x )::( sector l ss (i-1) ) ) else ( x::( sector l ss (i-1) ) );;
+let rec sector l s i = match s with [] -> [] | x::ss -> if i=1 then ( ( find_different_colour x l )::( sector l ss (i-1) ) ) else ( x::( sector l ss (i-1) ) );;
 
 (*funcao que pinta um circulo de varios sectores*)
-let rec pintar n m k s = if m=0 then [] else let x = ( sector k s (Random.int n ) ) in x::( pintar n (m-1) k x );;
+let rec pintar_rec n m k s = if m=0 then [] else let x = ( sector k s (Random.int n ) ) in x::( pintar_rec n (m-1) k x );;
+
+let pintar n m k = pintar_rec n m k [ get_colour_at ( Random.int (lenght k) ) ; get_colour_at ( Random.int (lenght k) ) ];;
