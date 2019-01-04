@@ -1,3 +1,4 @@
+(*Pintar*)
 
 (*funcao que verifica se um elemento l já existe numa lista*)
 let rec find_equal = function l -> function [] -> false | s::sl -> if s=l then true else find_equal l sl;;
@@ -14,11 +15,18 @@ let rec rand_sec n l = if n=0 then [] else (l.(Random.int (Array.length l)))::(r
 (*funcao recurciva que pinta n discos com m sectores com a palete k (l representa os sectores ja pintados)*)
 let rec pintar_rec n m k l = if m=0 then [] else match l with [] -> let x = rand_sec n k in x::(pintar_rec n (m-1) k [x]) | s::sl -> let x = sector k s (Random.int n) in if find_equal x l then (pintar_rec n m k l) else x::(pintar_rec n (m-1) k (x::l)) ;;
 
-(*
-let rec factorial n = match n with 0 -> 1 | 1->1 | x -> x*(factorial (n-1)) ;;
 
-let combinacao n k = (factorial n)/( (factorial k)*(factorial ( n-k )));;
-*)
+(*verificação*)
+
+let rec pot n k = if k=0 then 1 else (n)*(pot n (k-1));;
+
+let rec fac n = match n with 0 -> 1 | 1 -> 1 | x -> x * ( fac n-1 ) ;; 
+
+let combinacao n k = (fac n)/( (fac k)*(fac (n-k) ) );;
+
+let check n m k = let x = Array.length k in (pot x n) >= m ;; 
+
+(*main*)
 
 (*função que pinta n discos com m sectores com a palete k*)
-let pintar n m k = if (* (combinacao (lenght k) n ) > m *) false then [] else pintar_rec n m k [];;
+let pintar n m k = if check n m k then pintar_rec n m k [] else [];;
