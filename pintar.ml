@@ -23,7 +23,13 @@ let rec sector l s i = match s with [] -> [] | x::ss -> if i=0 then ( ( find_dif
 let rec rand_sec n l = if n=0 then [] else (get_colour_at (Random.int (lenght l)) l )::(rand_sec (n-1) l ) ;;
 
 (*funcao recurciva que pinta n discos com m sectores com a palete k (l representa os sectores ja pintados)*)
-let rec pintar_rec n m k l = if m=0 then [] else match l with [] -> let x = rand_sec n k in x::(pintar_rec n (m-1) k [x]) | s::sl -> let x = sector k s (Random.int n) in if find_equal x l then x::(pintar_rec n m k l) else x::(pintar_rec n (m-1) k (x::l)) ;;
+let rec pintar_rec n m k l = if m=0 then [] else match l with [] -> let x = rand_sec n k in x::(pintar_rec n (m-1) k [x]) | s::sl -> let x = sector k s (Random.int n) in if find_equal x l then (pintar_rec n m k l) else x::(pintar_rec n (m-1) k (x::l)) ;;
+
+(*
+let rec factorial n = match n with 0 -> 1 | 1->1 | x -> x*(factorial (n-1)) ;;
+
+let combinacao n k = (factorial n)/( (factorial k)*(factorial ( n-k )));;
+*)
 
 (*função que pinta n discos com m sectores com a palete k*)
-let pintar n m k = pintar_rec n m k [];;
+let pintar n m k = if (* (combinacao (lenght k) n ) > m *) false then [] else pintar_rec n m k [];;
