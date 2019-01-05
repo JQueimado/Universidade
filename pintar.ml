@@ -18,12 +18,10 @@ let rec pintar_rec n m k l = if m=0 then [] else match l with [] -> let x = rand
 
 (*verificação*)
 
+(*calcula a potencia de n por k (causa overflow se o valor calculado passar dos 31bits)*)
 let rec pot n k = if k=0 then 1 else (n)*(pot n (k-1));;
 
-let rec fac n = match n with 0 -> 1 | 1 -> 1 | x -> x * ( fac n-1 ) ;; 
-
-let combinacao n k = (fac n)/( (fac k)*(fac (n-k) ) );;
-
+(*verifica se é possivel pintar o disco*)
 let check n m k = let x = Array.length k in (pot x n) >= m ;; 
 
 (*main*)
