@@ -6,26 +6,100 @@ FILE_OUTPUT = FILE_NAME[:-5]+FILE_TERM
 
 def descompress (f):
 
-    out = lista
+    d = {0:"0", 1:"1"}
 
-    p = chr(f.pop(0))
+    i = 2
 
-    out.write(p)
+    c = f[0]
 
-    for a in f:
+    n = 0
 
-        if a in d
+    out = [d.get(c)]
 
-    pass
+    for nc in range(1,len(f)):
+        c = f[nc-1]
+        n = f[nc]
+
+        if not n in d:
+        
+            dout = str(d.get(c)) + str(d.get(c))[0]
+            
+            out.append(dout)
+        
+        else:
+
+            out.append( str(d.get(n)) )
+
+            dout = str(d.get(c)) + str(d.get(n))[0]
+
+        d[i] = dout
+
+        i += 1
+
+    return out
 
 def write_file (fo, s, t):
+
+    w, h = 0
+
+    i = 0
+
+    temp = ""
+    while fo[i] != " ":
+        temp += fo[i]
+        i += 1
+
+    w = int( temp )
+
+    temp = ""
+    
+    while fo[i] != " ":
+        temp += fo[i]
+        i += 1
+
+        
 
     pass
 
 def read_file(fn):
 
-    pass
+    f = open(fn)
+
+    i = 0
+
+    s = ""
+
+    n = ""
+
+    fo = []
+
+    l = f.readline()
+
+    for c in l:
+        if c != ' ':
+            
+            n += c
+        
+        else:
+
+            i += 1
+            
+            if i > 2:
+                
+                fo.append(int(n))
+            
+            else:
+            
+                s += n+' '
+
+            n = ''
+
+    fo.append(int (n))
+    return s[:-1] , fo
 
 
 if __name__ == "__main__":
-    pass
+    
+    s, fa = read_file(FILE_NAME)
+
+    descompress(fa))

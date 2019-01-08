@@ -8,28 +8,27 @@ def compress (f):
     d = {"0":0 , "1":1}
     i = 2
 
-    p = ''
-
-    c = ''
-
     out = []
 
-    for c in f:
+    while f != "":         
+
+        p = ""
+        s = ""
+        count = 0
         
-        pc = p + c
+        for s in f:
+            if p+s in d:
+                p = p+s
+                count += 1
+            else:
+                break
 
-        if pc in d:
-            
-            p = pc
-        
-        else:
-
-            d[pc] = i
-            i += 1
-
-            out.append( d.get( p ) )
-
-            p = c
+        f = f[count:]
+        out.append( d.get( p ) )
+        d[p+s] = i
+        i += 1
+                
+                
 
     return out
 
@@ -51,12 +50,12 @@ def read_file(fn):
 
     s = f.readline()[:-1]
 
-    ff = []
+    ff = ""
 
     for l in f:
         for c in l:
             if c != ' ' and c !='\n':
-                ff.append(c)
+                ff += c
 
     f.close()
 
