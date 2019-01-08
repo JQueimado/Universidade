@@ -1,6 +1,6 @@
 FILE_NAME = "j.best"
 
-FILE_TERM = ".pmb"
+FILE_TERM = ".pbm"
 
 FILE_OUTPUT = FILE_NAME[:-5]+"_exported"+FILE_TERM
 
@@ -119,12 +119,23 @@ def read_file(fn):
 
 if __name__ == "__main__":
     
-    s, fa = read_file(FILE_NAME)
+    fn = ""
+
+    while True:
+        
+        fn = input("Enter file name:")
+        
+        if not fn.endswith(".best"):
+            print("ERROR:File format not suported, must end in .best")
+        else:
+            break
+
+    s, fa = read_file(fn)
 
     a = descompress(fa)
 
-    print (s, fa)
+    fo = fn[:-5] + "_exported" + FILE_TERM
 
-    print(a)
+    write_file(a, s, fo)
 
-    print( write_file(a,s, FILE_OUTPUT) )
+    print("Done. File at: " + fo)

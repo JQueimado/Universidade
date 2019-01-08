@@ -63,7 +63,16 @@ def read_file(fn):
 
 if __name__ == "__main__":
     
-    fn = input("Enter image file name:")
+    fn = ""
+
+    while True:
+        
+        fn = input("Enter file name:")
+        
+        if not fn.endswith(".pbm"):
+            print("ERROR:File format not suported, must end in .pbm")
+        else:
+            break
 
     ff,_,s = read_file(fn)
 
@@ -71,7 +80,7 @@ if __name__ == "__main__":
 
     write_file( compress ( ff ), s, fo )
 
-    print("Done.")
+    print("Done. File at: "+ fo)
 
 
 
