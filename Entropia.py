@@ -37,6 +37,8 @@ def entropiat(ff):
 
 if __name__ == "__main__":
     
-    print(entropia1( read_file("j.pbm")))
+    ff,_,_ = read_file("j.pbm")
+
+    print(entropia1(ff))
 
     print("Done.")
