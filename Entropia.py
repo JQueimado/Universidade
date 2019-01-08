@@ -21,19 +21,18 @@ def read_file(fn):
 
 def entropia1(ff):
     
+    counter1 = 0
     counter = 0
 
     for i in ff:
 
+        counter += 1
+
         if i == '1':
 
-            counter += 1
+            counter1 += 1
     
-    return counter
-
-def entropiat(ff):
-    pass
-
+    return counter1 ,counter
 
 if __name__ == "__main__":
     
