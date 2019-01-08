@@ -19,9 +19,24 @@ def read_file(fn):
 
     return ff , t , s
 
+def entropia1(ff):
+    
+    counter = 0
+
+    for i in ff:
+
+        if i == '1':
+
+            counter += 1
+    
+    return counter
+
+def entropiat(ff):
+    pass
+
 
 if __name__ == "__main__":
     
-    print(read_file("j.pbm"))
+    print(entropia1( read_file("j.pbm")))
 
     print("Done.")
