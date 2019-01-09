@@ -53,6 +53,10 @@ def read_file(fn):
     ff = ""
 
     for l in f:
+
+        if l.startswith('#'):
+            continue
+
         for c in l:
             if c != ' ' and c !='\n':
                 ff += c
