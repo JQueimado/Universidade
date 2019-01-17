@@ -29,6 +29,30 @@ def faz_coisas(data, sock):
 			delContacto(input_info[2])
 		else:
 			delNumero(input_info[2],input_info[3])
+
+def getPhone(info): #receber nome devolver numero(s). READ do pickle
+	
+	pickle_in = open("listaContactos",'rb')
+	listaContactos = pickle.load(pickle_in)
+	
+	if info in listaContactos:
+		for i in listaContactos[info]:
+			print(info," has number ",i)
+	else:
+		print("ERROR: No contact found")
+
+
+def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
+	return null
+
+def setNum(nome,num): #definir contacto
+	return null
+
+def delContacto(nome): #eliminar contacto
+	return null
+
+def delNumero(nome,num): #eliminar numero pertencente ao nome
+	return null
 	
           
 if __name__ == "__main__":
