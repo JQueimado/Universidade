@@ -7,10 +7,28 @@ SOCKET_LIST = []    # lista de sockets abertos
 RECV_BUFFER = 4096  # valor recomendado na doc. do python
 PORT = 5000
 
+lista_contactos={}
+listaContactos = "contactos"
+
 # função que trata dados do cliente
-def faz_coisas(data, sock):	
+def faz_coisas(data, sock):
+	input_info=[]	
 	print("Client %s\n\tMessage: '%s'" % (sock, data))
+	input_info = data.split(";")
+	if len(input_info)==1:
+		if input_info[0][1] in alfabeto:
+			getPhone(input_info)
+		else:
+			getNome(input_info)
 	
+	elif input_info[0] == "-set":
+		setNum(input_info[1],input_info[2])
+	
+	elif input_funcao[1] == "-del":
+		if len(input_info)==2:
+			delContacto(input_info[2])
+		else:
+			delNumero(input_info[2],input_info[3])
 	
           
 if __name__ == "__main__":
