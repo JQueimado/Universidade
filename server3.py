@@ -18,7 +18,7 @@ def faz_coisas(data, sock):
 	input_info = data.split(";")
 
 	if len(input_info)==1:
-		if input_info[0][1] in alfabeto:
+		if input_info[0][1].isgigit():
 			getPhone(input_info)
 		else:
 			getNome(input_info)
@@ -46,16 +46,16 @@ def getPhone(info): #receber nome devolver numero(s). READ do pickle
 
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
-	return null
+	return
 
 def setNum(nome,num): #definir contacto
-	return null
+	return
 
 def delContacto(nome): #eliminar contacto
-	return null
+	return
 
 def delNumero(nome,num): #eliminar numero pertencente ao nome
-	return null
+	return
 	
           
 if __name__ == "__main__":
