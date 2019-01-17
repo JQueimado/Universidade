@@ -12,9 +12,11 @@ listaContactos = "contactos"
 
 # função que trata dados do cliente
 def faz_coisas(data, sock):
+
 	input_info=[]	
 	print("Client %s\n\tMessage: '%s'" % (sock, data))
 	input_info = data.split(";")
+
 	if len(input_info)==1:
 		if input_info[0][1] in alfabeto:
 			getPhone(input_info)
@@ -32,14 +34,15 @@ def faz_coisas(data, sock):
 
 def getPhone(info): #receber nome devolver numero(s). READ do pickle
 	
+	string=""
 	pickle_in = open("listaContactos",'rb')
 	listaContactos = pickle.load(pickle_in)
 	
 	if info in listaContactos:
 		for i in listaContactos[info]:
-			print(info," has number ",i)
+			string += info + " has number " + i
 	else:
-		print("ERROR: No contact found")
+		string += "ERROR: No contact found"
 
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
