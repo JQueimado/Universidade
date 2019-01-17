@@ -33,7 +33,7 @@ def faz_coisas(data, sock):
 		else:
 			delNumero(input_info[2],input_info[3])
 
-def getPhone(info): #receber nome devolver numero(s). READ do pickle
+def getPhone(info, sock): #receber nome devolver numero(s). READ do pickle
 	
 	string=""
 	pickle_in = open("listaContactos",'rb')
@@ -45,7 +45,12 @@ def getPhone(info): #receber nome devolver numero(s). READ do pickle
 	else:
 		string += "ERROR: No contact found"
 
+<<<<<<< HEAD
 	
+=======
+    sock.sendall( string.encode() )
+    
+>>>>>>> f01f19486c67e2c025801e4992e9f5e8c1cb84f5
 
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
