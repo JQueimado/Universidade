@@ -22,6 +22,7 @@ def faz_coisas(data, sock):
 			getPhone(input_info)
 		else:
 			getNome(input_info)
+
 	
 	elif input_info[0] == "-set":
 		setNum(input_info[1],input_info[2])
@@ -43,6 +44,8 @@ def getPhone(info): #receber nome devolver numero(s). READ do pickle
 			string += info + " has number " + i
 	else:
 		string += "ERROR: No contact found"
+
+	
 
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
