@@ -8,6 +8,13 @@ RECV_BUFFER = 4096  # valor recomendado na doc. do python
 PORT = 5000
 
 lista_contactos={}
+def pickle_read(lista_contactos):
+	pickle_in = open("contactos.pickle",'rb')
+	return pickle.load(pickle_in)
+
+def pickle_write(lista_contactos):
+	pickle_out = open("contactos.pickle",'wb')
+	pickle.dump(lista_contacto, pickle_out)
 
 # função que trata dados do cliente
 def faz_coisas(data, sock):
@@ -22,7 +29,6 @@ def faz_coisas(data, sock):
 		else:
 			getNome(input_info)
 
-	
 	elif input_info[0] == "-set":
 		setNum(input_info[1],input_info[2])
 	
@@ -35,8 +41,7 @@ def faz_coisas(data, sock):
 def getPhone(info, sock): #receber nome devolver numero(s). READ do pickle
 	
 	string=""
-	pickle_in = open("contactos.pickle",'rb')
-	lista_contactos = pickle.load(pickle_in)
+	lista_contactos = picle_read(lista_contactos)
 	
 	if info in lista_contactos:
 		for i in lista_contactos[info]:
@@ -45,12 +50,11 @@ def getPhone(info, sock): #receber nome devolver numero(s). READ do pickle
 		string += "ERROR: No contact found."
 
 	sock.sendall(string.encode())
-	pickle_in.close()
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
+	
 	string=""
-	pickle_in = open("contactos.pickle",'rb')
-	lista_contactos = pickle.load(pickle_in)
+	lista_contactos = picle_read(lista_contactos)
 
 	for i in lista_contactos:
 		if info in lista_contactos[i]:
@@ -59,21 +63,53 @@ def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
 		string += "ERRO: No contact found."
 
 	sock.sendall(string.encode())
-	pickle_in.close()	
+		
 
 def setNum(nome,num): #definir contacto
-	pickle_out = open("contactos.pickle",'wb')
-	pickle.dump(lista_contacto, pickle_out)
 	
-	
+	string = ""
+	lista_contactos = picle_read(lista_contactos)
+	 
+	if nome in lista_contactos:
+		if num in lista_contactos[nome]:
+			string = "ERROR: " +nome + "already has " + num + " as a contact."
+		else:
+			lista_contacto[nome].append(num)
+			string = nome + "number set to " + num
 
-	pickle_out.close()
+	pickle_write(lista_contactos)
+		
+	sock.sendall(string.encode())
+	
 
 def delContacto(nome): #eliminar contacto
-	return
+	
+	string = ""
+	lista_contactos = picle_read(lista_contactos)
+
+	if nome in lista_contactos:
+		example_dict.pop(nome)
+		pickle_write(lista_contactos)
+		string = nome + " was removed"
+	else:
+		string= nome + "doesnt exist"
+
+	sock.sendall(string.encode())
 
 def delNumero(nome,num): #eliminar numero pertencente ao nome
-	return
+	
+	string = ""
+	lista_contactos = picle_read(lista_contactos)
+	
+	
+	if num in lista_conctactos[nome]:
+		lista_contactos[nome].remove(num) 
+		pickle_write(lista_contactos)
+		string = nome + " number " + num + " deleted from database"
+	else:
+		string= num + " doesnt exist in " + nome + " number list"
+
+	sock.sendall(string.encode())
 	
           
 if __name__ == "__main__":
