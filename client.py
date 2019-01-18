@@ -9,7 +9,7 @@ cliente.connect(('localhost',5000))
 
 def format(inp):
 	
-	inp = inp.replace("getohone ", '')
+	inp = inp.replace("getphone ", '')
 
 	form = ""
 
