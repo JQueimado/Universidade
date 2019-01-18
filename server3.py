@@ -8,7 +8,6 @@ RECV_BUFFER = 4096  # valor recomendado na doc. do python
 PORT = 5000
 
 lista_contactos={}
-listaContactos = "contactos"
 
 # função que trata dados do cliente
 def faz_coisas(data, sock):
@@ -39,19 +38,36 @@ def getPhone(info, sock): #receber nome devolver numero(s). READ do pickle
 	pickle_in = open("contactos.pickle",'rb')
 	lista_contactos = pickle.load(pickle_in)
 	
-	if info in listaContactos:
-		for i in listaContactos[info]:
-			string += info + " has number " + i
+	if info in lista_contactos:
+		for i in lista_contactos[info]:
+			string += info + " has number " + str(i) +"\n"
 	else:
-		string += "ERROR: No contact found"
+		string += "ERROR: No contact found."
 
 	sock.sendall(string.encode())
+	pickle_in.close()
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
-	return
+	string=""
+	pickle_in = open("contactos.pickle",'rb')
+	lista_contactos = pickle.load(pickle_in)
+
+	for i in lista_contactos:
+		if info in lista_contactos[i]:
+			string += str(info) + " is the number for " + i +"\n" 
+	if len(string)==0:
+		string += "ERRO: No contact found."
+
+	sock.sendall(string.encode())
+	pickle_in.close()	
 
 def setNum(nome,num): #definir contacto
-	return
+	pickle_out = open("contactos.pickle",'wb')
+	pickle.dump(lista_contacto, pickle_out)
+	
+	
+
+	pickle_out.close()
 
 def delContacto(nome): #eliminar contacto
 	return
