@@ -13,6 +13,12 @@ def format(inp):
 
 	form = ""
 
+	while(inp.startswith(' ')):
+		inp = inp[1:]
+
+	while(inp.endswith(' ')):
+		inp = inp[:-1]
+
 	for c in inp:
 		if c == ' ':
 			form += ';'
@@ -26,7 +32,7 @@ if __name__ == "__main__":
 	try:
 
 		while True:
-			inp = format( input('$') )
+			inp = format( input("$ ") )
 
 			cliente.sendall( inp.encode() )
 
