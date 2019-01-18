@@ -7,15 +7,34 @@ import pickle
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 cliente.connect(('localhost',5000))
 
-input_info = argv[1:]
+def format(inp):
+	
+	inp = inp.replace("getohone ", '')
 
-string=""
+	form = ""
 
-for i in input_info:
-	string+=i + ";"
+	for c in inp:
+		if c == ' ':
+			form += ';'
+		else:
+			form += c
+	
+	return form
 
-cliente.sendall(string.encode())
-sleep(0.3)
+if __name__ == "__main__":
+	
+	try:
+
+		while True:
+			inp = format( input('$') )
+
+			cliente.sendall( inp.encode() )
+
+			print( cliente.recv(1024).decode() )
+
+	except Exception as e:
+		print(e)
+
 
 
 #pedir input mandar ao server, sendAll
