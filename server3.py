@@ -2,23 +2,34 @@
 import socket, select
 import traceback # para informação de excepções
 from time import sleep
+import pickle
 
 SOCKET_LIST = []    # lista de sockets abertos
 RECV_BUFFER = 4096  # valor recomendado na doc. do python
 PORT = 5000
 
 lista_contactos={}
+
 def pickle_read(lista_contactos):
-	pickle_in = open("contactos.pickle",'rb')
-	return pickle.load(pickle_in)
+	count=0
+	try:
+		pickle_in = open("contactos.pickle",'rb')
+		return pickle.load(pickle_in)
+	except:
+		count+=1
+
+	if count==1:
+		return lista_contactos
+	
+	
 
 def pickle_write(lista_contactos):
 	pickle_out = open("contactos.pickle",'wb')
-	pickle.dump(lista_contacto, pickle_out)
+	pickle.dump(lista_contactos, pickle_out)
 
 # função que trata dados do cliente
 def faz_coisas(data, sock):
-
+	
 	input_info=[]	
 	print("Client %s\n\tMessage: '%s'" % (sock, data))
 	input_info = data.split(";")
@@ -32,7 +43,7 @@ def faz_coisas(data, sock):
 	elif input_info[0] == "-set":
 		setNum(input_info[1],input_info[2])
 	
-	elif input_funcao[1] == "-del":
+	elif input_info[1] == "-del":
 		if len(input_info)==2:
 			delContacto(input_info[2])
 		else:
@@ -68,16 +79,17 @@ def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
 def setNum(nome,num): #definir contacto
 	
 	string = ""
-	lista_contactos = picle_read(lista_contactos)
+	lista={}
+	lista = pickle_read(lista_contactos)
 	 
-	if nome in lista_contactos:
-		if num in lista_contactos[nome]:
+	if nome in lista:
+		if num in lista[nome]:
 			string = "ERROR: " +nome + "already has " + num + " as a contact."
 		else:
-			lista_contacto[nome].append(num)
+			lista[nome].append(num)
 			string = nome + "number set to " + num
 
-	pickle_write(lista_contactos)
+	pickle_write(lista)
 		
 	sock.sendall(string.encode())
 	
