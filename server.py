@@ -28,10 +28,15 @@ def pickle_write(lista_contactos):
 	pickle.dump(lista_contactos, pickle_out)
 
 # função que trata dados do cliente
+
+
+
+
 def faz_coisas(data, sock):
 	
 	input_info=[]	
 	print("Client %s\n\tMessage: '%s'" % (sock, data))
+	input_info = format(data)
 	input_info = data.split(";")
 
 	if len(input_info)==1:
@@ -43,7 +48,7 @@ def faz_coisas(data, sock):
 	elif input_info[0] == "-set":
 		setNum(input_info[1],input_info[2])
 	
-	elif input_info[1] == "-del":
+	elif input_info[0] == "-del":
 		if len(input_info)==2:
 			delContacto(input_info[2])
 		else:
@@ -90,6 +95,7 @@ def setNum(nome,num): #definir contacto
 			string = nome + "number set to " + num
 
 	pickle_write(lista)
+	print(lista)
 		
 	sock.sendall(string.encode())
 	
