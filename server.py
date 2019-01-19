@@ -12,23 +12,61 @@ lista_contactos={}
 
 def format(inp):
 	
-	inp = inp.replace("getphone ", '')
+	formarray = []
 
-	form = ""
+	# removes the getphone string from the input#
+	inp.replace("getphone",'')
 
-	while(inp.startswith(' ')):
+	# removes spaces form the begin of the input#
+	while ( inp.startswith(' ')):
 		inp = inp[1:]
 
-	while(inp.endswith(' ')):
+	# removes spaces form the begin of the input#
+	while ( inp.endswith(' ')):
 		inp = inp[:-1]
 
-	for c in inp:
-		if c == ' ':
-			form += ';'
-		else:
-			form += c
-	
-	return form
+	# var extraction #
+	while inp != "":
+
+		if inp[0] == '-':
+			
+			n = ""
+
+			while inp[0] != ' ':
+				n += inp[0]
+				inp = inp[1:]
+
+			formarray.append(n)
+
+		# add if name ""
+		if inp[0] == '"':
+			
+			inp = inp[1:]
+
+			n = ""
+
+			while inp != " ":
+				n += inp[0]
+				inp[1:]
+
+			formarray.append(n)
+		
+		# add if contact #
+		if inp[0].isdigit():
+
+			n = ""
+
+			while inp[0].isdigit():
+				n += inp[0]
+				inp[1:]
+			
+			formarray.append(n)
+
+		# ignore if is space #
+		if inp[0] == " ":
+			inp = inp[1:]
+					
+	return formarray
 
 def pickle_read(lista_contactos):
 	count=0
