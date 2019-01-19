@@ -10,6 +10,26 @@ PORT = 5000
 
 lista_contactos={}
 
+def format(inp):
+	
+	inp = inp.replace("getphone ", '')
+
+	form = ""
+
+	while(inp.startswith(' ')):
+		inp = inp[1:]
+
+	while(inp.endswith(' ')):
+		inp = inp[:-1]
+
+	for c in inp:
+		if c == ' ':
+			form += ';'
+		else:
+			form += c
+	
+	return form
+
 def pickle_read(lista_contactos):
 	count=0
 	try:
@@ -28,9 +48,6 @@ def pickle_write(lista_contactos):
 	pickle.dump(lista_contactos, pickle_out)
 
 # função que trata dados do cliente
-
-
-
 
 def faz_coisas(data, sock):
 	
