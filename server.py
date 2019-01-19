@@ -14,8 +14,12 @@ def format(inp):
 	
 	formarray = []
 
+	# cheks  #
+	if not "getphone" in inp:
+		return[]
+
 	# removes the getphone string from the input#
-	inp.replace("getphone",'')
+	inp = inp.replace("getphone",'')
 
 	# removes spaces form the begin of the input#
 	while ( inp.startswith(' ')):
@@ -35,21 +39,27 @@ def format(inp):
 			while inp[0] != ' ':
 				n += inp[0]
 				inp = inp[1:]
+				if inp == "":
+					break
 
 			formarray.append(n)
+			continue
 
-		# add if name ""
+		# add if name #
 		if inp[0] == '"':
 			
 			inp = inp[1:]
 
 			n = ""
 
-			while inp != " ":
+			while inp[0] != '"':
 				n += inp[0]
-				inp[1:]
+				inp = inp[1:]
+
+			inp = inp[1:]
 
 			formarray.append(n)
+			continue
 		
 		# add if contact #
 		if inp[0].isdigit():
@@ -58,9 +68,12 @@ def format(inp):
 
 			while inp[0].isdigit():
 				n += inp[0]
-				inp[1:]
+				inp = inp[1:]
+				if inp == "":
+					break
 			
 			formarray.append(n)
+			continue
 
 		# ignore if is space #
 		if inp[0] == " ":
