@@ -160,9 +160,10 @@ def delContacto(nome): #eliminar contacto
 		novo = lista
 		del novo[nome]
 		pickle_write(novo)
-		string = nome + " was removed"
+		string = "DELETED " + nome
 	else:
-		string= nome + " doesnt exist"
+		string= "NOTFOUND " + nome
+
 	print(string)
 	print(lista)
 	sock.sendall(string.encode())
@@ -177,9 +178,9 @@ def delNumero(nome,num): #eliminar numero pertencente ao nome
 	if num in lista[nome]:
 		lista[nome].remove(num) 
 		pickle_write(lista)
-		string = nome + " number " + num + " deleted from database"
+		string = "DELETED " + nome + " " + num
 	else:
-		string= num + " doesnt exist in " + nome + " number list"
+		string= "NOTFOUND " + nome
 
 	print(string)
 	print(lista)
