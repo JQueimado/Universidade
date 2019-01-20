@@ -52,7 +52,11 @@ def format(inp):
 			n = ""
 
 			while inp[0] != '"':
-				n += inp[0]
+
+				if inp[0] == " ":
+					n += "_"
+				else:
+					n += inp[0]
 				inp = inp[1:]
 
 			inp = inp[1:]
@@ -82,6 +86,15 @@ def format(inp):
 
 # protocol #
 
+def nameform(name):
+	n = ""
+	for c in name:
+		if c == "_":
+			n += " "
+		else:
+			n += c
+	return n
+
 def encode (msg):
 
 	if(msg[0] == "-set"):
@@ -105,18 +118,21 @@ def decode (outmsg, inmsg):
 
 	if (outmsg[0] == "SETNUMBER"):
 		if(inmsg[0] == "NUMBERSET"):
+			inmsg[1] = nameform( inmsg[1] )
 			return inmsg[1] + " number set to " + inmsg[2]
 		else:
 			return "ERROR:Number no set"
 
 	if (outmsg[0] == "DELETENUMBER"):
 		if(inmsg[0] == "DELETED"):
+			inmsg[1] = nameform( inmsg[1] )
 			return inmsg[1] + " number " + inmsg[2] + " deleted from database"
 		else:
 			return "ERROR:Number no deleted"
 
 	if (outmsg[0] == "DELETECLIENT"):
 		if(inmsg[0] == "DELETED"):
+			inmsg[1] = nameform( inmsg[1] )
 			return inmsg[1] + " deleted from database"
 		else:
 			return "ERROR:Number no deleted"
@@ -125,6 +141,8 @@ def decode (outmsg, inmsg):
 		if(inmsg[0] == "CLIENTHASNUMBERS"):
 			
 			msg = ""
+
+			inmsg[1] = nameform( inmsg[1] )
 
 			for i in range(2,len(inmsg)):
 				msg += inmsg[1] + " has number " + inmsg[i] +'\n'
@@ -140,7 +158,7 @@ def decode (outmsg, inmsg):
 			msg = ""
 
 			for i in range(2,len(inmsg)):
-				msg += inmsg[1] + " is the number for " + inmsg[i] +'\n'
+				msg += inmsg[1] + " is the number for " + nameform(inmsg[i]) +'\n'
 
 			return msg[:-1]
 
