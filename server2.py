@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import socket, select
 import traceback # para informação de excepções
 from time import sleep
@@ -10,76 +9,37 @@ PORT = 5000
 
 lista_contactos={}
 
-def format(inp):
-	
-	formarray = []
 
-	# cheks  #
-	if not "getphone" in inp:
-		return[]
-
-	# removes the getphone string from the input#
-	inp = inp.replace("getphone",'')
-
-	# removes spaces form the begin of the input#
-	while ( inp.startswith(' ')):
-		inp = inp[1:]
-
-	# removes spaces form the begin of the input#
-	while ( inp.endswith(' ')):
-		inp = inp[:-1]
-
-	# var extraction #
-	while inp != "":
-
-		if inp[0] == '-':
-			
-			n = ""
-
-			while inp[0] != ' ':
-				n += inp[0]
-				inp = inp[1:]
-				if inp == "":
-					break
-
-			formarray.append(n)
-			continue
-
-		# add if name #
-		if inp[0] == '"':
-			
-			inp = inp[1:]
-
-			n = ""
-
-			while inp[0] != '"':
-				n += inp[0]
-				inp = inp[1:]
-
-			inp = inp[1:]
-
-			formarray.append(n)
-			continue
+##### protocol #############
 		
-		# add if contact #
-		if inp[0].isdigit():
+def decode (inmsg):
+	
+	inmsg = inmsg.split()
 
-			n = ""
+	if inmsg[0] == "SETNUMBER":
+		arr = ["-set"]
+		arr.append(inmsg[1])
+		arr.append(inmsg[2])
+		return arr
 
-			while inp[0].isdigit():
-				n += inp[0]
-				inp = inp[1:]
-				if inp == "":
-					break
-			
-			formarray.append(n)
-			continue
+	if inmsg[0] == "DELETENUMBER":
+		arr = ["-del"]
+		arr.append(inmsg[1])
+		arr.append(inmsg[2])
+		return arr
 
-		# ignore if is space #
-		if inp[0] == " ":
-			inp = inp[1:]
-					
-	return formarray
+	if inmsg[0] == "DELETECLIENT":
+		arr = ["-del"]
+		arr.append(inmsg[1])
+		return arr
+
+	if inmsg[0] == "GETNUMBER":
+		return [inmsg[1]]
+
+	if inmsg[0] == "REVERSE":
+		return [inmsg[1]]
+
+############################
 
 def pickle_read(lista_contactos):
 	count=0
@@ -101,11 +61,12 @@ def pickle_write(lista_contactos):
 # função que trata dados do cliente
 
 def faz_coisas(data, sock):
-	
-	input_info=[]	
+
+	input_info = decode(data)
+
+	print(data)
 	#print("Client %s\n\tMessage: '%s'" % (sock, data))
 	#input_info = format(data)
-	input_info = data.split(";")
 
 	if len(input_info)==1:
 		if input_info[0][1].isdigit():
@@ -124,15 +85,15 @@ def faz_coisas(data, sock):
 
 def getPhone(info): #receber nome devolver numero(s). READ do pickle
 	
-	string=""
+	string="CLIENTHASNUMBERS " + info
 	lista={}
 	lista = pickle_read(lista_contactos)
 	
 	if info in lista:
 		for i in lista[info]:
-			string += info + " has number " + i +"\n"
+			string += " " + i
 	else:
-		string += "ERROR: No contact found."
+		string = "NOTFOUND " + info
 
 	
 	print(lista)
@@ -142,7 +103,7 @@ def getPhone(info): #receber nome devolver numero(s). READ do pickle
 
 def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
 	
-	string=""
+	string="CLIENTHASNAMES " + info
 	lista={}
 	lista = pickle_read(lista_contactos)
 
@@ -150,10 +111,10 @@ def getNome(info): #recebe numero, devolve a quem pertence (pode ser >1)
 		
 		if info in lista[i]:
 			
-			string += info + " is the number for " + i +"\n"
+			string += " " + i 
 		
-	if len(string)==0:
-		string = "ERROR: No contact found"
+	if len(string)==len("CLIENTHASNAMES " + info):
+		string = "NOTFOUND " + info
 	
 	
 	print(lista)
@@ -176,11 +137,11 @@ def setNum(nome,num): #definir contacto
 		else:
 			print(lista[nome])
 			lista[nome].append(num)
-			string = nome + " number set to " + num
+			string = "NUMBERSET " + nome + " " + num
 			
 	else:
 		lista[nome] = [num]
-		string = nome + " number set to " + num
+		string = "NUMBERSET " + nome + " " + num
 
 	pickle_write(lista)
 	print(lista)

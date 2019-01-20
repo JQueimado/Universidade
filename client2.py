@@ -82,6 +82,73 @@ def format(inp):
 
 # protocol #
 
+def encode (msg):
+
+	if(msg[0] == "-set"):
+		return "SETNUMBER " + msg[1] + " " + msg[2]
+
+	if(msg[0] == "-del"):
+		if (len(msg) > 2):
+			return "DELETENUMBER " + msg[1] + " " + msg[2]
+		else:
+			return "DELETECLIENT " + msg[1]
+
+	if(msg[0].isdigit()):
+		return "REVERSE " + msg[0]
+	else:
+		return "GETNUMBER " + msg[0]
+		
+def decode (outmsg, inmsg):
+	
+	outmsg = outmsg.split()
+	inmsg = inmsg.split()
+
+	if (outmsg[0] == "SETNUMBER"):
+		if(inmsg[0] == "NUMBERSET"):
+			return inmsg[1] + " number set to " + inmsg[2]
+		else:
+			return "ERROR:Number no set"
+
+	if (outmsg[0] == "DELETENUMBER"):
+		if(inmsg[0] == "DELETED"):
+			return inmsg[1] + " number " + inmsg[2] + " deleted from database"
+		else:
+			return "ERROR:Number no deleted"
+
+	if (outmsg[0] == "DELETECLIENT"):
+		if(inmsg[0] == "DELETED"):
+			return inmsg[1] + " deleted from database"
+		else:
+			return "ERROR:Number no deleted"
+
+	if (outmsg[0] == "GETNUMBER"):
+		if(inmsg[0] == "CLIENTHASNUMBERS"):
+			
+			msg = ""
+
+			for i in range(2,len(inmsg)):
+				msg += inmsg[1] + " has number " + inmsg[i] +'\n'
+
+			return msg[:-1]
+
+		else:
+			return "ERROR:Name not found"
+
+	if (outmsg[0] == "REVERSE"):
+		if(inmsg[0] == "CLIENTHASNAMES"):
+			
+			msg = ""
+
+			for i in range(2,len(inmsg)):
+				msg += inmsg[1] + " is the number for " + inmsg[i] +'\n'
+
+			return msg[:-1]
+
+		else:
+			return "ERROR:Number not found"
+		
+
+
 # MAIN #
 
 if __name__ == "__main__":
@@ -91,7 +158,13 @@ if __name__ == "__main__":
 		while True:
 			inp = format( input("$ ") )
 
-			print( cliente.recv(1024).decode() )
+			inp = encode(inp)
+
+			cliente.sendall(inp.encode())
+
+			rcv = cliente.recv(1024).decode()
+
+			print(decode(inp, rcv))
 
 	except Exception as e:
 		print(e)
