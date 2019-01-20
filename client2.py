@@ -5,7 +5,7 @@ from time import sleep
 import pickle
 
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-cliente.connect(('localhost',5000))
+cliente.connect(('192.168.0.22',5000))
 
 # funções #
 
