@@ -41,7 +41,7 @@ def decode (inmsg):
 
 ############################
 
-def pickle_read(lista_contactos):
+def pickle_read():
 	count=0
 	try:
 		pickle_in = open("contactos.pickle",'rb')

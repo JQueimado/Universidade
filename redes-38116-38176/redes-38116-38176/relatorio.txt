@@ -1,0 +1,138 @@
+Relatorio de desenvolvimento
+
+->Descrição:
+    Com este trabalho pertende-se desenvolver uma lista telefonica remota, onde o utilizador pode 
+    adicionar, remover e visualizar os contactos.
+    Todos os contactos adicionados são guardados no disco do servidor sendo possivel restaurar a informação
+    caso o servidor vá a baixo.
+
+->Protocolo de transferencia de dados:
+    O protocolo de Transferencia é o que está presente no enunciado do trabalho sendo reconhecidas pelo servidor 
+    as seguintes instruções:
+
+    ->GETNUMBER <name>:
+        Mostra todos os numeros de telefone pertencentes ao utilizador com o nome <name>.
+        Deve retorntar:
+            CLIENTHASNUMBERS <name> <number_1> . . . <number_n>: caso encontre o utilizador
+        ou
+            NOTFOUND <name>: caso não encontre o utilizador
+
+    ->REVERSE <number>:
+        Mostra todos os nomes que tem o contacto <number>.
+        Deve retorntar:
+            CLIENTHASNAMES <number> <name_1> . . . <name_n>: caso encontre os numeros
+        ou
+            NOTFOUND <number>: caso não encontre o numero na base de dados
+
+    ->SETNUMBER <name> <number>:
+        Adiciona um contacato a lista.
+        Deve retornar:
+            NUMBERSET <name> <number>: se o numero foi adicionado
+
+    ->DELETENUMBER <name> <number>:
+        Remove o numero <number> do utilizador <name>.
+        Deve retornar:
+            DELETED <name> <number>: caso o contacto seja removido com sucesso
+        ou
+            NOTFOUND <name>: caso o utilizador não seja encontrado
+
+    ->DELETECLIENT <name>:
+        Remove o numero utilizador e todos os seu contactos da base de dados.
+        Deve retornar:
+            DELETED <name>: caso o utilizador seja removido com sucesso
+        ou
+            NOTFOUND <name>: caso o utilizador não seja encontrado
+
+->Servidor (server.py)
+
+    Servidor onde se encontra ospedado a lista de contactos.
+    Aceita ligações na porta 5000.
+
+    ->Funcões:
+        -> decode( inmsg ):
+            ->Descrição
+                função que adapta o a mensagem que é recebida pelo cliente e adapta a de forma 
+                a que possa ser reconhecida pelas outras funções.
+            ->Argumnetos
+                inmsg - mensagem inserida pelo utilizador
+
+        -> pickle_read():
+            ->Descrição
+                função que lê uma lista de contactos de um ficheiro .pickle.
+        
+        -> pickle_write(lista_contactos):
+            ->Descrição
+                função que insere uma lista de contactos num ficheiro .pickle.
+            ->Argumnetos
+                lista_contactos - lista a ser inserida
+
+        -> faz_coisas(data, sock):
+            ->Descrição
+                função que decodifica e aplica os comandos inseridos pelo utilizador.
+            ->Argumnetos
+                data - comando do cliente
+                sock - socket do cliente 
+
+        -> getPhone(info):
+            ->Descrição
+                função que envia para o cliente todos os contactos pertencentes a um utilizador.
+            ->Argumnetos
+                info - nome do utilizador 
+
+        -> getNome(info):
+            ->Descrição
+                função que envia para o cliente todos os nomes pertencentes a um numero.
+            ->Argumnetos
+                info - numero inserido
+
+        -> setNum(nome,num):
+            ->Descrição
+                função que adiciona um numero a lista e envia uma resposta ao utilizador.
+            ->Argumnetos
+                nome - nome a inserir
+                num - numero a inserir
+
+        -> delContacto(nome):
+            ->Descrição
+                função que elimina um utilizador da lista
+            ->Argumnetos
+                nome - nome a eliminar
+
+        -> delNumero(nome,num):
+            ->Descrição
+                função que elimina um contacto de um utilizador
+            ->Argumnetos
+                nome - nome de onde remover
+                num - numero a remover
+
+->Cliente ( client.py )
+    
+    Cliente que recebe comandos tipo unix e envia instruções para a porta 5000 do 
+    servidor seguindo o protocolo.
+
+    ->Funções:
+
+        -> format(inp):
+            ->Descrição
+                função que extrai informação do input do utilizador
+            ->Argumnetos
+                inp - input do utilizador
+
+        -> nameform(name):
+            ->Descrição
+                função que troca o caracter "_" pelo caracter " "
+            ->Argumnetos
+                name - string a formatar
+
+        -> encode (msg):
+            ->Descrição
+                função que adapta o input do utilizador ao protocolo de transferencia
+            ->Argumnetos
+                msg - mensagem a converter
+
+        -> decode (outmsg, inmsg):
+            ->Descrição
+                função que adapta o a mensagem do servidor para o output da consola
+            ->Argumnetos
+                outmsg - mensagem enviada para o servidor
+                inmsg - mensagem recebida do servidor
