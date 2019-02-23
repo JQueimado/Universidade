@@ -2,6 +2,7 @@
 
 int main ()
 {
+    
     /* read array size */
 
     int n;
