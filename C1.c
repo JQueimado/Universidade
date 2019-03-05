@@ -76,6 +76,53 @@ struct team *get_team(struct team *tabel[], int s, char *name)
 
 }
 
+/* eval */
+
+struct team *eval(struct team *teams[], int s)
+{
+
+    short flag = 0;
+
+    struct team *top = teams[0];
+
+    for( int i = 1; i < s; i++)
+    {
+
+        struct team *temp = teams[i];
+
+        if ( temp->score > top->score )
+        {
+
+            top = temp;
+
+            flag = 0;
+
+        }
+        else if (top->score == temp->score) 
+        {
+
+            flag = 1;
+
+        }
+
+        if( flag )
+        {
+
+            return NULL;
+
+        }
+        else
+        {
+            return top;
+        }
+        
+        
+    }
+
+    return top;
+
+}
+
 /* main */
 
 int main ( void )
@@ -157,32 +204,15 @@ int main ( void )
 
     /* Eval */
 
-    struct team *top = teams[0];
 
-    for( int i = 1; i < n_teams; i++)
-    {
+    struct team *top = eval(teams, n_teams);
 
-        struct team *temp = teams[i];
+    if( top == NULL )
 
-        if ( temp->score > top->score )
-        {
+        puts("torneio sem vencedora");
 
-            top = temp;
+    else
 
-        }
-        else if (top->score == temp->score) 
-        {
-            
-            puts("torneio sem vencedora");
-
-            return 0;
-
-        }
-        
-    }
-
-    printf("a vencedora foi %s, com %d ponto(s)\nganhou %d jogo(s), empatou %d jogo(s) e perdeu %d jogo(s)\nmarcou %d golo(s) e sofreu %d golo(s)\n", top->name, top->score, top->wins, top->draws, top->losses, top->goals, top->goals_against);
-
-    return 0;
+        printf("a vencedora foi %s, com %d ponto(s)\nganhou %d jogo(s), empatou %d jogo(s) e perdeu %d jogo(s)\nmarcou %d golo(s) e sofreu %d golo(s)\n", top->name, top->score, top->wins, top->draws, top->losses, top->goals, top->goals_against);
 
 }
