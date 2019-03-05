@@ -104,21 +104,16 @@ struct team *eval(struct team *teams[], int s)
             flag = 1;
 
         }
-
-        if( flag )
-        {
-
-            return NULL;
-
-        }
-        else
-        {
-            return top;
-        }
-        
         
     }
 
+    if( flag )
+    {
+
+        return NULL;
+
+    }
+       
     return top;
 
 }
@@ -128,12 +123,24 @@ struct team *eval(struct team *teams[], int s)
 int main ( void )
 {
 
-    int n_teams;
-    int n_match;
+    short n_teams;
+    short n_match;
 
     /* read line 1*/
 
-    scanf("%d %d", &n_teams, &n_match);
+    scanf("%hu %hu", &n_teams, &n_match);
+
+    /* limits */
+
+    /*
+
+    if ( n_teams > TEAM_LIMIT || n_teams < 2 )
+        return 0;
+
+    if ( n_match > (TEAM_LIMIT - 1) * TEAM_LIMIT || n_match < 1 )
+        return 0;
+
+    */
 
     /* read teams */
 
@@ -155,12 +162,12 @@ int main ( void )
     char *name1 = malloc(NAME_LIMIT);
     char *name2 = malloc(NAME_LIMIT);
     
-    int goal1;
-    int goal2;
+    short goal1;
+    short goal2;
 
     for ( int i = 0; i < n_match; i++ ){
 
-        scanf("%s %d - %s %d", name1, &goal1, name2, &goal2);
+        scanf("%s %hu - %s %hu", name1, &goal1, name2, &goal2);
 
         struct team *team1 = get_team(teams, n_teams, name1);
         struct team *team2 = get_team(teams, n_teams, name2);
