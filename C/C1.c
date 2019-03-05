@@ -130,18 +130,6 @@ int main ( void )
 
     scanf("%hu %hu", &n_teams, &n_match);
 
-    /* limits */
-
-    /*
-
-    if ( n_teams > TEAM_LIMIT || n_teams < 2 )
-        return 0;
-
-    if ( n_match > (TEAM_LIMIT - 1) * TEAM_LIMIT || n_match < 1 )
-        return 0;
-
-    */
-
     /* read teams */
 
     struct team *teams[n_teams];
