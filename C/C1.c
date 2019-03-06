@@ -147,7 +147,7 @@ int main ( void )
 
     /* read games */
 
-    char *name1 = malloc(NAME_LIMIT + 1);
+    char *name1 = malloc(NAME_LIMIT + 1 );
     char *name2 = malloc(NAME_LIMIT + 1 );
     
     short goal1;
