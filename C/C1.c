@@ -137,7 +137,7 @@ int main ( void )
     for ( int i = 0; i < n_teams; i++ )
     {
 
-        char *name = malloc(sizeof(NAME_LIMIT));
+        char *name = malloc(NAME_LIMIT + 1);
 
         scanf("%s", name);
 
@@ -147,8 +147,8 @@ int main ( void )
 
     /* read games */
 
-    char *name1 = malloc(NAME_LIMIT);
-    char *name2 = malloc(NAME_LIMIT);
+    char *name1 = malloc(NAME_LIMIT + 1);
+    char *name2 = malloc(NAME_LIMIT + 1 );
     
     short goal1;
     short goal2;
@@ -159,6 +159,13 @@ int main ( void )
 
         struct team *team1 = get_team(teams, n_teams, name1);
         struct team *team2 = get_team(teams, n_teams, name2);
+
+        if (team1 == NULL || team2 == NULL || team1 == team2)
+        {
+
+            continue;
+
+        }
 
         team1->goals += goal1;
         team1->goals_against += goal2;
