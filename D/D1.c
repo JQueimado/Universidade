@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /* First acceptable letter */
 #define CharA 'a'
@@ -9,7 +8,7 @@
 
 /* Constants */
 #define MAX_INPUT 1100 
-#define ALFABET_SIZE CharZ - CharA + 1
+#define ALFABET_SIZE CharZ - CharA
 
 /* Function Main */
 int main( void )
@@ -25,7 +24,7 @@ int main( void )
 
     int inpsize = 0;
 
-    short searched_leters[ALFABET_SIZE] = {0};
+    short *searched_leters = malloc( sizeof( short[ALFABET_SIZE] ) );
 
     /*** Input/Processing ***/
 
@@ -60,7 +59,7 @@ int main( void )
         
             out_pointer += 1;
 
-            memset(searched_leters, 0, sizeof( short[ALFABET_SIZE] ) );
+            searched_leters = malloc( sizeof( short[ALFABET_SIZE] ) );
 
             continue;          
 
@@ -87,7 +86,7 @@ int main( void )
 
             out_pointer += 1;
 
-            memset(searched_leters, 0, sizeof( short[ALFABET_SIZE] ));
+            searched_leters = malloc( sizeof( short[ALFABET_SIZE] ) );
 
         }
 
@@ -102,3 +101,4 @@ int main( void )
     printf("%s", output);
 
 }
+
