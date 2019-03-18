@@ -1,31 +1,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "routing_table.h"
+#define MAX_ROUTES 100000
+
+#include "Route.h"
 
 int main( void )
 {
 
     int n = 0;
 
+    struct trie *routes = new_trie();
+
     scanf("%d",&n);
 
-    short interface[n];
-
-    char n1, n2, n3, n4;
     short intf;
+    unsigned char inp[3];
 
     for (int i = 0; i<n; i++){
 
-        scanf("%c.%c.%c.%c %hu", &n1, &n2, &n3, &n4, &intf);
-
-        interface[i] = intf;
-
-    }
-
-    for (int i = 0; i<n; i++){
-
-        printf("%lu\n", routs[i]);
+        scanf("%c.%c.%c.0 %hu", &inp[0], &inp[1], &inp[2], &intf);
 
     }
 
