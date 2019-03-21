@@ -61,7 +61,7 @@ int main( void )
         
             if(def_inf != -1)
                 
-                printf("%d\n", def_inf);
+                printf("%d", def_inf);
             
             else
             
