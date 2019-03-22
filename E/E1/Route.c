@@ -57,7 +57,7 @@ short route_compare( struct route * r1, struct route * r2 )
 }
 
 /* Route Swap */
-
+/*
 void route_swap( struct route ** list, int i, int j )
 {
 
@@ -68,23 +68,108 @@ void route_swap( struct route ** list, int i, int j )
     list[j] = temp;
 
 }
+*/
 
 /* Route Sorter */
 
-void sorter ( int size, struct route ** list )
+void merge(struct route ** list, int s, int m, int f)
 {
 
-    for( int i = 0; i < size - 1; i++){
+    int s1 = m - s + 1;
+    int s2 = f - m;
 
-        for( int j = 0; j < size - i - 1; j++){
+    struct route * temp1[s1];
+    struct route * temp2[s2];
 
-            if(route_compare( list[j], list[j+1] ) == 1){
+    for( int i = 0; i < s1; i++)
+        temp1[i] = list[s + i];
 
-                route_swap(list, j, j+1);
+    for( int j = 0; j < s2; j++)
+        temp2[j] = list[m + 1 + j];
 
-            }
+    /*
 
-        }
+    puts("--- temp 1 ---");
+
+    for( int i = 0; i < s1; i++){
+
+        struct route * temp = temp1[i];
+
+        printf("%d.%d.%d.0 -> %d\n", temp->s1, temp->s2, temp->s3, temp->i);
+
+    }
+
+    puts("--- temp 2 ---");
+
+    for( int i = 0; i < s2; i++){
+
+        struct route * temp = temp2[i];
+
+        printf("%d.%d.%d.0 -> %d\n", temp->s1, temp->s2, temp->s3, temp->i);
+
+    }
+
+    */
+
+    int p1 = 0;
+    int p2 = 0;
+    int p3 = 0;
+
+
+    while (p1 < s1 && p2 < s2){
+
+        if ( route_compare( temp1[p1], temp2[p2] ) == -1 ) 
+        { 
+        
+            list[p3] = temp1[p1]; 
+            p1++; 
+        
+        } 
+        else
+        { 
+            
+            list[p3] = temp2[p2]; 
+            p2++; 
+
+        } 
+        
+        p3++; 
+
+    } 
+
+    while (p1 < s1) 
+    { 
+        
+        list[p3] = temp1[p1];
+
+        p1++;
+        p3++;
+
+    } 
+
+    while (p2 < s2) 
+    { 
+        
+        list[p3] = temp2[p2];
+        
+        p2++;
+        p3++;
+
+    } 
+
+}
+
+void merge_sorter(struct route ** list, int s, int f)
+{
+
+    if ( s < f){
+
+        int m = s + (f-s)/2;
+
+        merge_sorter( list, s, m);
+        merge_sorter( list, m+1, f);
+
+        merge( list, s, m, f);
 
     }
 

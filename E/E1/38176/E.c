@@ -27,9 +27,9 @@ int main( void )
 
     }
 
-    sorter(n, array);
+    quick_sorter (array, 0, n);
 
-    short out[10000];
+    short out[100000];
     int outp = 0;
 
     while(  scanf("%hu.%hu.%hu.%hu", &a, &b, &c, &intf) != EOF )
@@ -61,7 +61,7 @@ int main( void )
         
             if(def_inf != -1)
                 
-                printf("%d", def_inf);
+                printf("%d\n", def_inf);
             
             else
             

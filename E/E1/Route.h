@@ -31,7 +31,9 @@ void route_swap( struct route ** list, int i, int j );
 
 /* Route Sorter */
 
-void sorter( int size, struct route ** list );
+void merge(struct route ** list, int s, int m, int f);
+
+void merge_sorter(struct route ** list, int s, int f);
 
 /* Route Search */
 

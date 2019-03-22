@@ -71,20 +71,38 @@ void route_swap( struct route ** list, int i, int j )
 
 /* Route Sorter */
 
-void sorter ( int size, struct route ** list )
+int part (struct route ** list, int s, int f)
 {
 
-    for( int i = 0; i < size - 1; i++){
+    int pivot = f;
 
-        for( int j = 0; j < size - i - 1; j++){
+    int sml = s -1;
 
-            if(route_compare( list[j], list[j+1] ) == 1){
+    for( int i = s; i <= f-1; i++){
 
-                route_swap(list, j, j+1);
+        if( route_compare(list[i], list[pivot]) != 1 ){
 
-            }
+            sml++;
+            route_swap(list, sml, i);
 
         }
+
+    }
+
+    route_swap(list, sml+1, f);
+    return sml + 1;
+
+}
+
+void quick_sorter (struct route ** list, int s, int f )
+{
+
+    if ( s < f ){
+
+        int pivot = part(list, s, f);
+
+        quick_sorter(list, s, pivot-1);
+        quick_sorter(list, pivot+1, f);
 
     }
 
