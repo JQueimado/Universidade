@@ -1,6 +1,6 @@
 :-dynamic(diag/1, diag2/1, conta/1).
 
-matriz(3). %(3x3)
+tamanho_tabuleiro(6). %(3x3)
 
 estado_inicial(E):-
   matriz(S),
