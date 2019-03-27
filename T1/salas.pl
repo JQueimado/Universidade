@@ -1,10 +1,12 @@
+
+
 % limite do mapa %
-mapa( 3 ).
+mapa( 7 ).
 
 % estado inicial e final %
-estado_inicial( (1,1) ).
+estado_inicial( (2,2) ).
 
-estado_final( (3,3) ).
+estado_final( (7,1) ).
 
 % avaliadores %
 max(A):-

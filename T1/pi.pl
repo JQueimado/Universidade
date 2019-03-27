@@ -6,6 +6,7 @@
 %representacao dos operadores
 %op(Eact,OP,Eseg,Custo)
 
+
 %representacao dos nos
 %no(Estado,no_pai,Operador,Custo,H+C,Profundidade)
 
@@ -29,7 +30,7 @@ pesquisa_a([E|R],Sol):-
 expande(no(E,Pai,Op,C,HC,P),L):- 
     findall(no(En,
     no(E,Pai,Op,C,HC,P),Opn,Cnn,HCnn,P1),
-    (op(E,Opn,En,Cn),P1 is P+1, Cnn is Cn+C, h(En,H), 
+    (op(E,Opn,En,Cn),P1 is P+1, Cnn is Cn+C, h1(En,H), 
     HCnn is Cnn+H), L).
 
 
