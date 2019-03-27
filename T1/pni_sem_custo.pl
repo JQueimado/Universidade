@@ -2,10 +2,10 @@
 %estado_final(Estado)
 
 %representacao dos operadores
-%op(Eact,OP,Eseg,Custo)
+%op(Eact,OP,Eseg)
 
 %representacao dos nos
-%no(Estado,no_pai,OperadorCusto,Profundidade)
+%no(Estado,no_pai)
 
 pesquisa(Problema,Alg):-
     consult(Problema),
