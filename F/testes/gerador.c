@@ -20,6 +20,32 @@ int main( int argc, char const *argv[])
 
     }
 
+    if (argc < 2)
+        return 0;
+
+    int c = atoi(argv[2]);
+
+    for(int j = 0; j < c; j++){
+
+        fprintf(file, "? 1000");
+
+        int v = j;
+
+        for(int i = 0; i <= 1000; i++){
+            
+            if( v == n )
+                v = 0;
+
+            fprintf(file," %d", v);
+
+            v++;
+
+        }
+
+        fprintf(file,"\n");
+
+    }
+
     fclose(file);
 
 }
