@@ -1,45 +1,112 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+/** <Header> **/
+
+struct connections
+{
+
+	int elem;
+
+	struct connections * next;
+
+
+};
 
 /** funcs **/
 
-void add( unsigned long n, char * senssors, unsigned long senssor1, unsigned long senssor2 )
+char find( int n, struct connections * senssors[], int senssor1, int senssor2 )
 {
 
-	char * temp = senssors + senssor1 * ( n * sizeof( char ) );
+	/* Gets connections form senssor1 */
+	struct connections * temp = senssors[senssor1];
 
-	*(temp + (senssor2 * sizeof( char ) )) = 1;
+	if ( temp == NULL )
+		return 0;
+
+	while( temp != NULL ){
+
+		if( temp->elem == senssor2 )
+			return 1;
+
+		temp = temp->next;
+	
+	}
+	
+
+	return 0;
+	
+}
+
+void add( int n, struct connections * senssors[], int senssor1, int senssor2 )
+{
+	
+	struct connections * temp = senssors[senssor1];
+
+	if( temp == NULL ){
+
+		temp = malloc( sizeof( struct connections ) );
+		temp->elem = senssor2;
+		senssors[senssor1] = temp;
+		return;
+
+	}
+
+	while( temp->next != NULL )
+		temp = temp->next;
+
+	struct connections * temp2 = malloc( sizeof( struct connections ) );
+
+	temp2->elem = senssor2;
+
+	temp2->next = NULL;
+
+	temp->next = temp2;
 
 }
 
-void rem( unsigned long n, char * senssors, unsigned long senssor1, unsigned long senssor2 )
+void rem( int n, struct connections * senssors[], int senssor1, int  senssor2 )
 {
+	
+	struct connections * temp = senssors[senssor1];
 
-	char * temp = senssors + senssor1 * ( n * sizeof( char ) );
+	if( temp == NULL )
+		return;
 
-	*(temp + (senssor2 * sizeof( char ) )) = 0;
+	if(temp->elem == senssor2){
 
+		senssors[senssor1] = temp->next;
+
+		free(temp);
+
+		return;
+
+	}
+
+	struct connections * pev = temp;
+
+	temp = temp->next; 
+
+	while( temp->next != NULL ){
+
+		if( temp->elem == senssor2 ){
+			
+			break;
+
+		}
+
+		temp = temp->next;
+
+	}
+
+	pev->next = temp->next;
+
+	free(temp);
 
 }
 
-char find_com( unsigned long n, char * senssors, unsigned long senssor1, unsigned long senssor2 )
-{
-
-	char * temp = senssors + senssor1 * ( n * sizeof( char ) );
-
-	return *(temp + (senssor2 * sizeof( char ) ));  
-
-
-}
-
-void clean_arr( unsigned long n, char senssors[n][n] )
-{
-
-	for( unsigned long i = 0; i < n; i++ )
-		for( unsigned long j = 0; j < n; j++ )
-			senssors[i][j] = 0;
-
-}
+/** </Header> **/
 
 /** main **/
 
@@ -47,85 +114,87 @@ int main( void )
 {
 
 	char op;
-	unsigned long m;
+	int m;
 
-	unsigned long a;
-	unsigned long b;
+	int a;
+	int b;
 
-	unsigned long s;
-	unsigned long c;
-	unsigned long p;
+	int s;
+	int c;
+	int p;
 
-	unsigned long ft;
+	int ft;
 
 	char flag = 0;
 
-	scanf("%lu", &m);
+	scanf("%d", &m);
 
-	char * array = calloc(m, m * sizeof( char ) );
+	struct connections * array[m];
+
+	memset(array, 0, m * sizeof( array[0] ) );
 	
 	while( scanf("%c", &op) != EOF )
 
-	switch (op)
-	{
-		case '+':
+		switch (op)
+		{
+			case '+':
 
-			scanf("%lu %lu", &a, &b);
+				scanf("%d %d", &a, &b);
 
-			add(m, array, a, b);
+				add(m, array, a, b);
 
-			break;
-	
-		case '-':
+				break;
+		
+			case '-':
 
-			scanf("%lu %lu", &a, &b);
+				scanf("%d %d", &a, &b);
 
-			rem(m, array, a, b);
+				rem(m, array, a, b);
 
-			break;
+				break;
 
-		case '?':
+			case '?':
 
-			flag = 0;
+				flag = 0;
 
-			scanf("%lu", &s);
+				scanf("%d", &s);
 
-			scanf("%lu", &p);
+				scanf("%d", &p);
 
-			ft = p;
+				ft = p;
 
-			for( int i = 0; i<s; i++){
+				for( int i = 0; i<s; i++){
 
-				scanf("%lu", &c);
+					scanf("%d", &c);
 
-				if( !find_com( m, array, p, c ) ){
+					if( !find( m, array, p, c ) ){
 
-					flag = 1;
+						flag = 1;
 
-				}else{
+					}else{
 
-					p = c;
+						p = c;
+
+					}
 
 				}
 
-			}
+				if( flag )
+				{
 
-			if( flag )
-			{
+					printf("no [%d..%d]\n", ft, c);
 
-				printf("no [%lu..%lu]\n", ft, c);
+				}
+				else
+				{
 
-			}
-			else
-			{
+					printf("yes [%d..%d]\n", ft, c);
 
-				printf("yes [%lu..%lu]\n", ft, c);
+				}
 
-			}
+				break;
 
-			break;
-
-	}
+		}
 
 	return 0;
 
