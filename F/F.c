@@ -17,7 +17,7 @@ struct connections * new_connection( int e, struct connections * next )
 {
 	struct connections * temp = malloc( sizeof( struct connections ) );
 	temp->elem = e;
-	temp->next = NULL;
+	temp->next = next;
 
 	return temp;
 }
