@@ -2,6 +2,9 @@
 
 tamanho_tabuleiro(6). %(3x3)
 
+
+
+/*
 estado_inicial(E):-
   matriz(S),
   AA is S * S,
@@ -12,6 +15,7 @@ estado_inicial(E):-
 functor(E, e, 2), arg(1, E, T), arg(2, E, []),
   nova_tabela(T2, S),
   flatten(T2, T).
+*/
 
 nova_tabela(L, Size):- 
   nova_tabela(L, 1, Size).
