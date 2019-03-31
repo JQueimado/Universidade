@@ -1,0 +1,31 @@
+U Zero7 Another fake James Bond
+U zsq4r Pseu Donym
+P zsq4r
+S MrPym zsq4r
+I MrPym
+S zsq4r zero7
+S zero7 zero7
+S zero7 zsq4r
+I zero7
+P zsq4r
+P zero7
+P zsq4r
+L zero7
+U zeze7 O *verdadeiro* JB
+S zero7 zeze7
+P zeze7
+R zeze7
+I zero7
+L zero7
+I zero7
+S MrPym zero7
+P zero7
+D MrPym zero7
+S MrPym zero7
+I MrPym
+U AlecS He Who Came from the Cold
+S MrPym AlecS
+I AlecS
+P AlecS
+L MrPym
+X
