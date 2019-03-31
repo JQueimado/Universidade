@@ -1,0 +1,415 @@
+.data
+	#arrays
+	Sv:.word 1,2,1,0,0,0,-1,-2,-1
+	Sh:.word 1,0,-1,2,0,-2,1,0,-1
+	file_buffer_size:.word 786432,262144
+	
+	#strings
+	fileRGB:.ascii "Desktop/"
+	directIn:.space 30	
+	contour_file:.ascii "Desktop/"
+	directOut:.space  30
+	
+	#prints
+	Input1:.asciiz "\n Escreva o nome do ficheiro a ler:"
+	Input2:.asciiz "\n Escreva o nome do ficheiro a exportar:"
+	load1:.asciiz "\n Carregando Imagem..."
+	load2:.asciiz "\n Convertendo para .gray..."
+	load3:.asciiz "\n Convolução horizontal..."
+	load4:.asciiz "\n Convolução vertical..."
+	load5:.asciiz "\n Calculando contornos..."
+	Output:.asciiz "\n Fim: \n Ficheiro guardado como:" 
+	
+	#buffers
+	fileRGB_buffer:.space 786432
+	fileGray_buffer:.space 262144
+	shConv_buffer:.space 262144
+	svConv_buffer:.space 262144
+	contour_buffer:.space 262144
+	
+.text
+#j main
+#nop 
+
+######################################################
+# read_rgb_image - Esta funcao carrega um ficheiro .rgb para a RAM
+#
+# Argumentos:
+# a0 - endereço da string nome do ficheiro
+#
+######################################################
+read_rgb_image:
+	#open
+	li $v0,13	           #tipo:open
+	li $a1,0	          #flag
+	li $a2,0	          #modo:read only
+	syscall
+	
+	move $a0,$v0
+	
+	#read
+	li $v0,14 	       			#tipo:read
+	la $a1,fileRGB_buffer 		#buffer
+	la $a2,file_buffer_size  	#tamanho
+	lw $a2,0($a2)			
+	syscall
+	
+	#close
+	li $v0,16	#close
+	syscall
+	
+	jr $ra
+	nop
+	
+######################################################
+# rgb_to_gray - Esta função converte uma imagem RGB para Gray
+#
+# Argumentos:
+# a0 -  endereço do buffer RGB na memoria
+# a1 - endereço do buffer Gray na memoria
+#
+######################################################
+rgb_to_gray:
+	
+	li $t0,30 #precentagem de vermelho
+	li $t1,59 #precentagem de verde
+	li $t2,11 #precentagem de azul 
+	li $t3,100 #converssor
+	
+	la $a2,file_buffer_size
+	lw $a2,4($a2)
+	
+	while:
+	#define vermelho
+	lbu $v0,0($a0)
+	mult $v0,$t0 
+	mflo $v0
+	
+	#define verde 
+	lbu $v1,1($a0)
+	mult $v1,$t1
+	mflo $v1
+	
+	add $v0,$v0,$v1
+	
+	#define azul
+	lbu $v1,2($a0)
+	mult $v1,$t2
+	mflo $v1
+	
+	add $v0,$v0,$v1
+	
+	#convercao
+	div $v0 $t3
+	mflo $v0 
+	
+	sb $v0 0($a1)
+	
+	addi $a1,$a1,1
+	addi $a0,$a0,3
+	
+	bne $a2,$zero,while
+	addi $a2,$a2,-1
+	
+	jr $ra
+	nop
+	
+	
+######################################################
+# write_gray_image - Esta função cria um ficheiro com uma imagem
+#
+# Argumentos:
+# a0 - Nome do ficheiro a escrever
+# a1 - buffer a escrever
+# a2 - tamanho do buffer
+#
+######################################################
+write_gray_image:
+	addi $sp,$sp,-4
+	sw $a1,4($sp)
+	sw $a2,0($sp)
+	
+	#criar ou alterar ficheiro
+	li $a1,1
+	li $a2,0x1ff
+	li $v0,13
+	syscall
+	
+	move $a0,$v0
+	lw $a2,0($sp)
+	lw $a1,4($sp)
+	addi $sp,$sp,8
+	
+	#write
+	li $v0,15
+	syscall
+	
+	#close
+	li $v0,16
+	syscall
+	
+	jr $ra
+	nop
+	 
+######################################################
+# lineConv - Esta função realiza a convolução de uma matriz 1x3
+#
+# Argumentos:
+# a0 -  endereço da matriz A
+# a1 - endereço da matriz B 
+#
+# Retorno 
+# v0 - resultado da convolução
+######################################################
+lineConv:
+	addi $a0,$a0,-1
+	lbu $t1,0($a0)
+	addi $a0,$a0,1
+	lbu $t2,0($a0)
+	addi $a0,$a0,1
+	lbu $t3,0($a0)
+	
+	addi $a0,$a0,3
+	
+	lw $t4,0($a1)
+	addi $a1,$a1,4
+	lw $t5,0($a1)
+	addi $a1,$a1,4
+	lw $t6,0($a1)
+	addi $a1,$a1,4
+	
+	mult $t1,$t4
+	mflo $v0
+	mult $t2,$t5
+	mflo $t1
+	add $v0,$v0,$t1
+	mult $t3,$t6
+	mflo $t1
+	add $v0,$v0,$t1
+	
+	jr $ra
+	nop
+######################################################
+# convolution - Esta função realiza a convolução de duas matrizes 
+#
+# Argumentos:
+# a0 - endereço da matriz A
+# a1 - endereço da matriz B 
+#
+######################################################
+convolution:
+	addi $sp,$sp,-12
+	sw $ra,8($sp)
+	sw $s0,4($sp)
+	sw $s1,0($sp)
+	
+	move $s0,$a0
+	addi $s1,$a0, 262144
+	
+	
+	la,$t0,file_buffer_size
+	lw,$t0,4($t0)
+	
+	convLoop:
+	addi $sp,$sp,-8
+	sw $a1,4($sp)
+	sw $a0,0($sp)
+	
+	lbu $a3,0($a0)
+	#1linha
+	jal lineConv
+	addi $a0,$a0,-512
+	move $t7,$v0
+	
+	#2linha
+	jal lineConv
+	addi $a0,$a0,512
+	add $t7,$t7,$v0
+	
+	#3linha
+	jal lineConv
+	addi $a0,$a0,512
+	add $t7,$t7,$v0
+	
+	#store
+	bgtz $t7 Pos
+	nop
+	sub $t7,$zero,$t7
+	Pos:
+	sb $t7,0($a2)
+	addi $a2,$a2,1
+	
+	lw $a0,0($sp)
+	lw $a1,4($sp)
+	addi $sp,$sp,8
+	
+	addi $t0,$t0,-1
+	bnez $t0,convLoop
+	addi $a0,$a0,1
+	
+	lw $s1,0($sp)
+	lw $s0,4($sp)
+	lw $ra,8($sp)
+	addi $sp,$sp,12
+	
+	jr $ra
+	nop
+
+######################################################
+# contour - Esta função calcula o contorno da imagem
+#
+# Argumentos:
+# a0 - endereço da matriz Sv
+# a1 - endereço da matriz Sh
+# a2 - endereço do buffer a carregar
+#
+######################################################
+contour:
+	li $t0,8
+	la $t1,file_buffer_size
+	lw $t1,4($t1)
+	
+	loop:
+	
+	lbu $t2,0($a0)
+	lbu $t3,0($a1)
+	add $t2,$t2,$t3
+	div $t2,$t0
+	mflo $t2
+	sub $t2,$zero,$t2
+	addi $t2,$t2,255
+	
+	sb $t2,0($a2)
+	
+	addi $a0,$a0,1
+	addi $a1,$a1,1
+	addi $a2,$a2,1
+	addi $t1,$t1,-1
+	bnez $t1,loop
+	nop
+	
+	jr $ra
+	nop
+	
+	
+######################################################
+# formatInput - Esta função retira o carater new line (\n) de uma string  
+#
+# Argumentos:
+# a0 - endereço da String 
+#
+######################################################
+formatInput:
+	li $t0,10
+	nextchar:
+	lbu $t1,0($a0)
+	bne $t1,$t0,nextchar
+	addi $a0,$a0,1
+	
+	jr $ra
+	sb $zero,-1($a0)
+
+########################main############################
+main:
+#print
+li $v0 4
+la $a0 Input1
+syscall
+
+#read
+la $a0,directIn
+li $a1,30
+li $v0,8
+syscall
+#format input
+jal formatInput
+nop
+
+#print
+li $v0 4
+la $a0 Input2
+syscall
+
+#read
+la $a0,directOut
+li $a1,30
+li $v0,8
+syscall
+#format input
+jal formatInput
+nop
+
+#print
+li $v0,4
+la $a0,load1
+syscall
+
+#carregar imagem
+la $a0,fileRGB
+jal read_rgb_image
+nop
+
+#print
+li $v0 4
+la $a0 load2
+syscall
+
+#converter para tons de cinzento
+la $a0,fileRGB_buffer
+la $a1,fileGray_buffer
+jal rgb_to_gray
+nop
+
+#print
+li $v0 4
+la $a0 load3
+syscall
+
+#convolution horizontal
+la $a0 fileGray_buffer
+la $a1 Sh 
+la $a2 shConv_buffer
+jal convolution
+nop
+
+#print
+li $v0 4
+la $a0 load4
+syscall
+
+#convolution vertical
+la $a0 fileGray_buffer
+la $a1 Sv 
+la $a2 svConv_buffer
+jal convolution
+nop
+
+#print
+li $v0 4
+la $a0 load5
+syscall
+
+#contour
+la $a0,svConv_buffer
+la $a1,shConv_buffer
+la $a2,contour_buffer
+jal contour
+nop
+
+#write
+la $a0,contour_file
+la $a1,contour_buffer
+la $a2,file_buffer_size
+lw $a2,4($a2)
+jal write_gray_image
+nop
+
+#print
+li $v0 4
+la $a0 Output
+syscall
+
+#print
+li $v0 4
+la $a0 contour_file
+syscall
