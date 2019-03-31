@@ -1,0 +1,234 @@
+\documentclass[12pt]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} 
+\usepackage[a4paper]{geometry}
+\usepackage{indentfirst}
+
+\title{Trabalho Final}
+\author{Cláudia Dias (35308), João Queimado (38176)}
+\date{today}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+	{\large\textbf{ UNIVERSIDADE DE EVORA\\Escola de Ciências e Tecnologias\\\vspace{0.5cm}}}
+	 \textnormal Engenharia Informática\\Teoria da Informação \\2017/2018\\\vspace{6cm}
+	{\huge \textbf{Compressão e Descompressão de Imagens Binárias\\\vspace{7cm}}
+\end{center}
+\begin{flushright}
+	\textnormal Docente: Miguel Barão\\Discentes: Cláudia Dias - 35308\\João Queimado - 38176\\
+\end{flushright}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introdução}
+ Pretende-se desenvolver um sistema de compressão e descompressão de imagens binárias.
+Uma imagem binária é uma imagem em que cada pixel apenas pode tomar um de dois valores: preto ou branco.
+Este tipo de imagens podem ser representadas como uma matriz zeros e uns, em que a coluna representa a posição horizontal na imagem e a linha a posição vertical.\\
+\indent O programa deverá receber uma imagem binária com extenção .pbm retornando um ficheiro através do algoritmo LZW a sua compressão com extenção .best
+ \\\\
+\indent \textbf{Input}: Imagem com extenção .pbm  \\
+\indent \textbf{Output}: Ficheiro com extenção .best
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Algoritmo Utilizado}
+Utilizou-se o algoritmo LZW, porque se entendeu como o mais adequado para o fim da realização deste trabalho.
+\indent O algoritmo LZW (Lempel-Ziv-Welch) é um algoritmo de compressão de dados, derivado do algoritmo LZ78, baseado na localização e no registro das padronagens de uma estrutura. É geralmente utilizado em imagens em que não se pode perder a definição original. Nas imagens, o algoritmo lê os valores de pixels de uma imagem bitmap e elabora uma tabela de códigos onde se representam as padronagens repetidas dos pixels encontrados. O codificador LZW reduz, pela compressão, os arquivos de imagens gráficas a 1/3 ou 1/4 de seu tamanho original.
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Compressão - Funções}
+
+\subsection{\textit{compress()}}
+\textbf{NOME}\\
+\indent\indent compress -  Comprime a imagem\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função tem como objetivo comprimir a imagem com extenção .pbm para um array. \\
+
+%%
+
+\subsection{\textit{write file(fo, s, fn)}}
+\textbf{NOME}\\
+\indent\indent write file - Escreve para o ficheiro .best\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent 	Esta função é a responsável por escrever para o ficheiro com extenção .best \\
+\indent fo - file output\\
+\indent s - tamanho\\
+\indent fn - file name\\
+
+%%
+
+\subsection{\textit{read file(fn)}}
+\textbf{NOME}\\
+\indent\indent read file - Lê para a string\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função possibilita a leitura para a string. \\
+\indent fn - file name\\
+
+%%
+
+\subsection{\textit{main()}}
+\textbf{NOME}\\
+\indent\indent main - Avalia o input introduzido comprime para o ficheiro com extenção .best\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent A função main utiliza todas as outras funções acima referidas.
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Descompressão - Funções}
+
+\subsection{\textit{desompress()}}
+\textbf{NOME}\\
+\indent\indent descompress -  descomprime a imagem\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função tem como objetivo descomprimir o array com extenção .best \\
+
+%%
+
+\subsection{\textit{write file(fo, s, fn)}}
+\textbf{NOME}\\
+\indent\indent write file - Escreve do array para o ficheiro .pbm\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent 	Esta função é a responsável por escrever do array para o ficheiro com extenção .pbm\\ 
+\indent fo - file output\\
+\indent s - tamanho\\
+\indent fn - file name\\
+
+%%
+
+\subsection{\textit{read_file(fn)}}
+\textbf{NOME}\\
+\indent\indent read file - Lê para a string\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função possibilita a leitura para a string. 
+\indent fn - file name
+
+%%
+
+\subsection{\textit{main()}}
+\textbf{NOME}\\
+\indent\indent main - Avalia o input introduzido comprime para o ficheiro com extenção .best\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent A função main utiliza todas as outras funções acima referidas.
+
+\clearpage
+
+%%%%%%%%%%%
+
+\section{Entropia - Funções}
+
+\subsection{\textit{read file(fn)}}
+\textbf{NOME}\\
+\indent\indent read file -  lê o ficheiro\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função tem como objetivo ler o ficheiro original \\
+
+
+%%
+
+\subsection{\textit{read file comp(fn)}}
+\textbf{NOME}\\
+\indent\indent read file comp -  lê o ficheiro\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função tem como objetivo ler o ficheiro comprimido \\
+
+%%
+
+\subsection{\textit{probabilidades(ff)}}
+\textbf{NOME}\\
+\indent\indent probabilidades -  calcular as probabilidades\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função tem como fim calcular quantos uns, quantos zeros e quantos números há na imagem com extenção .pbm. Vai calcular a probabilidade de cada um e cada zero aparecer. \\
+
+
+%%
+
+\subsection{\textit{entropia(p0,p1)}}
+\textbf{NOME}\\
+\indent\indent entropia - calcular a entropia \\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função calcula o valor da entropia. \\
+
+%%
+
+\subsection{\textit{condicionada(ff, p0, p1)}}
+\textbf{NOME}\\
+\indent\indent condicionada - calcular a entropia \\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função calcula o valor da entropia condicional. \\
+
+%%
+
+\subsection{\textit{comprimido(ff)}}
+\textbf{NOME}\\
+\indent\indent comprimido - calcular a entropia \\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent Esta função calcula o valor da entropia do ficheiro comprimido. \\
+
+%%
+
+\subsection{\textit{main()}}\\
+\textbf{NOME}\\
+\indent\indent main - Avalia o input introduzido comprime para o ficheiro com extenção .best\\
+
+\textbf{DESCRIÇÃO}\\
+\indent\indent A função main utiliza todas as outras funções acima referidas.\\
+
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cálculo da Entropia}\\
+\subsection{\textit{Entropia H(X)}}\\
+
+\indent Há no total 2073600 números de pixéis, sendo 1420586 uns e 653014 zeros. \\
+\indent A probabilidade de uns e zeros calcula-se através do numero total de pixéis, ou seja:\\
+\indent\indent p(1) = 1420586/2073600 = 0.685\\
+\indent\indent p(0) = 653014 / 2073600 = 0.315\\
+\\
+\indent A entropia vai ser:\\
+\[H(X) = - p(0)*log2(p(0)) - p(1)*log2(p(1))\]\\
+\[H(X) =  0.899  bits\]\\ 
+%%
+
+\subsection{\textit{Entropia Condicional H(X)}}\\
+\[H(Y|X) = - somatório   p(x) * somatório   (p(y|x) log2 p(y|x))\]\\
+\[H(Y|X)] = 0.827 bits \]
+
+
+\subsection{\textit{Entropia do ficheiro comprimido H(X)}}\\
+\[H(X)) = 15.577 bits\]\\
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%
+\section{Conclusão}
+Este trabalho foi bastante útil para a nossa aprendizagem e para a consolidação dos nossos conhecimentos.
+Está a funcionar corretamente.\\
+
+
+\end{document}
+
