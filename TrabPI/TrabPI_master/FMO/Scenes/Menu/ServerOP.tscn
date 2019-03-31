@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scripts/Menus/ServerOP.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Menu/servercover.jpg" type="Texture" id=2]
+
+[node name="ServerOP" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="Sprite" parent="."]
+
+visibility/opacity = 0.85
+visibility/self_opacity = 0.7
+transform/pos = Vector2( 510.666, 300.739 )
+transform/scale = Vector2( 2.51307, 3.75868 )
+texture = ExtResource( 2 )
+
+[node name="CreateSV" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 54.0
+margin/top = 452.0
+margin/right = 415.0
+margin/bottom = 540.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Create"
+flat = false
+
+[node name="JoinSV" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 597.0
+margin/top = 449.0
+margin/right = 958.0
+margin/bottom = 537.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Join"
+flat = false
+
+[node name="IP" type="TextEdit" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 148.0
+margin/top = 58.0
+margin/right = 898.0
+margin/bottom = 82.0
+syntax_highlighting = false
+show_line_numbers = false
+highlight_all_occurrences = false
+caret/block_caret = false
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[connection signal="pressed" from="CreateSV" to="." method="_on_CreateSV_pressed"]
+
+[connection signal="pressed" from="JoinSV" to="." method="_on_JoinSV_pressed"]
+
+
