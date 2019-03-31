@@ -1,0 +1,10 @@
+15,19
+branco
+preto
+azul
+verde
+rosa
+amarelo
+vermelho
+cinza
+lilas

@@ -1,0 +1,12 @@
+11,15
+chuva
+sol
+temperatura
+nevoeiro
+orvalho
+neve
+geada
+trovoada
+humidade
+nuvens
+vento
