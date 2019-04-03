@@ -45,6 +45,7 @@ def t_error( t ):
     t.lexer.skip(1)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     
     lexer = lex.lex()
 
@@ -61,3 +62,7 @@ if __name__ == "__main__":
         print(tok)
 
     pass
+=======
+    pass
+>>>>>>> 1e9f3495b88f9248eabf3d1e114b063f49e9cadc
+>>>>>>> 0b6f0d3e36ff02cb628ac524e11c33da2589753c
