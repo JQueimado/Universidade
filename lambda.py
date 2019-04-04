@@ -1,5 +1,4 @@
-from Resources import lex
-from Resources import yacc
+import ply.lex as lex
 
 # Gramatica em BNF
 # 
@@ -31,25 +30,19 @@ t_RP = r'\)'
 
 def t_VARIAVEL ( t ):
     r'[a-z]'
-    t.value = t
+    t.type = 'VARIAVEL'
     return t
-
-# lines
-def t_newline( t ):
-    r'\n+'
-    t.lexer.lineno += len(t.value)
 
 # error handeling
 def t_error( t ):
-    print("Invalid Sintaxe at char nº: %s" % t.value[0])
+    print("Invalid Sintaxe")
     t.lexer.skip(1)
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     
     lexer = lex.lex()
 
-    test = r"\x.x"
+    test ='''\x.x y'''
 
     lexer.input(test)
 
@@ -62,7 +55,3 @@ if __name__ == "__main__":
         print(tok)
 
     pass
-=======
-    pass
->>>>>>> 1e9f3495b88f9248eabf3d1e114b063f49e9cadc
->>>>>>> 0b6f0d3e36ff02cb628ac524e11c33da2589753c
