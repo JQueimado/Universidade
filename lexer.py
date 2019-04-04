@@ -36,6 +36,8 @@ def t_error( t ):
     print("Invalid Sintaxe")
     t.lexer.skip(1)
 
+
+# test #
 if __name__ == "__main__":
     
     lexer = lex.lex()
