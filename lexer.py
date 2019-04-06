@@ -1,6 +1,7 @@
 import ply.lex as lex
 
-#   TOKENS:
+'''  
+TOKENS:
 #
 #   VARIAVEL-> a-z
 #   LAMBDA  -> \
@@ -8,11 +9,11 @@ import ply.lex as lex
 #   SPACE   -> " "
 #   LP      -> (
 #   RP      -> )
-#
+'''
 
 # Tokens 
 tokens = (
-    'VARIAVEL',
+    'VARIABLE',
     'LAMBDA',
     'DOT',
     'SPACE',
@@ -28,12 +29,16 @@ t_RP = r'\)'
 
 def t_VARIAVEL ( t ):
     r'[a-z]'
-    t.type = 'VARIAVEL'
+    t.type = 'VARIABLE'
     return t
+
+precedence = (
+    ()
+)
 
 # error handeling
 def t_error( t ):
-    print("Invalid Sintaxe")
+    print("Invalid Sintax!")
     t.lexer.skip(1)
 
 
@@ -44,7 +49,7 @@ if __name__ == "__main__":
 
     try:
         while True:
-            test = raw_input()
+            test = input()
 
             print("-> %s" % test)
 
