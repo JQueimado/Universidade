@@ -6,6 +6,9 @@ class Node:
         self.left_child = None
         self.right_child = None
 
+    def print_node(self):
+        print(str(self.value) + "-" + str(self.type))
+
 class Tree:
     def __init__(self):
         self.root = None
@@ -28,6 +31,18 @@ class Tree:
         
     def printTree(self):
         if self.root:
-            self.root.printTree()
+            self.root.print_node()
+            self.root.left_child.printTree()
+            self.root.right_child.printTree()
             print("")
 
+if __name__ == "__main__":
+    
+    tree = Tree()
+
+    tree.insert(1, "cona")
+    tree.insert(2, "cona")
+    tree.insert(3, "cona")
+
+
+    tree.printTree()
