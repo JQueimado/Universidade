@@ -1,14 +1,14 @@
-import ply.lex as lex
+import ply.lex as lexer
 
 '''  
 TOKENS:
-#
-#   VARIAVEL-> a-z
-#   LAMBDA  -> \
-#   DOT     -> .
-#   SPACE   -> " "
-#   LP      -> (
-#   RP      -> )
+
+   VARIAVEL-> a-z
+   LAMBDA  -> \
+   DOT     -> .
+   SPACE   -> " "
+   LP      -> (
+   RP      -> )
 '''
 
 # Tokens 
@@ -43,6 +43,7 @@ def t_error( t ):
 
 
 # test #
+'''
 if __name__ == "__main__":
     
     lexer = lex.lex()
@@ -67,3 +68,4 @@ if __name__ == "__main__":
 
     except EOFError as e:
         pass
+'''
