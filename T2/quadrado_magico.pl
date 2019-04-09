@@ -6,7 +6,7 @@
 
 /*** tabuleiro ***/
 
-tamanho_tabuleiro(4).
+tamanho_tabuleiro(5).
 
 /*****************/
 
