@@ -1,0 +1,839 @@
+start
+process changed
+0 : empty
+process changed
+0 0
+1 : 1
+0 0
+2 : 1
+0 0
+3 : 1
+0 0
+4 : 1
+process changed
+0 0
+5 : 2
+0 0
+6 : 2
+0 0
+7 : 2
+0 0
+8 : 2
+process changed
+0 0
+9 : 1
+0 0
+10 : 1
+0 0
+11 : 1
+0 0
+12 : 1
+process changed
+0 0
+13 : 3
+0 0
+14 : 3
+0 0
+15 : 3
+0 0
+16 : 3
+process changed
+0 0
+17 : 2
+0 0
+18 : 2
+0 0
+19 : 2
+0 0
+20 : 2
+process changed
+0 0
+21 : 1
+0 0
+22 : 1
+0 0
+23 : 1
+0 0
+24 : 1
+process changed
+0 0
+25 : 3
+0 0
+26 : 3
+0 0
+27 : 3
+0 0
+28 : 3
+process changed
+0 0
+29 : 2
+0 0
+30 : 2
+0 0
+31 : 2
+0 0
+32 : 2
+process changed
+0 0
+33 : 1
+0 0
+34 : 1
+0 0
+35 : 1
+0 0
+36 : 1
+process changed
+0 0
+37 : 3
+0 0
+38 : 3
+0 0
+39 : 3
+0 0
+40 : 3
+process changed
+0 0
+41 : 2
+0 0
+42 : 2
+0 0
+43 : 2
+process changed
+0 0
+44 : 1
+0 0
+45 : 1
+0 0
+46 : 1
+0 0
+47 : 1
+process changed
+0 0
+48 : 3
+0 0
+49 : 3
+0 0
+50 : 3
+0 0
+51 : 3
+process changed
+0 0
+52 : 1
+0 0
+53 : 1
+0 0
+54 : 1
+0 0
+55 : 1
+process changed
+0 0
+56 : 3
+0 0
+57 : 3
+0 0
+58 : 3
+0 0
+59 : 3
+process changed
+0 0
+60 : 1
+0 0
+61 : 1
+0 0
+62 : 1
+0 0
+63 : 1
+process changed
+0 0
+64 : 3
+0 0
+65 : 3
+0 0
+66 : 3
+0 0
+67 : 3
+process changed
+0 0
+68 : 1
+0 0
+69 : 1
+0 0
+70 : 1
+0 0
+71 : 1
+process changed
+0 0
+72 : 3
+0 0
+73 : 3
+0 0
+74 : 3
+0 0
+75 : 3
+process changed
+0 0
+76 : 1
+0 0
+77 : 1
+process changed
+0 0
+78 : 3
+0 0
+79 : 3
+0 0
+80 : 3
+0 0
+81 : 3
+process changed
+0 0
+82 : 3
+0 0
+83 : 3
+0 0
+84 : 3
+0 0
+85 : 3
+process changed
+0 0
+86 : 3
+0 0
+87 : 3
+0 0
+88 : 3
+0 0
+89 : 3
+process changed
+0 0
+90 : 3
+0 0
+91 : 3
+0 0
+92 : 3
+0 0
+93 : 3
+process changed
+0 0
+94 : 3
+0 0
+95 : 3
+0 0
+96 : 3
+0 0
+97 : 3
+process changed
+0 0
+98 : 3
+0 0
+99 : 3
+0 0
+100 : 3
+0 0
+101 : 3
+process changed
+0 0
+102 : 3
+0 0
+103 : 3
+0 0
+104 : 3
+0 0
+105 : 3
+process changed
+0 0
+106 : 3
+0 0
+107 : 3
+0 0
+108 : 3
+0 0
+109 : 3
+process changed
+0 0
+110 : 3
+0 0
+111 : 3
+0 0
+112 : 3
+0 0
+113 : 3
+process changed
+0 0
+114 : 3
+0 0
+115 : 3
+0 0
+116 : 3
+0 0
+117 : 3
+process changed
+0 0
+118 : 3
+0 0
+119 : 3
+0 0
+120 : 3
+0 0
+121 : 3
+process changed
+0 0
+122 : 3
+0 0
+123 : 3
+0 0
+124 : 3
+0 0
+125 : 3
+process changed
+0 0
+126 : 3
+0 0
+127 : 3
+0 0
+128 : 3
+0 0
+129 : 3
+process changed
+0 0
+130 : 3
+0 0
+131 : 3
+0 0
+132 : 3
+0 0
+133 : 3
+process changed
+0 0
+134 : 3
+0 0
+135 : 3
+0 0
+136 : 3
+0 0
+137 : 3
+process changed
+0 0
+138 : 3
+0 0
+139 : 3
+0 0
+140 : 3
+0 0
+141 : 3
+process changed
+0 0
+142 : 3
+0 0
+143 : 3
+0 0
+144 : 3
+0 0
+145 : 3
+process changed
+146 : empty
+process changed
+147 : empty
+process changed
+148 : empty
+process changed
+149 : empty
+process changed
+150 : empty
+process changed
+151 : empty
+process changed
+152 : empty
+process changed
+153 : empty
+process changed
+154 : empty
+process changed
+155 : empty
+process changed
+156 : empty
+process changed
+157 : empty
+process changed
+158 : empty
+process changed
+159 : empty
+process changed
+160 : empty
+process changed
+161 : empty
+process changed
+162 : empty
+process changed
+163 : empty
+process changed
+164 : empty
+process changed
+165 : empty
+process changed
+166 : empty
+process changed
+167 : empty
+process changed
+168 : empty
+process changed
+169 : empty
+process changed
+0 0
+170 : 4
+0 0
+171 : 4
+0 0
+172 : 4
+0 0
+173 : 4
+process changed
+0 0
+174 : 4
+0 0
+175 : 4
+0 0
+176 : 4
+0 0
+177 : 4
+process changed
+0 0
+178 : 4
+0 0
+179 : 4
+0 0
+180 : 4
+0 0
+181 : 4
+process changed
+0 0
+182 : 4
+0 0
+183 : 4
+0 0
+184 : 4
+0 0
+185 : 4
+process changed
+0 0
+186 : 4
+0 0
+187 : 4
+0 0
+188 : 4
+0 0
+189 : 4
+process changed
+0 0
+190 : 4
+process changed
+191 : empty
+process changed
+192 : empty
+process changed
+193 : empty
+process changed
+194 : empty
+process changed
+195 : empty
+process changed
+196 : empty
+process changed
+197 : empty
+process changed
+198 : empty
+process changed
+199 : empty
+process changed
+0 0
+200 : 5
+0 0
+201 : 5
+0 0
+202 : 5
+0 0
+203 : 5
+process changed
+0 0
+204 : 5
+0 0
+205 : 5
+0 0
+206 : 5
+0 0
+207 : 5
+process changed
+0 0
+208 : 5
+0 0
+209 : 5
+0 0
+210 : 5
+0 0
+211 : 5
+process changed
+0 0
+212 : 5
+0 0
+213 : 5
+0 0
+214 : 5
+process changed
+215 : empty
+process changed
+216 : empty
+process changed
+217 : empty
+process changed
+218 : empty
+process changed
+219 : empty
+process changed
+220 : empty
+process changed
+221 : empty
+process changed
+222 : empty
+process changed
+223 : empty
+process changed
+224 : empty
+process changed
+225 : empty
+process changed
+226 : empty
+process changed
+227 : empty
+process changed
+228 : empty
+process changed
+229 : empty
+process changed
+230 : empty
+process changed
+231 : empty
+process changed
+232 : empty
+process changed
+233 : empty
+process changed
+234 : empty
+process changed
+235 : empty
+process changed
+236 : empty
+process changed
+237 : empty
+process changed
+238 : empty
+process changed
+239 : empty
+process changed
+240 : empty
+process changed
+241 : empty
+process changed
+242 : empty
+process changed
+243 : empty
+process changed
+244 : empty
+process changed
+245 : empty
+process changed
+246 : empty
+process changed
+247 : empty
+process changed
+248 : empty
+process changed
+249 : empty
+process changed
+0 0
+250 : 6
+0 0
+251 : 6
+0 0
+252 : 6
+0 0
+253 : 6
+process changed
+0 0
+254 : 6
+0 0
+255 : 6
+0 0
+256 : 6
+0 0
+257 : 6
+process changed
+258 : empty
+process changed
+259 : empty
+process changed
+260 : empty
+process changed
+261 : empty
+process changed
+262 : empty
+process changed
+263 : empty
+process changed
+264 : empty
+process changed
+265 : empty
+process changed
+266 : empty
+process changed
+267 : empty
+process changed
+268 : empty
+process changed
+269 : empty
+process changed
+270 : empty
+process changed
+271 : empty
+process changed
+272 : empty
+process changed
+273 : empty
+process changed
+274 : empty
+process changed
+275 : empty
+process changed
+276 : empty
+process changed
+277 : empty
+process changed
+278 : empty
+process changed
+279 : empty
+process changed
+280 : empty
+process changed
+281 : empty
+process changed
+282 : empty
+process changed
+283 : empty
+process changed
+284 : empty
+process changed
+285 : empty
+process changed
+286 : empty
+process changed
+287 : empty
+process changed
+288 : empty
+process changed
+289 : empty
+process changed
+290 : empty
+process changed
+291 : empty
+process changed
+292 : empty
+process changed
+293 : empty
+process changed
+294 : empty
+process changed
+295 : empty
+process changed
+296 : empty
+process changed
+297 : empty
+process changed
+298 : empty
+process changed
+299 : empty
+process changed
+300 : empty
+process changed
+301 : empty
+process changed
+302 : empty
+process changed
+303 : empty
+process changed
+304 : empty
+process changed
+305 : empty
+process changed
+306 : empty
+process changed
+307 : empty
+process changed
+308 : empty
+process changed
+309 : empty
+process changed
+310 : empty
+process changed
+311 : empty
+process changed
+312 : empty
+process changed
+313 : empty
+process changed
+314 : empty
+process changed
+315 : empty
+process changed
+316 : empty
+process changed
+317 : empty
+process changed
+318 : empty
+process changed
+319 : empty
+process changed
+320 : empty
+process changed
+321 : empty
+process changed
+322 : empty
+process changed
+323 : empty
+process changed
+324 : empty
+process changed
+325 : empty
+process changed
+326 : empty
+process changed
+327 : empty
+process changed
+328 : empty
+process changed
+329 : empty
+process changed
+0 0
+330 : 7
+0 0
+331 : 7
+0 0
+332 : 7
+0 0
+333 : 7
+process changed
+0 0
+334 : 7
+0 0
+335 : 7
+0 0
+336 : 7
+0 0
+337 : 7
+process changed
+0 0
+338 : 7
+0 0
+339 : 7
+0 0
+340 : 7
+0 0
+341 : 7
+process changed
+0 0
+342 : 7
+0 0
+343 : 7
+0 0
+344 : 7
+0 0
+345 : 7
+process changed
+0 0
+346 : 7
+0 0
+347 : 7
+0 0
+348 : 7
+0 0
+349 : 7
+process changed
+0 0
+350 : 8
+0 0
+351 : 8
+0 0
+352 : 8
+0 0
+353 : 8
+process changed
+0 0
+354 : 7
+0 0
+355 : 7
+0 0
+356 : 7
+0 0
+357 : 7
+process changed
+0 0
+358 : 8
+0 0
+359 : 8
+0 0
+360 : 8
+0 0
+361 : 8
+process changed
+0 0
+362 : 7
+0 0
+363 : 7
+0 0
+364 : 7
+0 0
+365 : 7
+process changed
+0 0
+366 : 8
+0 0
+367 : 8
+0 0
+368 : 8
+0 0
+369 : 8
+process changed
+0 0
+370 : 7
+0 0
+371 : 7
+0 0
+372 : 7
+0 0
+373 : 7
+process changed
+0 0
+374 : 8
+0 0
+375 : 8
+0 0
+376 : 8
+0 0
+377 : 8
+process changed
+0 0
+378 : 7
+0 0
+379 : 7
+0 0
+380 : 7
+0 0
+381 : 7
+process changed
+0 0
+382 : 7
+0 0
+383 : 7
+0 0
+384 : 7
+0 0
+385 : 7
+process changed
+0 0
+386 : 7
