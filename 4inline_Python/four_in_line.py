@@ -34,7 +34,7 @@ class State:
         pos = 0
 
         if( self.matrix[0][colum] != 0 ):
-            return
+            return False
 
         for pos in range(self.Y_Size):
             if( self.matrix[pos][colum] != 0 ):
@@ -42,6 +42,7 @@ class State:
                 break
 
         self.matrix[pos][colum] = player
+        return True
 
     def show(self):
         for i in range(self.Y_Size):
@@ -258,14 +259,18 @@ if __name__ == "__main__":
 
     state0.play(2,0)
     state0.play(2,0)
-    state0.play(1,0)
-    state0.play(1,0)
+    state0.play(2,0)
+    state0.play(2,0)
 
-    state0.play(1,1)
-    state0.play(1,1)
-    state0.play(1,1)
-    state0.play(1,1)
+    state1 = state0.cpy()
+
+    state1.play(1,1)
+    state1.play(1,1)
+    state1.play(1,1)
+    state1.play(1,1)
 
     state0.show()
 
-    print( state0.val_col() )
+    print()
+
+    state1.show()

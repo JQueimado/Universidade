@@ -8,46 +8,72 @@ class Node:
 
     def __init__(self, state):
         self.state = state
+        self.children = []
 
     def expand(self, player):
+
+        if( len(self.children) != 0 ):
+            return
+
         for i in range( self.state.X_Size ):
             nstate = self.state.cpy()
-            nstate.play(player, i)
-            nnode = Node(nstate)
+            if( not nstate.play(player, i) ):
+                continue
+            nnode = Node( nstate )
             self.children.append( nnode )
 
 class MinMaxTree:
     root = None
-    size = 0
 
     def __init__( self , inithial_state):
         self.root = Node( inithial_state )
-        self.size += 1
 
     def minmax_rec(self, node, prof, player, plim):
        
+        print(id(node), prof)
+        node.state.show()
+
         c = node.state.term()
 
-        if( c != 0 or prof == plim ):
+        inf = float('inf')
+
+        if( c == 1 ):
+            print( "win" )
+            return inf
+
+        if( c == -1):
+            print( "lose" )
+            return -inf
+
+        if( plim == prof ):
+            print ("leaf")
             return node.state.val()
 
         node.expand( player )
 
-        print( len( node.children ) )
+        count = 0
+        for n in node.children:
+            print(count)
+            n.state.show()
+            count += 1
 
         if( player == 1 ):
-            player = 2
+            p = 2
         else:
-            player = 1
+            p = 1
+
+        l = []
 
         for n in node.children:
-            print
-            n.state.show()
-            self.minmax_rec( node, prof+1, player, plim)
+            l.append( self.minmax_rec( n, prof+1, p, plim) )
 
-        return node.state.val()
+        if( player == 1 ):
+            val = max(l)
+        else:
+            val = min(l)
 
-        
+        return val
+
 
     def minmax(self):
         inithial = self.root
@@ -56,10 +82,13 @@ class MinMaxTree:
         if( c != 0 ):
             return c
 
-        val = self.minmax_rec( inithial, 0, 1, 2)
+        val = self.minmax_rec( inithial, 0, 1, 10)
+
+        return val
 
 if __name__ == "__main__":
     istate = State()
+
     tree = MinMaxTree( istate )
 
-    tree.minmax()
+    print( tree.minmax() )
