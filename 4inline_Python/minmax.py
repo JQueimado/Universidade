@@ -4,18 +4,16 @@ class Node:
     state = None
     value = 0
 
-    parent = None
     children = []
 
-    def __init__(self, state, parent):
+    def __init__(self, state):
         self.state = state
-        self.parent = parent
 
     def expand(self, player):
         for i in range( self.state.X_Size ):
             nstate = self.state.cpy()
             nstate.play(player, i)
-            nnode = Node(nstate, self)
+            nnode = Node(nstate)
             self.children.append( nnode )
 
 class MinMaxTree:
@@ -23,37 +21,33 @@ class MinMaxTree:
     size = 0
 
     def __init__( self , inithial_state):
-        self.root = Node( inithial_state, None )
+        self.root = Node( inithial_state )
         self.size += 1
 
-    def minmax_rec(self, node, prof):
-        
+    def minmax_rec(self, node, prof, player, plim):
+       
         c = node.state.term()
 
-        # leaf #
-        if( c != 0 ):
-            val = node.state.val()
-            node.val = val
-            return val
-        
-        # branch #
-        node.expand()
-        l = []
+        if( c != 0 or prof == plim ):
+            return node.state.val()
 
-        for i in node.children():
-            val = minmax_rec( i, prof+1 )
-            i.val = val
-            l.append( val )
+        node.expand( player )
 
-        if( (prof % 2) == 0 ):
-            val = min(l)
+        print( len( node.children ) )
+
+        if( player == 1 ):
+            player = 2
         else:
-            val = max(l)
+            player = 1
 
-        node.val = val
-        return val
+        for n in node.children:
+            print
+            n.state.show()
+            self.minmax_rec( node, prof+1, player, plim)
 
-        pass
+        return node.state.val()
+
+        
 
     def minmax(self):
         inithial = self.root
@@ -62,14 +56,10 @@ class MinMaxTree:
         if( c != 0 ):
             return c
 
-        val = minmax_rec( inithial, 0 )
+        val = self.minmax_rec( inithial, 0, 1, 2)
 
 if __name__ == "__main__":
     istate = State()
     tree = MinMaxTree( istate )
 
     tree.minmax()
-
-    for i in tree.root.children:
-        print()
-        i.state.show()

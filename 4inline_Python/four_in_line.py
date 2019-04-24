@@ -177,6 +177,7 @@ class State:
         
         return 0
 
+    # end game #
     def term(self):
         c = self.check_lines()
         if( c != 0 ):
@@ -196,36 +197,75 @@ class State:
 
         return 0
 
-    def val_point(self, x, y ):
-        score = 0
+    # evals colums #
+    def val_col(self):
+        
+        s = 0
 
-        l = []
+        for i in range(self.Y_Size):
+            # gets colum values #
+            l = self.get_colum( i )
 
-        print(l)
+            # finds possible winner #
+            c = 0
 
-        return score
+            for e in l:
+                if( e != self.EP ):
+                    break
+                c += 1
+
+            # if no player then valueles #
+            if( c >= len( l ) ):
+                continue
+
+            # gets chances for player #
+            t = l[c]
+            p = 1
+
+            if( t == self.P2 ):
+                p = -1
+
+            count = 0
+            j = 0
+
+            for j in range( c, len( l ) ):
+                if( l[j] != t ):
+                    break
+                count += p
+
+            # if any player cant win then its valueles #
+            if( j < self.WIN ):
+                continue
+
+            s += count
+
+        return s
+
+    def val_lines( self ):
+        s = 0
+        for l in self.matrix:
+            pass
 
     # val #
     def val(self):
-        score = 0
+        s = self.val_col()
 
-        x = 0
-        y = 0
-
-        for y in range( self.Y_Size ):
-            for x in range( self.X_Size ):
-                val = self.matrix[y][x]                    
-                    
+        return s
 
 ## main ##
 if __name__ == "__main__":
     state0 = State()
 
+    state0.play(2,0)
+    state0.play(2,0)
     state0.play(1,0)
     state0.play(1,0)
-    state0.play(1,0)
-    state0.play(1,0)
+
+    state0.play(1,1)
+    state0.play(1,1)
+    state0.play(1,1)
+    state0.play(1,1)
 
     state0.show()
 
-    print( state0.val_point( 0, 5 ) )
+    print( state0.val_col() )
