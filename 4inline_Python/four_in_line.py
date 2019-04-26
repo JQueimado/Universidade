@@ -67,6 +67,10 @@ class State:
                 count1 = 0
                 count2 += 1
 
+            if( elm == self.EP ):
+                count1 = 0
+                count2 = 0
+
             if( count1 == self.WIN ):
                 return 1
 
@@ -257,20 +261,11 @@ class State:
 if __name__ == "__main__":
     state0 = State()
 
-    state0.play(2,0)
-    state0.play(2,0)
-    state0.play(2,0)
-    state0.play(2,0)
-
-    state1 = state0.cpy()
-
-    state1.play(1,1)
-    state1.play(1,1)
-    state1.play(1,1)
-    state1.play(1,1)
+    state0.play(1,1)
+    state0.play(1,2)
+    state0.play(1,3)
+    state0.play(1,4)
 
     state0.show()
 
-    print()
-
-    state1.show()
+    print( state0.term() )

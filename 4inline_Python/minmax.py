@@ -75,14 +75,14 @@ class MinMaxTree:
         return val
 
 
-    def minmax(self):
+    def minmax(self, plim):
         inithial = self.root
         c = inithial.state.term()
         
         if( c != 0 ):
             return c
 
-        val = self.minmax_rec( inithial, 0, 1, 10)
+        val = self.minmax_rec( inithial, 0, 1, plim)
 
         return val
 
@@ -91,4 +91,4 @@ if __name__ == "__main__":
 
     tree = MinMaxTree( istate )
 
-    print( tree.minmax() )
+    print( tree.minmax( 10 ) )
