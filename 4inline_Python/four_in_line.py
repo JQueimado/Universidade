@@ -246,10 +246,31 @@ class State:
 
         return s
 
+    def val_line(self, l):
+        count = 0
+        val = 0
+        t = self.EP
+
+        i = 0
+        while True:
+            e = l[i]
+            i += 1
+
+            if( e == self.P1 or e == self.EP):
+                val += 1
+
+            if( e == self.P2):
+                pass
+
+            if( i >= len(l)):
+                break
+
+        return count
+
     def val_lines( self ):
         s = 0
         for l in self.matrix:
-            pass
+            self.val_line(l)
 
     # val #
     def val(self):
@@ -263,9 +284,10 @@ if __name__ == "__main__":
 
     state0.play(1,1)
     state0.play(1,2)
-    state0.play(1,3)
-    state0.play(1,4)
+    state0.play(2,3)
+    state0.play(2,4)
+    state0.play(2,6)
 
     state0.show()
 
-    print( state0.term() )
+    print( state0.val_line(state0.matrix[5]) )
