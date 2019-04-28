@@ -178,7 +178,6 @@ int main(void)
     /***Processor loop***/
     while (!(arrival_process_count == 0 && is_empty(new) && is_empty(ready) && run == NULL))
     {
-
         /**Check Process Entry**/
         for (int i = 0; i < arrival_process_end; ++i)
         {
