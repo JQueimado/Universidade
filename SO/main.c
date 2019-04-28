@@ -3,20 +3,30 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+/*Classes*/
+#include "Structs/Queue.h"
+#include "Structs/Process.h"
+#include "Structs/Pre_Process.h"
+
+/*Consts*/
+
 /*Vars*/
-#define MAX_PROCESS 5 
+#define SIZE_FILE_LINE 300
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
-#define SIZE_LINE 300
+#define MAX_PROCESS 20
 #define FILE_NAME "input1.txt"
 
 /*Scheduling*/
 #define QUANTUM 4
 #define MAX_READY_SIZE 4
 
-/*Functions*/
+/*Functions & Var*/
 #define SET_X 0
 #define SET_N 1
+#define X2
+#define N 
+
 #define INC_X 2
 #define DEC_X 3
 #define BACK_N 4
@@ -36,60 +46,97 @@ struct Process *CPU(struct Process *process , int MEM[]){
     int i = inst / 10;
     int v = inst - i*10;
 
-    printf("%d %d\n", i , v );
-
+    //printf("%d %d\n", i , v );
+    
     if (i == SET_X){
-	   int var2;
-	   scanf("%d", &var2);
-       MEM[ process->mem_str + v ] = var2;
+	   
+       MEM[ process->mem_str + v ] = X2;
 
     }
 
-    if (i == SET_N){
-        int N;
-		scanf("%d", &N);
-        MEM[ process->mem_str + v ] = N;
-        
-    }
+	if(i == SET_N){
+		
+		MEM[ process->mem_str + v ] = N;
+	}
 
     if (i == INC_X){
-
-       MEM[ process->mem_str + v ] += 1;
+        
+        MEM[ process->mem_str + v ] += 1;
         
     }
-	
-	if (i == DEC_X){
+
+    if (i == DEC_X){
 
        MEM[ process->mem_str + v ] -= 1;
         
     }
-    if (i == IF){
+
+	if (i == BACK_N){
+
+       set_pc(process , process->pc - MEM[ process->mem_str + v ]); 
+
+    }
+
+	if (i == FORW_N){
+
+       set_pc(process , process->pc + MEM[ process->mem_str + v ]);
+
+    }
+
+    if (i == IF_X_N){
 
         if ( MEM[ process->mem_str + v ] != 0 ){
 
             set_pc(process , process->pc + 1);
 
-        }
+        }else{
+
+			set_pc(process , process->pc + MEM[ process->mem_str + v ]);  
+    	}
+	}
+
+    if (i == FORK_X){
+
+       //2ª parte do trabalho
         
     }
 
-    *****
+    if (i == DISCK_SAVE_X){
 
+    	process->block_time = 0;
+    }
+	
+	if (i == DISCK_LOAD_X){
+
+		MEM[ process->mem_str ] = MEM[ process->mem_str + v ];
+	}
+
+    if (i == PRINT_X){
+
+		printf("%d ", MEM[ process->mem_str + v ]);
+    }
+
+    if (i == EXIT){
+
+        /*Tetsting*/
+        process->pc_aux = process->size;
+    }
+	
     set_pc( process , process->pc+1 );
 
     return process;
-
+	
 }
 
 /***main***/
-int main(void) {	
+int main() {	
 
     /**File Acess**/
     FILE * file_pointer;
     file_pointer = fopen ( FILE_NAME ,"r");
  
     if (!file_pointer) {
-        perror("Error");
+        perror("Erro: Ficheiro Incorreto.");
         exit(0);
     }
 
@@ -103,7 +150,7 @@ int main(void) {
 
      char Instants_Array[SIZE_FILE_LINE];
 
-     while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)) {
+     while(fgets(Instants_Array, SIZE_FILE_LINE , file_pointer)!= NULL) {
 
         line = line + 1;
 
@@ -147,6 +194,7 @@ int main(void) {
 
      int arrival_process_end = 0;
      int arrival_process_count = 0;
+
      struct Pre_Process *arrival_process[MAX_PROCESS];
 
      for (int i = 0; output_arr[i] != -1 ; i += 2){
@@ -161,10 +209,10 @@ int main(void) {
 
 
     /*prepare scheduel*/
-    puts("start");
-    int mem_str = 0;
-    int mem_end = 0;
-    int mem_cur_size = 0;
+    puts("Inicio do Escalonador:\n");
+    //int mem_str = 0;
+    //int mem_end = 0;
+    //int mem_cur_size = 0;
     
     /*MEM*/
     static int MEM[MEM_SIZE];
@@ -270,6 +318,8 @@ int main(void) {
                 }
 
             }
+            
+        }
 
         /*Disk acesses*/
         if ( !is_empty(blocked) ){
