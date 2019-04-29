@@ -91,7 +91,8 @@ void set_pc(struct Process *process, int val)
 
 void set_state(struct Process * process, int nstate)
 {
-	process->state = nstate;
+	if( process != NULL)
+		process->state = nstate;
 }
 
 #endif

@@ -18,7 +18,7 @@
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
 #define MAX_PROCESS 20
-#define FILE_NAME "input1.txt"
+#define FILE_NAME "inputb.txt"
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -319,12 +319,10 @@ int main()
                 {
                     if (cur_pro->block_time >= DISCK_SAVE_TIME)
                     {
-
                         cur_pro->block_time = -1;
                     }
                     else
                     {
-
                         cur_pro->block_time += 1;
                     }
                 }
