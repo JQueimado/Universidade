@@ -379,7 +379,7 @@ int main()
             }
             else if (temp->state == RUN)
             {
-                printf("|  run  ");
+                printf("|   run  ");
             }
             else if (temp->state == BLOCKED)
             {
