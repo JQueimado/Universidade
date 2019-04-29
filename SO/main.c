@@ -18,7 +18,7 @@
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
 #define MAX_PROCESS 20
-#define FILE_NAME "input1.txt"
+#define FILE_NAME "input_b.xpto"
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -27,8 +27,8 @@
 /*Functions & Var*/
 #define SET_X 0
 #define SET_N 1
-#define X2
-#define N 
+#define X2 0
+#define N 0
 
 #define INC_X 2
 #define DEC_X 3
@@ -139,7 +139,7 @@ int main() {
     file_pointer = fopen ( FILE_NAME ,"r");
  
     if (!file_pointer) {
-        perror("Erro: Ficheiro Incorreto.");
+        printf("Error: No such file or directory\n");
         exit(0);
     }
 
@@ -213,10 +213,12 @@ int main() {
 
     /*prepare scheduel*/
     puts("Inicio do Escalonador:\n");
-    //int mem_str = 0;
-    //int mem_end = 0;
-    //int mem_cur_size = 0;
-    
+	/* 2ª Parte:
+    	int mem_str = 0;
+    	int mem_end = 0;
+    	int mem_cur_size = 0;
+    */
+
     /*MEM*/
     static int MEM[MEM_SIZE];
 
