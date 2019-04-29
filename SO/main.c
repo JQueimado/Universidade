@@ -240,8 +240,9 @@ int main()
                 enqueue(new, temp);
                 arrival_process_count -= 1;
                 pre_temp->done = 1;
-                processes[n_procesess] == temp;
+                processes[n_procesess] = temp;
                 n_procesess++;
+
             }
         }
 
@@ -312,12 +313,10 @@ int main()
         {
             for (int count = 0; count < blocked->size; count++)
             {
-
                 struct Process *cur_pro = dequeue(blocked);
 
                 if (cur_pro->block_time != -1)
                 {
-
                     if (cur_pro->block_time >= DISCK_SAVE_TIME)
                     {
 
@@ -356,7 +355,7 @@ int main()
 
             if (run->pc_aux >= run->size)
             {
-
+                set_state(run, _EXIT_);
                 run = NULL;
             }
         }
@@ -371,6 +370,7 @@ int main()
         for( int i = 0; i < n_procesess; i++)
         {
             struct Process * temp = processes[i];
+
             if( temp->state == NEW )
             {
                 printf("|  new  ");

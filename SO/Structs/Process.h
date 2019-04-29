@@ -89,9 +89,9 @@ void set_pc(struct Process *process, int val)
 	process->pc = val;
 }
 
-void set_state(struct Process * process, int state)
+void set_state(struct Process * process, int nstate)
 {
-	process->state = state;
+	process->state = nstate;
 }
 
 #endif
