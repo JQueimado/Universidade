@@ -336,7 +336,7 @@ int main()
         {
             run = CPU(run, MEM);
 
-            printf("%d : P[%d]\n", count, run->id);
+            printf("P[%d]\n", run->id);
 
             /*Check if process is waiting for a message*/
             if (run->block_time != -1)
