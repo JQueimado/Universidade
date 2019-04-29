@@ -18,7 +18,7 @@
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
 #define MAX_PROCESS 20
-#define FILE_NAME "input_b.xpto"
+#define FILE_NAME "input1.txt"
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -381,7 +381,7 @@ int main()
             }
             else if (temp->state == RUN)
             {
-                printf("|   run  ");
+                printf("|  run  ");
             }
             else if (temp->state == BLOCKED)
             {
