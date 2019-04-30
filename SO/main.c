@@ -128,8 +128,11 @@ struct Process *CPU(struct Process *process, int MEM[])
 int main()
 {
     /**File Acess**/
+    char fname[300];
+    printf("Ficheiro de input: ");
+    scanf("%s", fname);
     FILE *file_pointer;
-    file_pointer = fopen(FILE_NAME, "r");
+    file_pointer = fopen(fname, "r");
 
     if (!file_pointer)
     {
@@ -169,11 +172,10 @@ int main()
 
             if (Instants_Array[i] == ' ')
             {
-
                 Instantes_size += 1;
             }
 
-            i++;
+            i += 3;
         }
 
         output_arr[output_arr_pointer] = Instantes_size;

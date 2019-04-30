@@ -1,0 +1,600 @@
+Ficheiro de input: Inicio do Escalonador:
+
+process changed
+0 : empty
+0
+process changed
+P[1]
+1|  run  
+P[1]
+2|  run  |  new  
+P[1]
+3|  run  |  new  |  new  
+P[1]
+4|  run  |  new  |  new  
+process changed
+P[2]
+5|  ready |  run  |  new  
+P[2]
+6|  ready |  run  |  new  
+P[2]
+7|  ready |  run  |  new  
+P[2]
+8|  ready |  run  |  new  
+process changed
+P[1]
+9|  run  |  ready |  ready 
+P[1]
+10|  run  |  ready |  ready 
+P[1]
+11|  run  |  ready |  ready 
+P[1]
+12|  run  |  ready |  ready 
+process changed
+P[3]
+13|  ready |  ready |  run  
+P[3]
+14|  ready |  ready |  run  
+P[3]
+15|  ready |  ready |  run  
+P[3]
+16|  ready |  ready |  run  
+process changed
+P[2]
+17|  ready |  run  |  ready 
+P[2]
+18|  ready |  run  |  ready 
+P[2]
+19|  ready |  run  |  ready 
+P[2]
+20|  ready |  run  |  ready 
+process changed
+P[1]
+21|  run  |  ready |  ready 
+P[1]
+22|  run  |  ready |  ready 
+P[1]
+23|  run  |  ready |  ready 
+P[1]
+24|  run  |  ready |  ready 
+process changed
+P[3]
+25|  ready |  ready |  run  
+P[3]
+26|  ready |  ready |  run  
+P[3]
+27|  ready |  ready |  run  
+P[3]
+28|  ready |  ready |  run  
+process changed
+P[2]
+29|  ready |  run  |  ready 
+P[2]
+30|  ready |  run  |  ready 
+P[2]
+31|  ready |  run  |  ready 
+P[2]
+32|  ready |  run  |  ready 
+process changed
+P[1]
+33|  run  |  ready |  ready 
+P[1]
+34|  run  |  ready |  ready 
+P[1]
+35|  run  |  ready |  ready 
+P[1]
+36|  run  |  ready |  ready 
+process changed
+P[3]
+37|  ready |  ready |  run  
+P[3]
+38|  ready |  ready |  run  
+P[3]
+39|  ready |  ready |  run  
+P[3]
+40|  ready |  ready |  run  
+process changed
+P[2]
+41|  ready |  run  |  ready 
+P[2]
+42|  ready |  run  |  ready 
+P[2]
+43|  ready |  exit   |  ready 
+process changed
+P[1]
+44|  run  |  exit   |  ready 
+P[1]
+45|  run  |  exit   |  ready 
+P[1]
+46|  run  |  exit   |  ready 
+P[1]
+47|  run  |  exit   |  ready 
+process changed
+P[3]
+48|  ready |  exit   |  run  
+P[3]
+49|  ready |  exit   |  run  
+P[3]
+50|  ready |  exit   |  run  
+P[3]
+51|  ready |  exit   |  run  
+process changed
+P[1]
+52|  run  |  exit   |  ready 
+P[1]
+53|  run  |  exit   |  ready 
+P[1]
+54|  run  |  exit   |  ready 
+P[1]
+55|  run  |  exit   |  ready 
+process changed
+P[3]
+56|  ready |  exit   |  run  
+P[3]
+57|  ready |  exit   |  run  
+P[3]
+58|  ready |  exit   |  run  
+P[3]
+59|  ready |  exit   |  run  
+process changed
+P[1]
+60|  run  |  exit   |  ready 
+P[1]
+61|  run  |  exit   |  ready 
+P[1]
+62|  run  |  exit   |  ready 
+P[1]
+63|  run  |  exit   |  ready 
+process changed
+P[3]
+64|  ready |  exit   |  run  
+P[3]
+65|  ready |  exit   |  run  
+P[3]
+66|  ready |  exit   |  run  
+P[3]
+67|  ready |  exit   |  run  
+process changed
+P[1]
+68|  run  |  exit   |  ready 
+P[1]
+69|  run  |  exit   |  ready 
+P[1]
+70|  run  |  exit   |  ready 
+P[1]
+71|  run  |  exit   |  ready 
+process changed
+P[3]
+72|  ready |  exit   |  run  
+P[3]
+73|  ready |  exit   |  run  
+P[3]
+74|  ready |  exit   |  run  
+P[3]
+75|  ready |  exit   |  run  
+process changed
+P[1]
+76|  run  |  exit   |  ready 
+P[1]
+77|  exit   |  exit   |  ready 
+process changed
+P[3]
+78|  exit   |  exit   |  run  
+P[3]
+79|  exit   |  exit   |  run  
+P[3]
+80|  exit   |  exit   |  run  
+P[3]
+81|  exit   |  exit   |  run  
+process changed
+P[3]
+82|  exit   |  exit   |  run  
+P[3]
+83|  exit   |  exit   |  run  
+P[3]
+84|  exit   |  exit   |  run  
+P[3]
+85|  exit   |  exit   |  run  
+process changed
+P[3]
+86|  exit   |  exit   |  run  
+P[3]
+87|  exit   |  exit   |  run  
+P[3]
+88|  exit   |  exit   |  run  
+P[3]
+89|  exit   |  exit   |  run  
+process changed
+P[3]
+90|  exit   |  exit   |  run  
+P[3]
+91|  exit   |  exit   |  run  
+P[3]
+92|  exit   |  exit   |  run  
+P[3]
+93|  exit   |  exit   |  run  
+process changed
+P[3]
+94|  exit   |  exit   |  run  
+P[3]
+95|  exit   |  exit   |  run  
+P[3]
+96|  exit   |  exit   |  run  
+P[3]
+97|  exit   |  exit   |  run  
+process changed
+P[3]
+98|  exit   |  exit   |  run  
+P[3]
+99|  exit   |  exit   |  run  
+P[3]
+100|  exit   |  exit   |  run  
+P[3]
+101|  exit   |  exit   |  run  
+process changed
+P[3]
+102|  exit   |  exit   |  run  
+P[3]
+103|  exit   |  exit   |  run  
+P[3]
+104|  exit   |  exit   |  run  
+P[3]
+105|  exit   |  exit   |  run  
+process changed
+P[3]
+106|  exit   |  exit   |  run  
+P[3]
+107|  exit   |  exit   |  run  
+P[3]
+108|  exit   |  exit   |  run  
+P[3]
+109|  exit   |  exit   |  run  
+process changed
+P[3]
+110|  exit   |  exit   |  run  
+P[3]
+111|  exit   |  exit   |  run  
+P[3]
+112|  exit   |  exit   |  run  
+P[3]
+113|  exit   |  exit   |  run  
+process changed
+P[3]
+114|  exit   |  exit   |  run  
+P[3]
+115|  exit   |  exit   |  run  
+P[3]
+116|  exit   |  exit   |  run  
+P[3]
+117|  exit   |  exit   |  run  
+process changed
+P[3]
+118|  exit   |  exit   |  run  
+P[3]
+119|  exit   |  exit   |  run  
+P[3]
+120|  exit   |  exit   |  run  
+P[3]
+121|  exit   |  exit   |  run  
+process changed
+P[3]
+122|  exit   |  exit   |  run  
+P[3]
+123|  exit   |  exit   |  run  
+P[3]
+124|  exit   |  exit   |  run  
+P[3]
+125|  exit   |  exit   |  run  
+process changed
+P[3]
+126|  exit   |  exit   |  run  
+P[3]
+127|  exit   |  exit   |  run  
+P[3]
+128|  exit   |  exit   |  run  
+P[3]
+129|  exit   |  exit   |  run  
+process changed
+P[3]
+130|  exit   |  exit   |  run  
+P[3]
+131|  exit   |  exit   |  run  
+P[3]
+132|  exit   |  exit   |  run  
+P[3]
+133|  exit   |  exit   |  run  
+process changed
+P[3]
+134|  exit   |  exit   |  run  
+P[3]
+135|  exit   |  exit   |  run  
+P[3]
+136|  exit   |  exit   |  run  
+P[3]
+137|  exit   |  exit   |  run  
+process changed
+P[3]
+138|  exit   |  exit   |  run  
+P[3]
+139|  exit   |  exit   |  run  
+P[3]
+140|  exit   |  exit   |  run  
+P[3]
+141|  exit   |  exit   |  run  
+process changed
+P[3]
+142|  exit   |  exit   |  run  
+P[3]
+143|  exit   |  exit   |  run  
+P[3]
+144|  exit   |  exit   |  run  
+P[3]
+145|  exit   |  exit   |  exit   
+process changed
+146 : empty
+146|  exit   |  exit   |  exit   
+process changed
+147 : empty
+147|  exit   |  exit   |  exit   
+process changed
+148 : empty
+148|  exit   |  exit   |  exit   
+process changed
+149 : empty
+149|  exit   |  exit   |  exit   
+process changed
+150 : empty
+150|  exit   |  exit   |  exit   
+process changed
+151 : empty
+151|  exit   |  exit   |  exit   
+process changed
+152 : empty
+152|  exit   |  exit   |  exit   
+process changed
+153 : empty
+153|  exit   |  exit   |  exit   
+process changed
+154 : empty
+154|  exit   |  exit   |  exit   
+process changed
+155 : empty
+155|  exit   |  exit   |  exit   
+process changed
+156 : empty
+156|  exit   |  exit   |  exit   
+process changed
+157 : empty
+157|  exit   |  exit   |  exit   
+process changed
+158 : empty
+158|  exit   |  exit   |  exit   
+process changed
+159 : empty
+159|  exit   |  exit   |  exit   
+process changed
+160 : empty
+160|  exit   |  exit   |  exit   
+process changed
+161 : empty
+161|  exit   |  exit   |  exit   
+process changed
+162 : empty
+162|  exit   |  exit   |  exit   
+process changed
+163 : empty
+163|  exit   |  exit   |  exit   
+process changed
+164 : empty
+164|  exit   |  exit   |  exit   
+process changed
+165 : empty
+165|  exit   |  exit   |  exit   
+process changed
+166 : empty
+166|  exit   |  exit   |  exit   
+process changed
+167 : empty
+167|  exit   |  exit   |  exit   
+process changed
+168 : empty
+168|  exit   |  exit   |  exit   
+process changed
+169 : empty
+169|  exit   |  exit   |  exit   
+process changed
+P[4]
+170|  exit   |  exit   |  exit   |  run  
+P[4]
+171|  exit   |  exit   |  exit   |  run  
+P[4]
+172|  exit   |  exit   |  exit   |  run  
+P[4]
+173|  exit   |  exit   |  exit   |  run  
+process changed
+P[4]
+174|  exit   |  exit   |  exit   |  run  
+P[4]
+175|  exit   |  exit   |  exit   |  run  
+P[4]
+176|  exit   |  exit   |  exit   |  run  
+P[4]
+177|  exit   |  exit   |  exit   |  run  
+process changed
+P[4]
+178|  exit   |  exit   |  exit   |  run  
+P[4]
+179|  exit   |  exit   |  exit   |  run  
+P[4]
+180|  exit   |  exit   |  exit   |  run  
+P[4]
+181|  exit   |  exit   |  exit   |  run  
+process changed
+P[4]
+182|  exit   |  exit   |  exit   |  run  
+P[4]
+183|  exit   |  exit   |  exit   |  run  
+P[4]
+184|  exit   |  exit   |  exit   |  run  
+P[4]
+185|  exit   |  exit   |  exit   |  run  
+process changed
+P[4]
+186|  exit   |  exit   |  exit   |  run  
+P[4]
+187|  exit   |  exit   |  exit   |  run  
+P[4]
+188|  exit   |  exit   |  exit   |  run  
+P[4]
+189|  exit   |  exit   |  exit   |  run  
+process changed
+P[4]
+190|  exit   |  exit   |  exit   |  exit   
+process changed
+191 : empty
+191|  exit   |  exit   |  exit   |  exit   
+process changed
+192 : empty
+192|  exit   |  exit   |  exit   |  exit   
+process changed
+193 : empty
+193|  exit   |  exit   |  exit   |  exit   
+process changed
+194 : empty
+194|  exit   |  exit   |  exit   |  exit   
+process changed
+195 : empty
+195|  exit   |  exit   |  exit   |  exit   
+process changed
+196 : empty
+196|  exit   |  exit   |  exit   |  exit   
+process changed
+197 : empty
+197|  exit   |  exit   |  exit   |  exit   
+process changed
+198 : empty
+198|  exit   |  exit   |  exit   |  exit   
+process changed
+199 : empty
+199|  exit   |  exit   |  exit   |  exit   
+process changed
+P[5]
+200|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+201|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+202|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+203|  exit   |  exit   |  exit   |  exit   |  run  
+process changed
+P[5]
+204|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+205|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+206|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+207|  exit   |  exit   |  exit   |  exit   |  run  
+process changed
+P[5]
+208|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+209|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+210|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+211|  exit   |  exit   |  exit   |  exit   |  run  
+process changed
+P[5]
+212|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+213|  exit   |  exit   |  exit   |  exit   |  run  
+P[5]
+214|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+215 : empty
+215|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+216 : empty
+216|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+217 : empty
+217|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+218 : empty
+218|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+219 : empty
+219|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+220 : empty
+220|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+221 : empty
+221|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+222 : empty
+222|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+223 : empty
+223|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+224 : empty
+224|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+225 : empty
+225|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+226 : empty
+226|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+227 : empty
+227|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+228 : empty
+228|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+229 : empty
+229|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+230 : empty
+230|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+231 : empty
+231|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+232 : empty
+232|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+233 : empty
+233|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+234 : empty
+234|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+235 : empty
+235|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+236 : empty
+236|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+237 : empty
+237|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+238 : empty
+238|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+239 : empty
+239|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+240 : empty
+240|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+241 : empty
+241|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+242 : empty
+242|  exit   |  exit   |  exit   |  exit   |  exit   
+process changed
+243 : empty
+243|  exit   |  exit   |  exit   |  exit   |  exit  
