@@ -212,12 +212,12 @@ int main()
     /*Lists*/
 
     struct Queue *new = new_Queue();
-
     struct Queue *ready = new_Queue();
-
     struct Queue *blocked = new_Queue();
-
     struct Process *run = NULL;
+    struct Process *ext = NULL;
+
+    int disco;
 
     int timer = 0;
     int count = 0;
@@ -229,6 +229,14 @@ int main()
 
     while (!(arrival_process_count == 0 && is_empty(new) && is_empty(ready) && run == NULL))
     {
+
+        /**Check Exit Process**/
+        if( ext != NULL )
+        {
+            processes [ext->id - 1] = NULL;
+            free(ext);
+            ext = NULL;
+        }
 
         /**Check Process Entry**/
         for (int i = 0; i < arrival_process_end; ++i)
@@ -369,26 +377,32 @@ int main()
         {
             struct Process * temp = processes[i];
 
+            if(temp == NULL)
+            {
+
+            }
+
             if( temp->state == NEW )
             {
-                printf("|  new  ");
+                printf("|%10s", "new");
             }
             else if (temp->state == READY_WAIT )
             {
-                printf("|  ready ");
+                printf("|%10s", "ready");
             }
             else if (temp->state == RUN)
             {
-                printf("|  run  ");
+                printf("|%10s", "run");
             }
             else if (temp->state == BLOCKED)
             {
-                printf("| blocked ");
+                printf("|%10s", "blocked");
             }
             else if (temp->state == _EXIT_)
             {
-                printf("|  exit   ");
+                printf("|%10s", "exit");
             }
+
             
         }
         puts("");
