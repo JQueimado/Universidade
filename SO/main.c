@@ -18,7 +18,6 @@
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
 #define MAX_PROCESS 20
-#define FILE_NAME "inputb.txt"
 
 /*Scheduling*/
 #define QUANTUM 4
@@ -361,7 +360,6 @@ int main()
         }
         else
         {
-
             printf("%d : empty\n", count);
         }
 

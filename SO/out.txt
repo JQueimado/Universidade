@@ -1,0 +1,51 @@
+Ficheiro de input: Inicio do Escalonador:
+
+process changed
+P[1]
+0|  run  
+P[1]
+1|  run  
+P[1]
+2|  run  
+P[1]
+3|  run  
+process changed
+P[2]
+4|  ready |  run  
+P[2]
+5|  ready |  run  |  new  
+P[2]
+6|  ready |  run  |  new  
+P[2]
+7|  ready |  run  |  new  
+process changed
+P[1]
+8|  run  |  ready |  ready 
+P[1]
+9|  run  |  ready |  ready 
+P[1]
+10|  run  |  ready |  ready 
+P[1]
+11|  run  |  ready |  ready 
+process changed
+P[3]
+12|  ready |  ready |  run  
+P[3]
+13|  ready |  ready |  run  
+P[3]
+14|  ready |  ready |  run  
+P[3]
+15|  ready |  ready |  run  
+process changed
+P[2]
+16|  ready |  exit   |  ready 
+process changed
+P[1]
+17|  run  |  exit   |  ready 
+P[1]
+18|  run  |  exit   |  ready 
+P[1]
+19|  exit   |  exit   |  ready 
+process changed
+P[3]
+20|  exit   |  exit   |  exit   
