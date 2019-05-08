@@ -119,10 +119,11 @@ class State:
 
     # get colum #
     def get_colum(self, colum):
+        matrix = self.generate_state()
         c = []
         matrix = self.generate_state()
         for i in range(Y_Size):
-            line = self.matrix[i]
+            line = matrix[i]
             c.append(line[colum])
         return c
 
@@ -178,14 +179,15 @@ class State:
 
     # check_diagonal_2 #
     def check_diagonal_2(self):
-        
+        matrix = self.generate_state()
+
         for i in range(X_Size - 1):
             l = []
             x = i
             y = 0
 
             for j in range( i + 1 ):
-                l.append( self.self.moves[y][x] )
+                l.append( matrix[y][x] )
                 x -= 1 
                 y += 1
 
@@ -200,7 +202,7 @@ class State:
             y = i
 
             for j in range( Y_Size - i, 0, -1):
-                l.append( self.self.moves[y][x] )
+                l.append( matrix[y][x] )
                 x -= 1
                 y += 1
 
@@ -235,7 +237,6 @@ class State:
 
     # evals colums #
     def val_col(self):
-        
         s = 0
 
         for i in range(Y_Size):
@@ -299,8 +300,9 @@ class State:
         return count
 
     def val_lines( self ):
+        matrix = self.generate_state()
         s = 0
-        for l in self.self.moves:
+        for l in matrix:
             self.val_line(l)
 
     # val #
@@ -316,13 +318,19 @@ if __name__ == "__main__":
 
     state0.add_move(1,1)
     state0.add_move(1,2)
-    state0.add_move(2,3)
-    state0.add_move(2,4)
+    state0.add_move(1,3)
+    state0.add_move(1,4)
     state0.add_move(2,6)
 
     state0.show()
 
     expancion = state0.expand_state(1)
+
+    print()
+    print( state0.term() )
+
+    print()
+    print( state0.val() )
 
     for ex in expancion:
         print()
