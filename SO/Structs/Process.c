@@ -1,10 +1,10 @@
 #include "Process.h"
 
 /*Constructors*/
-struct Process *new_Process(int i, int inst_size, int file)
+Process *new_Process(int i, int inst_size, int file)
 {
 
-	struct Process *temp = malloc(sizeof(struct Process));
+	Process *temp = malloc(sizeof(Process));
 
 	/*PCB*/
 	temp->id = i;
@@ -24,14 +24,14 @@ struct Process *new_Process(int i, int inst_size, int file)
 
 /*Methods*/
 
-void set_process_ready(struct Process *process, int mem_pos, int size)
+void set_process_ready(Process *process, int mem_pos, int size)
 {
 	process->pc = mem_pos + INST_POINTER;
 	process->mem_str = mem_pos;
 	process->mem_end = mem_pos + INST_POINTER + size;
 }
 
-void set_pc(struct Process *process, int val)
+void set_pc(Process *process, int val)
 {
 
 	int inst_pointer_str = process->mem_str + INST_POINTER;
@@ -53,7 +53,7 @@ void set_pc(struct Process *process, int val)
 	process->pc = val;
 }
 
-void set_state(struct Process * process, int nstate)
+void set_state(Process * process, int nstate)
 {
 	if( process != NULL)
 		process->state = nstate;

@@ -1,8 +1,8 @@
 #include "Queue.h"
 
 /*Constructor*/
-struct Queue *new_Queue(){
-	struct Queue *temp = malloc(sizeof(struct Queue));
+Queue *new_Queue(){
+	Queue *temp = malloc(sizeof(Queue));
 
 	temp->header = 0;
 	temp->footer = 0;
@@ -12,11 +12,11 @@ struct Queue *new_Queue(){
 }
 
 /*Methods*/
-bool is_empty(struct Queue *queue){
+bool is_empty(Queue *queue){
 	return queue->header == queue->footer;
 }
 
-void enqueue(struct Queue *queue, struct Process *item){
+void enqueue(Queue *queue, Process *item){
 	queue->arr[queue->footer] = item;
 	queue->footer += 1;
 	queue->size += 1;
@@ -29,7 +29,7 @@ void enqueue(struct Queue *queue, struct Process *item){
 
 }
 
-struct Process *dequeue(struct Queue *queue){
+Process *dequeue(Queue *queue){
 	if (is_empty(queue))
 		return NULL;
 
@@ -45,6 +45,6 @@ struct Process *dequeue(struct Queue *queue){
 	return queue->arr[queue->header - 1];
 }
 
-struct Process *next(struct Queue *queue){
+Process *next(Queue *queue){
 	return queue->arr[queue->header];
 }

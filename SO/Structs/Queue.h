@@ -18,19 +18,19 @@ typedef struct Queue{
 	int header;
 	int footer;
 	int size;
-	struct Process *arr[STD_QUEUE_SIZE];
+	Process *arr[STD_QUEUE_SIZE];
 } Queue;
 
 /*Constructor*/
-struct Queue *new_Queue();
+Queue *new_Queue();
 
 /*Methods*/
-bool is_empty(struct Queue *queue);
+bool is_empty(Queue *queue);
 
-void enqueue(struct Queue *queue, struct Process *item);
+void enqueue(Queue *queue, Process *item);
 
-struct Process *dequeue(struct Queue *queue);
+Process *dequeue(Queue *queue);
 
-struct Process *next(struct Queue *queue);
+Process *next(Queue *queue);
 
 #endif

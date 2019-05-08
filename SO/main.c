@@ -41,7 +41,7 @@
 #define EXIT 11
 
 /**CPU**/
-struct Process *CPU(struct Process *process, int MEM[])
+Process *CPU(Process *process, int MEM[])
 {
     int inst = MEM[process->pc];
 
@@ -188,7 +188,7 @@ int main()
     int arrival_process_end = 0;
     int arrival_process_count = 0;
 
-    struct Pre_Process *arrival_process[MAX_PROCESS];
+    Pre_Process *arrival_process[MAX_PROCESS];
 
     for (int i = 0; output_arr[i] != -1; i += 2)
     {
@@ -211,11 +211,11 @@ int main()
 
     /*Lists*/
 
-    struct Queue *new = new_Queue();
-    struct Queue *ready = new_Queue();
-    struct Queue *blocked = new_Queue();
-    struct Process *run = NULL;
-    struct Process *ext = NULL;
+    Queue *new = new_Queue();
+    Queue *ready = new_Queue();
+    Queue *blocked = new_Queue();
+    Process *run = NULL;
+    Process *ext = NULL;
 
     int disco;
 
@@ -225,7 +225,7 @@ int main()
 
     /***Processor loop***/
     int n_procesess = 0;
-    struct Process * processes[MAX_PROCESS];
+    Process * processes[MAX_PROCESS];
 
     while (!(arrival_process_count == 0 && is_empty(new) && is_empty(ready) && run == NULL))
     {
@@ -241,11 +241,11 @@ int main()
         /**Check Process Entry**/
         for (int i = 0; i < arrival_process_end; ++i)
         {
-            struct Pre_Process *pre_temp = arrival_process[i];
+            Pre_Process *pre_temp = arrival_process[i];
             if (pre_temp->arrival <= count && pre_temp->done == 0)
             {
                 ids += 1;
-                struct Process *temp = new_Process(ids, pre_temp->size, pre_temp->file_pos);
+                Process *temp = new_Process(ids, pre_temp->size, pre_temp->file_pos);
                 enqueue(new, temp);
                 arrival_process_count -= 1;
                 pre_temp->done = 1;
@@ -265,7 +265,7 @@ int main()
             /*Process for Ready*/
             if (ready->size < MAX_READY_SIZE && !is_empty(new))
             {
-                struct Process * temp = dequeue(new);
+                Process * temp = dequeue(new);
                 set_state(temp, READY_WAIT);
                 enqueue(ready, temp);
             }
@@ -301,7 +301,7 @@ int main()
             {
                 for (int count = 0; count < blocked->size; count++)
                 {
-                    struct Process *cur_pro = dequeue(blocked);
+                    Process *cur_pro = dequeue(blocked);
 
                     /*Check for processes to place in ready*/
                     if (ready->size < MAX_READY_SIZE && cur_pro->block_time == -1)
@@ -322,7 +322,7 @@ int main()
         {
             for (int count = 0; count < blocked->size; count++)
             {
-                struct Process *cur_pro = dequeue(blocked);
+                Process *cur_pro = dequeue(blocked);
 
                 if (cur_pro->block_time != -1)
                 {
@@ -375,7 +375,7 @@ int main()
         printf("%d",count);
         for( int i = 0; i < n_procesess; i++)
         {
-            struct Process * temp = processes[i];
+            Process * temp = processes[i];
 
             if(temp == NULL)
             {

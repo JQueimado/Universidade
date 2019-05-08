@@ -37,13 +37,13 @@ typedef struct Process
 } Process;
 
 /*Constructors*/
-struct Process *new_Process(int i, int inst_size, int file);
+Process *new_Process(int i, int inst_size, int file);
 
 /*Methods*/
-void set_process_ready(struct Process *process, int mem_pos, int size);
+void set_process_ready(Process *process, int mem_pos, int size);
 
-void set_pc(struct Process *process, int val);
+void set_pc(Process *process, int val);
 
-void set_state(struct Process * process, int nstate);
+void set_state(Process * process, int nstate);
 
 #endif

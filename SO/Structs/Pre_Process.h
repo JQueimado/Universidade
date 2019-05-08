@@ -21,6 +21,6 @@ typedef struct Pre_Process{
 
 	Output:	object of type Pre_Process 
 */
-struct Pre_Process *new_Pre_Process(int a , int fp , int s );
+Pre_Process *new_Pre_Process(int a , int fp , int s );
 
 #endif
