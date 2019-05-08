@@ -14,60 +14,23 @@
 #define STD_QUEUE_SIZE 50
 
 /*Define*/
-struct Queue{
+typedef struct Queue{
 	int header;
 	int footer;
 	int size;
 	struct Process *arr[STD_QUEUE_SIZE];
-};
+} Queue;
 
 /*Constructor*/
-struct Queue *new_Queue(){
-	struct Queue *temp = malloc(sizeof(struct Queue));
-
-	temp->header = 0;
-	temp->footer = 0;
-	temp->size = 0;
-
-	return temp;
-}
+struct Queue *new_Queue();
 
 /*Methods*/
-bool is_empty(struct Queue *queue){
-	return queue->header == queue->footer;
-}
+bool is_empty(struct Queue *queue);
 
-void enqueue(struct Queue *queue, struct Process *item){
-	queue->arr[queue->footer] = item;
-	queue->footer += 1;
-	queue->size += 1;
+void enqueue(struct Queue *queue, struct Process *item);
 
-	if ( queue->footer >=STD_QUEUE_SIZE ){
+struct Process *dequeue(struct Queue *queue);
 
-		queue->footer = 0;
-
-	}
-
-}
-
-struct Process *dequeue(struct Queue *queue){
-	if (is_empty(queue))
-		return NULL;
-
-	queue->header += 1;
-	queue->size -= 1;
-
-	if ( queue->header >=STD_QUEUE_SIZE ){
-
-		queue->header = 0;
-		
-	}
-
-	return queue->arr[queue->header - 1];
-}
-
-struct Process *next(struct Queue *queue){
-	return queue->arr[queue->header];
-}
+struct Process *next(struct Queue *queue);
 
 #endif
