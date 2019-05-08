@@ -1,57 +1,86 @@
 from copy import deepcopy
 
+X_Size = 7
+Y_Size = 6
+
+P1 = 1
+P2 = 2
+EP = 0
+
+WIN = 4
+
 class State:
-    X_Size = 7
-    Y_Size = 6
-
-    P1 = 1
-    P2 = 2
-    EP = 0
-
-    WIN = 4
-
-    matrix = []
+    moves = []
 
     # constuc #
     def __init__ (self):
-        for i in range(self.Y_Size):
-            sub = []
-            
-            for j in range(self.X_Size):
-                sub.append(self.EP)
-            
-            self.matrix.append(sub)
+        self.moves = []
 
+    # copy state #
     def cpy( self ):
         ns = State()
-
-        ns.matrix = deepcopy( self.matrix )
-        
+        ns.moves = deepcopy( self.moves )
         return ns
 
+    # create empty matrix #
+    def generate_empty(self):
+        matrix = []
+        for i in range(Y_Size):
+            sub = []
+            for j in range(X_Size):
+                sub.append(EP)
+            matrix.append(sub)
+        return matrix
+
     # play #
-    def play(self, player, colum):
+    def play(self, matrix, player, colum):
         pos = 0
 
-        if( self.matrix[0][colum] != 0 ):
+        if( matrix[0][colum] != 0 ):
             return False
 
-        for pos in range(self.Y_Size):
-            if( self.matrix[pos][colum] != 0 ):
+        for pos in range(Y_Size):
+            if( matrix[pos][colum] != 0 ):
                 pos -= 1
                 break
 
-        self.matrix[pos][colum] = player
+        matrix[pos][colum] = player
         return True
 
-    def show(self):
-        for i in range(self.Y_Size):
-            s = ""
-            
-            for j in range(self.X_Size):
-                s += str(self.matrix[i][j]) + " "
+    # recreate state #
+    def generate_state(self):
+        matrix = self.generate_empty()
+        for m in self.moves:
+            p, c = m
+            self.play(matrix, p, c)
+        return matrix
 
+    # prints state #
+    def show(self):
+        matrix = self.generate_state()
+
+        for i in range(Y_Size):
+            s = ""
+            for j in range(X_Size):
+                s += str(matrix[i][j]) + " "
             print(s)
+
+    # add move #
+    def add_move(self, player, colum):
+        self.moves.append((player, colum))
+
+    # expand state #
+    def expand_state(self, player):
+        l = []
+        for i in range(X_Size):
+            temp = self.cpy()
+            matrix = temp.generate_state()
+            if ( self.play(matrix, player, i) ):
+                temp.add_move(player, i)
+                l.append(temp)
+        return l
+
+    ############################## End Game Checks ################################
 
     # check #
     def check(self, line):
@@ -60,29 +89,30 @@ class State:
         count2 = 0
 
         for elm in line:
-            if( elm == self.P1 ):
+            if( elm == P1 ):
                 count1 += 1
                 count2 = 0
-            elif( elm == self.P2 ):
+            elif( elm == P2 ):
                 count1 = 0
                 count2 += 1
 
-            if( elm == self.EP ):
+            if( elm == EP ):
                 count1 = 0
                 count2 = 0
 
-            if( count1 == self.WIN ):
+            if( count1 == WIN ):
                 return 1
 
-            if( count2 == self.WIN ):
+            if( count2 == WIN ):
                 return -1
         
         return 0
 
     # check lines #
     def check_lines(self):
-        for i in range(self.Y_Size):
-            c = self.check( self.matrix[i] )
+        matrix = self.generate_state()
+        for i in range(Y_Size):
+            c = self.check( matrix[i] )
             if( c != 0):
                 return c
         return 0
@@ -90,17 +120,16 @@ class State:
     # get colum #
     def get_colum(self, colum):
         c = []
-
-        for i in range(self.Y_Size):
+        matrix = self.generate_state()
+        for i in range(Y_Size):
             line = self.matrix[i]
             c.append(line[colum])
-
         return c
 
     # check_colums #
     def check_colums(self):
         
-        for i in range(self.X_Size):
+        for i in range(X_Size):
             col = self.get_colum(i)
 
             c = self.check(col)
@@ -112,15 +141,15 @@ class State:
 
     # check_diagonal #
     def check_diagonal_1(self):
-       
-       # 0 to half #
-        for i in range(self.Y_Size - 1, -1, -1):
+        matrix = self.generate_state()
+        # 0 to half #
+        for i in range(Y_Size - 1, -1, -1):
             l = []
             x = 0
             y = i
 
-            for j in range( self.Y_Size - i):
-                l.append( self.matrix[y][x] )
+            for j in range( Y_Size - i):
+                l.append( matrix[y][x] )
                 x += 1
                 y += 1
 
@@ -130,13 +159,13 @@ class State:
                 return c
 
         # half to 7 #
-        for i in range(1, self.X_Size):
+        for i in range(1, X_Size):
             l = []
             x = i
             y = 0
 
-            for j in range( self.Y_Size - i + 1 ):
-                l.append( self.matrix[y][x] )
+            for j in range( Y_Size - i + 1 ):
+                l.append( matrix[y][x] )
                 x += 1
                 y += 1
 
@@ -150,13 +179,13 @@ class State:
     # check_diagonal_2 #
     def check_diagonal_2(self):
         
-        for i in range(self.X_Size - 1):
+        for i in range(X_Size - 1):
             l = []
             x = i
             y = 0
 
             for j in range( i + 1 ):
-                l.append( self.matrix[y][x] )
+                l.append( self.self.moves[y][x] )
                 x -= 1 
                 y += 1
 
@@ -165,13 +194,13 @@ class State:
             if( c != 0):
                 return c
 
-        for i in range( self.Y_Size ):
+        for i in range( Y_Size ):
             l = []
-            x = self.X_Size -1
+            x = X_Size -1
             y = i
 
-            for j in range( self.Y_Size - i, 0, -1):
-                l.append( self.matrix[y][x] )
+            for j in range( Y_Size - i, 0, -1):
+                l.append( self.self.moves[y][x] )
                 x -= 1
                 y += 1
 
@@ -202,12 +231,14 @@ class State:
 
         return 0
 
+    ####################### Eval State ############################
+
     # evals colums #
     def val_col(self):
         
         s = 0
 
-        for i in range(self.Y_Size):
+        for i in range(Y_Size):
             # gets colum values #
             l = self.get_colum( i )
 
@@ -215,7 +246,7 @@ class State:
             c = 0
 
             for e in l:
-                if( e != self.EP ):
+                if( e != EP ):
                     break
                 c += 1
 
@@ -227,7 +258,7 @@ class State:
             t = l[c]
             p = 1
 
-            if( t == self.P2 ):
+            if( t == P2 ):
                 p = -1
 
             count = 0
@@ -239,7 +270,7 @@ class State:
                 count += p
 
             # if any player cant win then its valueles #
-            if( j < self.WIN ):
+            if( j < WIN ):
                 continue
 
             s += count
@@ -249,17 +280,17 @@ class State:
     def val_line(self, l):
         count = 0
         val = 0
-        t = self.EP
+        t = EP
 
         i = 0
         while True:
             e = l[i]
             i += 1
 
-            if( e == self.P1 or e == self.EP):
+            if( e == P1 or e == EP):
                 val += 1
 
-            if( e == self.P2):
+            if( e == P2):
                 pass
 
             if( i >= len(l)):
@@ -269,7 +300,7 @@ class State:
 
     def val_lines( self ):
         s = 0
-        for l in self.matrix:
+        for l in self.self.moves:
             self.val_line(l)
 
     # val #
@@ -278,16 +309,21 @@ class State:
 
         return s
 
-## main ##
+####################### Main ############################
+
 if __name__ == "__main__":
     state0 = State()
 
-    state0.play(1,1)
-    state0.play(1,2)
-    state0.play(2,3)
-    state0.play(2,4)
-    state0.play(2,6)
+    state0.add_move(1,1)
+    state0.add_move(1,2)
+    state0.add_move(2,3)
+    state0.add_move(2,4)
+    state0.add_move(2,6)
 
     state0.show()
 
-    print( state0.val_line(state0.matrix[5]) )
+    expancion = state0.expand_state(1)
+
+    for ex in expancion:
+        print()
+        ex.show()
