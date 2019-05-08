@@ -1,4 +1,4 @@
-Ficheiro de input: Inicio do Escalonador:
+Inicio do Escalonador:
 
 process changed
 P[1]
@@ -41,22 +41,22 @@ P[2]
 16|     ready|      exit|     ready
 process changed
 P[1]
-17|       run|      exit|     ready
+17|       run|     ready
 P[1]
-18|       run|      exit|     ready
+18|       run|     ready
 P[1]
-19|      exit|      exit|     ready
+19|      exit|     ready
 process changed
 P[3]
-20|      exit|      exit|       run
+20|       run
 P[3]
-21|      exit|      exit|       run
+21|       run
 P[3]
-22|      exit|      exit|       run
+22|       run
 P[3]
-23|      exit|      exit|       run
+23|       run
 process changed
 P[3]
-24|      exit|      exit|       run
+24|       run
 P[3]
-25|      exit|      exit|      exit
+25|      exit

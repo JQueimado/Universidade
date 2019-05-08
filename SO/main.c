@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "Structs/Process.h"
-#include "Structs/Pre_Process.h"
-#include "Structs/Queue.h"
 
 /*Classes*/
 #include "Structs/Queue.h"
@@ -124,14 +121,11 @@ Process *CPU(Process *process, int MEM[])
 }
 
 /***main***/
-int main()
+int main(int arg_n, char** args)
 {
     /**File Acess**/
-    char fname[300];
-    printf("Ficheiro de input: ");
-    scanf("%s", fname);
     FILE *file_pointer;
-    file_pointer = fopen(fname, "r");
+    file_pointer = fopen( args[1], "r");
 
     if (!file_pointer)
     {
@@ -335,7 +329,6 @@ int main()
                         cur_pro->block_time += 1;
                     }
                 }
-
                 enqueue(blocked, cur_pro);
             }
         }
@@ -363,6 +356,7 @@ int main()
             if (run->pc_aux >= run->size)
             {
                 set_state(run, _EXIT_);
+                ext = run;
                 run = NULL;
             }
         }
@@ -379,7 +373,7 @@ int main()
 
             if(temp == NULL)
             {
-
+                continue;
             }
 
             if( temp->state == NEW )
