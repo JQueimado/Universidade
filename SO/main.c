@@ -252,8 +252,6 @@ int main(int arg_n, char** args)
         /**Scheduling Call**/
         if ((timer == QUANTUM) || (run == NULL))
         {
-
-            puts("process changed");
             timer = 0;
 
             /*Process for Ready*/
@@ -338,8 +336,6 @@ int main(int arg_n, char** args)
         {
             run = CPU(run, MEM);
 
-            printf("P[%d]\n", run->id);
-
             /*Check if process is waiting for a message*/
             if (run->block_time != -1)
             {
@@ -366,7 +362,7 @@ int main(int arg_n, char** args)
         }
 
         /*show states */
-        printf("%d",count);
+        printf("%5d",count);
         for( int i = 0; i < n_procesess; i++)
         {
             Process * temp = processes[i];
@@ -378,27 +374,28 @@ int main(int arg_n, char** args)
 
             if( temp->state == NEW )
             {
-                printf("|%10s", "new");
+                printf("|%5s", "new");
             }
             else if (temp->state == READY_WAIT )
             {
-                printf("|%10s", "ready");
+                printf("|%5s", "ready");
             }
             else if (temp->state == RUN)
             {
-                printf("|%10s", "run");
+                printf("|%5s", "run");
             }
             else if (temp->state == BLOCKED)
             {
-                printf("|%10s", "blocked");
+                printf("|%5s", "blocked");
             }
             else if (temp->state == _EXIT_)
             {
-                printf("|%10s", "exit");
+                printf("|%5s", "exit");
             }
 
             
         }
+        printf("|");
         puts("");
 
         timer += 1;

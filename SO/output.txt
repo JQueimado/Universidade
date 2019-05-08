@@ -1,62 +1,28 @@
 Inicio do Escalonador:
 
-process changed
-P[1]
-0|       run
-P[1]
-1|       run
-P[1]
-2|       run
-P[1]
-3|       run
-process changed
-P[2]
-4|     ready|       run
-P[2]
-5|     ready|       run|       new
-P[2]
-6|     ready|       run|       new
-P[2]
-7|     ready|       run|       new
-process changed
-P[1]
-8|       run|     ready|     ready
-P[1]
-9|       run|     ready|     ready
-P[1]
-10|       run|     ready|     ready
-P[1]
-11|       run|     ready|     ready
-process changed
-P[3]
-12|     ready|     ready|       run
-P[3]
-13|     ready|     ready|       run
-P[3]
-14|     ready|     ready|       run
-P[3]
-15|     ready|     ready|       run
-process changed
-P[2]
-16|     ready|      exit|     ready
-process changed
-P[1]
-17|       run|     ready
-P[1]
-18|       run|     ready
-P[1]
-19|      exit|     ready
-process changed
-P[3]
-20|       run
-P[3]
-21|       run
-P[3]
-22|       run
-P[3]
-23|       run
-process changed
-P[3]
-24|       run
-P[3]
-25|      exit
+    0|  run|
+    1|  run|
+    2|  run|
+    3|  run|
+    4|ready|  run|
+    5|ready|  run|  new|
+    6|ready|  run|  new|
+    7|ready|  run|  new|
+    8|  run|ready|ready|
+    9|  run|ready|ready|
+   10|  run|ready|ready|
+   11|  run|ready|ready|
+   12|ready|ready|  run|
+   13|ready|ready|  run|
+   14|ready|ready|  run|
+   15|ready|ready|  run|
+   16|ready| exit|ready|
+   17|  run|ready|
+   18|  run|ready|
+   19| exit|ready|
+   20|  run|
+   21|  run|
+   22|  run|
+   23|  run|
+   24|  run|
+   25| exit|

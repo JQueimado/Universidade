@@ -1,9 +1,8 @@
-.PHONY: all
-all: OSmake
+.PHONY: OSmake clean
 
 OSmake: main.c Pre_Process.o Process.o Queue.o input1.txt
-	gcc -g main.c -o MAIN Pre_Process.o Process.o Queue.o
-	./MAIN input1.txt > output.txt
+	gcc -g main.c -o main Pre_Process.o Process.o Queue.o
+	./main input1.txt > output.txt
 	make clean
 
 Pre_Process.o: Structs/Pre_Process.c Structs/Pre_Process.h
@@ -15,6 +14,5 @@ Process.o: Structs/Process.c Structs/Process.h
 Queue.o: Structs/Queue.c Structs/Queue.h
 	gcc -c Structs/Queue.c
 
-.PHONY: clean
 clean:
-	rm -f Pre_Process.o MAIN Process.o Queue.o
+	rm -f Pre_Process.o Process.o Queue.o
