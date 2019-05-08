@@ -15,13 +15,12 @@ class Node:
         if( len(self.children) != 0 ):
             return
 
-        for i in range( self.state.X_Size ):
-            nstate = self.state.cpy()
-            if( not nstate.play(player, i) ):
-                continue
-            nnode = Node( nstate )
-            self.children.append( nnode )
+        states = self.state.expand_state( player )
 
+        for s in states:
+            nnode = Node( s )
+            self.children.append( nnode )
+        
 class MinMaxTree:
     root = None
 
@@ -91,4 +90,4 @@ if __name__ == "__main__":
 
     tree = MinMaxTree( istate )
 
-    print( tree.minmax( 10 ) )
+    print( tree.minmax( 8 ) )

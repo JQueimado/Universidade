@@ -9,6 +9,8 @@ EP = 0
 
 WIN = 4
 
+################################## State ###################################
+
 class State:
     moves = []
 
@@ -109,8 +111,7 @@ class State:
         return 0
 
     # check lines #
-    def check_lines(self):
-        matrix = self.generate_state()
+    def check_lines(self, matrix):
         for i in range(Y_Size):
             c = self.check( matrix[i] )
             if( c != 0):
@@ -118,20 +119,17 @@ class State:
         return 0
 
     # get colum #
-    def get_colum(self, colum):
-        matrix = self.generate_state()
+    def get_colum(self, colum, matrix):
         c = []
-        matrix = self.generate_state()
         for i in range(Y_Size):
             line = matrix[i]
             c.append(line[colum])
         return c
 
     # check_colums #
-    def check_colums(self):
-        
+    def check_colums(self, matrix):
         for i in range(X_Size):
-            col = self.get_colum(i)
+            col = self.get_colum(i, matrix)
 
             c = self.check(col)
 
@@ -141,8 +139,7 @@ class State:
         return 0
 
     # check_diagonal #
-    def check_diagonal_1(self):
-        matrix = self.generate_state()
+    def check_diagonal_1(self, matrix):
         # 0 to half #
         for i in range(Y_Size - 1, -1, -1):
             l = []
@@ -178,8 +175,7 @@ class State:
         return 0
 
     # check_diagonal_2 #
-    def check_diagonal_2(self):
-        matrix = self.generate_state()
+    def check_diagonal_2(self, matrix):
 
         for i in range(X_Size - 1):
             l = []
@@ -215,19 +211,21 @@ class State:
 
     # end game #
     def term(self):
-        c = self.check_lines()
+        matrix = self.generate_state()
+
+        c = self.check_lines( matrix )
         if( c != 0 ):
             return c
 
-        c = self.check_colums()
+        c = self.check_colums( matrix )
         if( c != 0 ):
             return c
 
-        c = self.check_diagonal_1()
+        c = self.check_diagonal_1( matrix )
         if( c != 0 ):
             return c
 
-        c = self.check_diagonal_2()
+        c = self.check_diagonal_2( matrix )
         if( c != 0 ):
             return c
 
@@ -236,12 +234,12 @@ class State:
     ####################### Eval State ############################
 
     # evals colums #
-    def val_col(self):
+    def val_col(self, matrix):
         s = 0
 
         for i in range(Y_Size):
             # gets colum values #
-            l = self.get_colum( i )
+            l = self.get_colum( i , matrix)
 
             # finds possible winner #
             c = 0
@@ -299,16 +297,15 @@ class State:
 
         return count
 
-    def val_lines( self ):
-        matrix = self.generate_state()
+    def val_lines( self, matrix ):
         s = 0
         for l in matrix:
             self.val_line(l)
 
     # val #
     def val(self):
-        s = self.val_col()
-
+        matrix = self.generate_state()
+        s = self.val_col( matrix )
         return s
 
 ####################### Main ############################
