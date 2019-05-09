@@ -1,4 +1,1 @@
-.vscode/
-.vscode\
-SO/output.txt
-SO\output.txt
+*.txt

@@ -16,7 +16,7 @@ bool is_empty(Queue *queue){
 	return queue->header == queue->footer;
 }
 
-void enqueue(Queue *queue, Process *item){
+void enqueue(Queue *queue, void* item){
 	queue->arr[queue->footer] = item;
 	queue->footer += 1;
 	queue->size += 1;
@@ -29,7 +29,7 @@ void enqueue(Queue *queue, Process *item){
 
 }
 
-Process *dequeue(Queue *queue){
+void* dequeue(Queue *queue){
 	if (is_empty(queue))
 		return NULL;
 
@@ -45,6 +45,6 @@ Process *dequeue(Queue *queue){
 	return queue->arr[queue->header - 1];
 }
 
-Process *next(Queue *queue){
+void* next(Queue *queue){
 	return queue->arr[queue->header];
 }
