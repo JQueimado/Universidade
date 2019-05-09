@@ -1,29 +1,19 @@
 #include "Process.h"
 
 /*Constructors*/
-Process *new_Process(int i, int inst_size, int file)
+Process *new_Process(int i, int fpos)
 {
-
 	Process *temp = malloc(sizeof(Process));
-
 	/*PCB*/
 	temp->id = i;
-	temp->block_time = -1;
 	temp->pc = -1;
-	temp->size = inst_size;
-	temp->mem_str = -1;
-	temp->mem_end = -1;
-	temp->file_pos = file;
 	temp->state = NEW;
-
-	/*Testing*/
-	temp->pc_aux = 0;
-
+	temp->fpos = fpos;
 	return temp;
 }
 
 /*Methods*/
-
+/*
 void set_process_ready(Process *process, int mem_pos, int size)
 {
 	process->pc = mem_pos + INST_POINTER;
@@ -52,7 +42,7 @@ void set_pc(Process *process, int val)
 
 	process->pc = val;
 }
-
+*/
 void set_state(Process * process, int nstate)
 {
 	if( process != NULL)
