@@ -13,36 +13,44 @@ Process *new_Process(int i, int fpos)
 }
 
 /*Methods*/
-/*
-void set_process_ready(Process *process, int mem_pos, int size)
+bool load(Process* self, int* Memory, int mpos)
 {
-	process->pc = mem_pos + INST_POINTER;
-	process->mem_str = mem_pos;
-	process->mem_end = mem_pos + INST_POINTER + size;
+	if(self->in_mememory)
+		return false;
+
+	FILE* file = fopen(_FNAME_, "r");
+	fseek(file, self->fpos, SEEK_SET);
+	char read_buffer[300];
+	
+	if( fgets(read_buffer, 300, file) == NULL)
+		return false;
+	
+	int current = 0;
+	int p = mpos;
+	while ( read_buffer[current] != '\n' )
+	{
+		Memory[p] = atoi( read_buffer[current] );
+		current++;
+		p++;
+	}
+	
+	fclose(file);	
+	self->in_mememory = true;
+	return true;
 }
 
-void set_pc(Process *process, int val)
+bool unload(Process* self, int* Memory)
 {
+	if( !self->in_mememory )
+		return false;
 
-	int inst_pointer_str = process->mem_str + INST_POINTER;
-	int inst_pointer_end = process->mem_end;
+	FILE* file = fopen(_FNAME_,'a');
 
-	if (val < inst_pointer_str)
-	{
-
-		process->pc = inst_pointer_str;
-		return;
-	}
-
-	if (val >= inst_pointer_end)
-	{
-		process->pc = inst_pointer_end;
-		return;
-	}
-
-	process->pc = val;
+	fclose(file);
+	self->in_mememory = false;
+	return true;	
 }
-*/
+
 void set_state(Process * process, int nstate)
 {
 	if( process != NULL)

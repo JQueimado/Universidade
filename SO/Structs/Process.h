@@ -1,14 +1,11 @@
 /**Class Process**/
-
-/*Comflit avoider*/
 #ifndef _Process_
 #define _Process_
 
 /*Includes*/
 #include <stdlib.h>
-
-#define INST_POINTER 10
-#define MEM_SIZE 300
+#include <stdbool.h>
+#include <stdio.h>
 
 /*States*/
 #define NEW 0
@@ -16,6 +13,8 @@
 #define RUN 2
 #define BLOCKED 3
 #define _EXIT_ 4
+
+#define _FNAME_ "process.cache"
 
 /*Define*/
 typedef struct Process
@@ -28,17 +27,21 @@ typedef struct Process
 	/*file*/
 	int fpos;
 
+	/*memory*/
+	bool in_mememory;
+	int process_pointer;
+	int var_pointer;
+
 } Process;
 
 /*Constructors*/
 Process *new_Process(int i, int fpos);
 
 /*Methods*/
-/*
-void set_process_ready(Process *process, int mem_pos, int size);
+bool load(Process* self, int* Memory, int mpos);
 
-void set_pc(Process *process, int val);
-*/
+bool unload(Process* self, int* Memory);
+
 void set_state(Process * process, int nstate);
 
 #endif
