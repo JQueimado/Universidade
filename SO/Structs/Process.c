@@ -15,6 +15,7 @@ Process *new_Process(int i, int fpos)
 /*Methods*/
 bool load(Process* self, int* Memory, int mpos)
 {
+	/* Preparations */
 	if(self->in_mememory)
 		return false;
 
@@ -24,16 +25,32 @@ bool load(Process* self, int* Memory, int mpos)
 	
 	if( fgets(read_buffer, 300, file) == NULL)
 		return false;
-	
+
+	/* loads */
 	int current = 0;
 	int p = mpos;
-	while ( read_buffer[current] != '\n' )
+	char temp[3];
+	int minp = 0;
+	char curr;
+	while ( (curr = read_buffer[current]) != '\n' )
 	{
-		Memory[p] = atoi( read_buffer[current] );
-		current++;
-		p++;
+		if( curr == ' ' )
+		{
+			temp[minp + 1] = '\0';
+			minp = 0;
+			int conv = atoi( temp );
+			Memory[p] = conv;
+			p++;
+		}
+		else
+		{
+			temp[minp] = curr;
+			minp++;
+		}
+		
 	}
 	
+	self->end_pointer = p-1;
 	fclose(file);	
 	self->in_mememory = true;
 	return true;
@@ -45,6 +62,7 @@ bool unload(Process* self, int* Memory)
 		return false;
 
 	FILE* file = fopen(_FNAME_,'a');
+	self->fpos = ftell(file);
 
 	fclose(file);
 	self->in_mememory = false;
@@ -55,4 +73,16 @@ void set_state(Process * process, int nstate)
 {
 	if( process != NULL)
 		process->state = nstate;
+}
+
+/**************test_main**************/
+int main()
+{
+	Process* process = new_Process(1, 0);
+	int Memorry[300];
+
+	
+
+	for( int i = 0; i < 300; i++)
+		printf("%d\n", Memorry[i]);
 }

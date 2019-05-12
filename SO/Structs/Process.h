@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 /*States*/
 #define NEW 0
@@ -31,6 +32,7 @@ typedef struct Process
 	bool in_mememory;
 	int process_pointer;
 	int var_pointer;
+	int end_pointer;
 
 } Process;
 
