@@ -26,12 +26,12 @@ typedef struct Process
 	int state;
 
 	/*file*/
-	int fpos;
+	int inst_pos;
+	int var_pos;
 
 	/*memory*/
-	bool in_mememory;
+	bool in_memory;
 	int process_pointer;
-	int var_pointer;
 	int end_pointer;
 
 } Process;
@@ -40,10 +40,21 @@ typedef struct Process
 Process *new_Process(int i, int fpos);
 
 /*Methods*/
-bool load(Process* self, int* Memory, int mpos);
+/* loader and unloaders*/
+bool load_inst(Process* self, char* fname, int* Memory, int mpos);
+
+bool load_var(Process* self, int* Memory);
 
 bool unload(Process* self, int* Memory);
 
+/* Set State */
 void set_state(Process * process, int nstate);
+
+/* Vars */
+/* Get Var */
+int get_var(Process* self, int* Memory, int var);
+
+/* Set Var */
+bool set_var(Process* self, int* Memory, int var, int val);
 
 #endif

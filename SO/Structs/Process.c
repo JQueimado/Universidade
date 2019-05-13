@@ -8,81 +8,127 @@ Process *new_Process(int i, int fpos)
 	temp->id = i;
 	temp->pc = -1;
 	temp->state = NEW;
-	temp->fpos = fpos;
+	temp->inst_pos = fpos;
 	return temp;
 }
 
 /*Methods*/
-bool load(Process* self, int* Memory, int mpos)
+/* loader and unloaders*/
+bool load_inst(Process* self, char* fname, int* Memory, int mpos)
 {
-	/* Preparations */
-	if(self->in_mememory)
+	FILE* file = fopen(fname, "r");
+	if( file == NULL )
 		return false;
 
-	FILE* file = fopen(_FNAME_, "r");
-	fseek(file, self->fpos, SEEK_SET);
-	char read_buffer[300];
-	
-	if( fgets(read_buffer, 300, file) == NULL)
+	fseek(file,SEEK_SET, self->inst_pos);
+	char line[300];
+	if( fgets(line, 300, file) == NULL )
 		return false;
 
-	/* loads */
-	int current = 0;
-	int p = mpos;
-	char temp[3];
-	int minp = 0;
-	char curr;
-	while ( (curr = read_buffer[current]) != '\n' )
+	self->process_pointer = mpos;
+
+	char* point = strtok(line, " ");
+	int p = self->process_pointer + 10;
+	while( point != NULL )
 	{
-		if( curr == ' ' )
-		{
-			temp[minp + 1] = '\0';
-			minp = 0;
-			int conv = atoi( temp );
-			Memory[p] = conv;
-			p++;
-		}
-		else
-		{
-			temp[minp] = curr;
-			minp++;
-		}
-		
+		Memory[p] = atoi( point );
+		point = strtok(NULL, " ");
+		p++;
 	}
-	
-	self->end_pointer = p-1;
-	fclose(file);	
-	self->in_mememory = true;
+	self->in_memory = true;
+	self->end_pointer = p - 1;
+	fclose(file);
+	return true;
+}
+
+bool load_var(Process* self, int* Memory)
+{
+	FILE* file = fopen( _FNAME_, "r");
+	if( file == NULL )
+		return false;
+
+	fseek( file, SEEK_SET, self->var_pos);
+	char line[300];
+	if( fgets(line, 300, file) == NULL )
+		return false;
+
+	int p = self->process_pointer;
+	char* point = strtok(line, " ");
+	while( point != NULL )
+	{
+		Memory[p] = atoi( point );
+		point = strtok(NULL, " ");
+		p++;
+	}
+
+	self->end_pointer = self->process_pointer + 10;
+	fclose(file);
 	return true;
 }
 
 bool unload(Process* self, int* Memory)
 {
-	if( !self->in_mememory )
+	if( !self->in_memory )
 		return false;
 
-	FILE* file = fopen(_FNAME_,'a');
-	self->fpos = ftell(file);
+	FILE* file = fopen( _FNAME_, "a");
+	if( file == NULL )
+		return false;
 
+	self->var_pos = ftell(file);
+	
+	for( int p = self->process_pointer; p < self->process_pointer + 10 ; p++ )
+		fprintf( file,"%d ", Memory[p]);
+	fprintf(file, "\n");
+
+	self->in_memory = false;
 	fclose(file);
-	self->in_mememory = false;
-	return true;	
+	return true;
 }
 
+/* Set State */
 void set_state(Process * process, int nstate)
 {
 	if( process != NULL)
 		process->state = nstate;
 }
 
+/* Vars */
+/* Get Var */
+int get_var(Process* self, int* Memory, int var)
+{
+	if( !self->in_memory )
+		return -1;
+
+	return Memory[self->process_pointer + var];
+}
+
+/* Set Var */
+bool set_var(Process* self, int* Memory, int var, int val)
+{
+	if( var > 10 || var < 0 || !self->in_memory)
+		return false;
+
+	Memory[self->process_pointer + var] = val;
+	return true;
+}
+
 /**************test_main**************/
 int main()
 {
 	Process* process = new_Process(1, 0);
-	int Memorry[300];
+	int* Memory = calloc(sizeof( int ), 300);
 
-	
+	load_inst(process, "test1.txt", Memory, 0);
 
-	for( int i = 0; i < 300; i++)
-		printf("%d\n", Memorry[i]);
+	set_var(process, Memory, 0, 10);
+
+	unload(process,Memory);
+
+	load_var(process, Memory);
+
+	for( int i = 0; i < 100; i++)
+		printf("%d\n", Memory[i]);
+
+	printf("%d %d\n", process->process_pointer, process->end_pointer);
 }
