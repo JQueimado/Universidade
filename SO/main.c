@@ -7,6 +7,7 @@
 #include "Structs/Queue.h"
 #include "Structs/Process.h"
 #include "Structs/Pre_Process.h"
+#include "Structs/Disk.h"
 
 //Consts
 
@@ -23,9 +24,6 @@
 //Functions & Var
 #define SET_X 0
 #define SET_N 1
-#define X2 0
-#define N 0
-
 #define INC_X 2
 #define DEC_X 3
 #define BACK_N 4
@@ -38,83 +36,106 @@
 #define EXIT 11
 
 /************************************ CPU ************************************/
-Process *CPU(Process *process, int MEM[])
+int CPU(Process *process, int MEM[], Disk* disk)
 {
-    int inst = MEM[process->pc];
+    /* return codes
+        0 normal
+        1 fork
+        2 block
+        3 exit
+    */
+    int inst0 = MEM[process->pc + 0];
+    int inst1 = MEM[process->pc + 1];
+    int inst2 = MEM[process->pc + 2];
 
-    int i = inst / 10;
-    int v = inst - i * 10;
-
-    //printf("%d %d\n", i , v );
-
-    if (i == SET_X)
+    if( process->timer == 0)
     {
-        MEM[process->mem_str + v] = X2;
-    }
-
-    if (i == SET_N)
-    {
-        MEM[process->mem_str + v] = N;
-    }
-
-    if (i == INC_X)
-    {
-        MEM[process->mem_str + v] += 1;
-    }
-
-    if (i == DEC_X)
-    {
-        MEM[process->mem_str + v] -= 1;
-    }
-
-    if (i == BACK_N)
-    {
-        set_pc(process, process->pc - MEM[process->mem_str + v]);
-    }
-
-    if (i == FORW_N)
-    {
-        set_pc(process, process->pc + MEM[process->mem_str + v]);
-    }
-
-    if (i == IF_X_N)
-    {
-        if (MEM[process->mem_str + v] != 0)
+        process->timer = -1;
+        if(inst0 == DISCK_LOAD_X)
         {
-            set_pc(process, process->pc + 1);
+            set_disk(disk, inst1);
         }
-        else
+        else if( inst0 == DISCK_SAVE_X)
         {
-            set_pc(process, process->pc + MEM[process->mem_str + v]);
+            set_var(process, MEM, inst1, get_disk(disk));
         }
+        return 0;
     }
 
-    if (i == FORK_X)
+    if (inst0 == SET_X)
+    {
+        int var = get_var(process, MEM, inst2);
+        set_var(process, MEM, inst1, var);
+        return 0;
+    }
+
+    if (inst0 == SET_N)
+    {
+        set_var(process, MEM, inst1, inst2);
+        return 0;
+    }
+
+    if (inst0 == INC_X)
+    {
+        int var = get_var(process, MEM, inst1);
+        set_var(process, MEM, inst1, var+1);
+        return 0;
+    }
+
+    if (inst0 == DEC_X)
+    {
+        int var = get_var(process, MEM, inst1);
+        set_var(process, MEM, inst1, var-1);
+        return 0;
+    }
+
+    if (inst0 == BACK_N)
+    {
+        set_pc(process, -inst1);
+        return 0;
+    }
+
+    if (inst0 == FORW_N)
+    {
+        set_pc(process, inst1);
+        return 0;
+    }
+
+    if (inst0 == IF_X_N)
+    {
+        if(inst1 == 0)
+        {
+            set_pc(process, inst2);
+        }
+        return 0;
+    }
+
+    if (inst0 == FORK_X)
     {
         //2ª parte do trabalho
+        return 1;
     }
 
-    if (i == DISCK_SAVE_X)
+    if (inst0 == DISCK_SAVE_X)
     {
-        process->block_time = 0;
+        return 2;
     }
 
-    if (i == DISCK_LOAD_X)
+    if (inst0 == DISCK_LOAD_X)
     {
-        MEM[process->mem_str = MEM[process->mem_str + v];
+        return 2;
     }
 
-    if (i == PRINT_X)
+    if (inst0 == PRINT_X)
     {
-        printf("%d ", MEM[process->mem_str + v]);
+        printf("%d ", get_var(process, MEM, inst1));
+        return 0;
     }
 
-    if (i == EXIT)
+    if (inst0 == EXIT)
     {
-        return true;
+        return 3;
     }
-    
-    return false;
 }
 /************************************ file io ************************************/
 
@@ -152,7 +173,7 @@ int main(int arg_n, char** args)
     Process* run = NULL;
     Process* ext = NULL;
 
-    int disk;
+    Disk* disk = new_Disk();
     int MEM[MEM_SIZE];
 
     int timer = 0;
@@ -177,27 +198,34 @@ int main(int arg_n, char** args)
         //CPU
         if (run != NULL)
         {
-            run = CPU(run, MEM);
+            int code = CPU(run, MEM, disk);
 
-            //Check if process ended
-            //Testing
-            run->pc_aux += 1;
-
-            if (run->pc_aux >= run->size)
+            if( code == 0)
             {
-                set_state(run, _EXIT_);
+                /*normal*/
+                set_pc(run, 4);
+            }
+            else if (code == 1)
+            {
+                Process* temp = fork_process(run, ids);
+                ids++;
+                processes[n_procesess] = temp;
+                n_procesess++;
+                if( ready->size != MAX_READY_SIZE )
+                    enqueue(ready, temp);
+            }
+            else if( code == 2)
+            {
+                /*block*/
+            }
+            else if( code == 3)
+            {
                 ext = run;
                 run = NULL;
+                set_state(ext, _EXIT_);
             }
         }
-            run->pc_aux += 1;
 
-            if (run->pc_aux >= run->size)
-            {
-                set_state(run, _EXIT_);
-                ext = run;
-                run = NULL;
-            }
         //Scheduling Call
         if ((timer == QUANTUM) || (run == NULL))
         {
@@ -206,6 +234,13 @@ int main(int arg_n, char** args)
             //Process for Ready
             if (ready->size < MAX_READY_SIZE && !is_empty(new))
             {
+                if (ready->size < MAX_READY_SIZE && !is_empty(new))
+                {
+                    Process * temp = dequeue(new);
+                    set_state(temp, READY_WAIT);
+                    enqueue(ready, temp);
+                }
+
                 Process * temp = dequeue(new);
                 set_state(temp, READY_WAIT);
                 enqueue(ready, temp);
@@ -243,7 +278,7 @@ int main(int arg_n, char** args)
                     Process *cur_pro = dequeue(blocked);
 
                     //Check for processes to place in ready
-                    if (ready->size < MAX_READY_SIZE && cur_pro->block_time == -1)
+                    if (ready->size < MAX_READY_SIZE && cur_pro->timer != 0)
                     {
                         enqueue(blocked, cur_pro);
                     }
@@ -255,12 +290,26 @@ int main(int arg_n, char** args)
                 }
             }
         }
+
         //NEW -> READY
         if( new != NULL)
         {
             enqueue(ready, new);
             new = NULL;
         }
+
+        //BLOCKED -> READY
+        if( ready->size != MAX_READY_SIZE )
+        {
+            for( int i = 0; i<blocked->size; i++ )
+            {
+                Process* temp = dequeue(blocked);
+                if( temp->timer != -1 && temp->timer != 0)
+                    temp->timer--;
+                enqueue(blocked, temp);
+            }
+        }
+
         //check arrivals 
         Pre_Process* temp = next(pre_processess);
         if( count == temp->arrival )

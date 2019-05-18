@@ -9,7 +9,13 @@ Process *new_Process(int i, int fpos)
 	temp->pc = -1;
 	temp->state = NEW;
 	temp->inst_pos = fpos;
+	temp->timer = -1;
 	return temp;
+}
+
+Process* fork_process(Process* process, int id)
+{
+	return new_Process( id, process->inst_pos);
 }
 
 /*Methods*/
@@ -113,13 +119,19 @@ bool set_var(Process* self, int* Memory, int var, int val)
 	return true;
 }
 
+/* PC */
+void set_pc(Process* self, int N)
+{
+	self->pc += N;
+}
+
 /**************test_main**************/
 int main()
 {
 	Process* process = new_Process(1, 0);
 	int* Memory = calloc(sizeof( int ), 300);
 
-	load_inst(process, "test1.txt", Memory, 0);
+	load_inst(process, "input1.txt", Memory, 0);
 
 	set_var(process, Memory, 0, 10);
 

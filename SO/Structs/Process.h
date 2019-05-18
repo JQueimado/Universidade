@@ -34,10 +34,15 @@ typedef struct Process
 	int process_pointer;
 	int end_pointer;
 
+	/* helper */
+	short timer;
+
 } Process;
 
 /*Constructors*/
 Process *new_Process(int i, int fpos);
+
+Process* fork_process(Process* process, int id);
 
 /*Methods*/
 /* loader and unloaders*/
