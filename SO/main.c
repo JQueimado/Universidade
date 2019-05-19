@@ -230,8 +230,12 @@ int main(int arg_n, char** args)
         if ((timer == QUANTUM) || (run == NULL))
         {
             timer = 0;
-
-            
+            //RUN -> READY
+            if( ready->size < MAX_READY_SIZE )
+            {
+                
+            }
+            //READY -> RUN
         }
 
         //NEW -> READY
