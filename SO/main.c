@@ -149,7 +149,7 @@ bool read_file( char* fname, Queue* pre_process )
 
     while ( fgets( line, SIZE_FILE_LINE, file) != NULL )
     {
-        int arrival = atoi(line[0]);
+        int arrival = atoi( &line[0] );
         int file_pos = ftell(file);
         Pre_Process* temp = new_Pre_Process( arrival, file_pos);
         enqueue(pre_process, temp);
@@ -184,7 +184,7 @@ int main(int arg_n, char** args)
     int n_procesess = 0;
     Process * processes[MAX_PROCESS];
 
-    while (!(is_empty(pre_processess) == 0 && is_empty(new) && is_empty(ready) && run == NULL))
+    while (!(is_empty(pre_processess) == 0 && is_empty(pre_processess) && is_empty(ready) && run == NULL))
     {
 
         //Check Exit Process*
@@ -231,64 +231,7 @@ int main(int arg_n, char** args)
         {
             timer = 0;
 
-            //Process for Ready
-            if (ready->size < MAX_READY_SIZE && !is_empty(new))
-            {
-                if (ready->size < MAX_READY_SIZE && !is_empty(new))
-                {
-                    Process * temp = dequeue(new);
-                    set_state(temp, READY_WAIT);
-                    enqueue(ready, temp);
-                }
-
-                Process * temp = dequeue(new);
-                set_state(temp, READY_WAIT);
-                enqueue(ready, temp);
-            }
-
-            if (run != NULL)
-            {
-                if (ready->size < MAX_READY_SIZE)
-                {
-                    set_state(run, READY_WAIT);
-                    enqueue(ready, run);
-                }
-                else
-                {
-                    set_state(run, BLOCKED);
-                    enqueue(blocked, run);
-                }
-                run = NULL;
-            }
-
-            if (run == NULL)
-            {
-                if (!is_empty(ready))
-                {
-                    run = dequeue(ready);
-                    set_state(run, RUN);
-                }
-            }
-
-            //Check for Blocked Mesages*
-            if ((!is_empty(blocked)) && ready->size < MAX_READY_SIZE)
-            {
-                for (int count = 0; count < blocked->size; count++)
-                {
-                    Process *cur_pro = dequeue(blocked);
-
-                    //Check for processes to place in ready
-                    if (ready->size < MAX_READY_SIZE && cur_pro->timer != 0)
-                    {
-                        enqueue(blocked, cur_pro);
-                    }
-                    else
-                    {
-                        set_state(cur_pro, READY_WAIT);
-                        enqueue(ready, cur_pro);
-                    }
-                }
-            }
+            
         }
 
         //NEW -> READY

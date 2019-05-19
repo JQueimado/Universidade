@@ -62,4 +62,7 @@ int get_var(Process* self, int* Memory, int var);
 /* Set Var */
 bool set_var(Process* self, int* Memory, int var, int val);
 
+/* pc */
+void set_pc(Process* self, int N);
+
 #endif
