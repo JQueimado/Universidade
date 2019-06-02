@@ -20,7 +20,7 @@ int main()
 
     if( anel_procura(anel, i) )
         printf("%d\n", anel_proximo(anel));
-    puts("bam");
+
     anel_destroi(anel);
 
 }
