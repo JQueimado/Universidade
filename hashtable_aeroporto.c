@@ -10,8 +10,8 @@
 #include "hashtable_aeroporto.h"
 
 // numero primo seguinte 1833333 que permite menter o factor de carga abaixo de 0,6 para 1100000 utilizadores
-#define MAX_UTL 1833341  
-#define PRIME 1833319
+#define MAX_UTL 183334  
+#define PRIME 183331
 
 int hashtable_aeroportos_open(char*name)
 {
@@ -56,9 +56,11 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 		hash1 %= MAX_UTL;  
 
 		lseek(fd,hash1* sizeof(struct aeroportos),SEEK_SET);      
-		read(fd,&(novo_aeroporto),sizeof(struct aeroportos));  
+		read(fd,&(novo_aeroporto),sizeof(struct aeroportos));
+	}  
 	return novo_aeroporto;
 }
+
 void write_aeroportos(int fd,aeroportos novoAeroporto)
 {
 	aeroportos novo_Aeroportos;

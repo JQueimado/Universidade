@@ -7,16 +7,10 @@
 #include <string.h>
 #include <stdint.h>
 
-#define MAX_AERO 1833341
+#define MAX_AERO 183334
 
 
-int hash_function_aeroportos(char *codigo);
-int hash_function_aeroportos1(char *codigo);
-int hash_function_aeroportos2(char *codigo);
-void free_hash_utilizadores(aeroportos *hash_aeroportos);
-int  hashtable_aeroportos_open(char*name);
-aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
-void write_aeroportos(int fd,aeroportos novoAeroporto);
+
 
 
 typedef struct temp
@@ -53,3 +47,12 @@ typedef struct hashtable_aeroportos
 	aeroportos aeroporto[MAX_AERO];
 }
 hashtable_aeroportos;
+
+
+int hash_function_aeroportos(char *codigo);
+int hash_function_aeroportos1(char *codigo);
+int hash_function_aeroportos2(char *codigo);
+void free_hash_utilizadores(aeroportos *hash_aeroportos);
+int  hashtable_aeroportos_open(char*name);
+aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
+void write_aeroportos(int fd,aeroportos novoAeroporto);
