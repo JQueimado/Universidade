@@ -54,6 +54,22 @@ int main()
 			scanf(" %s %s",codigo_aero1,fuso_horario);
 			criarAeroportos(ficheiro,codigo_aero1,fuso_horario);
 		}
+		else if ( strcmp(modo,"FI") == 0 )
+		{
+			char codigo_partida[4];
+			char codigo_chegada[4];
+			char hora_partida[6];
+			short duracao;
+			
+			scanf(" %s %s %s %s %d", codigo_aero1, codigo_partida, codigo_chegada, hora_partida, &duracao);
+
+			if( !verifica_aero(ficheiro, codigo_partida) )
+				printf("+ aeroporto %s desconhecido", codigo_partida);
+
+			if( !verifica_aero(ficheiro, codigo_chegada) )
+				printf("+ aeroporto %s desconhecido", codigo_chegada);
+
+		}
 		
 	}
 	return 0;
