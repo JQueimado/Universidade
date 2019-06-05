@@ -45,6 +45,7 @@ void* dequeue(Queue *queue){
 	return queue->arr[queue->header - 1];
 }
 
-void* next(Queue *queue){
-	return queue->arr[queue->header];
+void* get(Queue *queue, int index)
+{
+	return queue->arr[queue->header + index];
 }

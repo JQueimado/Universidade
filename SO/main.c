@@ -195,6 +195,35 @@ int main(int arg_n, char** args)
             ext = NULL;
         }
 
+        //Scheduling Call
+        if ((timer == QUANTUM) || (run == NULL))
+        {
+            timer = 0;
+            //RUN -> READY
+            if( ready->size < MAX_READY_SIZE )
+            {
+                enqueue(ready, run);
+                set_state(run, READY_WAIT);
+            }
+            else
+            {
+                enqueue(blocked, run);
+                set_state(run, BLOCKED);
+            }
+            
+            /* Apply Rule: the first 2 prosses in the ready queue must be loaded*/
+            for( int point = 0; point < 2; point++)
+            {
+                Process* temp = get(ready, point);
+                if( temp->in_memory )
+                    
+            }
+
+            //READY -> RUN
+            run = dequeue(ready);
+            set_state(run, RUN);
+        }
+
         //CPU
         if (run != NULL)
         {
@@ -226,18 +255,6 @@ int main(int arg_n, char** args)
             }
         }
 
-        //Scheduling Call
-        if ((timer == QUANTUM) || (run == NULL))
-        {
-            timer = 0;
-            //RUN -> READY
-            if( ready->size < MAX_READY_SIZE )
-            {
-                
-            }
-            //READY -> RUN
-        }
-
         //NEW -> READY
         if( new != NULL)
         {
@@ -258,7 +275,7 @@ int main(int arg_n, char** args)
         }
 
         //check arrivals 
-        Pre_Process* temp = next(pre_processess);
+        Pre_Process* temp = get(pre_processess, 0);
         if( count == temp->arrival )
             new = dequeue(pre_processess);
 

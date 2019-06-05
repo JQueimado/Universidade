@@ -19,7 +19,7 @@ Process* fork_process(Process* process, int id)
 }
 
 /*Methods*/
-/* loader and unloaders*/
+/* loaders and unloaders*/
 bool load_inst(Process* self, char* fname, int* Memory, int mpos)
 {
 	FILE* file = fopen(fname, "r");

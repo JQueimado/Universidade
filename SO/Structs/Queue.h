@@ -31,6 +31,6 @@ void enqueue(Queue *queue, void* item);
 
 void* dequeue(Queue *queue);
 
-void* next(Queue *queue);
+void* get(Queue *queue, int index);
 
 #endif
