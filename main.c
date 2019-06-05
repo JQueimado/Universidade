@@ -20,7 +20,7 @@ bool verifica_aero(int fd,char *codigo)
 //recebe o FD, o codigo e o fuso horario do aeroporto
 //verifica se o aeroporto ja esta na hashtable, se nao
 //preenche os campos da struct e escreve em disco 
-void criarAeroportos(int fd,char *codigo,char *fuso_horario)
+void criarAeroportos(int fd,char *codigo)
 {	
 		if(verifica_aero(fd,codigo))
 		{
@@ -30,7 +30,6 @@ void criarAeroportos(int fd,char *codigo,char *fuso_horario)
 		{
 			aeroportos temp;
 			strcpy(temp.codigo,codigo);
-			strcpy(temp.fuso_horario,fuso_horario);
 			write_aeroportos(fd,temp); //passa para o disco
 			printf("+ novo aeroporto %s\n", codigo);
 		}
@@ -43,7 +42,7 @@ int main()
 	ficheiro = hashtable_aeroportos_open("ficheiro");
 
 	char modo[3];
-	while(scanf(" %s",modo) != EOF)
+	while(scanf("%s",modo) != EOF)
 	{
 		char codigo_aero1[4];
 		//char codigo_aero2[4];
@@ -51,9 +50,10 @@ int main()
 		
 		if(strcmp(modo,"AI")==0)
 		{
-			scanf(" %s %s",codigo_aero1,fuso_horario);
-			criarAeroportos(ficheiro,codigo_aero1,fuso_horario);
+			scanf(" %s",codigo_aero1);
+			criarAeroportos(ficheiro,codigo_aero1);
 		}
+		/*
 		else if ( strcmp(modo,"FI") == 0 )
 		{
 			char codigo_partida[4];
@@ -70,7 +70,7 @@ int main()
 				printf("+ aeroporto %s desconhecido", codigo_chegada);
 
 		}
-		
+		*/
 	}
 	return 0;
 }	

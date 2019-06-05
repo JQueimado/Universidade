@@ -25,9 +25,8 @@ temp;
 typedef struct voo
 {
 	char codigo[7]; // codigo do voo
-	char aero_partida[5];
-	char aero_chegada[5];
-	short fuso_horario;
+	int aero_partida;
+	int aero_chegada;
 	short duracao;
 }
 voos;
@@ -53,6 +52,9 @@ int hash_function_aeroportos(char *codigo);
 int hash_function_aeroportos1(char *codigo);
 int hash_function_aeroportos2(char *codigo);
 void free_hash_utilizadores(aeroportos *hash_aeroportos);
+
 int  hashtable_aeroportos_open(char*name);
 aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
+
+void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
