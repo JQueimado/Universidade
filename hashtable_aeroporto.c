@@ -14,7 +14,7 @@
 #define PRIME 1833319
 
 /* time_to_char */
-float time_to_char( char* time, char* h, char* m)
+void time_to_char( char* time, char* h, char* m)
 {
 	char hours[3];
 	char minutes[3];

@@ -35,7 +35,7 @@ void criarAeroportos(int fd,char *codigo)
 			printf("+ novo aeroporto %s\n", codigo);
 		}
 }
-void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,short hora_partida,short duracao)
+void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partida,short duracao)
 {
 	aeroportos temp_partida;
 	//aeroportos temp_chegada;
@@ -89,7 +89,7 @@ int main()
 			char hora_partida[6];			
 			short duracao;
 			
-			scanf(" %s %s %s %d %d",codigo_aero1, codigo_chegada, hora_partida, &duracao);
+			scanf(" %s %s %s %hd",codigo_aero1, codigo_chegada, hora_partida, &duracao);
 
 			criarVoo(ficheiro,codigo_aero1,codigo_chegada,hora_partida,duracao);
 
