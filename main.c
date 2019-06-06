@@ -30,6 +30,7 @@ void criarAeroportos(int fd,char *codigo)
 		{
 			aeroportos temp;
 			strcpy(temp.codigo,codigo);
+			temp.index_voo=0;
 			write_aeroportos(fd,temp); //passa para o disco
 			printf("+ novo aeroporto %s\n", codigo);
 		}
@@ -37,22 +38,31 @@ void criarAeroportos(int fd,char *codigo)
 void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,short hora_partida,short duracao)
 {
 	aeroportos temp_partida;
-	aeroportos temp_chegada;
+	//aeroportos temp_chegada;
 	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	temp_chegada = read_aeroportos_at_hash(fd,codigo_chegada);
 	if(!verifica_aero(fd,codigo_partida))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
 	}
-	else if(!verifica_aero(fd,codigo_chegada))
+	else if(!verifica_aero(fd,codigo_chegada) && verifica_aero(fd,codigo_chegada))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
 	}
-	else if (/* condition */)
+	else if (verifica_aero(fd,codigo_partida) && verifica_aero(fd,codigo_chegada) ) //ja existe voo
 	{
 		/* code */
 	}
+	else //cria voo
+	{
+		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].aero_chegada,codigo_chegada);
+	}
 }
+
+// verifica_hora
+
+
+//adicionar_voo
+
 // na funçao MAIN recebe os comandos a executar e chama as respectivas funções 	
 int main()
 {
@@ -71,24 +81,20 @@ int main()
 			scanf(" %s",codigo_aero1);
 			criarAeroportos(ficheiro,codigo_aero1);
 		}
-		/*
+		
 		else if ( strcmp(modo,"FI") == 0 )
 		{
-			char codigo_partida[4];
+			//char codigo_partida[4];
 			char codigo_chegada[4];
 			char hora_partida[6];
 			short duracao;
 			
-			scanf(" %s %s %s %s %d", codigo_aero1, codigo_partida, codigo_chegada, hora_partida, &duracao);
+			scanf(" %s %s %s %s %d",codigo_partida, codigo_chegada, hora_partida, &duracao);
 
-			if( !verifica_aero(ficheiro, codigo_partida) )
-				printf("+ aeroporto %s desconhecido", codigo_partida);
-
-			if( !verifica_aero(ficheiro, codigo_chegada) )
-				printf("+ aeroporto %s desconhecido", codigo_chegada);
+			criarVoo(ficheiro,codigo_aero1,codigo_chegada,)
 
 		}
-		*/
+		
 		if(strcmp(modo,"X") == 0)
 		{
 			close(ficheiro);
