@@ -44,7 +44,7 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
 	}
-	else if(!verifica_aero(fd,codigo_chegada) && verifica_aero(fd,codigo_chegada))
+	else if(verifica_aero(fd,codigo_partida) && !verifica_aero(fd,codigo_chegada))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
 	}
@@ -55,6 +55,7 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	else //cria voo
 	{
 		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].aero_chegada,codigo_chegada);
+		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
 	}
 }
 
@@ -87,7 +88,7 @@ int main()
 			//char codigo_partida[4];
 			char codigo_chegada[4];
 			char hora_partida[6];			
-			short duracao;
+			short duracao;	
 			
 			scanf(" %s %s %s %hd",codigo_aero1, codigo_chegada, hora_partida, &duracao);
 
