@@ -199,11 +199,3 @@ int hash_function_aeroportos2(char *codigo) {
 	lseek(fd, hash1 *sizeof(struct aeroportos),SEEK_SET);	
 	write(fd,&novoAeroporto,sizeof(struct aeroportos)); 
 }*/
-
-int main()
-{
-	char h = 0;
-	char m = 0;
-	time_to_char("20:30", &h, &m);
-	printf("%d:%d", h, m);
-}
