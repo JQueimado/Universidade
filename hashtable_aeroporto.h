@@ -26,7 +26,7 @@ typedef struct voo
 {
 	//char codigo[7]; // codigo do voo
 	//char aero_partida[5];
-	char aero_chegada[5];
+	char aero_chegada[4];
 	short hora_partida;
 	short duracao;
 }
@@ -36,7 +36,7 @@ voos;
 
 typedef struct aeroportos
 {	
-	char  codigo[5];		// codigo do aeroporto e não e reutilizavel
+	char  codigo[4];		// codigo do aeroporto e não e reutilizavel
 	//char  fuso_horario[5];		// fuso horario do aeroporto
 	unsigned char index_voo;		
 	voos voosDecorrer[150]; // array de 150 struct's voos 
