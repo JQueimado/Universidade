@@ -58,7 +58,7 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 	
 	while(strcmp(novo_aeroporto.codigo, "")!=0)  
 	{
-		if(strcmp(novo_aeroporto.codigo, codigo)==0)
+		if(strcmp(novo_aeroporto.codigo, codigo	)==0)
 		{
 			return novo_aeroporto;  
 		}
@@ -200,10 +200,3 @@ int hash_function_aeroportos2(char *codigo) {
 	write(fd,&novoAeroporto,sizeof(struct aeroportos)); 
 }*/
 
-int main()
-{
-	char h = 0;
-	char m = 0;
-	time_to_char("20:30", &h, &m);
-	printf("%d:%d", h, m);
-}

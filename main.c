@@ -86,7 +86,7 @@ int main()
 		{
 			//char codigo_partida[4];
 			char codigo_chegada[4];
-			char hora_partida[6];
+			char hora_partida[6];			
 			short duracao;
 			
 			scanf(" %s %s %s %d %d",codigo_aero1, codigo_chegada, hora_partida, &duracao);
