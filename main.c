@@ -89,9 +89,9 @@ int main()
 			char hora_partida[6];
 			short duracao;
 			
-			scanf(" %s %s %s %s %d",codigo_partida, codigo_chegada, hora_partida, &duracao);
+			scanf(" %s %s %s %d %d",codigo_aero1, codigo_chegada, hora_partida, &duracao);
 
-			criarVoo(ficheiro,codigo_aero1,codigo_chegada,)
+			criarVoo(ficheiro,codigo_aero1,codigo_chegada,hora_partida,duracao);
 
 		}
 		
