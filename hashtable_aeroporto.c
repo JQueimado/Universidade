@@ -13,8 +13,8 @@
 #define MAX_UTL 1833341  
 #define PRIME 1833319
 
-/* time_to_float */
-float time_to_float( char* time, char* h, char* m)
+/* time_to_char */
+float time_to_char( char* time, char* h, char* m)
 {
 	char hours[3];
 	char minutes[3];
@@ -204,6 +204,6 @@ int main()
 {
 	char h = 0;
 	char m = 0;
-	time_to_float("20:30", &h, &m);
+	time_to_char("20:30", &h, &m);
 	printf("%d:%d", h, m);
 }
