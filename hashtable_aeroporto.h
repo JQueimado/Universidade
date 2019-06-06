@@ -48,6 +48,7 @@ typedef struct hashtable_aeroportos
 }
 hashtable_aeroportos;
 
+float time_to_float( char* time, char* h, char* m);
 
 int hash_function_aeroportos(char *codigo);
 int hash_function_aeroportos1(char *codigo);

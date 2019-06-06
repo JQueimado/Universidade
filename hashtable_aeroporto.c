@@ -13,6 +13,17 @@
 #define MAX_UTL 1833341  
 #define PRIME 1833319
 
+/* time_to_float */
+float time_to_float( char* time, char* h, char* m)
+{
+	char hours[3];
+	char minutes[3];
+	memcpy(hours, &time[0], 2);
+	memcpy(minutes, &time[3], 2);
+	*h = atoi(hours);
+	*m = atoi(minutes);
+}
+
 int hashtable_aeroportos_open(char*name)
 {
 	temp *tempp = malloc(sizeof(struct temp));
@@ -188,3 +199,11 @@ int hash_function_aeroportos2(char *codigo) {
 	lseek(fd, hash1 *sizeof(struct aeroportos),SEEK_SET);	
 	write(fd,&novoAeroporto,sizeof(struct aeroportos)); 
 }*/
+
+int main()
+{
+	char h = 0;
+	char m = 0;
+	time_to_float("20:30", &h, &m);
+	printf("%d:%d", h, m);
+}
