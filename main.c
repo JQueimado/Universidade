@@ -34,7 +34,25 @@ void criarAeroportos(int fd,char *codigo)
 			printf("+ novo aeroporto %s\n", codigo);
 		}
 }
-
+void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,short hora_partida,short duracao)
+{
+	aeroportos temp_partida;
+	aeroportos temp_chegada;
+	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+	temp_chegada = read_aeroportos_at_hash(fd,codigo_chegada);
+	if(!verifica_aero(fd,codigo_partida))
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_partida);
+	}
+	else if(!verifica_aero(fd,codigo_chegada))
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
+	}
+	else if (/* condition */)
+	{
+		/* code */
+	}
+}
 // na funçao MAIN recebe os comandos a executar e chama as respectivas funções 	
 int main()
 {
@@ -46,7 +64,7 @@ int main()
 	{
 		char codigo_aero1[4];
 		//char codigo_aero2[4];
-		char fuso_horario[5];
+		//char fuso_horario[5];
 		
 		if(strcmp(modo,"AI")==0)
 		{
@@ -71,6 +89,12 @@ int main()
 
 		}
 		*/
+		if(strcmp(modo,"X") == 0)
+		{
+			close(ficheiro);
+			return 0;
+		}
+		
 	}
-	return 0;
-}	
+}
+
