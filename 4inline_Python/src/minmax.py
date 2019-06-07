@@ -1,21 +1,37 @@
 from four_in_line import *
+import pickle;
+
+FILE_NAME = "cache.bin"
 
 class Node:
-    state = None
+    fp = -1
     value = 0
 
     children = []
 
     def __init__(self, state):
-        self.state = state
+        self.dump(state)
         self.children = []
+
+    def load(self):
+        f = open(FILE_NAME, "rb")
+        f.seek(self.fp)
+        return pickle.load(f)
+
+    def dump(self, state):
+        f = open(FILE_NAME, "ab")
+        self.fp = f.tell()
+        pickle.dump(state, f, pickle.HIGHEST_PROTOCOL)
+
+    def get_state(self):
+        return self.load()
 
     def expand(self, player):
 
         if( len(self.children) != 0 ):
             return
 
-        states = self.state.expand_state( player )
+        states = self.get_state().expand_state( player )
 
         for s in states:
             nnode = Node( s )
@@ -28,33 +44,26 @@ class MinMaxTree:
         self.root = Node( inithial_state )
 
     def minmax_rec(self, node, prof, player, plim):
-       
-        print(id(node), prof)
-        node.state.show()
-
-        c = node.state.term()
+        print()
+        state = node.get_state()
+        c = state.term()
 
         inf = float('inf')
 
         if( c == 1 ):
+            state.show()
             print( "win" )
             return inf
 
         if( c == -1):
+            state.show()
             print( "lose" )
             return -inf
 
         if( plim == prof ):
-            print ("leaf")
-            return node.state.val()
+            return state.val()
 
         node.expand( player )
-
-        count = 0
-        for n in node.children:
-            print(count)
-            n.state.show()
-            count += 1
 
         if( player == 1 ):
             p = 2
@@ -76,7 +85,7 @@ class MinMaxTree:
 
     def minmax(self, plim):
         inithial = self.root
-        c = inithial.state.term()
+        c = inithial.get_state().term()
         
         if( c != 0 ):
             return c
@@ -84,10 +93,3 @@ class MinMaxTree:
         val = self.minmax_rec( inithial, 0, 1, plim)
 
         return val
-
-if __name__ == "__main__":
-    istate = State()
-
-    tree = MinMaxTree( istate )
-
-    print( tree.minmax( 8 ) )
