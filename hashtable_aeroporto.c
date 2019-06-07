@@ -14,14 +14,21 @@
 #define PRIME 1833319
 
 /* time_to_char */
-void time_to_char( char* time, char* h, char* m)
+void time_to_char( char* time,char *first_part,char *sec_part)
 {
-	char hours[3];
-	char minutes[3];
-	memcpy(hours, &time[0], 2);
-	memcpy(minutes, &time[3], 2);
-	*h = atoi(hours);
-	*m = atoi(minutes);
+	//char hours[3];
+	//char minutes[3];
+	//memcpy(hours, &time[0], 2);
+	//memcpy(minutes, &time[3], 2);
+	//*h = atoi(hours);
+	//*m = atoi(minutes);
+	//printf("%s\n",hours);
+
+	char *line = strdup(time); // don't do char *line = "user name"; see Note
+
+	first_part = strtok(line, ":"); //first_part points to "user"
+	sec_part = strtok(NULL, ":");   //sec_part points to "name"
+	printf("%s %s\n",first_part,sec_part);
 }
 
 int hashtable_aeroportos_open(char*name)

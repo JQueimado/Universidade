@@ -16,15 +16,20 @@ bool verifica_aero(int fd,char *codigo)
 	return false;
 }
 
-bool verifica_voo( aeroportos partida, char* chegada, char h, char m)
+bool verifica_voo( aeroportos partida, char* chegada, char* h, char* m)
 {
+	printf("cona\n");
 	for(int i = 0; i<partida.index_voo; i++)
 	{
 		voos curr = partida.voosDecorrer[i];
-		if( strcmp(chegada, curr.aero_chegada) == 0 &&  h == curr.hora_partida && m == curr.minuto_partida )
-			return false;
+		printf("%s %s %s\n",curr.aero_chegada,curr.hora_partida,curr.minuto_partida);
+		if( strcmp(chegada, curr.aero_chegada) == 0 &&  strcmp(h,curr.hora_partida) == 0 && strcmp(m,curr.minuto_partida) == 0)
+		{ //caso encontre
+			printf("h: %s\n hora_partida: %s\n",h,curr.hora_partida); 
+			return true;
+		}
 	}
-	return true;
+	return false;
 }
 
 //função CriarAeroportos cria um novo aeroporto
@@ -51,10 +56,11 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	aeroportos temp_partida;
 	//aeroportos temp_chegada;
 	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	char hora;
-	char minutos;
-	time_to_char(hora_partida, hora, minutos);
-
+	char hora[3];
+	char minutos[3];
+	time_to_char(hora_partida,hora,minutos);
+	printf("%s %s\n",hora,minutos);
+	//printf("%s %s\n",hora,minutos);
 	if(!verifica_aero(fd,codigo_partida))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
@@ -63,13 +69,20 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
 	}
-	else if ( !verifica_voo( temp_partida, codigo_chegada, hora, minutos) ) //ja existe voo
+	else if (verifica_voo(temp_partida, codigo_chegada, hora, minutos) ) //ja existe voo
 	{
 		printf("+ voo %s %s %s existe\n", codigo_partida, codigo_chegada, hora_partida);
 	}
 	else //cria voo
 	{
 		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].aero_chegada,codigo_chegada);
+		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].hora_partida,hora);
+		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].minuto_partida,minutos);
+		temp_partida.index_voo++;
+		printf("index: %d\n",temp_partida.index_voo++);
+		//printf("Horas: %s\n",temp_partida.voosDecorrer[temp_partida.index_voo].hora_partida);
+		//printf("Minutos: %s\n",temp_partida.voosDecorrer[temp_partida.index_voo].minuto_partida);
+		write_aeroportos(fd,temp_partida);
 		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
 	}
 }
