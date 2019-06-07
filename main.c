@@ -90,11 +90,27 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
 	}
 }
+void retirar_array(int fd,char *codigo_partida,char *codigo_chegada)
+{
+	
+}
+void elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_partida)
+{
+	aeroportos temp_partida;
+	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+	if(!verifica_aero(fd,codigo_partida))
+	{
+		printf("+ voo %s %s %s desconhecido\n",codigo_partida,codigo_chegada,hora_partida);
+	}
+	else if(verifica_aero(fd,codigo_partida) && !verifica_aero(fd,codigo_chegada))
+	{
+		printf("+ voo %s %s %s desconhecido\n",codigo_partida,codigo_chegada,hora_partida);
+	}
+	else //remove voo
+	{
 
-// verifica_hora
-
-
-//adicionar_voo
+	}
+}
 
 // na funçao MAIN recebe os comandos a executar e chama as respectivas funções 	
 int main()
