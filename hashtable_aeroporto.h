@@ -27,7 +27,8 @@ typedef struct voo
 	//char codigo[7]; // codigo do voo
 	//char aero_partida[5];
 	char aero_chegada[5];
-	short hora_partida;
+	char hora_partida;
+	char minuto_partida;
 	short duracao;
 }
 voos;
@@ -49,7 +50,7 @@ typedef struct hashtable_aeroportos
 }
 hashtable_aeroportos;
 
-float time_to_float( char* time, char* h, char* m);
+void time_to_char( char* time, char* h, char* m);
 
 int hash_function_aeroportos(char *codigo);
 int hash_function_aeroportos1(char *codigo);
