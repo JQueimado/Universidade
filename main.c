@@ -16,6 +16,17 @@ bool verifica_aero(int fd,char *codigo)
 	return false;
 }
 
+bool verifica_voo( aeroportos partida, char* chegada, char h, char m)
+{
+	for(int i = 0; i<partida.index_voo; i++)
+	{
+		voos curr = partida.voosDecorrer[i];
+		if( strcmp(chegada, curr.aero_chegada) == 0 &&  h == curr.hora_partida && m == curr.minuto_partida )
+			return false;
+	}
+	return true;
+}
+
 //função CriarAeroportos cria um novo aeroporto
 //recebe o FD, o codigo e o fuso horario do aeroporto
 //verifica se o aeroporto ja esta na hashtable, se nao
@@ -40,6 +51,10 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	aeroportos temp_partida;
 	//aeroportos temp_chegada;
 	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+	char hora;
+	char minutos;
+	time_to_char(hora_partida, hora, minutos);
+
 	if(!verifica_aero(fd,codigo_partida))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
@@ -48,9 +63,9 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
 	}
-	else if (verifica_aero(fd,codigo_partida) && verifica_aero(fd,codigo_chegada) ) //ja existe voo
+	else if ( !verifica_voo( temp_partida, codigo_chegada, hora, minutos) ) //ja existe voo
 	{
-		/* code */
+		printf("+ voo %s %s %s existe\n", codigo_partida, codigo_chegada, hora_partida);
 	}
 	else //cria voo
 	{
