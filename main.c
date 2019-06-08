@@ -51,6 +51,35 @@ void criarAeroportos(int fd,char *codigo)
 			printf("+ novo aeroporto %s\n", codigo);
 		}
 }
+/* Criar Voo */
+bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao )
+{
+	if( aeroporto.index_voo < 150 ){
+		strcpy(aeroporto.voosDecorrer[aeroporto.index_voo].aero_chegada,codigo_chegada);
+		aeroporto.voosDecorrer[aeroporto.index_voo].hora_partida = hora;
+		aeroporto.voosDecorrer[aeroporto.index_voo].minuto_partida = minutos;
+		aeroporto.index_voo++;
+		write_aeroportos(fd,aeroporto);
+	}
+	else
+	{
+		for( int i = 0; i < 150; i++ )
+		{
+			voos* voo = &aeroporto.voosDecorrer[i];
+			if( voo->hora_partida == -1 )
+			{
+				strcpy(voo->aero_chegada, codigo_chegada);
+				voo->hora_partida = hora;
+				voo->minuto_partida = minutos;
+				voo->duracao = duracao;
+			}
+		}
+		return false;
+	}
+	write_aeroportos(fd,aeroporto);
+	return true;
+}
+
 void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partida,short duracao)
 {
 	aeroportos temp_partida;
@@ -82,16 +111,7 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	}
 	else //cria voo
 	{
-		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].aero_chegada,codigo_chegada);
-		temp_partida.voosDecorrer[temp_partida.index_voo].hora_partida = hora;
-		temp_partida.voosDecorrer[temp_partida.index_voo].minuto_partida = minutos;
-		temp_partida.index_voo++;
-		printf("index: %d\n",temp_partida.index_voo);
-		printf("Horas: %d\n",temp_partida.voosDecorrer[temp_partida.index_voo - 1].hora_partida);
-		printf("Minutos: %d\n",temp_partida.voosDecorrer[temp_partida.index_voo - 1].minuto_partida);
-		printf("%d %d\n",hora,minutos);
-		write_aeroportos(fd,temp_partida);
-		temp_partida.index_voo++;
+		add_voo(fd, temp_partida, codigo_chegada, hora,minutos, duracao);
 		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
 	}
 }
