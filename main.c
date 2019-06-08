@@ -30,7 +30,11 @@ bool verifica_voo( aeroportos partida, char* chegada, char h, char m)
 	{
 		voos curr = partida.voosDecorrer[i];
 		printf("%s %d %d\n",curr.aero_chegada,curr.hora_partida,curr.minuto_partida);
-		if( strcmp(chegada, curr.aero_chegada) == 0 &&  curr.hora_partida == h && curr.minuto_partida == m)
+		
+		if( curr.hora_partida == -1)
+			continue;
+
+		if( compare_voo( &curr, chegada, h, m) )
 		{ //caso encontre
 			printf("h: %d\n hora_partida: %d\n",h,curr.hora_partida); 
 			return true;
@@ -66,7 +70,6 @@ bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char
 		aeroporto.voosDecorrer[aeroporto.index_voo].hora_partida = hora;
 		aeroporto.voosDecorrer[aeroporto.index_voo].minuto_partida = minutos;
 		aeroporto.index_voo++;
-		write_aeroportos(fd,aeroporto);
 	}
 	else
 	{
@@ -124,7 +127,7 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 /* Remover Voo:
 	Voos Removidos tem a flag hora = -1
 */
-bool retirar_voo( aeroportos aeroporto, char* codigo_chegada, char hora, char minutos)
+bool retirar_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos)
 {
 	for(unsigned char i = 0; i<aeroporto.index_voo; i++)
 	{
@@ -133,6 +136,7 @@ bool retirar_voo( aeroportos aeroporto, char* codigo_chegada, char hora, char mi
 			if( compare_voo(voo, codigo_chegada, hora, minutos) )
 			{
 				voo->hora_partida = -1; //Remoção
+				write_aeroportos(fd, aeroporto);
 				return true; //Successfull
 			}
 	}
@@ -148,7 +152,7 @@ bool elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_par
 		char hora;
 		char minutos;
 		time_to_char(hora_partida, &hora, &minutos);
-		if( retirar_voo(temp_partida, codigo_chegada, hora, minutos) )
+		if( retirar_voo( fd, temp_partida, codigo_chegada, hora, minutos) )
 			return true;
 	}
 	return false;
