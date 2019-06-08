@@ -28,8 +28,8 @@ typedef struct voo
 	//char aero_partida[5];
 
 	char aero_chegada[4];
-	char hora_partida[3];
-	char minuto_partida[3];
+	char hora_partida;
+	char minuto_partida;
 	short duracao;
 }
 voos;

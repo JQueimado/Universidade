@@ -16,16 +16,16 @@ bool verifica_aero(int fd,char *codigo)
 	return false;
 }
 
-bool verifica_voo( aeroportos partida, char* chegada, char* h, char* m)
+bool verifica_voo( aeroportos partida, char* chegada, char h, char m)
 {
 	printf("cona\n");
 	for(int i = 0; i<partida.index_voo; i++)
 	{
 		voos curr = partida.voosDecorrer[i];
-		printf("%s %s %s\n",curr.aero_chegada,curr.hora_partida,curr.minuto_partida);
-		if( strcmp(chegada, curr.aero_chegada) == 0 &&  strcmp(h,curr.hora_partida) == 0 && strcmp(m,curr.minuto_partida) == 0)
+		printf("%s %d %d\n",curr.aero_chegada,curr.hora_partida,curr.minuto_partida);
+		if( strcmp(chegada, curr.aero_chegada) == 0 &&  curr.hora_partida == h && curr.minuto_partida == m)
 		{ //caso encontre
-			printf("h: %s\n hora_partida: %s\n",h,curr.hora_partida); 
+			printf("h: %d\n hora_partida: %d\n",h,curr.hora_partida); 
 			return true;
 		}
 	}
@@ -56,13 +56,18 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	aeroportos temp_partida;
 	//aeroportos temp_chegada;
 	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	char *hora;
-	char *minutos;
+	char hora;
+	char minutos;
 	char *line = strdup(hora_partida); // don't do char *line = "user name"; see Note
 
+	/* 
 	hora = strtok(line, ":"); //first_part points to "user"
 	minutos = strtok(NULL, ":");   //sec_part points to "name"
-	printf("%s %s\n",hora,minutos);
+	*/
+	time_to_char(hora_partida, &hora, &minutos);
+
+	printf("%d %d\n",hora,minutos);
+
 	if(!verifica_aero(fd,codigo_partida))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
@@ -78,13 +83,13 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	else //cria voo
 	{
 		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].aero_chegada,codigo_chegada);
-		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].hora_partida,hora);
-		strcpy(temp_partida.voosDecorrer[temp_partida.index_voo].minuto_partida,minutos);
+		temp_partida.voosDecorrer[temp_partida.index_voo].hora_partida = hora;
+		temp_partida.voosDecorrer[temp_partida.index_voo].minuto_partida = minutos;
 		temp_partida.index_voo++;
-		printf("index: %d\n",temp_partida.index_voo++);
-		printf("Horas: %s\n",temp_partida.voosDecorrer[temp_partida.index_voo].hora_partida);
-		printf("Minutos: %s\n",temp_partida.voosDecorrer[temp_partida.index_voo].minuto_partida);
-		printf("%s %s\n",hora,minutos);
+		printf("index: %d\n",temp_partida.index_voo);
+		printf("Horas: %d\n",temp_partida.voosDecorrer[temp_partida.index_voo - 1].hora_partida);
+		printf("Minutos: %d\n",temp_partida.voosDecorrer[temp_partida.index_voo - 1].minuto_partida);
+		printf("%d %d\n",hora,minutos);
 		write_aeroportos(fd,temp_partida);
 		temp_partida.index_voo++;
 		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
