@@ -4,6 +4,13 @@
 #include <string.h>
 #include "hashtable_aeroporto.h"
 
+/* Compare */
+/* Compara 2 voos */
+bool compare_voo( voos* voo, char* codigo, char hora, char minutos)
+{
+	return (strcmp(voo->aero_chegada, codigo) == 0) && (voo->hora_partida == hora) && (voo->minuto_partida == minutos);
+}
+
 //função VERIFICA se o aeroporto já foi criado
 // função recebe o FD e o codigo para aceder ao disco
 // e devolve TRUE se o aeroporto existir ou FALSE se o contrario 
@@ -87,8 +94,6 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
 	char hora;
 	char minutos;
-	char *line = strdup(hora_partida); // don't do char *line = "user name"; see Note
-
 	/* 
 	hora = strtok(line, ":"); //first_part points to "user"
 	minutos = strtok(NULL, ":");   //sec_part points to "name"
@@ -115,26 +120,38 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
 	}
 }
-void retirar_array(int fd,char *codigo_partida,char *codigo_chegada)
+
+/* Remover Voo:
+	Voos Removidos tem a flag hora = -1
+*/
+bool retirar_voo( aeroportos aeroporto, char* codigo_chegada, char hora, char minutos)
 {
-	
+	for(unsigned char i = 0; i<aeroporto.index_voo; i++)
+	{
+		voos* voo = &aeroporto.voosDecorrer[i];
+		if( voo->hora_partida != -1 )
+			if( compare_voo(voo, codigo_chegada, hora, minutos) )
+			{
+				voo->hora_partida = -1; //Remoção
+				return true; //Successfull
+			}
+	}
+	return false; //Não encontrado
 }
-void elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_partida)
+
+bool elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_partida)
 {
 	aeroportos temp_partida;
 	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	if(!verifica_aero(fd,codigo_partida))
+	if( verifica_aero(fd,codigo_partida) && verifica_aero(fd, codigo_chegada))
 	{
-		printf("+ voo %s %s %s desconhecido\n",codigo_partida,codigo_chegada,hora_partida);
+		char hora;
+		char minutos;
+		time_to_char(hora_partida, &hora, &minutos);
+		if( retirar_voo(temp_partida, codigo_chegada, hora, minutos) )
+			return true;
 	}
-	else if(verifica_aero(fd,codigo_partida) && !verifica_aero(fd,codigo_chegada))
-	{
-		printf("+ voo %s %s %s desconhecido\n",codigo_partida,codigo_chegada,hora_partida);
-	}
-	else //remove voo
-	{
-
-	}
+	return false;
 }
 
 // na funçao MAIN recebe os comandos a executar e chama as respectivas funções 	
@@ -147,28 +164,32 @@ int main()
 	while(scanf("%s",modo) != EOF)
 	{
 		char codigo_aero1[4];
-		//char codigo_aero2[4];
-		//char fuso_horario[5];
+		char codigo_aero2[4];
+		char hora_partida[6];
 		
 		if(strcmp(modo,"AI")==0)
 		{
 			scanf(" %s",codigo_aero1);
 			criarAeroportos(ficheiro,codigo_aero1);
 		}
-		
 		else if ( strcmp(modo,"FI") == 0 )
-		{
-			//char codigo_partida[4];
-			char codigo_chegada[4];
-			char hora_partida[6];			
+		{		
 			short duracao;	
 			
-			scanf(" %s %s %s %hd",codigo_aero1, codigo_chegada, hora_partida, &duracao);
+			scanf(" %s %s %s %hd",codigo_aero1, codigo_aero2, hora_partida, &duracao);
 
-			criarVoo(ficheiro,codigo_aero1,codigo_chegada,hora_partida,duracao);
-
+			criarVoo(ficheiro,codigo_aero1,codigo_aero2,hora_partida,duracao);
+		}
+		else if( strcmp(modo,"FD") == 0 )
+		{
+			scanf("%s %s %s", codigo_aero1, codigo_aero2, hora_partida);
+			if( elimina_voo(ficheiro, codigo_aero1, codigo_aero2, hora_partida) )
+				printf("+ voo %s %s %s removido\n", codigo_aero1, codigo_aero2, hora_partida);
+			else
+				printf("+ voo %s %s %s inexistente\n", codigo_aero1, codigo_aero2, hora_partida);
 		}
 		
+
 		if(strcmp(modo,"X") == 0)
 		{
 			close(ficheiro);
