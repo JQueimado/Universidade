@@ -6,9 +6,9 @@
 
 /* Compare */
 /* Compara 2 voos */
-bool compare_voo( voos* voo, char* codigo, char hora, char minutos)
+bool compare_voo( voos voo, char* codigo, char hora, char minutos)
 {
-	return (strcmp(voo->aero_chegada, codigo) == 0) && (voo->hora_partida == hora) && (voo->minuto_partida == minutos);
+	return (strcmp(voo.aero_chegada, codigo) == 0) && (voo.hora_partida == hora) && (voo.minuto_partida == minutos);
 }
 
 //função VERIFICA se o aeroporto já foi criado
@@ -25,18 +25,15 @@ bool verifica_aero(int fd,char *codigo)
 
 bool verifica_voo( aeroportos partida, char* chegada, char h, char m)
 {
-	printf("cona\n");
+	//printf("cona\n");
 	for(int i = 0; i<partida.index_voo; i++)
 	{
 		voos curr = partida.voosDecorrer[i];
-		printf("%s %d %d\n",curr.aero_chegada,curr.hora_partida,curr.minuto_partida);
-		
-		if( curr.hora_partida == -1)
-			continue;
+		//printf("%s %d %d\n",curr.aero_chegada,curr.hora_partida,curr.minuto_partida);
 
-		if( compare_voo( &curr, chegada, h, m) )
+		if( compare_voo( curr, chegada, h, m) )
 		{ //caso encontre
-			printf("h: %d\n hora_partida: %d\n",h,curr.hora_partida); 
+			//printf("h: %d\n hora_partida: %d\n",h,curr.hora_partida); 
 			return true;
 		}
 	}
@@ -133,9 +130,10 @@ bool retirar_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, 
 	{
 		voos* voo = &aeroporto.voosDecorrer[i];
 		if( voo->hora_partida != -1 )
-			if( compare_voo(voo, codigo_chegada, hora, minutos) )
+			if( compare_voo(*voo, codigo_chegada, hora, minutos) )
 			{
 				voo->hora_partida = -1; //Remoção
+				//printf("flag:%d\n",voo.hora_partida);
 				write_aeroportos(fd, aeroporto);
 				return true; //Successfull
 			}
@@ -153,7 +151,9 @@ bool elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_par
 		char minutos;
 		time_to_char(hora_partida, &hora, &minutos);
 		if( retirar_voo( fd, temp_partida, codigo_chegada, hora, minutos) )
+		{
 			return true;
+		}
 	}
 	return false;
 }
