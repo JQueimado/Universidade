@@ -35,7 +35,7 @@ int hashtable_aeroportos_open(char*name)
 		tempp -> fd = open(name, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 
 		lseek(tempp -> fd, 0,SEEK_SET);
-		write(tempp -> fd, NULL,sizeof(struct hashtable_aeroportos));
+		write(tempp -> fd, NULL, sizeof(struct hashtable));
 		
 		return tempp -> fd;
 	}

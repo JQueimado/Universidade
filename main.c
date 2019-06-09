@@ -100,8 +100,6 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	*/
 	time_to_char(hora_partida, &hora, &minutos);
 
-	printf("%d %d\n",hora,minutos);
-
 	if(!verifica_aero(fd,codigo_partida))
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);

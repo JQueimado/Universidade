@@ -59,12 +59,7 @@ int hash_function_aeroportos2(char *codigo);
 void free_hash_aeroportos(aeroportos *hash_aeroportos);
 
 int  hashtable_aeroportos_open(char*name);
-<<<<<<< HEAD
-void* read_aeroportos_at_hash(int fd ,char *codigo);
-void write_aeroportos(int fd,aeroportos novoAeroporto);
-=======
 aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
 //void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
->>>>>>> master
