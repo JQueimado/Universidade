@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-
-#define MAX_AERO 183334
+			
+#define MAX_AERO 1833341
 
 
 
@@ -24,20 +24,23 @@ temp;
 
 typedef struct voo
 {
-	char codigo[7]; // codigo do voo
-	char aero_partida[5];
-	char aero_chegada[5];
-	short fuso_horario;
+	//char codigo[7]; // codigo do voo
+	//char aero_partida[5];
+
+	char aero_chegada[4];
+	char hora_partida;
+	char minuto_partida;
 	short duracao;
 }
 voos;
 
-//Struct UTILIZADORES
+//Struct AEROPORTOS
 
 typedef struct aeroportos
 {	
-	char  codigo[5];		// codigo do aeroporto e não e reutilizavel
-	char  fuso_horario[5];		// fuso horario do aeroporto		
+	char  codigo[4];		// codigo do aeroporto e não e reutilizavel
+	//char  fuso_horario[5];		// fuso horario do aeroporto
+	unsigned char index_voo;		
 	voos voosDecorrer[150]; // array de 150 struct's voos 
 }
 aeroportos;
@@ -48,11 +51,20 @@ typedef struct hashtable
 }
 hashtable;
 
+void time_to_char( char* time,char *first_part,char *sec_part);
 
 int hash_function_aeroportos(char *codigo);
 int hash_function_aeroportos1(char *codigo);
 int hash_function_aeroportos2(char *codigo);
-void free_hash_utilizadores(aeroportos *hash_aeroportos);
+void free_hash_aeroportos(aeroportos *hash_aeroportos);
+
 int  hashtable_aeroportos_open(char*name);
+<<<<<<< HEAD
 void* read_aeroportos_at_hash(int fd ,char *codigo);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
+=======
+aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
+void write_aeroportos(int fd,aeroportos novoAeroporto);
+
+//void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
+>>>>>>> master
