@@ -216,7 +216,10 @@ int main(int arg_n, char** args)
             {
                 Process* temp = get(ready, point);
                 if( temp->in_memory )
-                    
+                    continue;
+                else
+                    load_inst( );
+                
             }
 
             //READY -> RUN
