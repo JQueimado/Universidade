@@ -36,7 +36,7 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 	self->process_pointer = mpos;
 
 	char *point = strtok(line, " ");
-	int p = self->process_pointer + 10 - 1;
+	int p = self->process_pointer + 10;
 	while (point != NULL)
 	{
 		Memory[p] = atoi(point);

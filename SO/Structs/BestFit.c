@@ -6,11 +6,10 @@
 #define MAX_FRAME MEM_SIZE/2
 
 /* New Frame */
-Frame* new_frame(short init, short end)
+Frame* new_frame(Process* process)
 {
     Frame* temp = malloc(sizeof(Frame));
-    temp->init = init;
-    temp->end = end;
+    temp->process = process;
     temp->next = NULL;
     return temp;
 }
@@ -23,7 +22,7 @@ Frame* add_to_frame_list(Frame* head, Frame* item )
         return item;
 
     /* if head */
-    if(head->init < item->init)
+    if(head->process->process_pointer > item->process->process_pointer)
     {
         item->next = head;
         return item;
@@ -38,7 +37,7 @@ Frame* add_to_frame_list(Frame* head, Frame* item )
 
     /* find place */
     Frame* header = head;
-    while (head->next->init < item->init)
+    while (head->next->process->process_pointer < item->process->process_pointer)
     {
         head = head->next;
         
@@ -64,7 +63,7 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
         Process* curr = processes[i];
         if(!curr->in_memory)
             continue;
-        head = add_to_frame_list(head, new_frame(curr->process_pointer, curr->process_pointer));
+        head = add_to_frame_list(head, new_frame(curr));
     }
 
     /* if no process */
@@ -73,25 +72,33 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
 
     /* if 1 process */
     if(head->next == NULL)
-        return head->end + 1;
+        return head->process->end_pointer + 1;
 
     /* if > 1 */
+
+    /* test */
+    /* 
+    Frame* temp = head;
+    while (temp != NULL)
+    {
+        printf("ids:%d\n", temp->process->id);
+        temp = temp->next;
+    }
+    */
     int diference;
     Frame* seleced_frame;
 
-    while(head != NULL)
+    while(head->next != NULL)
     {
         /* Calc free Space */
-        int free_space = head->next->init - head->end - 1;
-        
+        int free_space = head->next->process->process_pointer - head->process->end_pointer - 1;
         /* Check if fit */
-        if( free_space > p_size )
+        if( free_space > insrt_size )
         {
             /* Calc free Space after allocasion */
-            free_space = free_space - p_size;
-
-            /* Check for Best feet */
-            if( diference > free_space )
+            free_space = free_space - insrt_size;
+            /* Check for Best fit */
+            if( free_space < diference )
             {
                 diference = free_space;
                 seleced_frame = head;
@@ -102,8 +109,14 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
         head = head->next;
     }
 
-    return seleced_frame->end + 1;
-
+    int free_to_end = MEM_SIZE - head->process->end_pointer;
+    if( free_to_end > insrt_size )
+    {
+        free_to_end = free_to_end - insrt_size;
+        if( free_to_end < diference)
+            return head->process->end_pointer + 1;
+    }
+    return seleced_frame->process->end_pointer + 1;
 }
 
 /**************test_main**************/
@@ -113,10 +126,13 @@ int main()
     char* fname = "input1.txt";
 
     Process *process = new_Process(1, 0);
-    Process *process1 = new_Process(2, 28);
-    Process* processes[2];
+    Process *process1 = new_Process(2, 40);    
+    Process *process2 = new_Process(3, 76);
+    int p_size = 3;
+    Process* processes[p_size];
     processes[0] = process;
     processes[1] = process1;
+    processes[2] = process2;
 
 	int *Memory = calloc(sizeof(int), 300);
 
@@ -124,13 +140,23 @@ int main()
     printf("mem2:%d\n", get_size(process1, fname));
 
     load_process(process1, Memory, 0, fname);
+    set_var(process1, Memory, 10, 200);
+    set_var(process1, Memory, 1, 22);
 
-    int p = find_pos(processes, 2, get_size(process, fname), Memory);
-
+    int p = find_pos(processes, p_size, get_size(process, fname), Memory);
     printf("pos:%d\n", p);
+    load_process(process, Memory, p, fname);
+    set_var(process, Memory, 10, 300);
+    set_var(process, Memory, 1, 33);
+
+    p = find_pos(processes, p_size, get_size(process2, fname), Memory);
+    printf("pos:%d\n", p);
+    load_process(process2, Memory, p, fname);
+    set_var(process, Memory, 10, 400);
+    set_var(process, Memory, 1, 44);
 
     puts("mem");
-    for (int i = 0; i < 40; i++)
+    for (int i = 0; i < 100; i++)
 		printf("%d\n", Memory[i]);
     puts("nomeme");
 
