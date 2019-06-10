@@ -8,6 +8,7 @@
 #include "Structs/Process.h"
 #include "Structs/Pre_Process.h"
 #include "Structs/Disk.h"
+#include "Structs/MemoryManager.h"
 
 //Consts
 
@@ -216,10 +217,10 @@ int main(int arg_n, char** args)
             {
                 Process* temp = get(ready, point);
                 if( temp->in_memory )
-                    continue;
-                else
-                    load_inst( );
-                
+                {
+                    find_pos(processes, )
+                }
+                    
             }
 
             //READY -> RUN

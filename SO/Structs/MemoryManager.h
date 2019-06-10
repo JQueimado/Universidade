@@ -10,4 +10,4 @@ typedef struct Frame
 
 Frame* new_frame(short init, short end);
 
-int find_pos(Process** processes, int p_size, int* Memory);
+int find_pos(Process** processes, int p_size, int insert_size, int* Memory);

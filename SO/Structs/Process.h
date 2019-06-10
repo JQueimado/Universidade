@@ -50,10 +50,15 @@ bool load_inst(Process* self, char* fname, int* Memory, int mpos);
 
 bool load_var(Process* self, int* Memory);
 
+bool load_process(Process *self, int *Memory, int mem_pos, char *fname);
+
 bool unload(Process* self, int* Memory);
 
 /* Set State */
 void set_state(Process * process, int nstate);
+
+/* Get Size */
+int get_size(Process* self, char* fname);
 
 /* Vars */
 /* Get Var */

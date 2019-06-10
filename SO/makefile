@@ -8,7 +8,7 @@ run: main input1.txt
 	./main input1.txt > output.txt
 
 clean:
-	rm -f Pre_Process.o Process.o Queue.o Disk.o
+	rm -f Pre_Process.o Process.o Queue.o Disk.o process.cache
 
 main: main.c Pre_Process.o Process.o Queue.o Disk.o
 	gcc -g main.c -o main Pre_Process.o Process.o Queue.o Disk.o

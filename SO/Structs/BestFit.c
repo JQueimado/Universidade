@@ -1,4 +1,6 @@
 #include "MemoryManager.h"
+#include "Process.h"
+
 /* Best Fit implementation */
 #define MEM_SIZE 300
 #define MAX_FRAME MEM_SIZE/2
@@ -52,7 +54,7 @@ Frame* add_to_frame_list(Frame* head, Frame* item )
 }
 
 /* Find pos */
-int find_pos(Process** processes, int p_size,  int* Memory)
+int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
 {
     Frame* head = NULL;
 
@@ -101,5 +103,35 @@ int find_pos(Process** processes, int p_size,  int* Memory)
     }
 
     return seleced_frame->end + 1;
+
+}
+
+/**************test_main**************/
+#include <stdio.h>
+int main()
+{
+    char* fname = "input1.txt";
+
+    Process *process = new_Process(1, 0);
+    Process *process1 = new_Process(2, 28);
+    Process* processes[2];
+    processes[0] = process;
+    processes[1] = process1;
+
+	int *Memory = calloc(sizeof(int), 300);
+
+    printf("mem1:%d\n", get_size(process, fname));
+    printf("mem2:%d\n", get_size(process1, fname));
+
+    load_process(process1, Memory, 0, fname);
+
+    int p = find_pos(processes, 2, get_size(process, fname), Memory);
+
+    printf("pos:%d\n", p);
+
+    puts("mem");
+    for (int i = 0; i < 40; i++)
+		printf("%d\n", Memory[i]);
+    puts("nomeme");
 
 }
