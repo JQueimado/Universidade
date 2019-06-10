@@ -28,7 +28,7 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 	if (file == NULL)
 		return false;
 
-	fseek(file, SEEK_SET, self->inst_pos);
+	fseek(file, self->inst_pos, SEEK_SET);
 	char line[300];
 	if (fgets(line, 300, file) == NULL)
 		return false;
@@ -58,7 +58,7 @@ bool load_var(Process *self, int *Memory)
 	if (file == NULL)
 		return false;
 
-	fseek(file, SEEK_SET, self->var_pos);
+	fseek(file, self->var_pos, SEEK_SET);
 	char line[300];
 	if (fgets(line, 300, file) == NULL)
 		return false;
@@ -132,13 +132,13 @@ int get_size(Process *self, char* fname)
 		if (file == NULL)
 			return -1;
 
-		fseek(file, SEEK_SET, self->inst_pos);
+		fseek(file, self->inst_pos, SEEK_SET);
 		
 		char line[300];
 		if (fgets(line, 300, file) == NULL)
 			return -1;
 		fclose(file);
-		
+
 		char *point = strtok(line, " ");
 		int p = 10;
 		while (point != NULL)
@@ -177,7 +177,7 @@ void set_pc(Process *self, int N)
 }
 
 /**************test_main**************/
-
+/*
 int main()
 {
 	Process *process = new_Process(1, 0);
@@ -203,10 +203,11 @@ int main()
 	load_process(process,Memory,0, "input1.txt");
 
 	set_var(process, Memory, 2, 30);
-	/*
+	
 	for (int i = 0; i < 25; i++)
 		printf("%d\n", Memory[i]);
 
 	printf("%d %d\n", process->process_pointer, process->end_pointer);
-	*/
+	
 }
+*/
