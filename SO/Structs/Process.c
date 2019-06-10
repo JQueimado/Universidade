@@ -36,7 +36,7 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 	self->process_pointer = mpos;
 
 	char *point = strtok(line, " ");
-	int p = self->process_pointer + 10;
+	int p = self->process_pointer + 10 - 1;
 	while (point != NULL)
 	{
 		Memory[p] = atoi(point);
@@ -51,7 +51,7 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 /* loads varibles */
 bool load_var(Process *self, int *Memory)
 {
-	if( self->var_pos == -1)
+	if (self->var_pos == -1)
 		return false;
 
 	FILE *file = fopen(_FNAME_, "r");
@@ -98,12 +98,12 @@ bool unload(Process *self, int *Memory)
 	}
 	else
 	{
-		fseek(file,self->var_pos, 0);
+		fseek(file, self->var_pos, 0);
 	}
 
 	for (int p = self->process_pointer; p < self->process_pointer + 10; p++)
 		fprintf(file, "%d ", Memory[p]);
-	
+
 	fprintf(file, "\n");
 	self->in_memory = false;
 	fclose(file);
@@ -118,8 +118,36 @@ void set_state(Process *process, int nstate)
 }
 
 /* Get Size */
-int get_size(Process *self)
+int get_size(Process *self, char* fname)
 {
+	if (self->in_memory)
+	{
+		/* processo em memoria */
+		return self->end_pointer - self->process_pointer + 1;
+	}
+	else
+	{
+		/* processo no disco */
+		FILE *file = fopen(fname, "r");
+		if (file == NULL)
+			return -1;
+
+		fseek(file, SEEK_SET, self->inst_pos);
+		
+		char line[300];
+		if (fgets(line, 300, file) == NULL)
+			return -1;
+		fclose(file);
+		
+		char *point = strtok(line, " ");
+		int p = 10;
+		while (point != NULL)
+		{
+			point = strtok(NULL, " ");
+			p++;
+		}
+		return p - 1;
+	}
 }
 
 /* Vars */
@@ -149,6 +177,7 @@ void set_pc(Process *self, int N)
 }
 
 /**************test_main**************/
+
 int main()
 {
 	Process *process = new_Process(1, 0);
@@ -159,7 +188,11 @@ int main()
 	set_var(process, Memory, 10, 10);
 	set_var(process, Memory, 1, 10);
 
+	printf("mem:%d\n", get_size(process, "input1.txt"));
+
 	unload(process, Memory);
+
+	printf("disk:%d\n", get_size(process, "input1.txt"));
 
 	load_process(process,Memory,0, "input1.txt");
 
@@ -170,9 +203,10 @@ int main()
 	load_process(process,Memory,0, "input1.txt");
 
 	set_var(process, Memory, 2, 30);
-
+	/*
 	for (int i = 0; i < 25; i++)
 		printf("%d\n", Memory[i]);
 
 	printf("%d %d\n", process->process_pointer, process->end_pointer);
+	*/
 }

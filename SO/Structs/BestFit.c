@@ -103,3 +103,8 @@ int find_pos(Process** processes, int p_size,  int* Memory)
     return seleced_frame->end + 1;
 
 }
+
+int main()
+{
+    
+}
