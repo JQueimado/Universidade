@@ -139,16 +139,22 @@ int main()
     printf("mem1:%d\n", get_size(process, fname));
     printf("mem2:%d\n", get_size(process1, fname));
     /* p */
+    int p = find_pos(processes, p_size, get_size(process, fname), Memory);
+    printf("pos:%d\n", p);
     load_process(process, Memory, 0, fname);
     set_var(process, Memory, 10, 100);
     set_var(process, Memory, 1, 11);
 
+    printf("mem1:%d\n", get_size(process, fname));
+
     /* p1 */
-    int p = find_pos(processes, p_size, get_size(process1, fname), Memory);
+    p = find_pos(processes, p_size, get_size(process1, fname), Memory);
     printf("pos:%d\n", p);
     load_process(process1, Memory, /*57*/ 29, fname);
     set_var(process1, Memory, 10, 200);
     set_var(process1, Memory, 1, 22);
+
+    printf("mem2:%d\n", get_size(process1, fname));
 
     /* p2 */
     p = find_pos(processes, p_size, get_size(process2, fname), Memory);

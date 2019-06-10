@@ -72,7 +72,6 @@ bool load_var(Process *self, int *Memory)
 		p++;
 	}
 
-	self->end_pointer = self->process_pointer + 10;
 	fclose(file);
 	return true;
 }
