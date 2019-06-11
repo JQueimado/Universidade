@@ -12,6 +12,7 @@ Process *new_Process(int i, int fpos)
 	temp->inst_pos = fpos;
 	temp->var_pos = -1;
 	temp->timer = -1;
+	temp->in_memory = false;
 	return temp;
 }
 
@@ -52,6 +53,7 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 /* loads varibles */
 bool load_var(Process *self, int *Memory)
 {
+	self->pc = self->process_pointer+10;
 	if (self->var_pos == -1)
 		return false;
 
@@ -66,6 +68,8 @@ bool load_var(Process *self, int *Memory)
 
 	int p = self->process_pointer;
 	char *point = strtok(line, " ");
+	self->pc = self->process_pointer + atoi(point);
+	point = strtok(NULL, " ");
 	while (point != NULL)
 	{
 		Memory[p] = atoi(point);
@@ -99,6 +103,8 @@ bool unload(Process *self, int *Memory)
 	{
 		fseek(file, self->var_pos, 0);
 	}
+
+	fprintf(file,"%d ", self->pc - self->process_pointer);
 
 	for (int p = self->process_pointer; p < self->process_pointer + 10; p++)
 		fprintf(file, "%d ", Memory[p]);

@@ -49,6 +49,8 @@ int CPU(Process *process, int MEM[], Disk* disk)
     int inst1 = MEM[process->pc + 1];
     int inst2 = MEM[process->pc + 2];
 
+    //printf("process %d inst: %d %d %d\n", process->id, inst0, inst1, inst2);
+
     if( process->timer == 0)
     {
         process->timer = -1;
@@ -113,7 +115,6 @@ int CPU(Process *process, int MEM[], Disk* disk)
 
     if (inst0 == FORK_X)
     {
-        //2ª parte do trabalho
         return 1;
     }
 
@@ -147,13 +148,13 @@ bool read_file( char* fname, Queue* pre_process )
 
     if(!file)
         return false;
-
+    int file_pos = ftell(file);
     while ( fgets( line, SIZE_FILE_LINE, file) != NULL )
     {
-        int arrival = atoi( &line[0] );
-        int file_pos = ftell(file);
-        Pre_Process* temp = new_Pre_Process( arrival, file_pos);
+        char* token = strtok(line, " ");
+        Pre_Process* temp = new_Pre_Process( atoi(token), file_pos);
         enqueue(pre_process, temp);
+        file_pos = ftell(file);
     }
     fclose( file );
     return true;
@@ -164,8 +165,8 @@ int main(int arg_n, char** args)
 {
     //File Acess
     Queue * pre_processess = new_Queue();
-
-    if(!read_file(args[1], pre_processess))
+    char* fname = args[1];
+    if(!read_file(fname, pre_processess))
         printf("file %s not found\n", args[1]);
 
     Queue* ready = new_Queue();
@@ -176,16 +177,16 @@ int main(int arg_n, char** args)
 
     Disk* disk = new_Disk();
     int MEM[MEM_SIZE];
-
+    memset(MEM, 0, MEM_SIZE * sizeof(int));
     int timer = 0;
     int count = 0;
-    int ids = 0;
+    int ids = 1;
 
     //Processor loop**
     int n_procesess = 0;
     Process * processes[MAX_PROCESS];
 
-    while (!(is_empty(pre_processess) == 0 && is_empty(pre_processess) && is_empty(ready) && run == NULL))
+    while (!(is_empty(pre_processess) && is_empty(ready) && is_empty(blocked) && run == NULL && ext == NULL && new == NULL))
     {
 
         //Check Exit Process*
@@ -201,26 +202,33 @@ int main(int arg_n, char** args)
         {
             timer = 0;
             //RUN -> READY
-            if( ready->size < MAX_READY_SIZE )
+            if( run != NULL)
             {
-                enqueue(ready, run);
-                set_state(run, READY_WAIT);
-            }
-            else
-            {
-                enqueue(blocked, run);
-                set_state(run, BLOCKED);
-            }
-            
-            /* Apply Rule: the first 2 prosses in the ready queue must be loaded*/
-            for( int point = 0; point < 2; point++)
-            {
-                Process* temp = get(ready, point);
-                if( temp->in_memory )
+                if( ready->size < MAX_READY_SIZE )
                 {
-                    find_pos(processes, )
+                    enqueue(ready, run);
+                    set_state(run, READY_WAIT);
                 }
-                    
+                else
+                {
+                    enqueue(blocked, run);
+                    set_state(run, BLOCKED);
+                }
+            }
+
+            /* Apply Rule: all prosses in the ready queue must be loaded*/
+            for( int point = 0; point < ready->size; point++)
+            {
+                Process* temp = dequeue(ready);
+                //printf("addrs in:%d\n", temp->id);
+
+                if( !temp->in_memory )
+                {
+                    int p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                    load_process(temp, MEM, p, fname);
+                }
+                //printf("addrs out:%d\n", temp->id);
+                enqueue(ready, temp);
             }
 
             //READY -> RUN
@@ -236,23 +244,31 @@ int main(int arg_n, char** args)
             if( code == 0)
             {
                 /*normal*/
-                set_pc(run, 4);
+                set_pc(run, 3);
             }
             else if (code == 1)
             {
+                /* fork */
                 Process* temp = fork_process(run, ids);
                 ids++;
                 processes[n_procesess] = temp;
                 n_procesess++;
                 if( ready->size != MAX_READY_SIZE )
                     enqueue(ready, temp);
+
+                set_pc(run, 3);
             }
             else if( code == 2)
             {
-                /*block*/
+                /* disk */
+                enqueue(blocked, run);
+                set_state(run, BLOCKED);
+                run->timer = DISCK_SAVE_TIME;
+                run = NULL;
             }
             else if( code == 3)
             {
+                /* exit */
                 ext = run;
                 run = NULL;
                 set_state(ext, _EXIT_);
@@ -263,25 +279,55 @@ int main(int arg_n, char** args)
         if( new != NULL)
         {
             enqueue(ready, new);
+            set_state(new, READY_WAIT);
             new = NULL;
         }
 
         //BLOCKED -> READY
-        if( ready->size != MAX_READY_SIZE )
+        if( !is_empty(blocked) )
         {
-            for( int i = 0; i<blocked->size; i++ )
+            for( int i = 0; i < blocked->size; i++ )
             {
                 Process* temp = dequeue(blocked);
-                if( temp->timer != -1 && temp->timer != 0)
+                if(temp == NULL)
+                    continue;
+                // timer
+                if( temp->timer != -1 )
+                {
+                    if( temp->timer == 0 )
+                    {
+                        if( ready->size < MAX_READY_SIZE )
+                        {
+                            enqueue(ready, temp);
+                            set_state(temp, READY_WAIT);
+                        }
+                        continue;
+                    }
                     temp->timer--;
+                }
+                //Proceses that didnt had space in ready 
+                else if(ready->size < MAX_READY_SIZE)
+                {
+                    enqueue(ready, temp);
+                    set_state(temp, READY_WAIT);
+                    continue;
+                }
+                
                 enqueue(blocked, temp);
             }
         }
 
         //check arrivals 
-        Pre_Process* temp = get(pre_processess, 0);
-        if( count == temp->arrival )
-            new = dequeue(pre_processess);
+        Pre_Process* temp2 = get(pre_processess);
+        if( temp2 != NULL)
+            if( count == temp2->arrival )
+            {
+                Pre_Process* pre_new = dequeue(pre_processess);
+                new = new_Process(ids, pre_new->file_pos);
+                processes[n_procesess] = new;
+                n_procesess++;
+                ids++;
+            }
 
         //show states 
         printf("%5d",count);
@@ -296,29 +342,30 @@ int main(int arg_n, char** args)
 
             if( temp->state == NEW )
             {
-                printf("|%5s", "new");
+                printf("|%2d %10s", temp->id, "new");
             }
             else if (temp->state == READY_WAIT )
             {
-                printf("|%5s", "ready");
+                printf("|%2d %10s",temp->id, "ready");
             }
             else if (temp->state == RUN)
             {
-                printf("|%5s", "run");
+                printf("|%2d %10s",temp->id, "run");
             }
             else if (temp->state == BLOCKED)
             {
-                printf("|%5s", "blocked");
+                printf("|%2d %10s",temp->id, "blocked");
             }
             else if (temp->state == _EXIT_)
             {
-                printf("|%5s", "exit");
+                printf("|%2d %10s",temp->id, "exit");
             }
-
-            
         }
         printf("|");
         puts("");
+
+        //for(int i = 0; i < MEM_SIZE; i++ )
+        //    printf("%d\n", MEM[i]);
 
         timer += 1;
         count += 1;

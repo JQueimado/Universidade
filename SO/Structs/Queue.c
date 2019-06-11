@@ -7,7 +7,7 @@ Queue *new_Queue(){
 	temp->header = 0;
 	temp->footer = 0;
 	temp->size = 0;
-
+	memset(temp->arr, 0,sizeof(void*));
 	return temp;
 }
 
@@ -32,7 +32,7 @@ void enqueue(Queue *queue, void* item){
 void* dequeue(Queue *queue){
 	if (is_empty(queue))
 		return NULL;
-
+	void* head = queue->arr[queue->header];
 	queue->header += 1;
 	queue->size -= 1;
 
@@ -42,10 +42,38 @@ void* dequeue(Queue *queue){
 		
 	}
 
-	return queue->arr[queue->header - 1];
+	return head;
 }
 
-void* get(Queue *queue, int index)
+void* get(Queue *queue)
 {
-	return queue->arr[queue->header + index];
+	if(is_empty(queue))
+		return NULL;
+	
+	return queue->arr[queue->header];
 }
+/* 
+int main()
+{
+	Queue* queue = new_Queue();
+	int s = 30;
+
+	for(int i = 0; i <=s; i++)
+		enqueue(queue, i);
+
+	for(int i = 0; i<=s-10; i++)
+		dequeue(queue);
+
+	for(int i = 0; i<s; i++)
+		enqueue(queue, i);
+
+	for(int i = 0; i < s; i++ )
+		printf("%d\n", get(queue, i));
+
+	//for(int i = 0; i < s; i++ )
+	//	printf("%d\n", dequeue(queue));
+
+
+
+}
+*/

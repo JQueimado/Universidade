@@ -2,7 +2,7 @@
 
 all: main run clean
 
-compile: main
+compile:clean main
 
 testBestfit: clean Structs/BestFit.c Process.o
 	gcc -Wall Structs/BestFit.c Process.o -o main -g

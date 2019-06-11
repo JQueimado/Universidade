@@ -61,7 +61,9 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
     for(int i = 0; i < p_size; i++)
     {
         Process* curr = processes[i];
-        if(!curr->in_memory)
+        if( curr == NULL )
+            continue;
+        if( !curr->in_memory )
             continue;
         head = add_to_frame_list(head, new_frame(curr));
     }
@@ -75,16 +77,6 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
         return head->process->end_pointer + 1;
 
     /* if > 1 */
-
-    /* test */
-    /* 
-    Frame* temp = head;
-    while (temp != NULL)
-    {
-        printf("ids:%d\n", temp->process->id);
-        temp = temp->next;
-    }
-    */
     int diference;
     Frame* seleced_frame;
 
@@ -120,6 +112,7 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
 }
 
 /**************test_main**************/
+/*
 #include <stdio.h>
 int main()
 {
@@ -147,7 +140,7 @@ int main()
     //printf("mem1:%d\n", get_size(process, fname));
     //printf("mem2:%d\n", get_size(process1, fname));
     
-    /* p */
+    // p 
     int p = find_pos(processes, p_size, get_size(process, fname), Memory);
     load_process(process, Memory, 0, fname);
     
@@ -159,7 +152,7 @@ int main()
     
     //printf("mem1:%d\n", get_size(process, fname));
     
-    /* p1 */ 
+    // p1 
     p = find_pos(processes, p_size, get_size(process1, fname), Memory);
     load_process(process1, Memory, p, fname);
 
@@ -170,7 +163,7 @@ int main()
     set_var(process1, Memory, 1, 22);
     
     //printf("mem2:%d\n", get_size(process1, fname));
-    /* p2 */
+    // p2 
     
     p = find_pos(processes, p_size, get_size(process2, fname), Memory);
     load_process(process2, Memory, p, fname);
@@ -187,3 +180,4 @@ int main()
     puts("nomeme");
 
 }
+*/
