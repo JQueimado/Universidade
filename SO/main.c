@@ -44,6 +44,7 @@ int CPU(Process *process, int MEM[], Disk* disk)
         1 fork
         2 block
         3 exit
+        4 jump
     */
     int inst0 = MEM[process->pc + 0];
     int inst1 = MEM[process->pc + 1];
@@ -95,13 +96,13 @@ int CPU(Process *process, int MEM[], Disk* disk)
     if (inst0 == BACK_N)
     {
         set_pc(process, -inst1);
-        return 0;
+        return 4;
     }
 
     if (inst0 == FORW_N)
     {
         set_pc(process, inst1);
-        return 0;
+        return 4;
     }
 
     if (inst0 == IF_X_N)
@@ -110,7 +111,7 @@ int CPU(Process *process, int MEM[], Disk* disk)
         {
             set_pc(process, inst2);
         }
-        return 0;
+        return 4;
     }
 
     if (inst0 == FORK_X)
@@ -130,7 +131,7 @@ int CPU(Process *process, int MEM[], Disk* disk)
 
     if (inst0 == PRINT_X)
     {
-        printf("%d ", get_var(process, MEM, inst1));
+        printf("%d\n", get_var(process, MEM, inst1));
         return 0;
     }
 
@@ -158,6 +159,19 @@ bool read_file( char* fname, Queue* pre_process )
     }
     fclose( file );
     return true;
+}
+/************************************ garbadge colector ************************************/
+/* limpa a memoria de processos desnecessarios (blocked) */
+int gc(Process** processes, int ps_size, int* Memory)
+{
+    for(int i = 0; i<ps_size; i++ )
+    {
+        Process* cur = processes[i];
+        if(cur == NULL)
+            continue;
+        if(cur->state == BLOCKED && cur->in_memory)
+            unload(cur, Memory);
+    }
 }
 
 /************************************ main ************************************/
@@ -220,17 +234,23 @@ int main(int arg_n, char** args)
             for( int point = 0; point < ready->size; point++)
             {
                 Process* temp = dequeue(ready);
-                //printf("addrs in:%d\n", temp->id);
-
+                
                 if( !temp->in_memory )
                 {
                     int p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                    if ( p == -1 )
+                    {
+                        puts("bam");
+                        gc(processes, n_procesess, MEM);
+                        p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                    }
+                    //printf("pos: %d %d\n", p, processes[0]->end_pointer);
                     load_process(temp, MEM, p, fname);
                 }
-                //printf("addrs out:%d\n", temp->id);
+
                 enqueue(ready, temp);
             }
-
+            
             //READY -> RUN
             run = dequeue(ready);
             set_state(run, RUN);
@@ -249,13 +269,46 @@ int main(int arg_n, char** args)
             else if (code == 1)
             {
                 /* fork */
-                Process* temp = fork_process(run, ids);
+                Process* temp = new_Process(ids, run->inst_pos);
+                
+                /* loads to temp to change pc */
+                int* Temp = calloc(100, sizeof(int));
+                load_process(temp, Temp, 0, fname);
+                
+                /* copy vars */
+                for(int i = 1; i<= 10;i++)
+                {
+                    set_var(temp, Temp, i, get_var(run, MEM, i));
+                }
+
+                temp->pc = temp->process_pointer + (run->pc - run->process_pointer)+3;
+                
+                /* X = 0 */
+                int inst1 = Temp[temp->pc + 1];
+                set_var(temp, Temp, inst1, 0);
+                
+                /* unloads to store pc */
+                unload(temp, Temp);
+
+                /* X = PID */
+                set_var(run, MEM, inst1, temp->id);
                 ids++;
+
+                /* add process to system */
                 processes[n_procesess] = temp;
                 n_procesess++;
-                if( ready->size != MAX_READY_SIZE )
-                    enqueue(ready, temp);
 
+                /* queue to ready */
+                if( ready->size != MAX_READY_SIZE )
+                {
+                    enqueue(ready, temp);
+                    set_state(temp, READY_WAIT);
+                }   
+                else
+                {
+                    enqueue(blocked, temp);
+                    set_state(temp, BLOCKED);
+                }
                 set_pc(run, 3);
             }
             else if( code == 2)
@@ -328,7 +381,7 @@ int main(int arg_n, char** args)
                 n_procesess++;
                 ids++;
             }
-
+        
         //show states 
         printf("%5d",count);
         for( int i = 0; i < n_procesess; i++)
@@ -363,6 +416,13 @@ int main(int arg_n, char** args)
         }
         printf("|");
         puts("");
+
+        /*
+        puts("mem:");
+        for(int i = 0; i<MEM_SIZE; i++)
+            printf("%3d->%d\n", i, MEM[i]);
+        puts("endmeme");
+        */
 
         //for(int i = 0; i < MEM_SIZE; i++ )
         //    printf("%d\n", MEM[i]);

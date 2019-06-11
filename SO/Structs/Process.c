@@ -16,11 +16,6 @@ Process *new_Process(int i, int fpos)
 	return temp;
 }
 
-Process *fork_process(Process *process, int id)
-{
-	return new_Process(id, process->inst_pos);
-}
-
 /*Methods*/
 /* loaders and unloaders*/
 bool load_inst(Process *self, char *fname, int *Memory, int mpos)
@@ -82,6 +77,8 @@ bool load_var(Process *self, int *Memory)
 
 bool load_process(Process *self, int *Memory, int mem_pos, char *fname)
 {
+	if( self->in_memory )
+		return false;
 	return load_inst(self, fname, Memory, mem_pos) && load_var(self, Memory);
 }
 
@@ -159,10 +156,10 @@ int get_size(Process *self, char* fname)
 /* Get Var */
 int get_var(Process *self, int *Memory, int var)
 {
-	if (!self->in_memory)
-		return -1;
+	if (var > 10 || var <= 0 || !self->in_memory)
+		return false;
 
-	return Memory[self->process_pointer + var];
+	return Memory[self->process_pointer + var - 1];
 }
 
 /* Set Var */
@@ -178,7 +175,15 @@ bool set_var(Process *self, int *Memory, int var, int val)
 /* PC */
 void set_pc(Process *self, int N)
 {
-	self->pc += N;
+	if(self->pc + N > self->end_pointer)
+		/* points to the last instruction */
+		self->pc = self->end_pointer-2;
+	else if( self->pc + N < self->process_pointer + 10)
+		/* points to the begin */
+		self->pc = self->process_pointer + 10;
+	else
+		/* jumps */
+		self->pc += N;
 }
 
 /**************test_main**************/

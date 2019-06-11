@@ -42,8 +42,6 @@ typedef struct Process
 /*Constructors*/
 Process *new_Process(int i, int fpos);
 
-Process* fork_process(Process* process, int id);
-
 /*Methods*/
 /* loader and unloaders*/
 bool load_inst(Process* self, char* fname, int* Memory, int mpos);

@@ -77,8 +77,8 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
         return head->process->end_pointer + 1;
 
     /* if > 1 */
-    int diference;
-    Frame* seleced_frame;
+    int diference = MEM_SIZE;
+    Frame* seleced_frame = NULL;
 
     while(head->next != NULL)
     {
@@ -108,6 +108,11 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
         if( free_to_end < diference)
             return head->process->end_pointer + 1;
     }
+
+    /* dont fit */
+    if( seleced_frame == NULL)
+        return -1;
+
     return seleced_frame->process->end_pointer + 1;
 }
 
