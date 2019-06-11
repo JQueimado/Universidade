@@ -36,8 +36,11 @@
 #define PRINT_X 10
 #define EXIT 11
 
+#define SIMPLE_FILE "scheduler_simples.out"
+#define COMPLE_FILE "scheduler_complexo.out"
+
 /************************************ CPU ************************************/
-int CPU(Process *process, int MEM[], Disk* disk)
+int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_file)
 {
     /* return codes
         0 normal
@@ -49,8 +52,6 @@ int CPU(Process *process, int MEM[], Disk* disk)
     int inst0 = MEM[process->pc + 0];
     int inst1 = MEM[process->pc + 1];
     int inst2 = MEM[process->pc + 2];
-
-    //printf("process %d inst: %d %d %d\n", process->id, inst0, inst1, inst2);
 
     if( process->timer == 0)
     {
@@ -111,6 +112,11 @@ int CPU(Process *process, int MEM[], Disk* disk)
         {
             set_pc(process, inst2);
         }
+        else
+        {
+            set_pc(process, 3);
+        }
+        
         return 4;
     }
 
@@ -131,7 +137,8 @@ int CPU(Process *process, int MEM[], Disk* disk)
 
     if (inst0 == PRINT_X)
     {
-        printf("%d\n", get_var(process, MEM, inst1));
+        fprintf(simp_file,"%d\n", get_var(process, MEM, inst1));
+        fprintf(comp_file,"%d\n", get_var(process, MEM, inst1));
         return 0;
     }
 
@@ -160,9 +167,17 @@ bool read_file( char* fname, Queue* pre_process )
     fclose( file );
     return true;
 }
+/************************************ assistent ************************************/
+/* imprime os valores da memoria num ficheiro */
+void mem_printer(int* Memory, FILE* comp_file)
+{
+    for(int i = 0; i<MEM_SIZE; i++)
+        fprintf(comp_file,"%3d->%d\n", i, Memory[i]);
+}
+
 /************************************ garbadge colector ************************************/
 /* limpa a memoria de processos desnecessarios (blocked) */
-int gc(Process** processes, int ps_size, int* Memory)
+int gc(Process** processes, int ps_size, int* Memory )
 {
     for(int i = 0; i<ps_size; i++ )
     {
@@ -170,7 +185,9 @@ int gc(Process** processes, int ps_size, int* Memory)
         if(cur == NULL)
             continue;
         if(cur->state == BLOCKED && cur->in_memory)
+        {
             unload(cur, Memory);
+        }
     }
 }
 
@@ -182,6 +199,9 @@ int main(int arg_n, char** args)
     char* fname = args[1];
     if(!read_file(fname, pre_processess))
         printf("file %s not found\n", args[1]);
+
+    FILE* simp_file = fopen(SIMPLE_FILE, "w+");
+    FILE* comp_file = fopen(COMPLE_FILE, "w+");
 
     Queue* ready = new_Queue();
     Queue* blocked = new_Queue();
@@ -240,12 +260,12 @@ int main(int arg_n, char** args)
                     int p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
                     if ( p == -1 )
                     {
-                        puts("bam");
-                        gc(processes, n_procesess, MEM);
+                        gc(processes, n_procesess, MEM );
+                        mem_printer(MEM, comp_file);
                         p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
                     }
-                    //printf("pos: %d %d\n", p, processes[0]->end_pointer);
                     load_process(temp, MEM, p, fname);
+                    mem_printer(MEM, comp_file);
                 }
 
                 enqueue(ready, temp);
@@ -259,7 +279,7 @@ int main(int arg_n, char** args)
         //CPU
         if (run != NULL)
         {
-            int code = CPU(run, MEM, disk);
+            int code = CPU(run, MEM, disk, simp_file, comp_file);
 
             if( code == 0)
             {
@@ -281,7 +301,7 @@ int main(int arg_n, char** args)
                     set_var(temp, Temp, i, get_var(run, MEM, i));
                 }
 
-                temp->pc = temp->process_pointer + (run->pc - run->process_pointer)+3;
+                temp->pc = temp->process_pointer + (run->pc - run->process_pointer) + 3;
                 
                 /* X = 0 */
                 int inst1 = Temp[temp->pc + 1];
@@ -383,7 +403,7 @@ int main(int arg_n, char** args)
             }
         
         //show states 
-        printf("%5d",count);
+        fprintf(simp_file,"%5d",count);
         for( int i = 0; i < n_procesess; i++)
         {
             Process * temp = processes[i];
@@ -395,42 +415,38 @@ int main(int arg_n, char** args)
 
             if( temp->state == NEW )
             {
-                printf("|%2d %10s", temp->id, "new");
+                fprintf(simp_file,"|%2d %10s", temp->id, "new");
+                fprintf(comp_file,"|%2d %10s", temp->id, "new");
             }
             else if (temp->state == READY_WAIT )
             {
-                printf("|%2d %10s",temp->id, "ready");
+                fprintf(simp_file,"|%2d %10s",temp->id, "ready");
+                fprintf(comp_file,"|%2d %10s",temp->id, "ready");
             }
             else if (temp->state == RUN)
             {
-                printf("|%2d %10s",temp->id, "run");
+                fprintf(simp_file,"|%2d %10s",temp->id, "run");
+                fprintf(comp_file,"|%2d %10s",temp->id, "run");
             }
             else if (temp->state == BLOCKED)
             {
-                printf("|%2d %10s",temp->id, "blocked");
+                fprintf(simp_file,"|%2d %10s",temp->id, "blocked");
+                fprintf(comp_file,"|%2d %10s",temp->id, "blocked");
             }
             else if (temp->state == _EXIT_)
             {
-                printf("|%2d %10s",temp->id, "exit");
+                fprintf(simp_file,"|%2d %10s",temp->id, "exit");
+                fprintf(comp_file,"|%2d %10s",temp->id, "exit");
             }
         }
-        printf("|");
-        puts("");
-
-        /*
-        puts("mem:");
-        for(int i = 0; i<MEM_SIZE; i++)
-            printf("%3d->%d\n", i, MEM[i]);
-        puts("endmeme");
-        */
-
-        //for(int i = 0; i < MEM_SIZE; i++ )
-        //    printf("%d\n", MEM[i]);
+        fprintf(simp_file, "|\n");
+        fprintf(comp_file, "|\n");
 
         timer += 1;
         count += 1;
 
     }
-
+    fclose(simp_file);
+    fclose(comp_file);
     return 0;
 }
