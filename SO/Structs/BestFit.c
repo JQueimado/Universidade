@@ -91,7 +91,7 @@ int find_pos(Process** processes, int p_size, int insrt_size,  int* Memory)
     while(head->next != NULL)
     {
         /* Calc free Space */
-        int free_space = head->next->process->process_pointer - head->process->end_pointer - 1;
+        int free_space = head->next->process->process_pointer - head->process->end_pointer;
         /* Check if fit */
         if( free_space > insrt_size )
         {
@@ -163,8 +163,8 @@ int main()
     p = find_pos(processes, p_size, get_size(process1, fname), Memory);
     load_process(process1, Memory, p, fname);
 
-    printf("pos:%d size:%d\n", p, get_size(process1, fname));
-    printf("%d %d\n", process1->process_pointer, process1->end_pointer);
+    //printf("pos:%d size:%d\n", p, get_size(process1, fname));
+    //printf("%d %d\n", process1->process_pointer, process1->end_pointer);
     
     set_var(process1, Memory, 10, 200);
     set_var(process1, Memory, 1, 22);
