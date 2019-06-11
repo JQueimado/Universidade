@@ -4,7 +4,7 @@ all: main run clean
 
 compile: main
 
-testBestfit: Structs/BestFit.c Process.o
+testBestfit: clean Structs/BestFit.c Process.o
 	gcc -Wall Structs/BestFit.c Process.o -o main -g
 
 run: main input1.txt

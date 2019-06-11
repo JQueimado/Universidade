@@ -125,9 +125,17 @@ int main()
 {
     char* fname = "input1.txt";
 
+    FILE* file = fopen(fname,"r");
+    char line[300];
+    while (fgets(line, 300, file) != NULL)
+    {
+        printf("%ld\n", ftell(file));
+    }
+    
+
     Process *process = new_Process(1, 0);
-    Process *process1 = new_Process(2, 40);    
-    Process *process2 = new_Process(3, 76);
+    Process *process1 = new_Process(2, 31);    
+    Process *process2 = new_Process(3, 86);
     int p_size = 3;
     Process* processes[p_size];
     processes[0] = process;
@@ -135,31 +143,41 @@ int main()
     processes[2] = process2;
 
 	int *Memory = calloc(sizeof(int), 300);
-
-    printf("mem1:%d\n", get_size(process, fname));
-    printf("mem2:%d\n", get_size(process1, fname));
+ 
+    //printf("mem1:%d\n", get_size(process, fname));
+    //printf("mem2:%d\n", get_size(process1, fname));
+    
     /* p */
     int p = find_pos(processes, p_size, get_size(process, fname), Memory);
-    printf("pos:%d\n", p);
     load_process(process, Memory, 0, fname);
+    
+    //printf("pos:%d size:%d\n", p, get_size(process, fname));
+    //printf("%d %d\n", process->process_pointer, process->end_pointer);
+    
     set_var(process, Memory, 10, 100);
     set_var(process, Memory, 1, 11);
-
-    printf("mem1:%d\n", get_size(process, fname));
-
-    /* p1 */
+    
+    //printf("mem1:%d\n", get_size(process, fname));
+    
+    /* p1 */ 
     p = find_pos(processes, p_size, get_size(process1, fname), Memory);
-    printf("pos:%d\n", p);
-    load_process(process1, Memory, /*57*/ 29, fname);
+    load_process(process1, Memory, p, fname);
+
+    printf("pos:%d size:%d\n", p, get_size(process1, fname));
+    printf("%d %d\n", process1->process_pointer, process1->end_pointer);
+    
     set_var(process1, Memory, 10, 200);
     set_var(process1, Memory, 1, 22);
-
-    printf("mem2:%d\n", get_size(process1, fname));
-
+    
+    //printf("mem2:%d\n", get_size(process1, fname));
     /* p2 */
+    
     p = find_pos(processes, p_size, get_size(process2, fname), Memory);
-    printf("pos:%d\n", p);
     load_process(process2, Memory, p, fname);
+
+    printf("pos:%d size:%d\n", p, get_size(process2, fname));
+    printf("%d %d\n", process2->process_pointer, process2->end_pointer);
+    
     set_var(process2, Memory, 10, 300);
     set_var(process2, Memory, 1, 33);
     

@@ -32,11 +32,13 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 	char line[300];
 	if (fgets(line, 300, file) == NULL)
 		return false;
+	fclose(file);
 
 	self->process_pointer = mpos;
 
 	char *point = strtok(line, " ");
-	int p = self->process_pointer + 10;
+	point = strtok(NULL, " ");
+	int p = mpos + 10;
 	while (point != NULL)
 	{
 		Memory[p] = atoi(point);
@@ -45,7 +47,6 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 	}
 	self->in_memory = true;
 	self->end_pointer = p - 1;
-	fclose(file);
 	return true;
 }
 /* loads varibles */
@@ -71,7 +72,6 @@ bool load_var(Process *self, int *Memory)
 		point = strtok(NULL, " ");
 		p++;
 	}
-
 	fclose(file);
 	return true;
 }
