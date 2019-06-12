@@ -30,6 +30,7 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 	fclose(file);
 
 	self->process_pointer = mpos;
+	self->pc = self->process_pointer+10;
 
 	char *point = strtok(line, " ");
 	point = strtok(NULL, " ");
@@ -47,11 +48,11 @@ bool load_inst(Process *self, char *fname, int *Memory, int mpos)
 /* loads varibles */
 bool load_var(Process *self, int *Memory)
 {
-	self->pc = self->process_pointer+10;
 	if (self->var_pos == -1)
 	{
 		for(int i = 0; i < 10; i++)
 			Memory[ self->process_pointer + i ] = 0;
+		return true;
 	}
 
 	FILE *file = fopen(_FNAME_, "r");

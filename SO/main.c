@@ -60,6 +60,8 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
     int inst1 = MEM[process->pc + 1];
     int inst2 = MEM[process->pc + 2];
 
+    printf("%d-> %d %d %d\n", process->id, inst0,inst1,inst2);
+
     if( process->timer == 0)
     {
         process->timer = -1;
@@ -316,8 +318,10 @@ int main(int arg_n, char** args)
                     set_var(temp, Temp, i, get_var(run, MEM, i));
                 }
 
-                temp->pc = temp->process_pointer + (run->pc - run->process_pointer) + 3;
-                
+                temp-> pc = temp->process_pointer + (run->pc - run->process_pointer);
+                set_pc(temp, 1);
+                printf( "%d->%d->%d-%d\n",run->id, temp->id, MEM[temp->pc], MEM[temp->pc+1]);
+
                 /* X = 0 */
                 int inst1 = Temp[temp->pc + 1];
                 set_var(temp, Temp, inst1, 0);
@@ -419,6 +423,7 @@ int main(int arg_n, char** args)
         
         //show states 
         fprintf(simp_file,"%5d",count);
+        fprintf(comp_file,"%5d",count);
         for( int i = 0; i < n_procesess; i++)
         {
             Process* temp = processes[i];
@@ -428,31 +433,31 @@ int main(int arg_n, char** args)
                 continue;
             }
 
+            char* state;
+
             if( temp->state == NEW )
             {
-                fprintf(simp_file,"|%2d %10s", temp->id, "new");
-                fprintf(comp_file,"|%2d %10s", temp->id, "new");
+               state = "new";
             }
             else if (temp->state == READY_WAIT )
             {
-                fprintf(simp_file,"|%2d %10s",temp->id, "ready");
-                fprintf(comp_file,"|%2d %10s",temp->id, "ready");
+                state = "ready";
             }
             else if (temp->state == RUN)
             {
-                fprintf(simp_file,"|%2d %10s",temp->id, "run");
-                fprintf(comp_file,"|%2d %10s",temp->id, "run");
+                state = "run";
             }
             else if (temp->state == BLOCKED)
             {
-                fprintf(simp_file,"|%2d %10s",temp->id, "blocked");
-                fprintf(comp_file,"|%2d %10s",temp->id, "blocked");
+                state = "blocked";
             }
             else if (temp->state == _EXIT_)
             {
-                fprintf(simp_file,"|%2d %10s",temp->id, "exit");
-                fprintf(comp_file,"|%2d %10s",temp->id, "exit");
+                state = "exit";
             }
+            fprintf(simp_file, "|%*s%*s", 5+strlen(state)/2, state, 5-strlen(state)/2, "");
+            fprintf(comp_file, "|%*s%*s", 5+strlen(state)/2, state, 5-strlen(state)/2, "");
+
         }
         fprintf(simp_file, "|\n");
         fprintf(comp_file, "|\n");
