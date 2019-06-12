@@ -1,5 +1,23 @@
 instante     0:|   new    |
 instante     1:|  ready   |
-MEMORY ACCESS VIOLATION
-instante     2:|   exit   |
-instante     3:|
+instante     2:|   run    |
+instante     3:|   run    |  ready   |
+2
+instante     4:|   run    |  ready   |
+instante     5:|   run    |  ready   |  ready   |
+0
+instante     6:|  ready   |   run    |  ready   |
+instante     7:|  ready   |   run    |  ready   |  ready   |
+4
+instante     8:|  ready   |   run    |  ready   |  ready   |
+instante     9:|  ready   |   exit   |  ready   |  ready   |
+0
+instante    10:|  ready   |          |   run    |  ready   |
+instante    11:|  ready   |          |   exit   |  ready   |
+3
+instante    12:|   run    |          |          |  ready   |
+instante    13:|   exit   |          |          |  ready   |
+0
+instante    14:|          |          |          |   run    |
+instante    15:|          |          |          |   exit   |
+instante    16:|          |          |          |          |
