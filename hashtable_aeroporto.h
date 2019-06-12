@@ -9,10 +9,6 @@
 			
 #define MAX_AERO 1833341
 
-
-
-
-
 typedef struct temp
 {
 	int fd;

@@ -46,7 +46,6 @@ int hashtable_aeroportos_open(char*name)
 	}
 }
 	
-
 aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 {
 	aeroportos novo_aeroporto;
