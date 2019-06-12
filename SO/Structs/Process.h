@@ -66,6 +66,6 @@ int get_var(Process* self, int* Memory, int var);
 bool set_var(Process* self, int* Memory, int var, int val);
 
 /* pc */
-void set_pc(Process* self, int N);
+bool set_pc(Process* self, int N);
 
 #endif

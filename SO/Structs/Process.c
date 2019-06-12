@@ -179,19 +179,17 @@ bool set_var(Process *self, int *Memory, int var, int val)
 }
 
 /* PC */
-void set_pc(Process *self, int N)
+bool set_pc(Process *self, int N)
 {
 	N = N * 3;
-
 	if(self->pc + N > self->end_pointer)
-		/* points to the last instruction */
-		self->pc = self->end_pointer-2;
+		return false;
 	else if( self->pc + N < self->process_pointer + 10)
-		/* points to the begin */
-		self->pc = self->process_pointer + 10;
+		return false;
 	else
 		/* jumps */
 		self->pc += N;
+		return true;
 }
 
 /**************test_main**************/

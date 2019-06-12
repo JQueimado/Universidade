@@ -55,6 +55,7 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
         2 block
         3 exit
         4 jump
+        -1 memory error
     */
     int inst0 = MEM[process->pc + 0];
     int inst1 = MEM[process->pc + 1];
@@ -105,13 +106,15 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
 
     if (inst0 == BACK_N)
     {
-        set_pc(process, -inst1);
+        if( !set_pc(process, -inst1))
+            return -1;
         return 4;
     }
 
     if (inst0 == FORW_N)
     {
-        set_pc(process, inst1);
+        if( !set_pc(process, inst1) )
+            return -1;
         return 4;
     }
 
@@ -119,11 +122,13 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
     {
         if(inst1 == 0)
         {
-            set_pc(process, inst2);
+            if( !set_pc(process, inst2) )
+                return -1;
         }
         else
         {
-            set_pc(process, 1);
+            if( !set_pc(process, 1) )
+                return -1;
         }
         
         return 4;
@@ -300,7 +305,14 @@ int main(int arg_n, char** args)
             if( code == 0)
             {
                 /*normal*/
-                set_pc(run, 1);
+                if(!set_pc(run, 1))
+                {
+                    ext = run;
+                    run = NULL;
+                    set_state(ext, _EXIT_);
+                    fputs("MEMORY ACCESS VIOLATION\n", simp_file);
+                    fputs("MEMORY ACCESS VIOLATION\n", comp_file);
+                }
             }
             else if (code == 1)
             {
@@ -318,35 +330,50 @@ int main(int arg_n, char** args)
                 }
 
                 temp-> pc = temp->process_pointer + (run->pc - run->process_pointer);
-                set_pc(temp, 1);
-
-                /* X = 0 */
-                int inst1 = Temp[temp->pc + 1];
-                set_var(temp, Temp, inst1, 0);
-                
-                /* unloads to store pc */
-                unload(temp, Temp);
-
-                /* X = PID */
-                set_var(run, MEM, inst1, temp->id);
-                ids++;
-
-                /* add process to system */
-                processes[n_procesess] = temp;
-                n_procesess++;
-
-                /* queue to ready */
-                if( ready->size != MAX_READY_SIZE )
+                if(!set_pc(temp, 1))
                 {
-                    enqueue(ready, temp);
-                    set_state(temp, READY_WAIT);
-                }   
+                    ext = temp;
+                    set_state(ext, _EXIT_);
+                    fputs("MEMORY ACCESS VIOLATION\n", simp_file);
+                    fputs("MEMORY ACCESS VIOLATION\n", comp_file);
+                }
                 else
                 {
-                    enqueue(blocked, temp);
-                    set_state(temp, BLOCKED);
+                    /* X = 0 */
+                    int inst1 = Temp[temp->pc + 1];
+                    set_var(temp, Temp, inst1, 0);
+                    
+                    /* unloads to store pc */
+                    unload(temp, Temp);
+
+                    /* X = PID */
+                    set_var(run, MEM, inst1, temp->id);
+                    ids++;
+
+                    /* add process to system */
+                    processes[n_procesess] = temp;
+                    n_procesess++;
+
+                    /* queue to ready */
+                    if( ready->size != MAX_READY_SIZE )
+                    {
+                        enqueue(ready, temp);
+                        set_state(temp, READY_WAIT);
+                    }   
+                    else
+                    {
+                        enqueue(blocked, temp);
+                        set_state(temp, BLOCKED);
+                    }
                 }
-                set_pc(run, 1);
+                if(!set_pc(run, 1) )
+                {
+                    ext = run;
+                    run = NULL;
+                    set_state(ext, _EXIT_);
+                    fputs("MEMORY ACCESS VIOLATION\n", simp_file);
+                    fputs("MEMORY ACCESS VIOLATION\n", comp_file);
+                }
                 
             }
             else if( code == 2)
@@ -364,6 +391,15 @@ int main(int arg_n, char** args)
                 run = NULL;
                 set_state(ext, _EXIT_);
             }
+            else if( code == -1)
+            {
+                ext = run;
+                run = NULL;
+                set_state(ext, _EXIT_);
+                fputs("MEMORY ACCESS VIOLATION\n", simp_file);
+                fputs("MEMORY ACCESS VIOLATION\n", comp_file);
+            }
+            
         }
 
         //NEW -> READY
@@ -421,8 +457,8 @@ int main(int arg_n, char** args)
             }
 
         //show states 
-        fprintf(simp_file,"%5d",count);
-        fprintf(comp_file,"%5d",count);
+        fprintf(simp_file,"instante %5d:",count);
+        fprintf(comp_file,"instante %5d:",count);
         for( int i = 0; i < n_procesess; i++)
         {
             Process* temp = processes[i];
