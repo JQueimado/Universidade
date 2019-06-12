@@ -90,26 +90,29 @@ bool unload(Process *self, int *Memory)
 	if (!self->in_memory)
 		return false;
 
-	FILE *file = fopen(_FNAME_, "w+");
-	if (file == NULL)
-		return false;
+	FILE* file = NULL;
 
 	if (self->var_pos == -1)
 	{
-		fseek(file, 0, SEEK_END);
+		file = fopen(_FNAME_, "a");
 		self->var_pos = ftell(file);
 	}
 	else
 	{
-		fseek(file, self->var_pos, 0);
+		file = fopen(_FNAME_, "w+");
+		fseek(file, self->var_pos, SEEK_SET);
 	}
+
+	if (file == NULL)
+		return false;
 
 	fprintf(file,"%d ", self->pc - self->process_pointer);
 
-	for (int p = self->process_pointer; p < self->process_pointer + 10; p++)
+	for (int p = self->process_pointer; p < self->process_pointer + 9; p++)
 		fprintf(file, "%d ", Memory[p]);
 
-	fprintf(file, "\n");
+	fprintf(file,"%d\n", Memory[self->process_pointer + 9]);
+	
 	self->in_memory = false;
 	fclose(file);
 	return true;

@@ -60,7 +60,7 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
     int inst1 = MEM[process->pc + 1];
     int inst2 = MEM[process->pc + 2];
 
-    printf("%d-> %d %d %d\n", process->id, inst0,inst1,inst2);
+    //printf("%d-> %d %d %d\n", process->id, inst0,inst1,inst2);
 
     if( process->timer == 0)
     {
@@ -284,10 +284,9 @@ int main(int arg_n, char** args)
                     load_process(temp, MEM, p, fname);
                     mem_printer(MEM, comp_file);
                 }
-
                 enqueue(ready, temp);
             }
-            
+
             //READY -> RUN
             run = dequeue(ready);
             set_state(run, RUN);
@@ -320,7 +319,6 @@ int main(int arg_n, char** args)
 
                 temp-> pc = temp->process_pointer + (run->pc - run->process_pointer);
                 set_pc(temp, 1);
-                printf( "%d->%d->%d-%d\n",run->id, temp->id, MEM[temp->pc], MEM[temp->pc+1]);
 
                 /* X = 0 */
                 int inst1 = Temp[temp->pc + 1];
@@ -349,6 +347,7 @@ int main(int arg_n, char** args)
                     set_state(temp, BLOCKED);
                 }
                 set_pc(run, 1);
+                
             }
             else if( code == 2)
             {
@@ -376,7 +375,7 @@ int main(int arg_n, char** args)
         }
 
         //BLOCKED -> READY
-        if( !is_empty(blocked) )
+        if( !is_empty(blocked) && ready->size < MAX_READY_SIZE)
         {
             for( int i = 0; i < blocked->size; i++ )
             {
@@ -420,7 +419,7 @@ int main(int arg_n, char** args)
                 n_procesess++;
                 ids++;
             }
-        
+
         //show states 
         fprintf(simp_file,"%5d",count);
         fprintf(comp_file,"%5d",count);
