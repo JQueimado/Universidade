@@ -8,7 +8,8 @@
 #include "Structs/Process.h"
 #include "Structs/Pre_Process.h"
 #include "Structs/Disk.h"
-#include "Structs/MemoryManager.h"
+#include "Structs/Bestfit.h"
+#include "Structs/Nextfit.h"
 
 //Consts
 
@@ -17,6 +18,12 @@
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
 #define MAX_PROCESS 20
+
+/* Memory Manager:
+    0 -> Best fit
+    1 -> Next fit
+*/
+#define MEMORY_MANAGER 0
 
 //Scheduling
 #define QUANTUM 4
@@ -209,6 +216,11 @@ int main(int arg_n, char** args)
     Process* run = NULL;
     Process* ext = NULL;
 
+    Fit* fit;
+
+    if( MEMORY_MANAGER == 1)
+        fit = new_fit();
+
     Disk* disk = new_Disk();
     int MEM[MEM_SIZE];
     memset(MEM, 0, MEM_SIZE * sizeof(int));
@@ -262,7 +274,10 @@ int main(int arg_n, char** args)
                     {
                         gc(processes, n_procesess, MEM );
                         mem_printer(MEM, comp_file);
-                        p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                        if( MEMORY_MANAGER == 0)
+                            p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                        else
+                            p =find_next_pos(fit, processes, n_procesess, get_size(temp, fname));
                     }
                     load_process(temp, MEM, p, fname);
                     mem_printer(MEM, comp_file);

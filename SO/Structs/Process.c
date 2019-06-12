@@ -1,5 +1,4 @@
 #include "Process.h"
-#include "MemoryManager.h"
 
 /*Constructors*/
 Process *new_Process(int i, int fpos)

@@ -1,8 +1,7 @@
-#include "MemoryManager.h"
+#include "Bestfit.h"
 #include "Process.h"
 
 /* Best Fit implementation */
-#define MEM_SIZE 300
 #define MAX_FRAME MEM_SIZE/2
 
 /* New Frame */
