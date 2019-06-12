@@ -49,7 +49,10 @@ bool load_var(Process *self, int *Memory)
 {
 	self->pc = self->process_pointer+10;
 	if (self->var_pos == -1)
-		return false;
+	{
+		for(int i = 0; i < 10; i++)
+			Memory[ self->process_pointer + i ] = 0;
+	}
 
 	FILE *file = fopen(_FNAME_, "r");
 	if (file == NULL)
@@ -174,6 +177,8 @@ bool set_var(Process *self, int *Memory, int var, int val)
 /* PC */
 void set_pc(Process *self, int N)
 {
+	N = N * 3;
+
 	if(self->pc + N > self->end_pointer)
 		/* points to the last instruction */
 		self->pc = self->end_pointer-2;

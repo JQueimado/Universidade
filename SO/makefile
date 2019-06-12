@@ -14,7 +14,7 @@ run: main input1.txt
 	./main input1.txt > output.txt
 
 clean:
-	rm -f Pre_Process.o Process.o Queue.o Disk.o process.cache BestFit.o Nextfit.0
+	rm -f Pre_Process.o Process.o Queue.o Disk.o process.cache BestFit.o Nextfit.o output.txt
 
 main: main.c Pre_Process.o Process.o Queue.o Disk.o BestFit.o Nextfit.o
 	gcc -g main.c -o main Pre_Process.o Process.o Queue.o Disk.o BestFit.o Nextfit.o

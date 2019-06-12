@@ -17,7 +17,7 @@
 #define SIZE_FILE_LINE 300
 #define DISCK_SAVE_TIME 3
 #define MEM_SIZE 300
-#define MAX_PROCESS 20
+#define MAX_PROCESS 100
 
 /* Memory Manager:
     0 -> Best fit
@@ -121,7 +121,7 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
         }
         else
         {
-            set_pc(process, 3);
+            set_pc(process, 1);
         }
         
         return 4;
@@ -299,7 +299,7 @@ int main(int arg_n, char** args)
             if( code == 0)
             {
                 /*normal*/
-                set_pc(run, 3);
+                set_pc(run, 1);
             }
             else if (code == 1)
             {
@@ -344,7 +344,7 @@ int main(int arg_n, char** args)
                     enqueue(blocked, temp);
                     set_state(temp, BLOCKED);
                 }
-                set_pc(run, 3);
+                set_pc(run, 1);
             }
             else if( code == 2)
             {
@@ -421,7 +421,7 @@ int main(int arg_n, char** args)
         fprintf(simp_file,"%5d",count);
         for( int i = 0; i < n_procesess; i++)
         {
-            Process * temp = processes[i];
+            Process* temp = processes[i];
 
             if(temp == NULL)
             {
@@ -463,5 +463,9 @@ int main(int arg_n, char** args)
     }
     fclose(simp_file);
     fclose(comp_file);
+
+    free( ready );
+    free( blocked );
+
     return 0;
 }
