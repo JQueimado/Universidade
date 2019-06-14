@@ -52,10 +52,13 @@ void time_to_char( char* time,char *first_part,char *sec_part);
 int hash_function_aeroportos(char *codigo);
 int hash_function_aeroportos1(char *codigo);
 int hash_function_aeroportos2(char *codigo);
+int find_aeroporto(int fd, char* codigo);
+
 void free_hash_aeroportos(aeroportos *hash_aeroportos);
 
 int  hashtable_aeroportos_open(char*name);
 aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
+aeroportos read_aeroportos_at(int fd, int pos);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
 //void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);

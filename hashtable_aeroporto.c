@@ -71,6 +71,14 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 	return novo_aeroporto;
 }
 
+aeroportos read_aeroportos_at(int fd, int pos)
+{
+	aeroportos aeroporto;
+	lseek(fd, pos * sizeof(struct aeroportos),SEEK_SET); // posiciona na posicao do disco 
+	read(fd,&aeroporto,sizeof(struct aeroportos)); 
+	return aeroporto;
+}
+
 void write_aeroportos(int fd,aeroportos novoAeroporto)
 {
 	aeroportos novo_Aeroportos;
