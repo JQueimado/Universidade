@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include "hashtable_aeroporto.h"
 
-// numero primo seguinte 1833333 que permite menter o factor de carga abaixo de 0,6 para 1100000 utilizadores
+// numero primo seguinte 1833333 que permite menter o factor de carga abaixo de 0,2 para 200000 aeroportos
 #define MAX_UTL 1833341  
 #define PRIME 1833319
 

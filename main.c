@@ -155,6 +155,21 @@ bool elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_par
 	}
 	return false;
 }
+/*
+void calcula_viagem(int fd,char *codigo_partida,char *codigo_chegada,char *hora_partida)
+{
+	aeroportos temp_partida;
+	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+	if(!verifica_aero(fd,codigo_partida))
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_partida);
+	}
+	if(verifica_aero(fd,codigo_partida))
+	{
+
+	}
+
+}*/
 
 // na funçao MAIN recebe os comandos a executar e chama as respectivas funções 	
 int main()
