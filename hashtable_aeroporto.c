@@ -46,7 +46,6 @@ int hashtable_aeroportos_open(char*name)
 	}
 }
 	
-
 aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 {
 	aeroportos novo_aeroporto;
@@ -70,6 +69,14 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 		read(fd,&(novo_aeroporto),sizeof(struct aeroportos));
 	}  
 	return novo_aeroporto;
+}
+
+aeroportos read_aeroportos_at(int fd, int pos)
+{
+	aeroportos aeroporto;
+	lseek(fd, pos * sizeof(struct aeroportos),SEEK_SET); // posiciona na posicao do disco 
+	read(fd,&aeroporto,sizeof(struct aeroportos)); 
+	return aeroporto;
 }
 
 void write_aeroportos(int fd,aeroportos novoAeroporto)
