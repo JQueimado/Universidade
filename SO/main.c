@@ -161,8 +161,8 @@ int CPU(Process *process, int MEM[], Disk* disk, FILE* simp_file, FILE* comp_fil
         return 3;
     }
 }
-/************************************ file io ************************************/
 
+/************************************ file io ************************************/
 bool read_file( char* fname, Queue* pre_process )
 {
     FILE* file = fopen(fname, "r");
@@ -186,7 +186,7 @@ bool read_file( char* fname, Queue* pre_process )
 void mem_printer(int* Memory, FILE* comp_file)
 {
     for(int i = 0; i<MEM_SIZE; i++)
-        fprintf(comp_file,"%3d->%d\n", i, Memory[i]);
+        fprintf(comp_file," %d ", Memory[i]);
 }
 
 /************************************ garbadge colector ************************************/
@@ -276,7 +276,13 @@ int main(int arg_n, char** args)
                 
                 if( !temp->in_memory )
                 {
-                    int p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                    int p;
+
+                    if( MEMORY_MANAGER == 0)
+                        p = find_pos(processes, n_procesess, get_size(temp, fname), MEM);
+                    else
+                        p =find_next_pos(fit, processes, n_procesess, get_size(temp, fname));
+                    
                     if ( p == -1 )
                     {
                         gc(processes, n_procesess, MEM );
@@ -399,7 +405,6 @@ int main(int arg_n, char** args)
                 fputs("MEMORY ACCESS VIOLATION\n", simp_file);
                 fputs("MEMORY ACCESS VIOLATION\n", comp_file);
             }
-            
         }
 
         //NEW -> READY
@@ -472,7 +477,7 @@ int main(int arg_n, char** args)
             {
                 if( temp->state == NEW )
                 {
-                state = "new";
+                    state = "new";
                 }
                 else if (temp->state == READY_WAIT )
                 {
