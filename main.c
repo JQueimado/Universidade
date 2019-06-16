@@ -180,8 +180,8 @@ int main()
 	char modo[3];
 	while(scanf("%s",modo) != EOF)
 	{
-		char codigo_aero1[4];
-		char codigo_aero2[4];
+		char codigo_aero1[5];
+		char codigo_aero2[5];
 		char hora_partida[6];
 		
 		if(strcmp(modo,"AI")==0)
