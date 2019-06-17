@@ -53,7 +53,7 @@ hashtable;
 
 void new_aeroporto(char* codigo, int fd);
 
-bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao );
+bool add_voo(int fd, aeroportos* aeroporto, char* codigo_chegada, char hora, char minutos, short duracao );
 
 void time_to_char( char* time,char *first_part,char *sec_part);
 

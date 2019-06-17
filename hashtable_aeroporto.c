@@ -34,19 +34,20 @@ void new_aeroporto(char* codigo, int fd)
 }
 
 /* Criar Voo */
-bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao )
+bool add_voo(int fd, aeroportos* aeroporto, char* codigo_chegada, char hora, char minutos, short duracao )
 {
-	if( aeroporto.index_voo < 150 ){
-		strcpy(aeroporto.voosDecorrer[aeroporto.index_voo].aero_chegada,codigo_chegada);
-		aeroporto.voosDecorrer[aeroporto.index_voo].hora_partida = hora;
-		aeroporto.voosDecorrer[aeroporto.index_voo].minuto_partida = minutos;
-		aeroporto.index_voo++;
+	if( aeroporto->index_voo < 150 ){
+		strcpy(aeroporto->voosDecorrer[aeroporto->index_voo].aero_chegada,codigo_chegada);
+		aeroporto->voosDecorrer[aeroporto->index_voo].hora_partida = hora;
+		aeroporto->voosDecorrer[aeroporto->index_voo].minuto_partida = minutos;
+		aeroporto->index_voo++;
+		printf("index: %d\n",aeroporto->index_voo);
 	}
 	else
 	{
 		for( int i = 0; i < 150; i++ )
 		{
-			voos* voo = &aeroporto.voosDecorrer[i];
+			voos* voo = &aeroporto->voosDecorrer[i];
 			if( voo->hora_partida == -1 )
 			{
 				strcpy(voo->aero_chegada, codigo_chegada);
@@ -57,7 +58,7 @@ bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char
 		}
 		return false;
 	}
-	write_aeroportos(fd,aeroporto);
+	write_aeroportos(fd, *aeroporto);
 	return true;
 }
 
