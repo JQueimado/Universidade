@@ -5,6 +5,9 @@ compile: main.c Dijkstra.o hashtable_aeroporto.o
 test1: clean compile testes/test1.txt
 	time ./Result < testes/test1.txt
 
+testdisconas: Dijkstra.o hashtable_aeroporto.o
+	gcc -g -Wall discona.c -o Result Dijkstra.o hashtable_aeroporto.o
+
 Dijkstra.o: Dijkstra.c Dijkstra.c
 	gcc -c Dijkstra.c
 
