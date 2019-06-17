@@ -1,46 +1,63 @@
 #include "Dijkstra.h"
 
-int* dijkstra_rec( int fd, aeroportos* current, int final )
+void dijkstra_rec( int fd, aeroportos* current, char* final , aeroportos** ret, int s )
 {
-    int min = 0;
-    int i = -1;
+    int min = -1;
+    int i = 0;
     voos* voo;
     aeroportos* aero;
     aeroportos* min_dis;
     do
     {
         voo = &current->voosDecorrer[i];
-        aero = read_aeroportos_at_hash( fd, voo->aero_chegada );
-        int calc = voo->duracao + current->peso;
+        if( voo->tag != true )
+        {
+            aero = read_aeroportos_at_hash( fd, voo->aero_chegada );
+            int calc = voo->duracao + current->peso;
 
-        if( calc < aero->peso )
-        {
-            aero->peso = calc;
-        }
-        else
-        {
-            calc = aero->peso;
-        }
-        
-        if( calc < min || min == -1 )
-        {
-            min = calc;
-            min_dis = aero;
-        }
+            if( calc < aero->peso )
+            {
+                aero->peso = calc;
+            }
+            else
+            {
+                calc = aero->peso;
+            }
 
+            if( (min > calc) || (min = -1) )
+            {
+                min = calc;
+                min_dis = aero;
+            }
+            voo->tag = true;
+
+            if( strcmp(current->codigo, final) != 0 )
+            {
+                dijkstra_rec(fd, aero, final, ret, s);
+            }
+        }
         i++;
     }
     while ( i < current->index_voo );
-    
-    return dijkstra_rec(fd, min_dis, final);
+
+    ret[s] = min_dis;
+    s++;
 
 }
 
-int* dijkstra( int fd, char* init_code, char* final )
+aeroportos** dijkstra( int fd, char* init_code, char* final )
 {
     aeroportos* curr = read_aeroportos_at_hash( fd, init_code );
     curr->peso = 0;
-    int* ret = dijkstra_rec( fd, curr, find_aeroporto(fd, final) );
+
+    aeroportos** ret = malloc(sizeof(int) * MAX_AERO);
+    int size = 0;
+
+    /* run recursion */
+    dijkstra_rec( fd, curr, final, ret, size );
+
+    /* reset peso */
     curr->peso = INF;
+
     return ret;
 }
