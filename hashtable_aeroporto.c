@@ -108,11 +108,11 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
 	return novo_aeroporto;
 }
 
-aeroportos read_aeroportos_at(int fd, int pos)
+aeroportos* read_aeroportos_at(int fd, int pos)
 {
-	aeroportos aeroporto;
+	aeroportos* aeroporto = malloc(sizeof(aeroportos));
 	lseek(fd, pos * sizeof(struct aeroportos),SEEK_SET); // posiciona na posicao do disco 
-	read(fd,&aeroporto,sizeof(struct aeroportos)); 
+	read(fd, aeroporto, sizeof(struct aeroportos)); 
 	return aeroporto;
 }
 

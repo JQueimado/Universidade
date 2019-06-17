@@ -45,7 +45,7 @@ int main()
 
     for( int i = 0; i<ae1.index_voo; i++)
     {
-        printf("itsme: %s\n", read_aeroportos_at(ficheiro, cona[i]).codigo );
+        printf("itsme: %s\n", read_aeroportos_at(ficheiro, cona[i])->codigo );
     }
 
 }

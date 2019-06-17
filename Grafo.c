@@ -15,9 +15,9 @@ void new_no(Grafo* self, char* code, int fd )
 
 void get_conects( Grafo* self, int pos, int fd, int* _return )
 {
-    aeroportos temp = read_aeroportos_at(fd, self->nos[pos]);
-    for( int i = 0; i< temp.index_voo; i++ )
+    aeroportos* temp = read_aeroportos_at(fd, self->nos[pos]);
+    for( int i = 0; i< temp->index_voo; i++ )
     {
-        _return[i] = find_aeroporto(fd, temp.voosDecorrer[i].aero_chegada );
+        _return[i] = find_aeroporto(fd, temp->voosDecorrer[i].aero_chegada );
     }
 }
