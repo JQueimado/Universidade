@@ -8,10 +8,13 @@ struct grafo
 {
     int nos_point;
     int nos[MAX_NOS];
-}typedef grafo;
+}
+typedef Grafo;
 
-grafo* new_grafo();
+Grafo* new_grafo();
 
-void new_no(grafo self, char* code, int fd );
+void new_no(Grafo* self, char* code, int fd );
+
+void get_conects( Grafo* self, int pos, int fd, int* _return);
 
 #endif // _Grafo_
