@@ -84,18 +84,18 @@ int hashtable_aeroportos_open(char*name)
 	}
 }
 	
-aeroportos read_aeroportos_at_hash(int fd ,char *codigo)
+aeroportos* read_aeroportos_at_hash(int fd ,char *codigo)
 {
-	aeroportos novo_aeroporto;
+	aeroportos* novo_aeroporto = malloc(sizeof(aeroportos));
 	int hash1 = hash_function_aeroportos1(codigo);
 	int hash2 = hash_function_aeroportos2(codigo);
 	
 	lseek(fd, hash1 * sizeof(struct aeroportos),SEEK_SET); // posiciona na posicao do disco 
 	read(fd,&novo_aeroporto,sizeof(struct aeroportos)); 
 	
-	while(strcmp(novo_aeroporto.codigo, "")!=0)  
+	while(strcmp(novo_aeroporto->codigo, "")!=0)  
 	{
-		if(strcmp(novo_aeroporto.codigo, codigo	)==0)
+		if(strcmp(novo_aeroporto->codigo, codigo	)==0)
 		{
 			return novo_aeroporto;  
 		}
