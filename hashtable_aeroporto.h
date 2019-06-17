@@ -10,7 +10,8 @@
 #include <string.h>
 #include <stdint.h>
 			
-#define MAX_AERO 1833341
+#define MAX_AERO 532783
+//532783  1833341
 
 typedef struct temp
 {
@@ -68,6 +69,5 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
 aeroportos* read_aeroportos_at(int fd, int pos);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
-//void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
 
 #endif
