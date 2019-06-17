@@ -1,6 +1,3 @@
-#ifndef _HASH_
-#define _HASH_
-
 #include <fcntl.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -51,10 +48,6 @@ typedef struct hashtable
 }
 hashtable;
 
-void new_aeroporto(char* codigo, int fd);
-
-bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao );
-
 void time_to_char( char* time,char *first_part,char *sec_part);
 
 int hash_function_aeroportos(char *codigo);
@@ -69,5 +62,4 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
 aeroportos read_aeroportos_at(int fd, int pos);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
-
-#endif
+//void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
