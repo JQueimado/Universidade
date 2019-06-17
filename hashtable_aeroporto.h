@@ -7,7 +7,8 @@
 #include <string.h>
 #include <stdint.h>
 			
-#define MAX_AERO 1833341
+#define MAX_AERO 532783
+//532783  1833341
 
 typedef struct temp
 {
