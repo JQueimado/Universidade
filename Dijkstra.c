@@ -40,6 +40,9 @@ int* dijkstra( int fd, char* init_code, char* final )
 {
     aeroportos* curr = read_aeroportos_at_hash( fd, init_code );
     curr->peso = 0;
+
+    int* ret = malloc(sizeof(int) * MAX_AERO);
+
     int* ret = dijkstra_rec( fd, curr, find_aeroporto(fd, final) );
     curr->peso = INF;
     return ret;
