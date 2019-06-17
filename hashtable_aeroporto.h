@@ -39,6 +39,7 @@ typedef struct aeroportos
 	//char  fuso_horario[5];		// fuso horario do aeroporto
 	unsigned char index_voo;		
 	voos voosDecorrer[150]; // array de 150 struct's voos 
+	int peso;
 }
 aeroportos;
 
@@ -48,6 +49,13 @@ typedef struct hashtable
 }
 hashtable;
 
+<<<<<<< HEAD
+=======
+void new_aeroporto(char* codigo, int fd);
+
+bool add_voo(int fd, aeroportos* aeroporto, char* codigo_chegada, char hora, char minutos, short duracao );
+
+>>>>>>> 023ba51cbf1fe3bee22b9270a036743b70af35ec
 void time_to_char( char* time,char *first_part,char *sec_part);
 
 int hash_function_aeroportos(char *codigo);
@@ -58,8 +66,8 @@ int find_aeroporto(int fd, char* codigo);
 void free_hash_aeroportos(aeroportos *hash_aeroportos);
 
 int  hashtable_aeroportos_open(char*name);
-aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
-aeroportos read_aeroportos_at(int fd, int pos);
+aeroportos* read_aeroportos_at_hash(int fd ,char *codigo);
+aeroportos* read_aeroportos_at(int fd, int pos);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
 //void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);

@@ -87,7 +87,7 @@ void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partid
 	}
 	else //cria voo
 	{
-		add_voo(fd, temp_partida, codigo_chegada, hora,minutos, duracao);
+		add_voo(fd, &temp_partida, codigo_chegada, hora,minutos, duracao);
 		printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada,hora_partida);
 	}
 }
@@ -148,7 +148,7 @@ void calcula_viagem(int fd,char *codigo_partida,char *codigo_chegada,char *hora_
 int main()
 {
 	int ficheiro;
-	ficheiro = hashtable_aeroportos_open("ficheiro");
+	ficheiro = hashtable_aeroportos_open("ficheiro.cache");
 
 	char modo[3];
 	while(scanf("%s",modo) != EOF)

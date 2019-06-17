@@ -1,4 +1,4 @@
-/*#include "Grafo.h"
+#include "Grafo.h"
 #include "hashtable_aeroporto.h"
 
 int main()
@@ -11,7 +11,7 @@ int main()
     char* a2 = "MAD";
     char* a3 = "BAR";
     char* a4 = "ALG";
-    //short duracao = 33;
+    short duracao = 33;
 
     new_aeroporto(a1, ficheiro);
     new_aeroporto(a2, ficheiro);
@@ -25,11 +25,10 @@ int main()
     //aeroportos ae4 = read_aeroportos_at_hash(ficheiro, a4);
 
 
-    add_voo(ficheiro, ae1, a2, 22, 33, duracao);
-    add_voo(ficheiro, ae1, a3, 22, 33, duracao);
-    add_voo(ficheiro, ae1, a4, 22, 33, duracao);
-    //criarVoo(ficheiro,ae1.codigo,a2,,30);
-    printf("%d\n",ae1.voosDecorrer[0].duracao);
+    add_voo(ficheiro, &ae1, a2, 22, 33, duracao);
+    add_voo(ficheiro, &ae1, a3, 22, 33, duracao);
+    add_voo(ficheiro, &ae1, a4, 22, 33, duracao);
+    //printf("%d\n",ae1.voosDecorrer[0].duracao);
 
     new_no(grafo, a1, ficheiro);
     new_no(grafo, a2, ficheiro);
@@ -49,7 +48,7 @@ int main()
 
     for( int i = 0; i<ae1.index_voo; i++)
     {
-        printf("itsme: %s\n", read_aeroportos_at(ficheiro, cona[i]).codigo );
+        printf("itsme: %s\n", read_aeroportos_at(ficheiro, cona[i])->codigo );
     }
 
-}*/
+}
