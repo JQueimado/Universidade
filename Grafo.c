@@ -17,6 +17,7 @@ aeroportos get_conects( grafo self, int pos, int fd )
 {
     aeroportos temp = read_aeroportos_at(fd, self.nos[pos]);
     int aeros[temp.index_voo];
+    int 
     for( int i = 0; i< temp.index_voo; i++ )
     {
         
