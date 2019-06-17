@@ -1,3 +1,6 @@
+#ifndef _HASH_
+#define _HASH_
+
 #include <fcntl.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -23,7 +26,7 @@ typedef struct voo
 	//char codigo[7]; // codigo do voo
 	//char aero_partida[5];
 
-	char aero_chegada[4];
+	char aero_chegada[5];
 	char hora_partida;
 	char minuto_partida;
 	short duracao;
@@ -34,7 +37,7 @@ voos;
 
 typedef struct aeroportos
 {	
-	char  codigo[4];		// codigo do aeroporto e não e reutilizavel
+	char  codigo[5];		// codigo do aeroporto e não e reutilizavel
 	//char  fuso_horario[5];		// fuso horario do aeroporto
 	unsigned char index_voo;		
 	voos voosDecorrer[150]; // array de 150 struct's voos 
@@ -46,6 +49,10 @@ typedef struct hashtable
 	void* aeroporto[MAX_AERO];
 }
 hashtable;
+
+void new_aeroporto(char* codigo, int fd);
+
+bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao );
 
 void time_to_char( char* time,char *first_part,char *sec_part);
 
@@ -62,3 +69,5 @@ aeroportos read_aeroportos_at(int fd, int pos);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
 //void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
+
+#endif

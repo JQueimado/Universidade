@@ -1,25 +1,23 @@
 #include "Grafo.h"
 
-grafo* new_grafo()
+Grafo* new_grafo()
 {
-    grafo* temp = malloc(sizeof(grafo));
+    Grafo* temp = malloc(sizeof(Grafo));
     temp->nos_point = 0;
     return temp;
 }
 
-void new_no(grafo self, char* code, int fd )
+void new_no(Grafo* self, char* code, int fd )
 {
-    self.nos[self.nos_point] = find_aeroporto(fd, code);
-    self.nos_point++;
+    self->nos[self->nos_point] = find_aeroporto(fd, code);
+    self->nos_point++;
 }
 
-aeroportos get_conects( grafo self, int pos, int fd )
+void get_conects( Grafo* self, int pos, int fd, int* _return )
 {
-    aeroportos temp = read_aeroportos_at(fd, self.nos[pos]);
-    int aeros[temp.index_voo];
-    int 
+    aeroportos temp = read_aeroportos_at(fd, self->nos[pos]);
     for( int i = 0; i< temp.index_voo; i++ )
     {
-        
+        _return[i] = find_aeroporto(fd, temp.voosDecorrer[i].aero_chegada );
     }
 }

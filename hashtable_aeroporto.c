@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include "hashtable_aeroporto.h"
 
-// numero primo seguinte 1833333 que permite menter o factor de carga abaixo de 0,6 para 1100000 utilizadores
+// numero primo seguinte 1833333 que permite menter o factor de carga abaixo de 0,2 para 200000 aeroportos
 #define MAX_UTL 1833341  
 #define PRIME 1833319
 
@@ -22,6 +22,43 @@ void time_to_char( char* time, char* h, char* m )
 	memcpy(minutes, &time[3], 2);
 	*h = atoi(hours);
 	*m = atoi(minutes);
+}
+
+/* new aeroporto */
+void new_aeroporto(char* codigo, int fd)
+{
+	aeroportos temp;
+	strcpy(temp.codigo,codigo);
+	temp.index_voo=0;
+	write_aeroportos(fd,temp); //passa para o disco
+}
+
+/* Criar Voo */
+bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao )
+{
+	if( aeroporto.index_voo < 150 ){
+		strcpy(aeroporto.voosDecorrer[aeroporto.index_voo].aero_chegada,codigo_chegada);
+		aeroporto.voosDecorrer[aeroporto.index_voo].hora_partida = hora;
+		aeroporto.voosDecorrer[aeroporto.index_voo].minuto_partida = minutos;
+		aeroporto.index_voo++;
+	}
+	else
+	{
+		for( int i = 0; i < 150; i++ )
+		{
+			voos* voo = &aeroporto.voosDecorrer[i];
+			if( voo->hora_partida == -1 )
+			{
+				strcpy(voo->aero_chegada, codigo_chegada);
+				voo->hora_partida = hora;
+				voo->minuto_partida = minutos;
+				voo->duracao = duracao;
+			}
+		}
+		return false;
+	}
+	write_aeroportos(fd,aeroporto);
+	return true;
 }
 
 int hashtable_aeroportos_open(char*name)

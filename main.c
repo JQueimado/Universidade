@@ -59,33 +59,6 @@ void criarAeroportos(int fd,char *codigo)
 			printf("+ novo aeroporto %s\n", codigo);
 		}
 }
-/* Criar Voo */
-bool add_voo(int fd, aeroportos aeroporto, char* codigo_chegada, char hora, char minutos, short duracao )
-{
-	if( aeroporto.index_voo < 150 ){
-		strcpy(aeroporto.voosDecorrer[aeroporto.index_voo].aero_chegada,codigo_chegada);
-		aeroporto.voosDecorrer[aeroporto.index_voo].hora_partida = hora;
-		aeroporto.voosDecorrer[aeroporto.index_voo].minuto_partida = minutos;
-		aeroporto.index_voo++;
-	}
-	else
-	{
-		for( int i = 0; i < 150; i++ )
-		{
-			voos* voo = &aeroporto.voosDecorrer[i];
-			if( voo->hora_partida == -1 )
-			{
-				strcpy(voo->aero_chegada, codigo_chegada);
-				voo->hora_partida = hora;
-				voo->minuto_partida = minutos;
-				voo->duracao = duracao;
-			}
-		}
-		return false;
-	}
-	write_aeroportos(fd,aeroporto);
-	return true;
-}
 
 void criarVoo(int fd,char *codigo_partida,char *codigo_chegada,char* hora_partida,short duracao)
 {
@@ -155,6 +128,21 @@ bool elimina_voo(int fd,char *codigo_partida,char *codigo_chegada, char*hora_par
 	}
 	return false;
 }
+/*
+void calcula_viagem(int fd,char *codigo_partida,char *codigo_chegada,char *hora_partida)
+{
+	aeroportos temp_partida;
+	temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+	if(!verifica_aero(fd,codigo_partida))
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_partida);
+	}
+	if(verifica_aero(fd,codigo_partida))
+	{
+
+	}
+
+}*/
 
 // na funçao MAIN recebe os comandos a executar e chama as respectivas funções 	
 int main()
@@ -165,8 +153,8 @@ int main()
 	char modo[3];
 	while(scanf("%s",modo) != EOF)
 	{
-		char codigo_aero1[4];
-		char codigo_aero2[4];
+		char codigo_aero1[5];
+		char codigo_aero2[5];
 		char hora_partida[6];
 		
 		if(strcmp(modo,"AI")==0)
