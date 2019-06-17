@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include "hashtable_aeroporto.h"
 
-// numero primo seguinte 1833333 que permite menter o factor de carga abaixo de 0,2 para 200000 aeroportos
+
 #define MAX_UTL 532783  
 #define PRIME 532781
 
@@ -213,34 +213,4 @@ int hash_function_aeroportos2(char *codigo) {
 	return PRIME - hash % PRIME;
 }
 
-/* Adicionar Voo */
-/*void criar_voo(int fd, char* codigo, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao)
-{
-
-
-	voos novo_voo;
-	int hash1 = hash_function_aeroportos1(novoAeroporto.codigo); //faz hash para encontrar a posiçao do aeroporto 
-	int hash2 = hash_function_aeroportos2(novoAeroporto.codigo); //faz duplo hash, na eventualidade da posiçao esta ocupada
-	
-	lseek(fd, hash1 * sizeof(struct aeroportos),SEEK_SET);  // posiciona na posicao do disco 
-	read(fd, &novo_Aeroportos,sizeof(struct aeroportos)); // le do disco a informaçao do aeroporto
-
-	
-	while(strcmp(novo_Aeroportos.codigo,"")!=0) 
- 	{
-		if(strcmp(novo_Aeroportos.codigo,novoAeroporto.codigo)==0)  
-		{
-			lseek(fd, hash1 *sizeof(struct aeroportos),SEEK_SET);  	
-			write(fd,&novoAeroporto,sizeof(struct aeroportos)); 
-			return;
-		} 
-		hash1 += hash2; 	
-		hash1 %= MAX_UTL;
-
-		lseek(fd, hash1 * sizeof(struct aeroportos),SEEK_SET); 
-		read(fd,&novo_Aeroportos,sizeof(struct aeroportos));
-	}
-	lseek(fd, hash1 *sizeof(struct aeroportos),SEEK_SET);	
-	write(fd,&novoAeroporto,sizeof(struct aeroportos)); 
-}*/
 

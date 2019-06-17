@@ -69,6 +69,5 @@ aeroportos read_aeroportos_at_hash(int fd ,char *codigo);
 aeroportos read_aeroportos_at(int fd, int pos);
 void write_aeroportos(int fd,aeroportos novoAeroporto);
 
-//void criar_voo(int fd, aeroportos partida, aeroportos chegada, char* hora, unsigned char duracao);
 
 #endif
