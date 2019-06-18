@@ -7,7 +7,7 @@
 #include "hashtable.h"
 #include "basedados.h"
 #define MAX_SIZE 400009
-#define CACHE 75
+#define CACHE 500
 #define MAX_VOO 150
 #define FILE_DB "db.cache"
 
@@ -40,7 +40,7 @@ bool criar_aeroporto(char *codigo)
 		//write(disk,novoaeroporto,pos);
 		strcpy( buffer[ae_size].codigo, codigo );
 		ae_size++;
-		printf("%d\n",ae_size);
+		//printf("%d\n",ae_size);
 		pos++;
 		
 		if(ae_size >= CACHE)
@@ -48,7 +48,7 @@ bool criar_aeroporto(char *codigo)
 				fseek(disk, pos*sizeof(struct aeroportos), SEEK_SET);
 				fwrite( &buffer ,sizeof(struct aeroportos), CACHE, disk);
 				ae_size = 0;
-				printf("aqui\n");
+				//printf("aqui\n");
 			}
 		printf("+ novo aeroporto %s\n",codigo);
 		free(novoaeroporto);
