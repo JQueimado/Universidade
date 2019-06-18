@@ -13,17 +13,6 @@
 #define MAX_UTL 532783  
 #define PRIME 532781
 
-/* time_to_char */
-void time_to_char( char* time, char* h, char* m )
-{
-	char hours[3];
-	char minutes[3];
-	memcpy(hours, &time[0], 2);
-	memcpy(minutes, &time[3], 2);
-	*h = atoi(hours);
-	*m = atoi(minutes);
-}
-
 /* new aeroporto */
 void new_aeroporto(char* codigo, int fd)
 {
