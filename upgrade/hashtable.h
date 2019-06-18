@@ -1,7 +1,7 @@
 #ifndef _HASH_
 #define _HASH
 #include <stdbool.h>
-#define MAX_SIZE 200003
+#define MAX_SIZE 400009
 #define MAX_VOO 150
 
 

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX_SIZE 200003
+#define MAX_SIZE 400009
 #define MAX_VOO 150
 struct tabela
 {

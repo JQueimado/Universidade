@@ -41,4 +41,15 @@ void read(FILE *file,struct aeroportos *aeroportos,int pos)
 	fseek(file,pos*sizeof(struct aeroportos),SEEK_SET);
 	fread(aeroportos,sizeof(struct aeroportos),1,file);
 }
-
+void loadDb(FILE *file, struct hashtable *hash)
+{
+	struct aeroportos aeroportos;	
+	//int pos=0;
+	
+	while (fread(&aeroportos, sizeof(struct aeroportos), 1, file) != 0)
+	{
+		inserir_aeroporto(hash, aeroportos.codigo);
+	}
+	
+	//return id;
+}

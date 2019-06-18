@@ -5,7 +5,7 @@
 #include "aeroporto.h"
 #include "hashtable.h"
 #include "basedados.h"
-#define MAX_SIZE 200003
+#define MAX_SIZE 400009
 #define MAX_VOO 150
 #define FILE_DB "db.db"
 
@@ -14,8 +14,9 @@ struct hashtable *hash;
 bool criar_aeroporto(char *codigo)
 {
 	int pos = hash_function_aeroportos(codigo);
+	//printf("%d\n",pos);
 	//Procura o aeroporto na hashtable
-	if(find_aeroporto(hash,codigo) == 1)
+	if(find_aeroporto(hash,codigo))
 	{
 		printf("+ aeroporto %s existe\n",codigo);
 		return true;
@@ -51,7 +52,7 @@ int main(void)
 		return 1;
 
 	//carrega os aeroportos para a hashtable
-	//loadDB(disk,hash);	
+	loadDb(disk,hash);	
 
 	//Interface do utilizador
 	char modo[3];
