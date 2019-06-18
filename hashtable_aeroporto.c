@@ -30,7 +30,6 @@ bool add_voo(int fd, aeroportos* aeroporto, char* codigo_chegada, char hora, cha
 		aeroporto->voosDecorrer[aeroporto->index_voo].hora_partida = hora;
 		aeroporto->voosDecorrer[aeroporto->index_voo].minuto_partida = minutos;
 		aeroporto->index_voo++;
-		printf("index: %d\n",aeroporto->index_voo);
 	}
 	else
 	{
@@ -80,7 +79,7 @@ aeroportos* read_aeroportos_at_hash(int fd ,char *codigo)
 	int hash2 = hash_function_aeroportos2(codigo);
 	
 	lseek(fd, hash1 * sizeof(struct aeroportos),SEEK_SET); // posiciona na posicao do disco 
-	read(fd,&novo_aeroporto,sizeof(struct aeroportos)); 
+	read(fd, novo_aeroporto,sizeof(struct aeroportos)); 
 	
 	while(strcmp(novo_aeroporto->codigo, "")!=0)  
 	{

@@ -35,7 +35,7 @@ int main()
     //ae3 = read_aeroportos_at_hash(ficheiro, a3);
     //ae4 = read_aeroportos_at_hash(ficheiro, a4);
 
-    aeroportos** cona =  dijkstra( ficheiro, a1, a2 );
+    aeroportos** cona = dijkstra( ficheiro, a1, a2 );
 
     printf("%s\n", cona[0]->codigo );
 
