@@ -7,7 +7,7 @@
 #include "basedados.h"
 #define MAX_SIZE 400009
 #define MAX_VOO 150
-#define FILE_DB "db.db"
+#define FILE_DB "db.cache"
 
  FILE *disk;
 struct hashtable *hash;
