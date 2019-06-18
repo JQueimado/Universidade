@@ -4,11 +4,13 @@
 #include <string.h>
 #define MAX_SIZE 400009
 #define MAX_VOO 150
+
 struct tabela
 {
 	char codigo[5];
 
 };
+
 //definir hashtable
 struct hashtable 
 {
@@ -29,7 +31,8 @@ struct hashtable *newhash()
 	return new;
 }
 
-/*faz free da hashtable
+/*
+*faz free da hashtable
 *recebe como argumento um apontador para a hashtable e faz free de cada elemento
 */
 void hash_free(struct hashtable *ht)
@@ -58,6 +61,7 @@ int hash_function_aeroportos(char *codigo)
 
 bool find_aeroporto(struct hashtable *ht,char *codigo)
 {
+	/* hash search */
 	int hashIndex = hash_function_aeroportos(codigo);
 
 	while(ht->arr[hashIndex] !=NULL)
@@ -71,10 +75,14 @@ bool find_aeroporto(struct hashtable *ht,char *codigo)
 		hashIndex %= MAX_SIZE;
 	}
 
+	/* disk search */
+	
+
 	return false;
 }
 
-/*insere um aeroporto na hashtable
+/*
+insere um aeroporto na hashtable
 recebe uma hashtable e o codigo
 */
 bool inserir_aeroporto(struct hashtable *ht,char *codigo)

@@ -9,7 +9,7 @@
 #define MAX_VOO 150
 #define FILE_DB "db.cache"
 
- FILE *disk;
+FILE *disk;
 struct hashtable *hash;
 bool criar_aeroporto(char *codigo)
 {
@@ -31,7 +31,7 @@ bool criar_aeroporto(char *codigo)
 	//Guarda a informação no disco
 	if(inserir_aeroporto(hash,codigo))
 	{
-		write(disk,novoaeroporto,pos);
+		//write(disk,novoaeroporto,pos);
 		printf("+ novo aeroporto %s\n",codigo);
 		free(novoaeroporto);
 		return true;
@@ -43,8 +43,13 @@ bool criar_aeroporto(char *codigo)
 
 }
 
+#define CONA 500
+
 int main(void)
 {
+	struct aeroportos buffer[CONA];
+	int ae_size = 0;
+
 	hash = newhash();
 	disk = openFile(FILE_DB);
 
@@ -61,11 +66,29 @@ int main(void)
 		char codigo_aero1[5];
 		//char codigo_aero2[5];
 		//char hora_partida[6];
-		
+
 		if(strcmp(modo,"AI")==0)
 		{
 			scanf(" %s",codigo_aero1);
-			criar_aeroporto(codigo_aero1);
+			//criar_aeroporto(codigo_aero1);
+
+			if(find_aeroporto(hash,codigo_aero1))
+			{
+				printf("+ aeroporto %s existe\n",codigo_aero1);
+				continue;
+			}
+
+		 	strcmp( buffer[ae_size].codigo, codigo_aero1 );
+			ae_size++;
+
+			if(ae_size >= CONA)
+			{
+				fseek(disk, -1, SEEK_END);
+				fwrite( &buffer ,sizeof(struct aeroportos), CONA, disk);
+				ae_size = 0;
+			}
+			printf("+ novo aeroporto %s\n",codigo_aero1);
+
 		}
 		/*else if ( strcmp(modo,"FI") == 0 )
 		{		
@@ -84,10 +107,12 @@ int main(void)
 				printf("+ voo %s %s %s inexistente\n", codigo_aero1, codigo_aero2, hora_partida);
 		}
 		
-*/
+		*/
 		if(strcmp(modo,"X") == 0)
 		{
 			hash_free(hash);
+			fseek(disk,0, SEEK_END);
+			fwrite( &buffer ,sizeof(struct aeroportos), ae_size, disk);
 			fclose(disk);
 			return 0;
 			

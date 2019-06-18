@@ -1,5 +1,8 @@
 #include "Dijkstra.h"
-
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 void dijkstra_rec( int fd, aeroportos* current, char* final , int* ret, int s )
 {
     int min = -1;
