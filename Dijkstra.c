@@ -50,7 +50,7 @@ aeroportos** dijkstra( int fd, char* init_code, char* final )
     aeroportos* curr = read_aeroportos_at_hash( fd, init_code );
     curr->peso = 0;
 
-    aeroportos** ret = malloc(sizeof(int) * MAX_AERO);
+    aeroportos** ret = malloc( sizeof(void*) * MAX_AERO );
     int size = 0;
 
     /* run recursion */

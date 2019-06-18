@@ -1,6 +1,7 @@
 #ifndef Dijkstra
 #define Dijkstra
 
+#include <malloc.h>
 #include "hashtable_aeroporto.h"
 
 #define INF -1;
