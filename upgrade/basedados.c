@@ -44,16 +44,26 @@ void read(FILE *file,struct aeroportos *aeroportos,int pos)
 	fread(aeroportos,sizeof(struct aeroportos),1,file);
 }
 
+/*carrega todos os utilizadores para a hash
+recebe um fp do ficheiro e a hash a preencher
+devolve o id do ultimo aeroporto encontrado
+*/
 
-void loadDb(FILE *file, struct hashtable *hash)
+int loadDb(FILE *file, struct hashtable *hash)
 {
 	struct aeroportos aeroportos;	
-	//int pos=0;
+	int pos=0;
 	
 	while (fread(&aeroportos, sizeof(struct aeroportos), 1, file) != 0)
 	{
-		inserir_aeroporto(hash, aeroportos.codigo);
+		inserir_aeroporto(hash, aeroportos.codigo,pos);
+		pos++;
+							
 	}
+
+	return pos;
 	
-	//return id;
+
 }
+
+

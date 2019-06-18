@@ -2,19 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define MAX_SIZE 400009
 #define MAX_VOO 150
 
+
 struct tabela
 {
-	char codigo[5];
+	char codigo[5]; // 5 bytes
+	int pos; // 4 bytes
+	
 
 };
 
 //definir hashtable
 struct hashtable 
 {
-	struct tabela *arr[MAX_SIZE];
+	struct tabela *arr[MAX_SIZE]; 
 };
 
 /*cria uma nova hashtable em memória
@@ -63,15 +67,20 @@ bool find_aeroporto(struct hashtable *ht,char *codigo)
 {
 	/* hash search */
 	int hashIndex = hash_function_aeroportos(codigo);
+	//printf("hashIndex");
+
 
 	while(ht->arr[hashIndex] !=NULL)
 	{
-		if(strcmp(ht->arr[hashIndex]->codigo,codigo) == 0)
+
+		if(strcmp(ht->arr[hashIndex]->codigo,codigo) == 0) //converter codigo para inteiro
 		{
+			//printf("%s\n",ht->arr[hashIndex]->codigo);	
+			//printf("aqui\n");
 			return true;
 		}
 
-		hashIndex++;
+		hashIndex+=hashIndex;
 		hashIndex %= MAX_SIZE;
 	}
 
@@ -85,7 +94,7 @@ bool find_aeroporto(struct hashtable *ht,char *codigo)
 insere um aeroporto na hashtable
 recebe uma hashtable e o codigo
 */
-bool inserir_aeroporto(struct hashtable *ht,char *codigo)
+bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos)
 {
 	int hashIndex = hash_function_aeroportos(codigo);
 
@@ -93,10 +102,12 @@ bool inserir_aeroporto(struct hashtable *ht,char *codigo)
 	if(tabela == NULL)
 		return false;
 	strcpy(tabela->codigo,codigo);
+	tabela->pos=pos;
 
 	while(ht->arr[hashIndex] != NULL && strcmp(ht->arr[hashIndex]->codigo,codigo))
 	{
-		hashIndex++;
+		//printf("colisao");
+		hashIndex+=hashIndex;
 		hashIndex %= MAX_SIZE;
 	}
 

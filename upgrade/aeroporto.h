@@ -16,3 +16,4 @@ struct aeroportos
 	struct voos *voosDecorrer[150]; // array de 150 struct's voos 
 	bool ocupado;
 };
+
