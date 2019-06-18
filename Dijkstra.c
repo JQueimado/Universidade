@@ -1,12 +1,12 @@
 #include "Dijkstra.h"
 
-void dijkstra_rec( int fd, aeroportos* current, char* final , aeroportos** ret, int s )
+void dijkstra_rec( int fd, aeroportos* current, char* final , int* ret, int s )
 {
     int min = -1;
     int i = 0;
     voos* voo;
     aeroportos* aero;
-    aeroportos* min_dis;
+    char* min_dis;
     do
     {
         voo = &current->voosDecorrer[i];
@@ -27,7 +27,7 @@ void dijkstra_rec( int fd, aeroportos* current, char* final , aeroportos** ret, 
             if( (min > calc) || (min = -1) )
             {
                 min = calc;
-                min_dis = aero;
+                min_dis = aero->codigo;
             }
             voo->tag = true;
 
@@ -40,17 +40,17 @@ void dijkstra_rec( int fd, aeroportos* current, char* final , aeroportos** ret, 
     }
     while ( i < current->index_voo );
 
-    ret[s] = min_dis;
+    ret[s] = find_aeroporto(fd, min_dis);
     s++;
 
 }
 
-aeroportos** dijkstra( int fd, char* init_code, char* final )
+int* dijkstra( int fd, char* init_code, char* final )
 {
     aeroportos* curr = read_aeroportos_at_hash( fd, init_code );
     curr->peso = 0;
 
-    aeroportos** ret = malloc( sizeof(void*) * MAX_AERO );
+    int* ret = malloc( (sizeof(int*) * MAX_AERO) );
     int size = 0;
 
     /* run recursion */
