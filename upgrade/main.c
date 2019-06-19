@@ -22,7 +22,7 @@ struct aeroportos buffer[CACHE];
 /*FUncoes auxiliares*/
 
 
-int pesquisabinaria(char *codigo,struct voos arr[], int i, int j)
+int pesquisabinaria(char *codigo,char *hora_partida,struct voos arr[], int i, int j)
 {
 	
 	if (i > j)
@@ -31,23 +31,37 @@ int pesquisabinaria(char *codigo,struct voos arr[], int i, int j)
   int m = (i + j) / 2;          // posição central
 
 
-  if (strcmp(codigo,arr[m].aero_chegada) < 0) 
+  if (strcmp(codigo,arr[m].aero_chegada) < 0) {
     // Restringe a pesquisa ao intervalo i..m - 1
-    return pesquisabinaria(codigo, arr, i, m - 1);
-
+    return pesquisabinaria(codigo,hora_partida,arr,i,m-1);
+	}
+  else if(strcmp(codigo,arr[m].aero_chegada) == 0 && strcmp(hora_partida,arr[m].hora_partida) < 0)
+    {
+    	return pesquisabinaria(codigo,hora_partida, arr, i, m - 1);
+	}
+	
   if (strcmp(codigo,arr[m].aero_chegada) > 0)
+  {
+   return pesquisabinaria(codigo,hora_partida,arr, m + 1, j);
+   }	
+  	else if(strcmp(codigo,arr[m].aero_chegada) == 0 && strcmp(hora_partida,arr[m].hora_partida) > 0)
+ 	{ 
     // Restringe a pesquisa ao intervalo m + 1..j
-    return pesquisabinaria(codigo, arr, m + 1, j);
+    return pesquisabinaria(codigo,hora_partida,arr, m + 1, j);
+	}
 
   return m;                     // n == v[m]
 }
 
+
+
 void arrayordenado(struct voos voo, int size, struct voos array[])	
 {
 	short i;
-	//Percorre a lista a partir do fim, se nick na posição i for maior do que o nick dado
+	//Percorre a lista a partir do fim, se aeroporto na posição i for maior do que o aeroporto dado
 	//move i para i+1
-	for (i = size-1; ( i >= 0  && strcmp(array[i].aero_chegada,voo.aero_chegada) > 0); i--)
+	//MUDAR PARA WHILE
+	for (i = size-1; ( i >= 0  && strcmp(array[i].aero_chegada,voo.aero_chegada) >= 0 && strcmp(array[i].hora_partida,voo.hora_partida) > 0); i--)
        array[i+1] = array[i];
 	
 	//Coloca o user seguido no esapaço criado
@@ -120,6 +134,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 	}
 	struct aeroportos *aeroporto1 = malloc(sizeof(struct aeroportos)); 
 	int pos1=find_aeroportoid(hash,codigo_partida);
+	printf("pos:%d\n",pos1);
 	//printf("aqui1");
 	if(aeroporto1 == NULL)
 	{
@@ -128,17 +143,16 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 	}
 
 	read(disk,aeroporto1,pos1);
-	short i=pesquisabinaria(codigo_chegada,aeroporto1->voosDecorrer,0,aeroporto1->ocupado-1);
+	printf("aqui: %d\n",aeroporto1->ocupado);
+	short i=pesquisabinaria(codigo_chegada,hora_partida,aeroporto1->voosDecorrer,0,aeroporto1->ocupado-1); //esta mal
+	printf("KKK %d\n",i);
 	if (i!=-1) //Encontrou voos iguais
 	{
+		printf("+ voo %s %s %s existe\n", codigo_partida, codigo_chegada, hora_partida);
+		return true;
 		//printf("%d\n",i);
 		//printf("%s\n",aeroporto1->voosDecorrer[i].hora_partida);
-		if(strcmp(aeroporto1->voosDecorrer->hora_partida,hora_partida) == 0 )
-		{
-			printf("+ voo %s %s %s existe\n", codigo_partida, codigo_chegada, hora_partida);
-			return true;
-		}
-		
+
 	}
 	//cria voo-
 	//strcpy(aeroporto1->voosDecorrer[0].aero_chegada,codigo_chegada); //RESOLVER BUG DE QUANDO CRIA DEVIA IMPRIMIR JÁ EXISTE
@@ -150,15 +164,18 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 	
 	//1. ordenar array de voos
 	//qsort(aeroporto1->voosDecorrer, 150, sizeof(struct voos), compare);
-	/*for(int i=0;i<=aeroporto1->ocupado-1;i++)
-	{
-		printf("cod: %s\n",aeroporto1->voosDecorrer[i].aero_chegada);
-	}*/
-
+	
 	//add_voo(fd, &temp_partida, codigo_chegada, hora,minutos, duracao);
 	
 	printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada, hora_partida);
+
+	printf("cona\n");
 	aeroporto1->ocupado+=1;
+
+		for(int i=0;i<=aeroporto1->ocupado-1;i++)
+	{
+		printf("cod: %s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
+	}
 	//guarda no disco
 	write(disk, aeroporto1, pos1);
 	

@@ -13,7 +13,7 @@ struct voos {
 struct aeroportos
 {
 	char  codigo[5];		// codigo do aeroporto e não e reutilizavel 5 bytes
-	unsigned char index_voo;		// 1 byte
+	// index_voo;		// 1 byte
 	struct voos voosDecorrer[MAX_VOO]; // array de 150 struct's voos 150*10 = 1500 bytes 
-	short ocupado; // 1 byte
+	unsigned char ocupado; // 1 byte
 };
