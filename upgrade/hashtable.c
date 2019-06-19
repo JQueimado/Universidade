@@ -12,6 +12,7 @@ struct tabela
 	char codigo[5]; // 5 bytes
 	int pos; // 4 bytes
 	
+	
 
 };
 

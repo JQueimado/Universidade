@@ -7,7 +7,7 @@
 #include "hashtable.h"
 #include "basedados.h"
 #define MAX_SIZE 400009
-#define CACHE 500
+#define CACHE 879  //perto do numero de paginas
 #define MAX_VOO 150
 #define FILE_DB "db.cache"
 
@@ -18,7 +18,7 @@ int ae_size = 0;
 struct aeroportos buffer[CACHE];
 bool criar_aeroporto(char *codigo)
 {
-	int pos = hash_function_aeroportos(codigo);
+	//int pos = hash_function_aeroportos(codigo);
 	//printf("%d\n",pos);
 	//Procura o aeroporto na hashtable
 	if(find_aeroporto(hash,codigo))
@@ -55,14 +55,36 @@ bool criar_aeroporto(char *codigo)
 		return true;
 	}
 
-
-
 	free(novoaeroporto);
 	return false;
-
-
 }
 
+
+/*void criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char minutos, short duracao)
+{
+	//aeroportos* temp_partida;
+	//aeroportos temp_chegada;
+	//temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+
+	
+	if(!verifica_aero(fd,codigo_partida))
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_partida);
+	}
+	else if(verifica_aero(fd,codigo_partida) && !verifica_aero(fd,codigo_chegada))
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
+	}
+	else if (verifica_voo(*temp_partida, codigo_chegada, hora, minutos) ) //ja existe voo
+	{
+		printf("+ voo %s %s %d:%d existe\n", codigo_partida, codigo_chegada, hora, minutos);
+	}
+	else //cria voo
+	{
+		add_voo(fd, &temp_partida, codigo_chegada, hora,minutos, duracao);
+		printf("+ novo voo %s %s %d:%d\n",codigo_partida,codigo_chegada, hora, minutos);
+	}
+}*/
 
 
 
@@ -78,7 +100,7 @@ int main(void)
 		return 1;
 
 	//carrega os aeroportos para a hashtable
-	loadDb(disk,hash);	
+	pos=loadDb(disk,hash);	
 
 	//Interface do utilizador
 	char modo[3];
