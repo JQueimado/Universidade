@@ -7,11 +7,11 @@
 #define MAX_VOO 150
 
 
+
 struct tabela
 {
 	char codigo[5]; // 5 bytes
-	int pos; // 4 bytes
-	
+	int pos; // 4 bytes                                //20mil em memoria depois passa para disco(33.18 mb)
 	
 
 };
@@ -116,3 +116,29 @@ bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos)
 	return true;
 }
 
+int find_aeroportoid(struct hashtable *ht,char *codigo)
+{
+	/* hash search */
+	int hashIndex = hash_function_aeroportos(codigo);
+	//printf("hashIndex");
+
+
+	while(ht->arr[hashIndex] !=NULL)
+	{
+
+		if(strcmp(ht->arr[hashIndex]->codigo,codigo) == 0) //converter codigo para inteiro
+		{
+			//printf("%s\n",ht->arr[hashIndex]->codigo);	
+			//printf("aqui\n");
+			return ht->arr[hashIndex]->pos;
+		}
+
+		hashIndex+=hashIndex;
+		hashIndex %= MAX_SIZE;
+	}
+
+	/* disk search */
+	
+
+	return -1;
+}
