@@ -7,7 +7,5 @@ def randomString(stringLength=4):
     return ''.join(random.choice(letters) for i in range(stringLength))
 for i in range(200000):
     f.write("AI " + randomString() + '\n')
-for i in range(150000):
-    f.write("FI " + randomString() + " " + randomString() + " " + str(random.randrange(10,23)) + ":" + str(random.randrange(10,23)) + " " + str(random.randrange(30,999)) + '\n')
 
 f.close() 
