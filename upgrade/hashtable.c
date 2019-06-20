@@ -116,7 +116,7 @@ bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos)
 	return true;
 }
 
-int find_aeroportoid(struct hashtable *ht,char *codigo)
+int find_aeroportopos(struct hashtable *ht,char *codigo)
 {
 	/* hash search */
 	int hashIndex = hash_function_aeroportos(codigo);

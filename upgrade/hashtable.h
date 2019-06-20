@@ -14,5 +14,5 @@ int hash_function_aeroportos(char *codigo);
 bool find_aeroporto(struct hashtable *ht,char *codigo);
 bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos);
 void print_hash(struct hashtable *ht);
-int find_aeroportoid(struct hashtable *ht,char *codigo);
+int find_aeroportopos(struct hashtable *ht,char *codigo);
 #endif
