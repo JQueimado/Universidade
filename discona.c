@@ -18,25 +18,33 @@ int main()
     new_aeroporto(a4, ficheiro);
 
     aeroportos* ae1 = read_aeroportos_at_hash(ficheiro, a1);
-    //printf("%d\n",ae1.voosDecorrer[0]);
-    //aeroportos ae2 = read_aeroportos_at_hash(ficheiro, a2);
-    //aeroportos ae3 = read_aeroportos_at_hash(ficheiro, a3);
-    //aeroportos ae4 = read_aeroportos_at_hash(ficheiro, a4);
+    //printf("%d\n",ae1->voosDecorrer[0]);
+    aeroportos* ae2 = read_aeroportos_at_hash(ficheiro, a2);
+    aeroportos* ae3 = read_aeroportos_at_hash(ficheiro, a3);
+    aeroportos* ae4 = read_aeroportos_at_hash(ficheiro, a4);
 
-
-    add_voo(ficheiro, ae1, a2, 22, 33, duracao);
+    /* 
+    
+    LIS->BAR->ALG->MAD
+    
+    */
     add_voo(ficheiro, ae1, a3, 22, 33, duracao);
-    add_voo(ficheiro, ae1, a4, 22, 33, duracao);
-    //printf("%d\n",ae1.voosDecorrer[0].duracao);
+    add_voo(ficheiro, ae3, a4, 22, 33, duracao);
+    add_voo(ficheiro, ae4, a2, 22, 33, duracao);
+    //printf("%d\n",ae1->voosDecorrer[0].duracao);
 
 
     ae1 = read_aeroportos_at_hash(ficheiro, a1);
-    //ae2 = read_aeroportos_at_hash(ficheiro, a2);
-    //ae3 = read_aeroportos_at_hash(ficheiro, a3);
-    //ae4 = read_aeroportos_at_hash(ficheiro, a4);
+    ae2 = read_aeroportos_at_hash(ficheiro, a2);
+    ae3 = read_aeroportos_at_hash(ficheiro, a3);
+    ae4 = read_aeroportos_at_hash(ficheiro, a4);
 
-    int* cona = dijkstra( ficheiro, a1, a2 );
+    aeroportos* cona = dijkstra( ficheiro, a1, a2 );
 
-    printf("%d\n", cona[0] );
+    while (cona->pai != NULL)
+    {
+        printf("aero: %s\n", cona->codigo );
+        cona = cona->pai;
+    }
 
 }

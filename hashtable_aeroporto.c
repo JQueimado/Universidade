@@ -19,6 +19,8 @@ void new_aeroporto(char* codigo, int fd)
 	aeroportos temp;
 	strcpy(temp.codigo,codigo);
 	temp.index_voo=0;
+	temp.peso = -1;
+	temp.vesitado = 0;
 	write_aeroportos(fd,temp); //passa para o disco
 }
 

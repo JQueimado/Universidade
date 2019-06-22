@@ -44,6 +44,8 @@ typedef struct aeroportos
 	unsigned char index_voo;		
 	voos voosDecorrer[150]; // array de 150 struct's voos 
 	int peso;
+	char vesitado;
+	struct aeroportos* pai;
 }
 aeroportos;
 
