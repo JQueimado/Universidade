@@ -408,15 +408,15 @@ int main()
     //  LIS->BAR
 	//	 |    |
 	//   V    V
-	//	MAD->ALG
+	//	MAD<---
 
 
+	criarVoo(a1, a3, "22:33", duracao);
+	criarVoo(a3, a2, "22:33", duracao);
 	criarVoo(a1, a2, "22:33", duracao);
-	criarVoo(a1, a3, "22:33", 100);
-	criarVoo(a2, a4, "22:33", duracao);
-	criarVoo(a3, a4, "22:33", duracao);
+	//criarVoo(a3, a4, "22:33", duracao);
 
-	aeroportos *cona = dijkstra(hash, disk, a1, a4);
+	aeroportos *cona = dijkstra(hash, disk, a1, a2);
 
 	while ( strcmp("", cona->pai) != 0)
 	{
