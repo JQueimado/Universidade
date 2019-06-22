@@ -481,6 +481,21 @@ int main(void)
 		{
 			char hora_chegada[6];
 			scanf("%s %s %s",codigo_aero1,codigo_aero2,hora_chegada);
+			int pos1=find_aeroportopos(hash,codigo_aero1);
+	
+			//printf("posicao em memoria: %d %d\n",pos1,pos2);
+			if(pos1==-1 )
+			{
+				printf("+ aeroporto %s desconhecido\n",codigo_aero1);
+				
+			}
+			int pos2=find_aeroportopos(hash,codigo_aero2);
+			if(pos1!=-1 && pos2==-1)
+			{
+
+				printf("+ aeroporto %s desconhecido\n",codigo_aero2);
+				
+			}			
 			dijkstra(codigo_aero1, codigo_aero2);
 
 		}
