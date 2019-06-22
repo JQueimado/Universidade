@@ -40,24 +40,26 @@ void write_aero(hashtable* hash, FILE* disk, aeroportos* add)
 /* Sorted Linked List */
 struct SLL
 {
-	aeroportos *node;
-	struct SLL *next;
+	aeroportos* node;
+	aeroportos* current;
+	struct SLL* next;
 } typedef SLL;
 
 /* Cria um no do tipo SLL */
-SLL *new_SLL(aeroportos *add)
+SLL *new_SLL(aeroportos *add, aeroportos* current)
 {
 	SLL *temp = malloc(sizeof(SLL));
 	temp->next = NULL;
 	temp->node = add;
+	temp->current = current;
 	return temp;
 }
 
 /* Adiciona um no a SLL e retorna a Head */
-SLL *add_sll(SLL *self, aeroportos *add)
+SLL *add_sll(SLL *self, aeroportos *add, aeroportos* current)
 {
 	/* Create Node */
-	SLL *n_node = new_SLL(add);
+	SLL *n_node = new_SLL(add, current);
 
 	/* Se vazio adiciona ao Inicio */
 	if (self == NULL)
@@ -75,7 +77,7 @@ SLL *add_sll(SLL *self, aeroportos *add)
 	SLL *head = self;
 	while (self->next != NULL)
 	{
-		if (self->next->node->peso > add->peso)
+		if (self->next->node->peso >= add->peso)
 			break;
 
 		self = self->next;
@@ -108,7 +110,7 @@ void kill(SLL *self)
 aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char *pai, char *final, SLL *helper)
 {
 	/*****************************/
-	//printf("%s pai de %s\n", pai, current->codigo );
+	//printf("faz %s pai de %s\n", pai, current->codigo );
 	/*****************************/
 	current->vesitado = 1;
 	strcpy(current->pai, pai);
@@ -147,23 +149,25 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 		/* calculo do peso */
 		int calc = current->peso + voo->duracao;
 
+		/*****************************/
+		//printf("calc for %s->%s is %d\n", current->codigo, aero->codigo, calc);
+		/*****************************/
+
 		/* alteracao de peso */
 		if (aero->peso == INF || aero->peso > calc)
 		{
+			/*****************************/
+			//printf("set %s->%s\n", current->codigo, aero->codigo);
+			/*****************************/
 			aero->peso = calc;
 			write_aero(hash, disk, aero);
-			helper = add_sll(helper, aero);
+			helper = add_sll(helper, aero, current);
 		}
 	}
-	if( helper != NULL )
-	{
-		aero = helper->node;
-		helper = pop(helper);
-	}
-	else
-	{
-		return NULL;
-	}
+	aero = helper->node;
+	current = helper->current;
+	
+	helper = pop(helper);
 	
 	/*************************/
 	//printf("aqui");
@@ -401,14 +405,16 @@ int main()
 	criar_aeroporto(a3);
 	criar_aeroporto(a4);
 
-    //  LIS->MAD
+    //  LIS->BAR
 	//	 |    |
-	//	BAR<---
+	//   V    V
+	//	MAD->ALG
 
 
 	criarVoo(a1, a2, "22:33", duracao);
-	criarVoo(a1, a3, "22:33", duracao);
-	criarVoo(a2, a3, "22:33", duracao);
+	criarVoo(a1, a3, "22:33", 100);
+	criarVoo(a2, a4, "22:33", duracao);
+	criarVoo(a3, a4, "22:33", duracao);
 
 	aeroportos *cona = dijkstra(hash, disk, a1, a4);
 
@@ -417,6 +423,15 @@ int main()
 		printf("aero:%s -> %s\n", cona->pai, cona->codigo);
 		cona = get_aeroporto(hash, disk, cona->pai);
 	}
+	puts("");
+	aeroportos* temp = get_aeroporto(hash, disk, a1);
+	printf("%s -> %d\n", temp->codigo, temp->peso);
+	temp = get_aeroporto(hash, disk, a2);
+	printf("%s -> %d\n", temp->codigo, temp->peso);
+	temp = get_aeroporto(hash, disk, a3);
+	printf("%s -> %d\n", temp->codigo, temp->peso);
+	temp = get_aeroporto(hash, disk, a4);
+	printf("%s -> %d\n", temp->codigo, temp->peso);
 
 }
 
