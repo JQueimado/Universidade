@@ -9,8 +9,7 @@
 
 #define CACHE 879 //perto do numero de paginas
 
-/* Sorted Linked List */
-
+/* FILE IO */
 aeroportos* get_aeroporto(hashtable *hash, FILE *disk, char *code)
 {
 	aeroportos *temp = malloc(sizeof(aeroportos));
@@ -37,6 +36,8 @@ void write_aero(hashtable* hash, FILE* disk, aeroportos* add)
 	write(disk, add, pos);
 }
 
+
+/* Sorted Linked List */
 struct SLL
 {
 	aeroportos *node;
@@ -63,6 +64,7 @@ SLL *add_sll(SLL *self, aeroportos *add)
 		return n_node;
 
 	/* Se for menor que a head adiciona no inicio */
+
 	if (self->node->peso > add->peso)
 	{
 		n_node->next = self;
@@ -149,12 +151,20 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 		if (aero->peso == INF || aero->peso > calc)
 		{
 			aero->peso = calc;
+			write_aero(hash, disk, aero);
 			helper = add_sll(helper, aero);
 		}
 	}
-
-	aero = helper->node;
-	helper = pop(helper);
+	if( helper != NULL )
+	{
+		aero = helper->node;
+		helper = pop(helper);
+	}
+	else
+	{
+		return NULL;
+	}
+	
 	/*************************/
 	//printf("aqui");
 	/*************************/
@@ -374,6 +384,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 }
 
 /****************************************************main*****************************************************************************************/
+/*
 int main()
 {
 	hash = newhash();
@@ -390,22 +401,73 @@ int main()
 	criar_aeroporto(a3);
 	criar_aeroporto(a4);
 
-	/*
-        LIS->BAR->ALG->MAD
-    */
+    //  LIS->MAD
+	//	 |    |
+	//	BAR<---
 
+
+	criarVoo(a1, a2, "22:33", duracao);
 	criarVoo(a1, a3, "22:33", duracao);
-	criarVoo(a3, a4, "22:33", duracao);
-	criarVoo(a4, a2, "22:33", duracao);
+	criarVoo(a2, a3, "22:33", duracao);
 
-	aeroportos *cona = dijkstra(hash, disk, a1, a2);
-	/********************/
-	//printf("aero: %s\n", cona->codigo);
-	/********************/
+	aeroportos *cona = dijkstra(hash, disk, a1, a4);
+
 	while ( strcmp("", cona->pai) != 0)
 	{
 		printf("aero:%s -> %s\n", cona->pai, cona->codigo);
 		cona = get_aeroporto(hash, disk, cona->pai);
 	}
 
+}
+*/
+
+int main()
+{
+	hash = newhash();
+	disk = openFile("test.cache");
+
+	char *a1 = "LIS";
+	char *a2 = "MAD";
+	char *a3 = "BAR";
+	char *a4 = "ALG";
+
+	criar_aeroporto(a1);
+	criar_aeroporto(a2);
+	criar_aeroporto(a3);
+	criar_aeroporto(a4);
+
+	aeroportos* ae1 = get_aeroporto(hash, disk, a1);
+	aeroportos* ae2 = get_aeroporto(hash, disk, a2);
+	aeroportos* ae3 = get_aeroporto(hash, disk, a3);
+	aeroportos* ae4 = get_aeroporto(hash, disk, a4);
+
+	ae1->peso = 10;
+	ae2->peso = 20;
+	ae3->peso = 30;
+	ae4->peso = 40;
+
+	SLL* head = add_sll(NULL, ae1);
+	printf("%s\n", head->node->codigo);
+
+	head = add_sll(head, ae2);
+	printf("%s\n", head->node->codigo);
+
+	head = add_sll(head, ae2);
+	printf("%s\n", head->node->codigo);
+
+	head = add_sll(head, ae2);
+	printf("%s\n", head->node->codigo);
+
+
+	head = pop(head);
+	printf("%s\n", head->node->codigo);
+
+	head = pop(head);
+	printf("%s\n", head->node->codigo);
+
+	head = pop(head);
+	printf("%s\n", head->node->codigo);
+
+	head = pop(head);
+	printf("%s\n", head->node->codigo);
 }
