@@ -14,18 +14,18 @@
 aeroportos* get_aeroporto(hashtable *hash, FILE *disk, char *code)
 {
 	aeroportos *temp = malloc(sizeof(aeroportos));
-	int pos = find_aeroporto(hash, code);
+	int pos = find_aeroportopos(hash, code);
 	if( pos == -1 )
 	{
 		/****************************/
-		puts("not found");
+		//puts("not found");
 		/****************************/
 		return NULL;
 	}
 	read(disk, temp, pos);
 
 	/****************************/
-	printf("%s = %s\n", temp->codigo, code);
+	//printf("%s = %s\n", temp->codigo, code);
 	/****************************/
 
 	return temp;
@@ -228,6 +228,7 @@ bool criar_aeroporto(char *codigo)
 		return false; // caso nao consiga alocar
 	strcpy(novoaeroporto->codigo, codigo);
 	novoaeroporto->ocupado = 0;
+	novoaeroporto->pai = INF;
 	//Guarda a informação no disco
 	if (inserir_aeroporto(hash, codigo, pos))
 	{
