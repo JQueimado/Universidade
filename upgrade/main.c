@@ -240,7 +240,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
 		return true;
 	}
-	int pos2=find_aeroportopos(hash,codigo_chegada);
+	int pos2 = find_aeroportopos(hash,codigo_chegada);
 	if(pos1!=-1 && pos2==-1)
 	{
 

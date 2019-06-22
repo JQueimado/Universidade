@@ -1,5 +1,6 @@
 #ifndef _HASH_
-#define _HASH
+#define _HASH_
+
 #include <stdbool.h>
 #define MAX_SIZE 400009
 #define PRIME 399989
@@ -28,4 +29,5 @@ bool find_aeroporto(struct hashtable *ht,char *codigo);
 bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos);
 void print_hash(struct hashtable *ht);
 int find_aeroportopos(struct hashtable *ht,char *codigo);
+
 #endif

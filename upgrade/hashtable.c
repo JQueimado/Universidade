@@ -3,31 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "hashtable.h"
+
 #define MAX_SIZE 400009
 #define MAX_VOO 150
 
-
-
-struct tabela
+hashtable *newhash()
 {
-	char codigo[5]; // 5 bytes
-	int pos; // 4 bytes                                //20mil em memoria depois passa para disco(33.18 mb)
-	
-
-};
-
-//definir hashtable
-struct hashtable 
-{
-	struct tabela *arr[MAX_SIZE]; 
-};
-
-/*cria uma nova hashtable em memória
-*/
-
-struct hashtable *newhash()
-{
-	struct hashtable *new = malloc(sizeof(struct hashtable));
+	hashtable *new = malloc(sizeof(hashtable));
 	if(new == NULL)
 		return NULL;
 
@@ -40,7 +23,7 @@ struct hashtable *newhash()
 *faz free da hashtable
 *recebe como argumento um apontador para a hashtable e faz free de cada elemento
 */
-void hash_free(struct hashtable *ht)
+void hash_free(hashtable *ht)
 {
 	for(int i=0;i<MAX_SIZE;i++)
 		free(ht->arr[i]);
@@ -64,7 +47,7 @@ int hash_function_aeroportos(char *codigo)
 *retorna true se foi encontrado e false caso nao encontrado
 */
 
-bool find_aeroporto(struct hashtable *ht,char *codigo)
+bool find_aeroporto(hashtable *ht,char *codigo)
 {
 	/* hash search */
 	int hashIndex = hash_function_aeroportos(codigo);
@@ -95,7 +78,7 @@ bool find_aeroporto(struct hashtable *ht,char *codigo)
 insere um aeroporto na hashtable
 recebe uma hashtable e o codigo
 */
-bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos)
+bool inserir_aeroporto(hashtable *ht,char *codigo,int pos)
 {
 	int hashIndex = hash_function_aeroportos(codigo);
 
@@ -116,7 +99,7 @@ bool inserir_aeroporto(struct hashtable *ht,char *codigo,int pos)
 	return true;
 }
 
-int find_aeroportopos(struct hashtable *ht,char *codigo)
+int find_aeroportopos(hashtable *ht,char *codigo)
 {
 	/* hash search */
 	int hashIndex = hash_function_aeroportos(codigo);

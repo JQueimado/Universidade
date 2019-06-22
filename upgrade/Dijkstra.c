@@ -1,10 +1,23 @@
-#include "Dijkstra.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "Dijkstra.h"
+#include "basedados.h"
+#include "hashtable.h"
+
+#define CACHE 879  //perto do numero de paginas 
+
 /* Sorted Linked List */
+
+aeroportos* get_aeroporto( hashtable* hash, FILE* disk, char* code )
+{
+    aeroportos* temp = malloc(sizeof(aeroportos));
+    int pos = find_aeroporto(hash, code);
+    read(disk, temp, pos);
+    return temp;
+}
 
 struct SLL
 {
@@ -73,10 +86,11 @@ void kill(SLL* self)
 
 
 /* ALGO */
-aeroportos* dijkstra_rec( int fd, aeroportos* current, aeroportos* pai, char* final, SLL* helper )
+aeroportos* dijkstra_rec( hashtable* hash, FILE* disk, aeroportos* current, char* pai, char* final, SLL* helper )
 {
     current->vesitado = 1;
-    current->pai = pai;
+    if(pai != NULL)
+        strcpy( current->pai, pai );
 
     if( strcmp(current->codigo, final) == 0 )
     {
@@ -87,10 +101,13 @@ aeroportos* dijkstra_rec( int fd, aeroportos* current, aeroportos* pai, char* fi
     aeroportos* aero;
     
     /* precore as ligacoes */
+    /**************************/
+    //printf("");
+    /**************************/
     for( int i=0; i<current->ocupado; i++ )
     {
         voo = &current->voosDecorrer[i];
-        aero = read_aeroportos_at_hash(fd, voo->aero_chegada);
+        aero = get_aeroporto( hash, disk, voo->aero_chegada );
 
         /***************************/
 
@@ -116,24 +133,22 @@ aeroportos* dijkstra_rec( int fd, aeroportos* current, aeroportos* pai, char* fi
     aero = helper->node;
     helper = pop(helper);
 
-    return dijkstra_rec(fd, aero, current, final, helper);
+    return dijkstra_rec(hash, disk, aero, current->codigo , final, helper);
 }
 
 /* MAIN DIJKSTRA */
-aeroportos* dijkstra( int fd, char* init_code, char* final )
+aeroportos* dijkstra( hashtable* hash, FILE* disk, char* init_code, char* final )
 {
-    aeroportos* curr = read_aeroportos_at_hash( fd, init_code );
+    aeroportos* curr = get_aeroporto(hash, disk, init_code);
     curr->peso = 0;
 
     puts("test");
     /* run recursion */
-    aeroportos* caminho = dijkstra_rec( fd, curr, NULL, final, NULL );
+    aeroportos* caminho = dijkstra_rec( hash, disk, curr, NULL, final, NULL );
 
     return caminho;
 }
 /* ************************************************* AUX TEST ******************************************************* */
-
-#define CACHE 879  //perto do numero de paginas 
 
 FILE *disk;
 struct hashtable *hash;
@@ -141,6 +156,55 @@ int pos;
 int ae_size = 0;
 struct aeroportos buffer[CACHE];
 
+/* Funcoes auxiliares */
+int pesquisabinaria(char *codigo,char *hora_partida,struct voos arr[], int i, int j)
+{
+	
+	if (i > j)
+    	return -1;                  // vector vazio
+
+  int m = (i + j) / 2;          // posição central
+
+
+  if (strcmp(codigo,arr[m].aero_chegada) < 0) {
+    // Restringe a pesquisa ao intervalo i..m - 1
+    return pesquisabinaria(codigo,hora_partida,arr,i,m-1);
+	}
+  else if(strcmp(codigo,arr[m].aero_chegada) == 0 && strcmp(hora_partida,arr[m].hora_partida) < 0)
+    {
+    	return pesquisabinaria(codigo,hora_partida, arr, i, m - 1);
+	}
+	
+  if (strcmp(codigo,arr[m].aero_chegada) > 0)
+  {
+   return pesquisabinaria(codigo,hora_partida,arr, m + 1, j);
+   }	
+  	else if(strcmp(codigo,arr[m].aero_chegada) == 0 && strcmp(hora_partida,arr[m].hora_partida) > 0)
+ 	{ 
+    // Restringe a pesquisa ao intervalo m + 1..j
+    return pesquisabinaria(codigo,hora_partida,arr, m + 1, j);
+	}
+
+  return m;                     // n == v[m]
+}
+
+void arrayordenado(struct voos voo, int size, struct voos array[])	
+{
+	short i;
+	//Percorre o a partir do fim, se aeroporto na posição i for maior do que o aeroporto dado
+	//move i para i+1
+
+	i=size-1;
+	while(i>=0 && strcmp(array[i].aero_chegada,voo.aero_chegada) > 0)
+	{
+		array[i+1] = array[i];
+		i--;
+	}
+	//Coloca o aeroporto seguido no esapaço criado
+	array[i+1] = voo;
+	
+	
+}
 
 bool criar_aeroporto(char *codigo)
 {
@@ -280,6 +344,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 int main()
 {
     hash = newhash();
+    disk = openFile("test.cache");
 
     char* a1 = "LIS";
     char* a2 = "MAD";
@@ -292,29 +357,22 @@ int main()
     criar_aeroporto(a3);
     criar_aeroporto(a4);
 
-    aeroportos* ae1 = read_aeroportos_at_hash(a1);
-    //printf("%d\n",ae1.voosDecorrer[0]);
-    //aeroportos ae2 = read_aeroportos_at_hash(ficheiro, a2);
-    //aeroportos ae3 = read_aeroportos_at_hash(ficheiro, a3);
-    //aeroportos ae4 = read_aeroportos_at_hash(ficheiro, a4);
+    /*
+        LIS->BAR->ALG->MAD
+    */
 
-
-    criarVoo(a1, a2, "22:33", duracao);
     criarVoo(a1, a3, "22:33", duracao);
-    criarVoo(a1, a4, "22:33", duracao);
-    //printf("%d\n",ae1.voosDecorrer[0].duracao);
+    criarVoo(a3, a4, "22:33", duracao);
+    criarVoo(a4, a2, "22:33", duracao);
 
+    aeroportos* cona = dijkstra( hash, disk, a1, a2 );
 
-    ae1 = read_aeroportos_at_hash( a1 );
-    //ae2 = read_aeroportos_at_hash(ficheiro, a2);
-    //ae3 = read_aeroportos_at_hash(ficheiro, a3);
-    //ae4 = read_aeroportos_at_hash(ficheiro, a4);
+    int i = 6;
 
-    aeroportos* cona = dijkstra( ficheiro, a1, a2 );
-
-    while (cona->pai != NULL)
+    while (cona->pai != NULL && i > 0)
     {
+        i--;
         printf("aero: %s\n", cona->codigo );
-        cona = cona->pai;
+        cona = get_aeroporto(hash, disk, cona->pai);
     }
 }

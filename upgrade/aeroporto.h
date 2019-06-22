@@ -1,3 +1,6 @@
+#ifndef _aeroporto_
+#define _aeroporto_
+
 #include <stdbool.h>
 #define MAX_VOO 150
 
@@ -21,6 +24,8 @@ struct aeroportos
 	struct voos voosDecorrer[MAX_VOO]; 	// array de 150 struct's voos 150*10 = 1500 bytes 
 	unsigned char ocupado; 				// 1 byte
 	char vesitado; 						// 1 byte
-	struct aeroportos* pai;		// 4 bytes *pointer* 
+	char pai[5];						// 4 bytes *pointer* 
 } 
 typedef aeroportos;
+
+#endif
