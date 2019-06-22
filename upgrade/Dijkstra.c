@@ -14,7 +14,7 @@
 aeroportos *get_aeroporto(hashtable *hash, FILE *disk, char *code)
 {
 	aeroportos *temp = malloc(sizeof(aeroportos));
-	int pos = find_aeroporto(hash, code);
+	int pos = find_aeroportopos(hash, code);
 	read(disk, temp, pos);
 	return temp;
 }
@@ -87,11 +87,15 @@ void kill(SLL *self)
 /* ALGO */
 aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char *pai, char *final, SLL *helper)
 {
+	printf("cas");
 	current->vesitado = 1;
 	strcpy(current->pai, pai);
 
+	
+	printf("%s %s\n",current->codigo,final);
 	if (strcmp(current->codigo, final) == 0)
 	{
+		printf("cona");
 		return current;
 	}
 
@@ -101,6 +105,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 	/* precore as ligacoes */
 	/**************************/
 	printf("ocupado %d\n", current->ocupado);
+	
 	/**************************/
 	for (int i = 0; i < current->ocupado; i++)
 	{
@@ -130,7 +135,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	aero = helper->node;
 	helper = pop(helper);
-
+	printf("aqui");
 	return dijkstra_rec(hash, disk, aero, current->codigo, final, helper);
 }
 
@@ -138,8 +143,16 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 aeroportos *dijkstra(hashtable *hash, FILE *disk, char *init_code, char *final)
 {
 	aeroportos *curr = get_aeroporto(hash, disk, init_code);
+	/*struct aeroportos *curr = malloc(sizeof(struct aeroportos));
+	int pos1 = find_aeroportopos(hash, init_code);
+	read(disk, curr, pos1); //le para o aeroporto a informacao do disco
+*/
 	curr->peso = 0;
-
+	printf("%d\n",curr->ocupado);
+	for(int i=0;i<curr->ocupado;i++)
+	{
+		printf("%s\n",curr->voosDecorrer[i].aero_chegada);
+	}
 	puts("test");
 	/* run recursion */
 	aeroportos *caminho = dijkstra_rec(hash, disk, curr, "", final, NULL);
@@ -316,14 +329,14 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 
 	//printf("cona\n");
 
-	/*	for(int i=0;i<=aeroporto1->ocupado-1;i++)
-	{
-		printf("cod: %s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
-	}*/
+	
 	//guarda no disco
 	aeroporto1->ocupado += 1;
 	write(disk, aeroporto1, pos1);
-
+		for(int i=0;i<=aeroporto1->ocupado-1;i++)
+	{
+		printf("cod: %s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
+	}
 	free(aeroporto1);
 
 	return true;
