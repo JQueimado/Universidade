@@ -2,7 +2,8 @@
 #define Dijkstra
 
 #include <malloc.h>
-#include "hashtable_aeroporto.h"
+#include "hashtable.h"
+#include "aeroporto.h"
 
 #define INF -1
 

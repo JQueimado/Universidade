@@ -87,7 +87,7 @@ aeroportos* dijkstra_rec( int fd, aeroportos* current, aeroportos* pai, char* fi
     aeroportos* aero;
     
     /* precore as ligacoes */
-    for( int i=0; i<current->index_voo; i++ )
+    for( int i=0; i<current->ocupado; i++ )
     {
         voo = &current->voosDecorrer[i];
         aero = read_aeroportos_at_hash(fd, voo->aero_chegada);
@@ -131,39 +131,181 @@ aeroportos* dijkstra( int fd, char* init_code, char* final )
 
     return caminho;
 }
+/* ************************************************* AUX TEST ******************************************************* */
 
+#define CACHE 879  //perto do numero de paginas 
+
+FILE *disk;
+struct hashtable *hash;
+int pos;
+int ae_size = 0;
+struct aeroportos buffer[CACHE];
+
+
+bool criar_aeroporto(char *codigo)
+{
+	//int pos = hash_function_aeroportos(codigo);
+	//printf("%d\n",pos);
+	//Procura o aeroporto na hashtable
+	if(find_aeroporto(hash,codigo))
+	{
+		printf("+ aeroporto %s existe\n",codigo);
+		return true;
+	}
+
+	//Cria um aeroporto
+	struct aeroportos *novoaeroporto = malloc(sizeof(struct aeroportos));
+	if(novoaeroporto == NULL)
+		return false; // caso nao consiga alocar
+	strcpy(novoaeroporto->codigo,codigo);
+	novoaeroporto->ocupado=0;
+	//Guarda a informação no disco
+	if(inserir_aeroporto(hash,codigo,pos))
+	{
+
+		write(disk,novoaeroporto,pos);
+		//strcpy( buffer[ae_size].codigo, codigo );
+
+		//ae_size++;
+		//printf("%d\n",ae_size);
+		pos++;
+		
+		/*if(ae_size >= CACHE)
+			{
+				fseek(disk, pos*sizeof(struct aeroportos), SEEK_SET);
+				fwrite( &buffer ,sizeof(struct aeroportos), CACHE, disk);
+				ae_size = 0;
+				//printf("aqui\n");
+			}*/
+		printf("+ novo aeroporto %s\n",codigo);
+		free(novoaeroporto);
+		return true;
+	}
+
+	free(novoaeroporto);
+	return false;
+}
+
+bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, short duracao)
+{
+	//printf("partida:%s chegada: %s hora_partida: %s duracao: %d\n",codigo_partida,codigo_chegada,hora_partida,duracao);
+	//aeroportos* temp_partida;
+	//aeroportos temp_chegada;
+	//temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
+	
+	int pos1=find_aeroportopos(hash,codigo_partida);
+	
+	//printf("posicao em memoria: %d %d\n",pos1,pos2);
+	if(pos1==-1 )
+	{
+		printf("+ aeroporto %s desconhecido\n",codigo_partida);
+		return true;
+	}
+	int pos2=find_aeroportopos(hash,codigo_chegada);
+	if(pos1!=-1 && pos2==-1)
+	{
+
+		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
+		return true;
+	}
+	struct aeroportos *aeroporto1;
+	aeroporto1 = malloc(sizeof(struct aeroportos)); 
+	//int pos1=find_aeroportoid(hash,codigo_partida);
+	//printf("pos:%d\n",pos1);
+	//printf("aqui1");
+	if(aeroporto1 == NULL)
+	{
+		//printf("aqui2");
+		return false;
+	}
+
+	read(disk,aeroporto1,pos1); //le para o aeroporto a informacao do disco
+	//printf("aqui: %d\n",aeroporto1->ocupado);
+	/*for(int i=0;i<=aeroporto1->ocupado-1;i++)
+	{
+		printf("X:%s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
+	}*/
+	short i=pesquisabinaria(codigo_chegada,hora_partida,aeroporto1->voosDecorrer,0,aeroporto1->ocupado-1); 
+	//printf("Indice do array: %d\n",i);
+	if (i!=-1) //Encontrou voos iguais
+	{
+		printf("+ voo %s %s %s existe\n", codigo_partida, codigo_chegada, hora_partida);
+		/*for(int i=0;i<=aeroporto1->ocupado-1;i++)
+	{
+		printf("X:%s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
+	}*/
+		free(aeroporto1);
+		return true;
+		//printf("%d\n",i);
+		//printf("%s\n",aeroporto1->voosDecorrer[i].hora_partida);
+
+	}
+	//cria voo-
+	//strcpy(aeroporto1->voosDecorrer[0].aero_chegada,codigo_chegada); //RESOLVER BUG DE QUANDO CRIA DEVIA IMPRIMIR JÁ EXISTE
+	struct voos voo;
+	strcpy(voo.aero_chegada,codigo_chegada);
+	strcpy(voo.hora_partida,hora_partida);
+	voo.duracao = duracao;
+	//printf("VOO:%s %s %d\n",voo.aero_chegada,voo.hora_partida,voo.duracao);
+	
+	arrayordenado(voo, aeroporto1->ocupado, aeroporto1->voosDecorrer);
+	//aeroporto1->voosDecorrer[0] = voo;
+
+	//printf("cod: %s\n",aeroporto1->voosDecorrer[0].aero_chegada);
+
+	
+	
+	
+	
+	printf("+ novo voo %s %s %s\n",codigo_partida,codigo_chegada, hora_partida);
+
+	
+	//printf("cona\n");
+	
+
+	/*	for(int i=0;i<=aeroporto1->ocupado-1;i++)
+	{
+		printf("cod: %s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
+	}*/
+	//guarda no disco
+	aeroporto1->ocupado+=1;
+	write(disk, aeroporto1, pos1); 
+	
+	free(aeroporto1);
+
+	return true;
+}
 
 /****************************************************main*****************************************************************************************/
 int main()
 {
-    int ficheiro;
-	ficheiro = hashtable_aeroportos_open("ftest.cache");
-   
+    hash = newhash();
+
     char* a1 = "LIS";
     char* a2 = "MAD";
     char* a3 = "BAR";
     char* a4 = "ALG";
     short duracao = 33;
 
-    new_aeroporto(a1, ficheiro);
-    new_aeroporto(a2, ficheiro);
-    new_aeroporto(a3, ficheiro);
-    new_aeroporto(a4, ficheiro);
+    criar_aeroporto(a1);
+    criar_aeroporto(a2);
+    criar_aeroporto(a3);
+    criar_aeroporto(a4);
 
-    aeroportos* ae1 = read_aeroportos_at_hash(ficheiro, a1);
+    aeroportos* ae1 = read_aeroportos_at_hash(a1);
     //printf("%d\n",ae1.voosDecorrer[0]);
     //aeroportos ae2 = read_aeroportos_at_hash(ficheiro, a2);
     //aeroportos ae3 = read_aeroportos_at_hash(ficheiro, a3);
     //aeroportos ae4 = read_aeroportos_at_hash(ficheiro, a4);
 
 
-    add_voo(ficheiro, ae1, a2, 22, 33, duracao);
-    add_voo(ficheiro, ae1, a3, 22, 33, duracao);
-    add_voo(ficheiro, ae1, a4, 22, 33, duracao);
+    criarVoo(a1, a2, "22:33", duracao);
+    criarVoo(a1, a3, "22:33", duracao);
+    criarVoo(a1, a4, "22:33", duracao);
     //printf("%d\n",ae1.voosDecorrer[0].duracao);
 
 
-    ae1 = read_aeroportos_at_hash(ficheiro, a1);
+    ae1 = read_aeroportos_at_hash( a1 );
     //ae2 = read_aeroportos_at_hash(ficheiro, a2);
     //ae3 = read_aeroportos_at_hash(ficheiro, a3);
     //ae4 = read_aeroportos_at_hash(ficheiro, a4);

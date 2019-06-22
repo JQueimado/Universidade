@@ -26,9 +26,7 @@ int ae_size = 0;
 struct aeroportos buffer[CACHE];
 
 
-/*FUncoes auxiliares*/
-
-
+/* Funcoes auxiliares */
 int pesquisabinaria(char *codigo,char *hora_partida,struct voos arr[], int i, int j)
 {
 	
@@ -103,14 +101,6 @@ const unsigned long hash_code(const char *str) {
         hash = ((hash << 5) + hash) + c;
     return hash;
 }
-
-
-
-
-
-
-
-
 
 void dijkstra_rec(int pos,struct aeroportos *current, char* final , int* ret, int s )
 {
