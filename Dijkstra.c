@@ -83,11 +83,6 @@ aeroportos* dijkstra_rec( int fd, aeroportos* current, aeroportos* pai, char* fi
         return current;
     }
 
-    /***************************/
-
-    //
-
-    /***************************/
     voos* voo;
     aeroportos* aero;
     
@@ -96,6 +91,12 @@ aeroportos* dijkstra_rec( int fd, aeroportos* current, aeroportos* pai, char* fi
     {
         voo = &current->voosDecorrer[i];
         aero = read_aeroportos_at_hash(fd, voo->aero_chegada);
+
+        /***************************/
+
+        printf("conection:%s->%s\n",current->codigo, aero->codigo);
+
+        /***************************/
 
         /* ingnora se ja foi vesitado */
         if( aero ->vesitado )
