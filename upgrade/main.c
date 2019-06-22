@@ -8,6 +8,7 @@
 #include "basedados.h"
 
 #define MAX_SIZE 400009
+#define MAX_VIAGEM 150000
 #define CACHE 879  //perto do numero de paginas 
 #define MAX_VOO 150
 #define AI 5862127
@@ -102,13 +103,21 @@ const unsigned long hash_code(const char *str) {
         hash = ((hash << 5) + hash) + c;
     return hash;
 }
-/*
+
+
+
+
+
+
+
+
+
 void dijkstra_rec(int pos,struct aeroportos *current, char* final , int* ret, int s )
 {
     int min = -1;
     int i = 0;
     struct voos voo;
-    struct aeroportos* aero;
+    struct aeroportos *aero;
     
 
     read(disk,current,pos);
@@ -117,12 +126,12 @@ void dijkstra_rec(int pos,struct aeroportos *current, char* final , int* ret, in
     do
     {
         voo = current->voosDecorrer[i];
+        aero = malloc(sizeof(struct aeroportos));
         if( voo.tag != true )
         {
         	pos1=find_aeroportopos(hash,voo.aero_chegada);
-            read(disk,voo->aero_chegada,pos1);
-            aero=voo.aero_chegada;
-            int calc = voo->duracao + current->peso;
+        	read(disk,aero,pos1);
+            int calc = voo.duracao + current->peso;
 
             if( calc < aero->peso )
             {
@@ -138,11 +147,11 @@ void dijkstra_rec(int pos,struct aeroportos *current, char* final , int* ret, in
                 min = calc;
                 min_dis = aero->codigo;
             }
-            voo->tag = true;
+            voo.tag = true;
 
             if( strcmp(current->codigo, final) != 0 )
             {
-                dijkstra_rec(disk, aero, final, ret, s);
+                dijkstra_rec(pos1, aero, final, ret, s);
             }
         }
         i++;
@@ -150,6 +159,8 @@ void dijkstra_rec(int pos,struct aeroportos *current, char* final , int* ret, in
     while ( i < current->ocupado);
 
     ret[s] = find_aeroportopos(hash, min_dis);
+    read(disk,aero,ret[s]);
+    printf("%s\n",aero->codigo);
     s++;
 
 }
@@ -158,15 +169,16 @@ int* dijkstra(char* codigo_partida, char* codigo_chegada )
 {
 	struct aeroportos *aeroporto1;
 	int pos1=find_aeroportopos(hash,codigo_partida);
+	
+	aeroporto1=malloc(sizeof(struct aeroportos));
 	if(aeroporto1 == NULL)
 	{
 		return false;
 	}
-
-    aeroporto1= read(disk,aeroporto1,pos1);
+    read(disk,aeroporto1,pos1);
     aeroporto1->peso = 0;
 
-    int* ret = malloc( (sizeof(int*) * MAX_SIZE) );
+    int* ret = malloc( (sizeof(int*) * MAX_VIAGEM) );
     int size = 0;
 
      //run recursion 
@@ -177,7 +189,7 @@ int* dijkstra(char* codigo_partida, char* codigo_chegada )
 
     return ret;
 }
-*/
+
 bool criar_aeroporto(char *codigo)
 {
 	//int pos = hash_function_aeroportos(codigo);
@@ -229,21 +241,23 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 	//aeroportos* temp_partida;
 	//aeroportos temp_chegada;
 	//temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	struct aeroportos *aeroporto1;
+	
 	int pos1=find_aeroportopos(hash,codigo_partida);
-	int pos2=find_aeroportopos(hash,codigo_chegada);
+	
 	//printf("posicao em memoria: %d %d\n",pos1,pos2);
 	if(pos1==-1 )
 	{
 		printf("+ aeroporto %s desconhecido\n",codigo_partida);
 		return true;
 	}
+	int pos2=find_aeroportopos(hash,codigo_chegada);
 	if(pos1!=-1 && pos2==-1)
 	{
 
 		printf("+ aeroporto %s desconhecido\n",codigo_chegada);
 		return true;
 	}
+	struct aeroportos *aeroporto1;
 	aeroporto1 = malloc(sizeof(struct aeroportos)); 
 	//int pos1=find_aeroportoid(hash,codigo_partida);
 	//printf("pos:%d\n",pos1);
@@ -288,10 +302,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 
 	//printf("cod: %s\n",aeroporto1->voosDecorrer[0].aero_chegada);
 
-	/*for(int i=0;i<=aeroporto1->ocupado;i++)
-	{
-		printf("X:%s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
-	}*/
+	
 	
 	
 	
@@ -326,34 +337,41 @@ bool elimina_voo(char *codigo_partida,char *codigo_chegada,char *hora_partida)
 	int pos1,pos2;
 
 	pos1 = find_aeroportopos(hash,codigo_partida);
-	pos2 = find_aeroportopos(hash,codigo_chegada);
+	//printf("Pos1:%d\n",pos1);
 	//printf("Pos1: %d pos2: %d\n",pos1,pos2);
 	aeroporto1 = malloc(sizeof(struct aeroportos));
 	if(aeroporto1==NULL)
 		return false;
-	read(disk,aeroporto1,pos1);
-	short i=pesquisabinaria(codigo_chegada,hora_partida,aeroporto1->voosDecorrer,0,aeroporto1->ocupado-1);
+	
+	
 	//printf("Encontrou: %d\n",i); 
 	//tenta encontrar voo
 	if(pos1==-1)
 	{
-		//printf("coas");
+		
 		printf("+ voo %s %s %s inexistente\n",codigo_partida,codigo_chegada,hora_partida);
 		return true;
 	}
+	pos2 = find_aeroportopos(hash,codigo_chegada);
 	if(pos1 == -1 && pos2 == -1)
 	{
-		printf("+ voo %s %s %s inexistente\n",codigo_partida,codigo_chegada,hora_partida);
-		return true;
-	}
-	if(pos1!=-1 && i==-1)
-	{
-		//printf("cona\n");
+		
 		printf("+ voo %s %s %s inexistente\n",codigo_partida,codigo_chegada,hora_partida);
 		return true;
 	}
 	
+	read(disk,aeroporto1,pos1);
+	short i=pesquisabinaria(codigo_chegada,hora_partida,aeroporto1->voosDecorrer,0,aeroporto1->ocupado-1);
+	
 
+	if(pos1!=-1 && i==-1)
+	{
+		
+		printf("+ voo %s %s %s inexistente\n",codigo_partida,codigo_chegada,hora_partida);
+		return true;
+	}
+	
+	read(disk,aeroporto1,pos1);
 	//tenta remover do array
 	eliminaarray(codigo_chegada,hora_partida,aeroporto1->ocupado,aeroporto1->voosDecorrer);
 	
@@ -384,7 +402,8 @@ int main(void)
 
 	//Interface do utilizador
 	char modo[3];
-	char codigo_aero1[5];
+	
+	/*char codigo_aero1[5];
 	char codigo_aero2[5];
 	char hora_partida[6];
 	short duracao;
@@ -409,10 +428,10 @@ int main(void)
 			fclose(disk);
 			return 0;
 		default:
-			return 0;
+			
 	}
-}
-/*
+}*/
+
 	while(scanf("%s",modo) != EOF)
 	{
 		char codigo_aero1[5];
@@ -443,7 +462,7 @@ int main(void)
 			}
 			printf("+ novo aeroporto %s\n",codigo_aero1);	
 
-		}
+		*/}
 		else if ( strcmp(modo,"FI") == 0 )
 		{		
 			short duracao;	
@@ -458,7 +477,7 @@ int main(void)
 			elimina_voo(codigo_aero1,codigo_aero2,hora_partida);
 			
 		}
-		/*else if(strcmp(modo,"TR") == 0)
+		else if(strcmp(modo,"TR") == 0)
 		{
 			char hora_chegada[6];
 			scanf("%s %s %s",codigo_aero1,codigo_aero2,hora_chegada);
@@ -473,7 +492,7 @@ int main(void)
 				fwrite( &buffer ,sizeof(struct aeroportos), CACHE, disk);
 				
 				
-			}
+			}*/
 			hash_free(hash);
 			//fseek(disk,0, SEEK_END);
 			//fwrite( &buffer ,sizeof(struct aeroportos), ae_size, disk);
@@ -482,6 +501,6 @@ int main(void)
 			
 		}
 	}
-*/
+
 	return 0;
 }
