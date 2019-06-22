@@ -384,7 +384,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char *hora_partida, sh
 }
 
 /****************************************************main*****************************************************************************************/
-/*
+
 int main()
 {
 	hash = newhash();
@@ -419,8 +419,8 @@ int main()
 	}
 
 }
-*/
 
+/*
 int main()
 {
 	hash = newhash();
@@ -442,8 +442,8 @@ int main()
 	aeroportos* ae4 = get_aeroporto(hash, disk, a4);
 
 	ae1->peso = 10;
-	ae2->peso = 20;
-	ae3->peso = 30;
+	ae2->peso = 5;
+	ae3->peso = 7;
 	ae4->peso = 40;
 
 	SLL* head = add_sll(NULL, ae1);
@@ -452,22 +452,24 @@ int main()
 	head = add_sll(head, ae2);
 	printf("%s\n", head->node->codigo);
 
-	head = add_sll(head, ae2);
+	head = add_sll(head, ae3);
 	printf("%s\n", head->node->codigo);
 
-	head = add_sll(head, ae2);
+	head = add_sll(head, ae4);
 	printf("%s\n", head->node->codigo);
 
+	puts("pop");
 
+	printf("%s\n", head->node->codigo);
 	head = pop(head);
-	printf("%s\n", head->node->codigo);
 
-	head = pop(head);
 	printf("%s\n", head->node->codigo);
+	head = pop(head);
 
-	head = pop(head);
 	printf("%s\n", head->node->codigo);
+	head = pop(head);
 
-	head = pop(head);
 	printf("%s\n", head->node->codigo);
+	head = pop(head);
 }
+*/
