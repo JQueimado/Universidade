@@ -11,11 +11,23 @@
 
 /* Sorted Linked List */
 
-aeroportos *get_aeroporto(hashtable *hash, FILE *disk, char *code)
+aeroportos* get_aeroporto(hashtable *hash, FILE *disk, char *code)
 {
 	aeroportos *temp = malloc(sizeof(aeroportos));
 	int pos = find_aeroportopos(hash, code);
+	if( pos == -1 )
+	{
+		/****************************/
+		puts("not found");
+		/****************************/
+		return NULL;
+	}
 	read(disk, temp, pos);
+
+	/****************************/
+	printf("%s = %s\n", temp->codigo, code);
+	/****************************/
+
 	return temp;
 }
 
@@ -113,9 +125,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
 
 		/***************************/
-
 		printf("conection:%s->%s\n", current->codigo, aero->codigo);
-
 		/***************************/
 
 		/* ingnora se ja foi vesitado */
@@ -154,6 +164,7 @@ aeroportos *dijkstra(hashtable *hash, FILE *disk, char *init_code, char *final)
 		printf("%s\n",curr->voosDecorrer[i].aero_chegada);
 	}
 	puts("test");
+
 	/* run recursion */
 	aeroportos *caminho = dijkstra_rec(hash, disk, curr, "", final, NULL);
 
@@ -370,11 +381,12 @@ int main()
 	aeroportos *cona = dijkstra(hash, disk, a1, a2);
 
 	int i = 6;
-
-	while (strcmp("", cona->codigo) != 0 && i > 0)
+	
+	printf("aero: %s\n", cona->codigo);
+	while ( strcmp("", cona->pai) != 0 && i > 0)
 	{
 		i--;
 		printf("aero: %s\n", cona->codigo);
 		cona = get_aeroporto(hash, disk, cona->pai);
-	}
+	}	
 }
