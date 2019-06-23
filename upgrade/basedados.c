@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "aeroporto.h"
 #include "hashtable.h"
 /*
@@ -62,8 +64,30 @@ int loadDb(FILE *file, struct hashtable *hash)
 	}
 
 	return pos;
-	
-
 }
 
+aeroportos* get_aeroporto(hashtable *hash, FILE *disk, char *code)
+{
+	aeroportos *temp = malloc(sizeof(aeroportos));
+	int pos = find_aeroportopos(hash, code);
+	if( pos == -1 )
+	{
+		/****************************/
+		//puts("not found");
+		/****************************/
+		return NULL;
+	}
+	read(disk, temp, pos);
 
+	/****************************/
+	//printf("%s = %s\n", temp->codigo, code);
+	/****************************/
+
+	return temp;
+}
+
+void write_aero(hashtable* hash, FILE* disk, aeroportos* add)
+{
+	int pos = find_aeroportopos(hash, add->codigo);
+	write(disk, add, pos);
+}
