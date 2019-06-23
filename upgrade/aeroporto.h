@@ -7,8 +7,8 @@
 //definir voos
 struct voos {
 	char aero_chegada[5]; // 5 byte
-	char hora; // 1 byte //aqui pode ser melhorado
-	char min;
+	unsigned char hora; // 1 byte //aqui pode ser melhorado
+	unsigned char min;
 	//char minuto_partida; // 1 byte
 	short duracao; // 2 byte
 	//short ocupado; // 1 byte = 10 bytes

@@ -40,7 +40,11 @@ int pesquisabinaria(char *codigo,char hora_partida, char min_partida,struct voos
     // Restringe a pesquisa ao intervalo i..m - 1
     return pesquisabinaria(codigo,hora_partida, min_partida, arr,i,m-1);
 	}
-  else if(strcmp(codigo,arr[m].aero_chegada) == 0 && hora_partida < arr[m].hora && min_partida < arr[m].min )
+  else if(strcmp(codigo,arr[m].aero_chegada) == 0 && hora_partida < arr[m].hora)
+    {
+    	return pesquisabinaria(codigo,hora_partida, min_partida, arr, i, m - 1);
+	}
+	else if(strcmp(codigo,arr[m].aero_chegada) == 0 && hora_partida == arr[m].hora && min_partida < arr[m].min)
     {
     	return pesquisabinaria(codigo,hora_partida, min_partida, arr, i, m - 1);
 	}
@@ -49,7 +53,13 @@ int pesquisabinaria(char *codigo,char hora_partida, char min_partida,struct voos
   {
    return pesquisabinaria(codigo,hora_partida, min_partida, arr, m + 1, j);
    }	
-  	else if(strcmp(codigo,arr[m].aero_chegada) == 0 && hora_partida > arr[m].hora && min_partida > arr[m].min)
+  	else if(strcmp(codigo,arr[m].aero_chegada) == 0 && hora_partida > arr[m].hora)
+ 	{ 
+    // Restringe a pesquisa ao intervalo m + 1..j
+    return pesquisabinaria(codigo,hora_partida, min_partida, arr, m + 1, j);
+	}
+
+	else if(strcmp(codigo,arr[m].aero_chegada) == 0 && hora_partida == arr[m].hora && min_partida > arr[m].min)
  	{ 
     // Restringe a pesquisa ao intervalo m + 1..j
     return pesquisabinaria(codigo,hora_partida, min_partida, arr, m + 1, j);
@@ -67,15 +77,51 @@ void arrayordenado(struct voos voo, int size, struct voos array[])
 	//move i para i+1
 
 	i=size-1;
-	while(i>=0 && strcmp(array[i].aero_chegada,voo.aero_chegada) > 0)
+	while(i>=0 && strcmp(array[i].aero_chegada,voo.aero_chegada) > 0 && array[i].hora > voo.hora && array[i].min > voo.min)
 	{
 		array[i+1] = array[i];
 		i--;
 	}
 	//Coloca o aeroporto seguido no esapaço criado
 	array[i+1] = voo;
-	
-	
+
+}
+
+
+/*
+
+Comparador que e utilizado no quick sort
+
+*/
+
+int cmp(const void *p1, const void *p2)
+{
+	char *a1 = ((struct voos*)p1)->aero_chegada;
+	char *a2 = ((struct voos*)p2)->aero_chegada;
+	char b1 = ((struct voos*)p1)->hora;
+	char b2 = ((struct voos*)p2)->hora;
+	char c1  =((struct voos*)p1)->min;
+	char c2 = ((struct voos*)p2)->min;
+	if (strcmp(a1,a2) < 0) 
+		return -1;
+	else if (strcmp(a1,a2) > 0)
+			return 1;
+	else // se a1 for igual a a2 prossegue
+	{
+		if(b1<b2)
+			return -1;
+		else if( b1 > b2)
+			return 1;
+		else // b1==b2
+		{
+			if(c1<c2)
+				return -1;
+			else if( c1 > c2)
+				return 1;
+			else // c1==c2
+				return 0;
+			}
+		}
 }
 
 bool eliminaarray(char *codigo,char hora_partida, char min_partida, int size,struct voos array[])
@@ -155,7 +201,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	//aeroportos* temp_partida;
 	//aeroportos temp_chegada;
 	//temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	
+	printf("%02d %02d\n",hora,min);
 	int pos1=find_aeroportopos(hash,codigo_partida);
 	
 	//printf("posicao em memoria: %d %d\n",pos1,pos2);
@@ -184,15 +230,12 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 
 	read(disk,aeroporto1,pos1); //le para o aeroporto a informacao do disco
 	//printf("aqui: %d\n",aeroporto1->ocupado);
-	/*for(int i=0;i<=aeroporto1->ocupado-1;i++)
-	{
-		printf("X:%s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
-	}*/
+	
 	short i = pesquisabinaria(codigo_chegada, hora, min, aeroporto1->voosDecorrer, 0, aeroporto1->ocupado-1); 
-	//printf("Indice do array: %d\n",i);
+	printf("Indice do array: %d\n",i);
 	if (i!=-1) //Encontrou voos iguais
 	{
-		printf("+ voo %s %s %d:%d existe\n", codigo_partida, codigo_chegada, hora, min);
+		printf("+ voo %s %s %02d:%02d existe\n", codigo_partida, codigo_chegada, hora, min);
 		/*for(int i=0;i<=aeroporto1->ocupado-1;i++)
 	{
 		printf("X:%s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
@@ -213,20 +256,22 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	voo.duracao = duracao;
 	//printf("VOO:%s %s %d\n",voo.aero_chegada,voo.hora_partida,voo.duracao);
 	
-	arrayordenado(voo, aeroporto1->ocupado, aeroporto1->voosDecorrer);
+	//arrayordenado(voo, aeroporto1->ocupado, aeroporto1->voosDecorrer);
+	aeroporto1->voosDecorrer[aeroporto1->ocupado] = voo;
+	qsort(aeroporto1->voosDecorrer,aeroporto1->ocupado+1,sizeof(*aeroporto1->voosDecorrer),cmp); //quick sort do standart
 	//aeroporto1->voosDecorrer[0] = voo;
 
 	//printf("cod: %s\n",aeroporto1->voosDecorrer[0].aero_chegada);
 
-	printf("+ novo voo %s %s %d:%d\n",codigo_partida,codigo_chegada, hora, min);
+	printf("+ novo voo %s %s %02d:%02d\n",codigo_partida,codigo_chegada, hora, min);
 
 	//printf("cona\n");
 	
 
-	/*	for(int i=0;i<=aeroporto1->ocupado-1;i++)
+		for(int i=0;i<=aeroporto1->ocupado;i++)
 	{
-		printf("cod: %s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
-	}*/
+		printf("cod: %s %02d:%02d\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora,aeroporto1->voosDecorrer[i].min);
+	}
 	//guarda no disco
 	aeroporto1->ocupado+=1;
 	write(disk, aeroporto1, pos1); 
@@ -378,7 +423,8 @@ int main(void)
 		{		
 			short duracao;	
 			
-			scanf(" %s %s %hhi:%hhi %hd",codigo_aero1, codigo_aero2, &hora, &min, &duracao);
+			scanf(" %s %s %02hhu:%02hhu %hd",codigo_aero1, codigo_aero2, &hora, &min, &duracao);
+			printf("%02hhu:%02hhu\n",hora,min);
 			criarVoo(codigo_aero1, codigo_aero2, hora, min, duracao);
 		}
 		
