@@ -36,34 +36,32 @@ int pesquisabinaria(char *codigo, char hora_partida, char min_partida, struct vo
 
 	int m = (i + j) / 2; // posição central
 
-	if (strcmp(codigo, arr[m].aero_chegada) < 0)
+	if (hora_partida < arr[m].hora )
 	{
 		// Restringe a pesquisa ao intervalo i..m - 1
 		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
-	else if (strcmp(codigo, arr[m].aero_chegada) == 0 && hora_partida < arr[m].hora)
+	else if (hora_partida == arr[m].hora && min_partida < arr[m].min)
 	{
 		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
-	else if (strcmp(codigo, arr[m].aero_chegada) == 0 && hora_partida == arr[m].hora && min_partida < arr[m].min)
+	else if (hora_partida == arr[m].hora && min_partida == arr[m].min && strcmp(codigo, arr[m].aero_chegada) < 0)
 	{
 		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
 
-	if (strcmp(codigo, arr[m].aero_chegada) > 0)
+		if (hora_partida > arr[m].hora )
 	{
-		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m + 1, j);
+		// Restringe a pesquisa ao intervalo i..m - 1
+		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
-	else if (strcmp(codigo, arr[m].aero_chegada) == 0 && hora_partida > arr[m].hora)
+	else if (hora_partida == arr[m].hora && min_partida > arr[m].min)
 	{
-		// Restringe a pesquisa ao intervalo m + 1..j
-		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m + 1, j);
+		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
-
-	else if (strcmp(codigo, arr[m].aero_chegada) == 0 && hora_partida == arr[m].hora && min_partida > arr[m].min)
+	else if (hora_partida == arr[m].hora && min_partida == arr[m].min && strcmp(codigo, arr[m].aero_chegada) > 0)
 	{
-		// Restringe a pesquisa ao intervalo m + 1..j
-		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m + 1, j);
+		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
 
 	return m; // n == v[m]
@@ -100,21 +98,21 @@ int cmp(const void *p1, const void *p2)
 	char b2 = ((struct voos *)p2)->hora;
 	char c1 = ((struct voos *)p1)->min;
 	char c2 = ((struct voos *)p2)->min;
-	if (strcmp(a1, a2) < 0)
+	if (b1 < b2)
 		return -1;
-	else if (strcmp(a1, a2) > 0)
+	else if (b1 > b2)
 		return 1;
 	else // se a1 for igual a a2 prossegue
 	{
-		if (b1 < b2)
+		if (c1 < c2)
 			return -1;
-		else if (b1 > b2)
+		else if (c1 > c2)
 			return 1;
 		else // b1==b2
 		{
-			if (c1 < c2)
+			if (a1 < a2)
 				return -1;
-			else if (c1 > c2)
+			else if (a1 > a2)
 				return 1;
 			else // c1==c2
 				return 0;
