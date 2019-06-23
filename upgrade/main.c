@@ -305,14 +305,14 @@ bool elimina_voo(char *codigo_partida,char *codigo_chegada,char hora_partida, ch
 	if(pos1==-1)
 	{
 		
-		printf("+ voo %s %s %d:%d inexistente\n",codigo_partida,codigo_chegada,hora_partida, min_partida);
+		printf("+ voo %s %s %02d:%02d inexistente\n",codigo_partida,codigo_chegada,hora_partida, min_partida);
 		return true;
 	}
 	pos2 = find_aeroportopos(hash,codigo_chegada);
 	if(pos1 == -1 && pos2 == -1)
 	{
 		
-		printf("+ voo %s %s %d:%d inexistente\n",codigo_partida,codigo_chegada,hora_partida,min_partida);
+		printf("+ voo %s %s %02d:%02d inexistente\n",codigo_partida,codigo_chegada,hora_partida,min_partida);
 		return true;
 	}
 	
@@ -323,7 +323,7 @@ bool elimina_voo(char *codigo_partida,char *codigo_chegada,char hora_partida, ch
 	if(pos1!=-1 && i==-1)
 	{
 		
-		printf("+ voo %s %s %d:%d inexistente\n",codigo_partida,codigo_chegada,hora_partida, min_partida);
+		printf("+ voo %s %s %02d:%02d inexistente\n",codigo_partida,codigo_chegada,hora_partida, min_partida);
 		return true;
 	}
 	
@@ -331,7 +331,7 @@ bool elimina_voo(char *codigo_partida,char *codigo_chegada,char hora_partida, ch
 	//tenta remover do array
 	eliminaarray(codigo_chegada,hora_partida, min_partida, aeroporto1->ocupado,aeroporto1->voosDecorrer);
 	
-	printf("+ voo %s %s %d:%d removido\n",codigo_partida,codigo_chegada,hora_partida, min_partida);
+	printf("+ voo %s %s %02d:%02d removido\n",codigo_partida,codigo_chegada,hora_partida, min_partida);
 	aeroporto1->ocupado-=1;
 		//colocar no disco
 	write(disk,aeroporto1,pos1);
@@ -430,7 +430,7 @@ int main(void)
 		
 		else if( strcmp(modo,"FD") == 0 )
 		{
-			scanf("%s %s %hhi:%hhi", codigo_aero1, codigo_aero2, &hora, &min);
+			scanf("%s %s %02hhu:%02hhu", codigo_aero1, codigo_aero2, &hora, &min);
 			elimina_voo(codigo_aero1,codigo_aero2,hora, min);
 			
 		}
