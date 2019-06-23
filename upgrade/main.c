@@ -412,11 +412,18 @@ int main(void)
 			puts("De   Para Parte Chega");
 			puts("==== ==== ===== =====");
 
+			char temp_hora;
+			char temp_min;
+
 			while(strcmp(aero->pai, "") != 0)
 			{
 				aeroportos* pai = get_aeroporto(hash,disk, aero->pai);
 				voos* aux = &pai->voosDecorrer[(int) aero->vesitado];
-				printf("%4s %4s %02hhi:%0hhi %02d:%02d\n", pai->codigo, aux->aero_chegada, aux->hora, aux->min, 22,22);
+
+				translate_time(aux->duracao, &temp_hora, &temp_min);
+				add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
+
+				printf("%4s %4s %02hhi:%0hhi %02d:%02d\n", pai->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
 				aero = pai;
 			}
 

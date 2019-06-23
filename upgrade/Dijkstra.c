@@ -166,16 +166,3 @@ aeroportos *dijkstra(hashtable *hash, FILE *disk, char *init_code, char *final)
 
 	return caminho;
 }
-
-int main()
-{
-
-	char hora;
-	char min;
-
-	//add_times( 22, 30, 22, 0, &hora, &min);
-
-	translate_time(90, &hora, &min);
-
-	printf("%d:%d\n", hora, min);
-}
