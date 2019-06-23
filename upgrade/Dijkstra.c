@@ -146,6 +146,10 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 			helper = add_sll(helper, aero, current, i);
 		}
 	}
+	/* nao ha mais caminhos logo n e possivel chegrar ao destino */
+	if( helper == NULL )
+		return NULL;
+
 	aero = helper->node;
 	current = helper->current;
 	int fpos = helper->f_pos;
