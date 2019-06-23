@@ -9,6 +9,36 @@
 
 #define CACHE 879 //perto do numero de paginas
 
+/* AUX OP */
+
+void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
+{
+	*min_res = min1 + min2;
+	
+	while(*min_res >= 60)
+	{
+		hora1++;
+		*min_res -= 60;
+	}	
+
+	*hora_res = hora1 + hora2;
+
+	while(*hora_res >= 24)
+	{
+		*hora_res -= 24;
+	}
+}
+
+void translate_time( short mins, char* hora, char* min)
+{
+	while( mins >= 60 )
+	{
+		*hora += 1;
+		mins -= 60;
+	}
+	*min = mins;
+}
+
 /* Sorted Linked List */
 struct SLL
 {
@@ -135,4 +165,17 @@ aeroportos *dijkstra(hashtable *hash, FILE *disk, char *init_code, char *final)
 	aeroportos *caminho = dijkstra_rec(hash, disk, curr, "", -1, final, NULL);
 
 	return caminho;
+}
+
+int main()
+{
+
+	char hora;
+	char min;
+
+	//add_times( 22, 30, 22, 0, &hora, &min);
+
+	translate_time(90, &hora, &min);
+
+	printf("%d:%d\n", hora, min);
 }

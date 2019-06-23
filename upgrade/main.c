@@ -352,10 +352,10 @@ int main(void)
 		{
 			scanf(" %s",codigo_aero1);
 			criar_aeroporto(codigo_aero1);
-		//	printf("ae:%d\n",ae_size);
+			//printf("ae:%d\n",ae_size);
 
-
-/*			if(find_aeroporto(hash,codigo_aero1))
+			/*
+			if(find_aeroporto(hash,codigo_aero1))
 			{
 				printf("+ aeroporto %s existe\n",codigo_aero1);
 				continue;
@@ -372,7 +372,8 @@ int main(void)
 			}
 			printf("+ novo aeroporto %s\n",codigo_aero1);	
 
-		*/}
+		*/
+		}
 		else if ( strcmp(modo,"FI") == 0 )
 		{		
 			short duracao;	
