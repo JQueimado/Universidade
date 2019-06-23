@@ -70,7 +70,7 @@ int pesquisabinaria(char *codigo,char hora_partida, char min_partida,struct voos
 
 
 
-void arrayordenado(struct voos voo, int size, struct voos array[])	
+/*void arrayordenado(struct voos voo, int size, struct voos array[])	
 {
 	short i;
 	//Percorre o a partir do fim, se aeroporto na posição i for maior do que o aeroporto dado
@@ -85,7 +85,7 @@ void arrayordenado(struct voos voo, int size, struct voos array[])
 	//Coloca o aeroporto seguido no esapaço criado
 	array[i+1] = voo;
 
-}
+}*/
 
 
 /*
@@ -201,7 +201,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	//aeroportos* temp_partida;
 	//aeroportos temp_chegada;
 	//temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	printf("%02d %02d\n",hora,min);
+	//printf("%02d %02d\n",hora,min);
 	int pos1=find_aeroportopos(hash,codigo_partida);
 	
 	//printf("posicao em memoria: %d %d\n",pos1,pos2);
@@ -232,7 +232,7 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	//printf("aqui: %d\n",aeroporto1->ocupado);
 	
 	short i = pesquisabinaria(codigo_chegada, hora, min, aeroporto1->voosDecorrer, 0, aeroporto1->ocupado-1); 
-	printf("Indice do array: %d\n",i);
+	//printf("Indice do array: %d\n",i);
 	if (i!=-1) //Encontrou voos iguais
 	{
 		printf("+ voo %s %s %02d:%02d existe\n", codigo_partida, codigo_chegada, hora, min);
@@ -268,10 +268,10 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	//printf("cona\n");
 	
 
-		for(int i=0;i<=aeroporto1->ocupado;i++)
+	/*	for(int i=0;i<=aeroporto1->ocupado;i++)
 	{
 		printf("cod: %s %02d:%02d\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora,aeroporto1->voosDecorrer[i].min);
-	}
+	}*/
 	//guarda no disco
 	aeroporto1->ocupado+=1;
 	write(disk, aeroporto1, pos1); 
@@ -339,6 +339,48 @@ bool elimina_voo(char *codigo_partida,char *codigo_chegada,char hora_partida, ch
 	return true;
 	
 	
+}
+
+bool tempo_voo(char *codigo_partida,char *codigo_chegada,char hora_chegada,char min_chegada)
+{
+	int pos1=find_aeroportopos(hash,codigo_partida);
+	
+			//printf("posicao em memoria: %d %d\n",pos1,pos2);
+			if(pos1==-1 )
+			{
+				printf("+ aeroporto %s desconhecido\n",codigo_partida);
+				return true;
+				
+			}
+			int pos2=find_aeroportopos(hash,codigo_chegada);
+			if(pos1!=-1 && pos2==-1)
+			{
+
+				printf("+ aeroporto %s desconhecido\n",codigo_chegada);
+				return true;
+				
+			}			
+			
+			aeroportos* aero = dijkstra(hash, disk, codigo_partida, codigo_chegada);
+
+			puts("De   Para Parte Chega");
+			puts("==== ==== ===== =====");
+
+			char temp_hora;
+			char temp_min;
+
+			while(strcmp(aero->pai, "") != 0)
+			{
+				aeroportos* pai = get_aeroporto(hash,disk, aero->pai);
+				voos* aux = &pai->voosDecorrer[(int) aero->vesitado];
+
+				translate_time(aux->duracao, &temp_hora, &temp_min);
+				add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
+
+				printf("%4s %4s %02hhi:%0hhi %02d:%02d\n", pai->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
+				aero = pai;
+			}
+		return true;
 }
 
 int main(void)
@@ -424,7 +466,7 @@ int main(void)
 			short duracao;	
 			
 			scanf(" %s %s %02hhu:%02hhu %hd",codigo_aero1, codigo_aero2, &hora, &min, &duracao);
-			printf("%02hhu:%02hhu\n",hora,min);
+			//printf("%02hhu:%02hhu\n",hora,min);
 			criarVoo(codigo_aero1, codigo_aero2, hora, min, duracao);
 		}
 		
@@ -437,41 +479,8 @@ int main(void)
 		else if(strcmp(modo,"TR") == 0)
 		{
 			scanf("%s %s %hhi:%hhi",codigo_aero1,codigo_aero2, &hora, &min);
-			int pos1=find_aeroportopos(hash,codigo_aero1);
-	
-			//printf("posicao em memoria: %d %d\n",pos1,pos2);
-			if(pos1==-1 )
-			{
-				printf("+ aeroporto %s desconhecido\n",codigo_aero1);
-				
-			}
-			int pos2=find_aeroportopos(hash,codigo_aero2);
-			if(pos1!=-1 && pos2==-1)
-			{
-
-				printf("+ aeroporto %s desconhecido\n",codigo_aero2);
-				
-			}			
+			tempo_voo(codigo_aero1,codigo_aero2,hora,min);
 			
-			aeroportos* aero = dijkstra(hash, disk, codigo_aero1, codigo_aero2);
-
-			puts("De   Para Parte Chega");
-			puts("==== ==== ===== =====");
-
-			char temp_hora;
-			char temp_min;
-
-			while(strcmp(aero->pai, "") != 0)
-			{
-				aeroportos* pai = get_aeroporto(hash,disk, aero->pai);
-				voos* aux = &pai->voosDecorrer[(int) aero->vesitado];
-
-				translate_time(aux->duracao, &temp_hora, &temp_min);
-				add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
-
-				printf("%4s %4s %02hhi:%0hhi %02d:%02d\n", pai->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
-				aero = pai;
-			}
 
 		}
 		if(strcmp(modo,"X") == 0)
