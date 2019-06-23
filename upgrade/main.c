@@ -20,6 +20,7 @@
 #define INF -1
 #define FILE_DB "db.cache"
 
+/** GLOBAIS **/
 FILE *disk;
 struct hashtable *hash;
 int pos;
@@ -349,8 +350,8 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 		return true;
 	}
 
-	aeroportos *aero = dijkstra(hash, disk, codigo_partida, codigo_chegada);
-	if (aero == NULL)
+	Caminho *caminho = dijkstra(hash, disk, codigo_partida, codigo_chegada);
+	if (caminho == NULL)
 	{
 		printf("+ sem voos de %s para %s\n", codigo_partida, codigo_chegada);
 		return true;
@@ -360,16 +361,17 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 	puts("==== ==== ===== =====");
 	char temp_hora;
 	char temp_min;
-	while (strcmp(aero->pai, "") != 0)
+	
+	while (caminho != NULL)
 	{
-		aeroportos *pai = get_aeroporto(hash, disk, aero->pai);
-		voos *aux = &pai->voosDecorrer[(int)aero->vesitado];
+		aeroportos *current = caminho->aero;
+		voos *aux = &current->voosDecorrer[(int)caminho->voo];
 
 		translate_time(aux->duracao, &temp_hora, &temp_min);
 		add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
 
-		printf("%4s %4s %02hhi:%0hhi %02d:%02d\n", pai->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
-		aero = pai;
+		printf("%s  %s  %02hhi:%0hhi %02d:%02d\n", current->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
+		caminho = caminho->next;
 	}
 	return true;
 }
