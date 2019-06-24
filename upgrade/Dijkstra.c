@@ -187,9 +187,9 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	voos *voo;
 	aeroportos *aero;
-
-	/* precore as ligacoes */
-	for (int i = 0; i < current->ocupado; i++)
+	
+	int i;
+	for (i = 0; i < current->ocupado; i++)
 	{
 		voo = &current->voosDecorrer[i];
 
@@ -200,6 +200,18 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 			if( min_currente > voo->min )
 				continue;
 
+		break;
+	}
+
+	/* precore as ligacoes */
+	for (int p = 0; i < current->ocupado; i++)
+	{
+		int pos = i+p;
+		if( pos > current->ocupado)
+			pos -= (current->ocupado - 1);
+
+		voo = &current->voosDecorrer[pos];
+
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
 
 		/* ingnora se ja foi vesitado */
@@ -208,6 +220,9 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 		/* calculo do peso */
 		int t_espera = time_min(voo->hora, voo->min) - time_min(hora_currente, min_currente);
+		if( t_espera < 0)
+			t_espera = time_min(24, 0) - time_min(hora_currente, min_currente) + time_min(voo->hora, voo->min);
+
 		int calc = current->peso + voo->duracao + t_espera;
 
 		/* alteracao de peso */
