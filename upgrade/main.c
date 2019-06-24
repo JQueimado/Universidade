@@ -332,7 +332,9 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 		return true;
 	}
 
-	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada,min_chegada, codigo_chegada);
+	short duracao;
+
+	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada,min_chegada, codigo_chegada, &duracao);
 	if (caminho == NULL)
 	{
 		printf("+ sem voos de %s para %s\n", codigo_partida, codigo_chegada);
@@ -343,7 +345,6 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 	puts("==== ==== ===== =====");
 	char temp_hora;
 	char temp_min;
-	
 	while (caminho != NULL)
 	{
 		aeroportos *current = caminho->aero;
@@ -353,12 +354,13 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 		add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
 
 		printf("%s  %s  %02hhi:%0hhi %02d:%02d\n", current->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
-		
+
 		Caminho* temp = caminho;
 		caminho = caminho->next;
 		free(temp->aero);
 		free(temp);
 	}
+	printf("Tempo de viagem: %hd minutos\n", duracao);
 	return true;
 }
 

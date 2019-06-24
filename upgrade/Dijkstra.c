@@ -32,6 +32,20 @@ void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, cha
 	translate_time( time_min(hora1,min1) + time_min(hora2,min2), hora_res, min_res );
 }
 
+/* f_comp */
+char t_compare( char hora1, char min1, char hora2, char min2 )
+{
+	int t1_min = time_min(hora1, min1);
+	int t2_min = time_min(hora2, min2);
+
+	if( t1_min > t2_min )
+		return 1;
+	else if( t1_min < t2_min )
+		return -1;
+	else
+		return 0;
+}
+
 /* Sorted Linked List */
 struct SLL
 {
@@ -143,6 +157,7 @@ Caminho *build_caminho(aeroportos *aero, hashtable *hash, FILE *disk)
 		n_caminho->voo = voo;
 		n_caminho->aero = aero;
 		n_caminho->next = caminho;
+		n_caminho->dur = aero->peso;
 
 		caminho = n_caminho;
 		voo = aero->vesitado;
@@ -153,6 +168,7 @@ Caminho *build_caminho(aeroportos *aero, hashtable *hash, FILE *disk)
 	n_caminho->voo = voo;
 	n_caminho->aero = aero;
 	n_caminho->next = caminho;
+	n_caminho->dur = aero->peso;
 
 	caminho = n_caminho;
 
@@ -175,21 +191,7 @@ void reset_visistados(LL *visistados, hashtable *hash, FILE *disk)
 	}
 }
 
-/* f_comp */
-char t_compare( char hora1, char min1, char hora2, char min2 )
-{
-	int t1_min = time_min(hora1, min1);
-	int t2_min = time_min(hora2, min2);
-
-	if( t1_min > t2_min )
-		return 1;
-	else if( t1_min < t2_min )
-		return -1;
-	else
-		return 0;
-}
-
-aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char hora_currente, char min_currente, char *pai, char f_code, char *final, SLL **helper, LL **visitados)
+aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char hora_currente, char min_currente, char *pai, char f_code, char *final, SLL **helper, LL **visitados, short *retdur)
 {
 	current->vesitado = f_code;
 	strcpy(current->pai, pai);
@@ -197,6 +199,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	if (strcmp(current->codigo, final) == 0)
 	{
+		*retdur = current->peso;
 		return current;
 	}
 
@@ -278,11 +281,11 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 		*helper = pop( *helper);
 	}
 
-	return dijkstra_rec(hash, disk, aero, hora_currente, min_currente, current->codigo, fpos, final, helper, visitados);
+	return dijkstra_rec(hash, disk, aero, hora_currente, min_currente, current->codigo, fpos, final, helper, visitados, retdur);
 }
 
 /* MAIN DIJKSTRA */
-Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final)
+Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, short* retdur)
 {
 	aeroportos *curr = get_aeroporto(hash, disk, init_code);
 	LL *visitados = NULL;
@@ -294,7 +297,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 	curr->peso = 0;
 
 	/* run recursion */
-	aeroportos *result = dijkstra_rec(hash, disk, curr, hora_chegada, min_chegada, "", -1, final, pt_helper, pt_visitados);
+	aeroportos *result = dijkstra_rec(hash, disk, curr, hora_chegada, min_chegada, "", -1, final, pt_helper, pt_visitados, retdur);
 
 	/* reconstroi o caminho */
 	Caminho *caminho = build_caminho(result, hash, disk);
