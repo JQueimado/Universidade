@@ -121,6 +121,7 @@ void kill(SLL *self)
 	while (self != NULL)
 	{
 		free(self->node);
+		free(self->current);
 		self = pop(self);
 	}
 }
@@ -167,11 +168,13 @@ void reset_visistados(LL *visistados, hashtable *hash, FILE *disk)
 		visistados->node->vesitado = -2;
 		write_aero(hash, disk, visistados->node);
 		free(visistados->node);
+		LL* temp = visistados;
 		visistados = visistados->next;
+		free(temp);
 	}
 }
 
-aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char hora_currente, char min_currente, char *pai, char f_code, char *final, SLL *helper, LL **visitados)
+aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char hora_currente, char min_currente, char *pai, char f_code, char *final, SLL **helper, LL **visitados)
 {
 	current->vesitado = f_code;
 	strcpy(current->pai, pai);
@@ -244,12 +247,12 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 			aero->peso = calc;
 			write_aero(hash, disk, aero);
-			helper = add_sll(helper, aero, current, i, hora, min);
+			*helper = add_sll(*helper, aero, current, i, hora, min);
 			*visitados = add_ll( *visitados, aero);
 		}
 	}
 	/* nao ha mais caminhos logo n e possivel chegrar ao destino */
-	if (helper == NULL)
+	if (*helper == NULL)
 		return NULL;
 	
 	int fpos = -1;
@@ -258,15 +261,16 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	while( aero->vesitado >= -1 )
 	{
-		aero = helper->node;
+		SLL* h1 = *helper;
+		aero = h1->node;
 		
-		current = helper->current;
-		fpos = helper->f_pos;
+		current = h1->current;
+		fpos = h1->f_pos;
 
-		hora_currente = helper->hora;
-		min_currente = helper->min;
+		hora_currente = h1->hora;
+		min_currente = h1->min;
 
-		helper = pop(helper);
+		*helper = pop( *helper);
 	}
 
 	return dijkstra_rec(hash, disk, aero, hora_currente, min_currente, current->codigo, fpos, final, helper, visitados);
@@ -279,11 +283,12 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 	LL *visitados = NULL;
 	LL **pt_visitados = &visitados;
 	SLL *helper = NULL;
+	SLL **pt_helper = &helper;
 
 	curr->peso = 0;
 
 	/* run recursion */
-	aeroportos *result = dijkstra_rec(hash, disk, curr, hora_chegada, min_chegada, "", -1, final, helper, pt_visitados);
+	aeroportos *result = dijkstra_rec(hash, disk, curr, hora_chegada, min_chegada, "", -1, final, pt_helper, pt_visitados);
 
 	/* reconstroi o caminho */
 	Caminho *caminho = build_caminho(result, hash, disk);
@@ -292,7 +297,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 	reset_visistados(*pt_visitados, hash, disk);
 
 	/* liberta o helper */
-	kill(helper);
+	kill(*pt_helper);
 
 	return caminho;
 }
