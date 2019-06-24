@@ -202,15 +202,21 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 		break;
 	}
+	int pos;
+	if( i == 0 )
+		pos = current->ocupado;
+	else if( i == current->ocupado-1 )
+		pos = 0;
+	else
+		pos = i-1;
 
 	/* precore as ligacoes */
-	for (int p = 0; i < current->ocupado; i++)
+	for (int p = i; p != pos; p++)
 	{
-		int pos = i+p;
-		if( pos > current->ocupado)
-			pos -= (current->ocupado - 1);
+		if( p >= current->ocupado)
+			p = 0;
 
-		voo = &current->voosDecorrer[pos];
+		voo = &current->voosDecorrer[p];
 
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
 
