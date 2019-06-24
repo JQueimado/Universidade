@@ -32,12 +32,6 @@ void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, cha
 	translate_time( time_min(hora1,min1) + time_min(hora2,min2), hora_res, min_res );
 }
 
-void sub_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
-{
-	/* 1 sempre maior que 2 */
-	translate_time( time_min(hora1,min1) - time_min(hora2,min2), hora_res, min_res );
-}
-
 /* Sorted Linked List */
 struct SLL
 {
@@ -241,7 +235,8 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 			/*************************/
 			
 			/* adiciona duracao a tempo  */
-			add_times(hora_currente, min_currente, hora, min, &hora, &min);
+			
+			add_times(voo->hora, voo->min, hora, min, &hora, &min);
 			
 			/*************************/
 			//printf("add: %d, %d to %d, %d\n", hora, min, hora_currente, min_currente);
