@@ -19,6 +19,6 @@ void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, cha
 
 void translate_time( short mins, char* hora, char* min);
 
-Caminho* dijkstra( hashtable* hash, FILE* disk, char* init_code, char* final );
+Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final);
 
 #endif

@@ -10,26 +10,15 @@
 #define CACHE 879 //perto do numero de paginas
 
 /* AUX OP */
-void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
+
+short time_min(char hora, char min)
 {
-	*min_res = min1 + min2;
-
-	while (*min_res >= 60)
-	{
-		hora1++;
-		*min_res -= 60;
-	}
-
-	*hora_res = hora1 + hora2;
-
-	while (*hora_res >= 24)
-	{
-		*hora_res -= 24;
-	}
+	return (hora*60) + min;
 }
 
 void translate_time(short mins, char *hora, char *min)
 {
+	*hora = 0;
 	while (mins >= 60)
 	{
 		*hora += 1;
@@ -38,31 +27,55 @@ void translate_time(short mins, char *hora, char *min)
 	*min = mins;
 }
 
+void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
+{
+	translate_time( time_min(hora1,min1) + time_min(hora2,min2), hora_res, min_res );
+}
+
+void sub_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
+{
+	/* 1 sempre maior que 2 */
+	translate_time( time_min(hora1,min1) - time_min(hora2,min2), hora_res, min_res );
+}
+
 /* Sorted Linked List */
 struct SLL
 {
 	aeroportos *node;
 	aeroportos *current;
-	int f_pos;
+	char f_pos;
+	char hora;
+	char min;
 	struct SLL *next;
+
 } typedef SLL;
 
+struct LL
+{
+	aeroportos *node;
+	char f_pos;
+	struct LL *next;
+
+} typedef LL;
+
 /* Cria um no do tipo SLL */
-SLL *new_SLL(aeroportos *add, aeroportos *current, char f_pos)
+SLL *new_SLL(aeroportos *add, aeroportos *current, char f_pos, char hora, char min)
 {
 	SLL *temp = malloc(sizeof(SLL));
 	temp->next = NULL;
 	temp->node = add;
 	temp->current = current;
 	temp->f_pos = f_pos;
+	temp->hora = hora;
+	temp->min = min;
 	return temp;
 }
 
 /* Adiciona um no a SLL e retorna a Head */
-SLL *add_sll(SLL *self, aeroportos *add, aeroportos *current, char f_pos)
+SLL *add_sll(SLL *self, aeroportos *add, aeroportos *current, char f_pos, char hora, char min)
 {
 	/* Create Node */
-	SLL *n_node = new_SLL(add, current, f_pos);
+	SLL *n_node = new_SLL(add, current, f_pos, hora, min);
 
 	/* Se vazio adiciona ao Inicio */
 	if (self == NULL)
@@ -92,9 +105,10 @@ SLL *add_sll(SLL *self, aeroportos *add, aeroportos *current, char f_pos)
 	return head;
 }
 
-SLL *add_ll(SLL *self, aeroportos *add)
+LL *add_ll(LL *self, aeroportos *add)
 {
-	SLL *n_node = new_SLL(add, NULL, -1);
+	LL *n_node = malloc(sizeof(LL));
+	n_node->node = add;
 	n_node->next = self;
 	return n_node;
 }
@@ -151,7 +165,7 @@ Caminho *build_caminho(aeroportos *aero, hashtable *hash, FILE *disk)
 }
 
 /* ALGO */
-void reset_visistados(SLL *visistados, hashtable *hash, FILE *disk)
+void reset_visistados(LL *visistados, hashtable *hash, FILE *disk)
 {
 	while (visistados != NULL)
 	{
@@ -159,11 +173,11 @@ void reset_visistados(SLL *visistados, hashtable *hash, FILE *disk)
 		visistados->node->vesitado = -2;
 		write_aero(hash, disk, visistados->node);
 		free(visistados->node);
-		visistados = pop(visistados);
+		visistados = visistados->next;
 	}
 }
 
-aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char *pai, char f_code, char *final, SLL *helper, SLL **visitados)
+aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char hora_currente, char min_currente, char *pai, char f_code, char *final, SLL *helper, LL **visitados)
 {
 	current->vesitado = f_code;
 	strcpy(current->pai, pai);
@@ -171,6 +185,9 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	if (strcmp(current->codigo, final) == 0)
 	{
+		/*********************************** */
+		printf("max dur: %d\n", current->peso);
+		/*********************************** */
 		return current;
 	}
 
@@ -181,6 +198,19 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 	for (int i = 0; i < current->ocupado; i++)
 	{
 		voo = &current->voosDecorrer[i];
+
+		/****************************/
+		//printf("hora: %hhd, min:%hhd -> hora: %hhd, min:%hhd\n", hora_currente, min_currente, voo->hora, voo->min);
+		/****************************/
+		if( hora_currente > voo->hora)
+			continue;
+
+		if( hora_currente == voo->hora )
+			if( min_currente > voo->min )
+				continue;
+		/***************************/
+		//puts("passou");
+		/***************************/
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
 
 		/* ingnora se ja foi vesitado */
@@ -188,41 +218,77 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 			continue;
 
 		/* calculo do peso */
-		int calc = current->peso + voo->duracao;
+		int t_espera = time_min(voo->hora, voo->min) - time_min(hora_currente, min_currente);
+		/********************************/
+		//printf("tespera %d\n", t_espera);
+		/********************************/
+		int calc = current->peso + voo->duracao + t_espera;
 
 		/* alteracao de peso */
 		if (aero->peso == INF || aero->peso > calc)
 		{
+			char hora = 0; 
+			char min = 0;
+			
+			/*************************/
+			//printf("duracao: %d\n", voo->duracao);
+			/*************************/
+			
+			translate_time(voo->duracao, &hora, &min);
+			
+			/*************************/
+			//printf("traducao: %d, %d\n", hora, min);
+			/*************************/
+			
+			/* adiciona duracao a tempo  */
+			add_times(hora_currente, min_currente, hora, min, &hora, &min);
+			
+			/*************************/
+			//printf("add: %d, %d to %d, %d\n", hora, min, hora_currente, min_currente);
+			/*************************/
+
 			aero->peso = calc;
 			write_aero(hash, disk, aero);
-			helper = add_sll(helper, aero, current, i);
+			helper = add_sll(helper, aero, current, i, hora, min);
 			*visitados = add_ll( *visitados, aero);
 		}
 	}
 	/* nao ha mais caminhos logo n e possivel chegrar ao destino */
 	if (helper == NULL)
 		return NULL;
+	
+	int fpos = -1;
 
-	aero = helper->node;
-	current = helper->current;
-	int fpos = helper->f_pos;
-	helper = pop(helper);
+	aero = current;
 
-	return dijkstra_rec(hash, disk, aero, current->codigo, fpos, final, helper, visitados);
+	while( aero->vesitado >= -1 )
+	{
+		aero = helper->node;
+		
+		current = helper->current;
+		fpos = helper->f_pos;
+
+		hora_currente = helper->hora;
+		min_currente = helper->min;
+
+		helper = pop(helper);
+	}
+
+	return dijkstra_rec(hash, disk, aero, hora_currente, min_currente, current->codigo, fpos, final, helper, visitados);
 }
 
 /* MAIN DIJKSTRA */
-Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char *final)
+Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final)
 {
 	aeroportos *curr = get_aeroporto(hash, disk, init_code);
-	SLL *visitados = NULL;
-	SLL **pt_visitados = &visitados;
+	LL *visitados = NULL;
+	LL **pt_visitados = &visitados;
 	SLL *helper = NULL;
 
 	curr->peso = 0;
 
 	/* run recursion */
-	aeroportos *result = dijkstra_rec(hash, disk, curr, "", -1, final, helper, pt_visitados);
+	aeroportos *result = dijkstra_rec(hash, disk, curr, hora_chegada, min_chegada, "", -1, final, helper, pt_visitados);
 
 	/* reconstroi o caminho */
 	Caminho *caminho = build_caminho(result, hash, disk);

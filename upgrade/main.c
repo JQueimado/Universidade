@@ -348,7 +348,7 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 		return true;
 	}
 
-	Caminho *caminho = dijkstra(hash, disk, codigo_partida, codigo_chegada);
+	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada,min_chegada, codigo_chegada);
 	if (caminho == NULL)
 	{
 		printf("+ sem voos de %s para %s\n", codigo_partida, codigo_chegada);
