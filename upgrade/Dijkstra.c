@@ -120,7 +120,7 @@ void kill(SLL *self)
 {
 	while (self != NULL)
 	{
-		free(self->node);
+		//free(self->node);
 		free(self->current);
 		self = pop(self);
 	}
@@ -182,9 +182,6 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	if (strcmp(current->codigo, final) == 0)
 	{
-		/*********************************** */
-		//printf("max dur: %d\n", current->peso);
-		/*********************************** */
 		return current;
 	}
 
@@ -196,18 +193,13 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 	{
 		voo = &current->voosDecorrer[i];
 
-		/****************************/
-		//printf("hora: %hhd, min:%hhd -> hora: %hhd, min:%hhd\n", hora_currente, min_currente, voo->hora, voo->min);
-		/****************************/
 		if( hora_currente > voo->hora)
 			continue;
 
 		if( hora_currente == voo->hora )
 			if( min_currente > voo->min )
 				continue;
-		/***************************/
-		//puts("passou");
-		/***************************/
+
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
 
 		/* ingnora se ja foi vesitado */
@@ -216,9 +208,6 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 		/* calculo do peso */
 		int t_espera = time_min(voo->hora, voo->min) - time_min(hora_currente, min_currente);
-		/********************************/
-		//printf("tespera %d\n", t_espera);
-		/********************************/
 		int calc = current->peso + voo->duracao + t_espera;
 
 		/* alteracao de peso */
@@ -227,23 +216,10 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 			char hora = 0; 
 			char min = 0;
 			
-			/*************************/
-			//printf("duracao: %d\n", voo->duracao);
-			/*************************/
-			
 			translate_time(voo->duracao, &hora, &min);
 			
-			/*************************/
-			//printf("traducao: %d, %d\n", hora, min);
-			/*************************/
-			
 			/* adiciona duracao a tempo  */
-			
 			add_times(voo->hora, voo->min, hora, min, &hora, &min);
-			
-			/*************************/
-			//printf("add: %d, %d to %d, %d\n", hora, min, hora_currente, min_currente);
-			/*************************/
 
 			aero->peso = calc;
 			write_aero(hash, disk, aero);
