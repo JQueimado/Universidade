@@ -353,8 +353,8 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 		translate_time(aux->duracao, &temp_hora, &temp_min);
 		add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
 
-		printf("%s  %s  %02hhi:%0hhi %02d:%02d\n", current->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
-
+		printf("%s  %s  %02hhi:%02hhi %02d:%02d\n", current->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
+		
 		Caminho* temp = caminho;
 		caminho = caminho->next;
 		free(temp->aero);
