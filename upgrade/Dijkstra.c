@@ -306,7 +306,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 	reset_visistados(*pt_visitados, hash, disk);
 
 	/* liberta o helper */
-	kill(*pt_helper);
+	//kill(*pt_helper);
 
 	return caminho;
 }
