@@ -167,6 +167,7 @@ void reset_visistados(LL *visistados, hashtable *hash, FILE *disk)
 		visistados->node->peso = INF;
 		visistados->node->vesitado = -2;
 		write_aero(hash, disk, visistados->node);
+
 		free(visistados->node);
 		LL* temp = visistados;
 		visistados = visistados->next;
@@ -204,7 +205,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	/* precore as ligacoes */
 	/************************ */
-	printf("current %s -> %d\n", current->codigo, current->ocupado);
+	//printf("current %s -> %d\n", current->codigo, current->ocupado);
 	/************************ */
 	for (int i = 0; i < current->ocupado; i++)
 	{
@@ -213,7 +214,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
 
 		/************************* */
-		printf("%s -> %s\n", current->codigo, voo->aero_chegada);
+		//printf("%s -> %s: vist %d\n", current->codigo, voo->aero_chegada, aero->vesitado);
 		/************************* */
 
 		/* ingnora se ja foi vesitado */
@@ -229,7 +230,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 			t_espera = time_min(voo->hora, voo->min) - time_min(hora_currente, min_currente);
 
 		/************************* */
-		printf("%s -> %s : %d\n", current->codigo, voo->aero_chegada, t_espera);
+		//printf("%s -> %s : %d\n", current->codigo, voo->aero_chegada, t_espera);
 		/************************* */
 
 		int calc = current->peso + voo->duracao + t_espera;
@@ -247,8 +248,12 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 			aero->peso = calc;
 			write_aero(hash, disk, aero);
+			/********************************** */
+			//printf("add: %s\n", aero->codigo);
+			/********************************** */
+
 			*helper = add_sll(*helper, aero, current, i, hora, min);
-			*visitados = add_ll( *visitados, aero);
+			*visitados = add_ll( *visitados, aero );
 		}
 	}
 	/* nao ha mais caminhos logo n e possivel chegrar ao destino */
@@ -281,6 +286,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 {
 	aeroportos *curr = get_aeroporto(hash, disk, init_code);
 	LL *visitados = NULL;
+	visitados = add_ll( visitados, get_aeroporto(hash, disk, init_code));
 	LL **pt_visitados = &visitados;
 	SLL *helper = NULL;
 	SLL **pt_helper = &helper;
