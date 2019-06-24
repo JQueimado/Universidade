@@ -67,22 +67,6 @@ int pesquisabinaria(char *codigo, char hora_partida, char min_partida, struct vo
 	return m; // n == v[m]
 }
 
-/*void arrayordenado(struct voos voo, int size, struct voos array[])	
-{
-	short i;
-	//Percorre o a partir do fim, se aeroporto na posição i for maior do que o aeroporto dado
-	//move i para i+1
-
-	i=size-1;
-	while(i>=0 && strcmp(array[i].aero_chegada,voo.aero_chegada) > 0 && array[i].hora > voo.hora && array[i].min > voo.min)
-	{
-		array[i+1] = array[i];
-		i--;
-	}
-	//Coloca o aeroporto seguido no esapaço criado
-	array[i+1] = voo;
-
-}*/
 
 /*
 
@@ -262,10 +246,10 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 
 	//printf("cona\n");
 
-	/*	for(int i=0;i<=aeroporto1->ocupado;i++)
+		for(int i=0;i<=aeroporto1->ocupado;i++)
 	{
 		printf("cod: %s %02d:%02d\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora,aeroporto1->voosDecorrer[i].min);
-	}*/
+	}
 	//guarda no disco
 	aeroporto1->ocupado += 1;
 	write(disk, aeroporto1, pos1);
