@@ -174,6 +174,20 @@ void reset_visistados(LL *visistados, hashtable *hash, FILE *disk)
 	}
 }
 
+/* f_comp */
+char t_compare( char hora1, char min1, char hora2, char min2 )
+{
+	int t1_min = time_min(hora1, min1);
+	int t2_min = time_min(hora2, min2);
+
+	if( t1_min > t2_min )
+		return 1;
+	else if( t1_min < t2_min )
+		return -1;
+	else
+		return 0;
+}
+
 aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char hora_currente, char min_currente, char *pai, char f_code, char *final, SLL **helper, LL **visitados)
 {
 	current->vesitado = f_code;
@@ -187,47 +201,36 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 
 	voos *voo;
 	aeroportos *aero;
-	
-	int i;
-	for (i = 0; i < current->ocupado; i++)
+
+	/* precore as ligacoes */
+	/************************ */
+	printf("current %s -> %d\n", current->codigo, current->ocupado);
+	/************************ */
+	for (int i = 0; i < current->ocupado; i++)
 	{
 		voo = &current->voosDecorrer[i];
 
-		if( hora_currente > voo->hora)
-			continue;
-
-		if( hora_currente == voo->hora )
-			if( min_currente > voo->min )
-				continue;
-
-		break;
-	}
-	int pos;
-	if( i == 0 )
-		pos = current->ocupado;
-	else if( i == current->ocupado-1 )
-		pos = 0;
-	else
-		pos = i-1;
-
-	/* precore as ligacoes */
-	for (int p = i; p != pos; p++)
-	{
-		if( p >= current->ocupado)
-			p = 0;
-
-		voo = &current->voosDecorrer[p];
-
 		aero = get_aeroporto(hash, disk, voo->aero_chegada);
+
+		/************************* */
+		printf("%s -> %s\n", current->codigo, voo->aero_chegada);
+		/************************* */
 
 		/* ingnora se ja foi vesitado */
 		if (aero->vesitado >= -1)
 			continue;
 
 		/* calculo do peso */
-		int t_espera = time_min(voo->hora, voo->min) - time_min(hora_currente, min_currente);
-		if( t_espera < 0)
+		int t_espera;
+		
+		if( t_compare(voo->hora, voo->min, hora_currente, min_currente) == -1 )
 			t_espera = time_min(24, 0) - time_min(hora_currente, min_currente) + time_min(voo->hora, voo->min);
+		else
+			t_espera = time_min(voo->hora, voo->min) - time_min(hora_currente, min_currente);
+
+		/************************* */
+		printf("%s -> %s : %d\n", current->codigo, voo->aero_chegada, t_espera);
+		/************************* */
 
 		int calc = current->peso + voo->duracao + t_espera;
 
