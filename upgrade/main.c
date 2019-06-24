@@ -246,9 +246,9 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 
 	//printf("cona\n");
 
-		for(int i=0;i<=aeroporto1->ocupado;i++)
+	for(int i=0;i<=aeroporto1->ocupado;i++)
 	{
-		printf("cod: %s %02d:%02d\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora,aeroporto1->voosDecorrer[i].min);
+	//printf("cod: %s %02d:%02d\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora,aeroporto1->voosDecorrer[i].min);
 	}
 	//guarda no disco
 	aeroporto1->ocupado += 1;

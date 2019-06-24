@@ -183,7 +183,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, aeroportos *current, char 
 	if (strcmp(current->codigo, final) == 0)
 	{
 		/*********************************** */
-		printf("max dur: %d\n", current->peso);
+		//printf("max dur: %d\n", current->peso);
 		/*********************************** */
 		return current;
 	}
