@@ -254,7 +254,7 @@ aeroportos *dijkstra_rec(hashtable *hash, FILE *disk, char *current_name, char h
 			char min = 0;
 			
 			translate_time(voo->duracao, &hora, &min);
-			
+			printf("hora: %s min: %s\n",hora,min);
 			/* adiciona duracao a tempo  */
 			add_times(voo->hora, voo->min, hora, min, &hora, &min);
 
