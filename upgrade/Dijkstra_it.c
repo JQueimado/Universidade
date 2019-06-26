@@ -31,7 +31,12 @@ void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, cha
 	translate_time( time_min(hora1,min1) + time_min(hora2,min2), hora_res, min_res );
 }
 
-/* f_comp */
+/* 
+t_comp:
+    -1 se o 1º for menor que o 2º
+     1 se o 1º for maior que o 2º
+     0 se o 1º for igual ao 2º
+*/
 char t_compare( char hora1, char min1, char hora2, char min2 )
 {
 	int t1_min = time_min(hora1, min1);
@@ -43,21 +48,47 @@ char t_compare( char hora1, char min1, char hora2, char min2 )
 		return -1;
 	else
 		return 0;
+} 
+
+struct Node
+{
+    char name[6];
+    short peso;
+    struct Node *pai;
+    struct Node *next;
+}
+typedef Node;
+
+Node* add_Nodes( Node* head, char* codigo )
+{
+    Node * new_node = malloc(sizeof(Node));
+    strcpy(new_node->name, codigo);
+    new_node->pai = NULL;
+    new_node->peso = INF;
+
+    new_node->next = head;
+    return new_node;
+}
+
+Node* get_node( Node *head, char* codigo )
+{
+    while ( head != NULL && strcmp(codigo, head->name)!=0 )
+        head = head->next;
+
+    return head;
 }
 
 struct PQueue
 {
-    char codigo;
-    short peso;
+    struct Node* elem;
     struct PQueue* next;
 }
 typedef PQueue;
 
-PQueue* pqueue_add( PQueue* self, char* codigo, short peso )
+PQueue* pqueue_add( PQueue* self, Node* node )
 {
     PQueue* temp = malloc( sizeof( PQueue ) );
-    strcpy( temp->codigo, codigo);
-    temp->peso = peso;
+    temp->elem = node;
 
     if( self == NULL )
     {
@@ -65,24 +96,24 @@ PQueue* pqueue_add( PQueue* self, char* codigo, short peso )
         return temp;
     }
 
-    if( peso < self->peso )
+    if( node->peso < self->elem->peso )
     {
         temp->next = self;
         return temp;
     }
 
-    PQueue* temp = self;
+    PQueue* head = self;
 
     while (self->next != NULL)
     {
-        if( self->next->peso < peso )
+        if( self->next->elem->peso < node->peso )
             break;
         self = self->next;
     }
     
     temp->next = self->next;
     self->next = temp;
-    return temp;
+    return head;
 }
 
 PQueue *pop( PQueue *self)
@@ -92,38 +123,112 @@ PQueue *pop( PQueue *self)
     return head;
 }
 
+void free_pqueue( PQueue *heap )
+{
+    while (heap != NULL)
+    {
+        PQueue* temp = heap->next;
+        free(heap);
+        heap = temp;
+    }   
+}
+
+void free_node( Node* nodes )
+{
+    while (nodes != NULL)
+    {
+        Node* temp = nodes->next;
+        free(nodes);
+        nodes = temp;
+    }   
+}
+
+/* Caminho */
+Caminho *build( Node* node )
+{
+    Caminho* ret = NULL;
+
+    while ( node != NULL )
+    {
+        Caminho* n_caminho = malloc(sizeof(Caminho));
+        strcpy(n_caminho->aero, node->name);
+        n_caminho->next = ret;
+        ret = n_caminho;
+
+        node = node->pai;
+    }
+    return ret;
+} 
+
 /* MAIN DIJKSTRA */
 Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, short* retdur)
 {
-    aeroportos* current;
-    char* current_name;
-    PQueue* heap = pqueue_add(NULL, init_code, 0);
-
-    char hora;
-    char min;
+    aeroportos* current = NULL;
+    char current_name[6];
+    Node* pai = NULL;
+    Node* cur_node = NULL;
+    Node* nodes = add_Nodes(NULL, init_code);
+    PQueue* heap = pqueue_add(NULL, nodes);
 
     do
     {
         /* if heap is empty there are no more ways */
         if( heap == NULL )
+        {
+            cur_node = NULL;
             break;
+        }
 
-        /* cycle heap */
-        strcpy(current_name, heap->codigo);
-        short peso = heap->peso;
+        cur_node = heap->elem;
         heap = pop(heap);
 
+        cur_node->pai = pai;
+
+        if( strcmp( cur_node->name, final ) == 0 )
+        {
+            *retdur = cur_node->peso;
+            break;
+        }
+
+        /* cycle heap */
+        strcpy(current_name, cur_node->name);
+
         /* cycle */
-        free( current );
+        if( current != NULL )
+            free( current );
         current = get_aeroporto(hash, disk, current_name);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
             voos voo = current->voosDecorrer[i];
 
+            short calc_peso;
+            if( t_compare(hora_chegada, min_chegada, voo.hora, voo.min ) == -1 )
+                calc_peso = cur_node->peso + ( time_min(voo.hora, voo.min) - time_min(hora_chegada, min_chegada) );
+            else
+                calc_peso = cur_node->peso + ( time_min(24,0) - time_min(hora_chegada, min_chegada) + time_min(voo.hora, voo.min) );
 
+            Node* dest_node = get_node( nodes, voo.aero_chegada);
+            if( dest_node == NULL )
+            {
+                nodes = add_Nodes( nodes, voo.aero_chegada);
+                dest_node = nodes;
+            }
+            
+            if( dest_node->peso == INF || dest_node->peso < calc_peso )
+            {
+                dest_node->peso = calc_peso;
+                heap = pqueue_add( heap, dest_node);
+            }
         }
+        pai = cur_node;
     }
-    while( srtcmp( current_name, final ) != 0 );
+    while( 1 );
 
+    Caminho *n_caminho = build( cur_node );
+    
+    free_pqueue(heap);
+    free_node(nodes);
+
+    return n_caminho;
 }

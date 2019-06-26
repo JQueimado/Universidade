@@ -9,9 +9,7 @@
 
 struct Caminho
 {
-    aeroportos* aero;
-    char voo;
-    short dur;
+    char aero[6];
     struct Caminho* next;
 }
 typedef Caminho;

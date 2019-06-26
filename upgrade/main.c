@@ -345,20 +345,13 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 	puts("==== ==== ===== =====");
 	char temp_hora;
 	char temp_min;
-	while (caminho != NULL)
+	while (caminho->next != NULL)
 	{
-		aeroportos *current = caminho->aero;
-		voos *aux = &current->voosDecorrer[(int)caminho->voo];
 
-		translate_time(aux->duracao, &temp_hora, &temp_min);
-		add_times(aux->hora, aux->min, temp_hora, temp_min, &temp_hora, &temp_min);
-		printf("%-4s %-4s %02hhi:%02hhi %02hhi:%02hhi\n",current->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
-		//printf("%s %s %02hhi:%02hhi %02d:%02d\n", current->codigo, aux->aero_chegada, aux->hora, aux->min, temp_hora, temp_min);
-		
-		Caminho* temp = caminho;
+		printf("%-4s %-4s %02hhi:%02hhi %02hhi:%02hhi\n",caminho->aero, caminho->next->aero, 22,30,22,20);
+		Caminho *to_free = caminho;
 		caminho = caminho->next;
-		free(temp->aero);
-		free(temp);
+		free( to_free );
 	}
 	printf("Tempo de viagem: %hd minutos\n", duracao);
 	return true;
