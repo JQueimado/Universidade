@@ -186,7 +186,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 
         /* cycle heap */
         cur_node = heap->elem;
-        printf("ve voos de %d\n", cur_node->peso);
         heap = pop(heap);
 
         cur_node->visitado = true;
@@ -202,6 +201,8 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         if( current != NULL )
             free( current );
         current = get_aeroporto(hash, disk, cur_node->name);
+
+        printf("ve voos de %s\n", cur_node->name);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
@@ -244,6 +245,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     free_pqueue(heap);
     free_node(nodes);
     free( current );
-    
+
     return n_caminho;
 }
