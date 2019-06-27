@@ -22,6 +22,8 @@ void translate_time(short mins, char *hora, char *min)
 	{
 		*hora += 1;
 		mins -= 60;
+        if( *hora >=24 )
+            *hora = 0;
 	}
 	*min = mins;
 }
@@ -181,8 +183,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 
         cur_node = heap->elem;
         heap = pop(heap);
-
-        cur_node->pai = pai;
+        pai = cur_node->pai;
 
         if( strcmp( cur_node->name, final ) == 0 )
         {
@@ -202,11 +203,18 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         {
             voos voo = current->voosDecorrer[i];
 
-            short calc_peso;
-            if( t_compare(hora_chegada, min_chegada, voo.hora, voo.min ) == -1 )
-                calc_peso = cur_node->peso + ( time_min(voo.hora, voo.min) - time_min(hora_chegada, min_chegada) );
+            int t_espera;
+		
+            char hora;
+            char min;
+            translate_time(cur_node->peso, &hora, &min);
+
+            if( t_compare(voo.hora, voo.min, hora_chegada, min_chegada) == -1 )
+                t_espera = time_min(24, 0) - time_min(hora, min) + time_min(voo.hora, voo.min);
             else
-                calc_peso = cur_node->peso + ( time_min(24,0) - time_min(hora_chegada, min_chegada) + time_min(voo.hora, voo.min) );
+                t_espera = time_min(voo.hora, voo.min) - time_min(hora_chegada, min_chegada);
+
+            int calc_peso = current->peso + voo.duracao + t_espera;
 
             Node* dest_node = get_node( nodes, voo.aero_chegada);
             if( dest_node == NULL )
@@ -221,7 +229,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 heap = pqueue_add( heap, dest_node);
             }
         }
-        pai = cur_node;
     }
     while( 1 );
 
