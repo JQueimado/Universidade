@@ -54,13 +54,19 @@ char t_compare( char hora1, char min1, char hora2, char min2 )
 
 struct Node
 {
-    char name[6];
-    short peso;
-    bool visitado;
-    struct Node *pai;
-    struct Node *next;
+    char name[6];       //6 bytes
+    
+    short peso;         //2 bytes
+    bool visitado;      //1 byte
+    
+    char hora;          //1 byte
+    char min;           //1 byte
+    char dur;           //1 byte
+
+    struct Node *pai;   //4 bytes
+    struct Node *next;  //4 bytes
 }
-typedef Node;
+typedef Node;           //20 bytes = 5 paginas
 
 Node* add_Nodes( Node* head, char* codigo )
 {
@@ -84,10 +90,10 @@ Node* get_node( Node *head, char* codigo )
 
 struct PQueue
 {
-    struct Node* elem;
-    struct PQueue* next;
+    struct Node* elem;      //4 bytes
+    struct PQueue* next;    //4 bytes
 }
-typedef PQueue;
+typedef PQueue;             //8 bytes = 2 paginas
 
 PQueue* pqueue_add( PQueue* self, Node* node)
 {
@@ -155,11 +161,15 @@ Caminho *build( Node* node )
     while ( node != NULL )
     {
         Caminho* n_caminho = malloc(sizeof(Caminho));
+        
         strcpy(n_caminho->aero, node->name);
         n_caminho->next = ret;
-        n_caminho->peso = node->peso;
-        ret = n_caminho;
+        n_caminho->hora_partida = node->hora;
+        n_caminho->min_partida = node->min;
 
+        translate_time( ( time_min(node->hora,node->min) + node->dur ), &n_caminho->hora_chegada, &n_caminho->min_chegada );
+
+        ret = n_caminho;
         node = node->pai;
     }
     return ret;
@@ -189,7 +199,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         heap = pop(heap);
 
         cur_node->visitado = true;
-
+ 
         /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
         {
@@ -231,6 +241,9 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             {
                 dest_node->peso = calc_peso;
                 dest_node->pai = cur_node;
+                dest_node->hora = voo.hora;
+                dest_node->min = voo.min;
+                dest_node->dur = voo.duracao;
                 //printf("set %s pai de %s\n", cur_node->name, dest_node->name);
             }
 

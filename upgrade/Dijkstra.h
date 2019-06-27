@@ -9,11 +9,14 @@
 
 struct Caminho
 {
-    char aero[6];
-    short peso;
-    struct Caminho* next;
+    char aero[6];           //6 bytes
+    char hora_partida;      //1 byte
+    char min_partida;       //1 byte
+    char hora_chegada;      //1 byte
+    char min_chegada;       //1 byte
+    struct Caminho* next;   //4 bytes
 }
-typedef Caminho;
+typedef Caminho;            //14 bytes + 2bytes(alinhamento) = 4 paginas
 
 short time_min(char hora, char min);
 
