@@ -10,6 +10,7 @@
 struct Caminho
 {
     char aero[6];
+    short peso;
     struct Caminho* next;
 }
 typedef Caminho;

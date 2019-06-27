@@ -56,6 +56,7 @@ struct Node
 {
     char name[6];
     short peso;
+    bool visitado;
     struct Node *pai;
     struct Node *next;
 }
@@ -67,6 +68,7 @@ Node* add_Nodes( Node* head, char* codigo )
     strcpy(new_node->name, codigo);
     new_node->pai = NULL;
     new_node->peso = INF;
+    new_node->visitado = false;
 
     new_node->next = head;
     return new_node;
@@ -87,7 +89,7 @@ struct PQueue
 }
 typedef PQueue;
 
-PQueue* pqueue_add( PQueue* self, Node* node )
+PQueue* pqueue_add( PQueue* self, Node* node)
 {
     PQueue* temp = malloc( sizeof( PQueue ) );
     temp->elem = node;
@@ -155,6 +157,7 @@ Caminho *build( Node* node )
         Caminho* n_caminho = malloc(sizeof(Caminho));
         strcpy(n_caminho->aero, node->name);
         n_caminho->next = ret;
+        n_caminho->peso = node->peso;
         ret = n_caminho;
 
         node = node->pai;
@@ -166,11 +169,11 @@ Caminho *build( Node* node )
 Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, short* retdur)
 {
     aeroportos* current = NULL;
-    char current_name[6];
-    Node* pai = NULL;
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code);
+    nodes->peso = 0;
     PQueue* heap = pqueue_add(NULL, nodes);
+    int tcurrent = time_min(hora_chegada, min_chegada);
 
     do
     {
@@ -181,40 +184,35 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             break;
         }
 
+        /* cycle heap */
         cur_node = heap->elem;
+        printf("ve voos de %d\n", cur_node->peso);
         heap = pop(heap);
-        pai = cur_node->pai;
 
+        cur_node->visitado = true;
+
+        /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
         {
             *retdur = cur_node->peso;
             break;
         }
 
-        /* cycle heap */
-        strcpy(current_name, cur_node->name);
-
         /* cycle */
         if( current != NULL )
             free( current );
-        current = get_aeroporto(hash, disk, current_name);
+        current = get_aeroporto(hash, disk, cur_node->name);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
             voos voo = current->voosDecorrer[i];
 
             int t_espera;
-		
-            char hora;
-            char min;
-            translate_time(cur_node->peso, &hora, &min);
 
-            if( t_compare(voo.hora, voo.min, hora_chegada, min_chegada) == -1 )
-                t_espera = time_min(24, 0) - time_min(hora, min) + time_min(voo.hora, voo.min);
-            else
-                t_espera = time_min(voo.hora, voo.min) - time_min(hora_chegada, min_chegada);
+            short hora_do_voo = time_min(voo.hora, voo.min);
+            t_espera = hora_do_voo - tcurrent;
 
-            int calc_peso = current->peso + voo.duracao + t_espera;
+            int calc_peso = cur_node->peso + voo.duracao + t_espera;
 
             Node* dest_node = get_node( nodes, voo.aero_chegada);
             if( dest_node == NULL )
@@ -223,12 +221,21 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node = nodes;
             }
             
-            if( dest_node->peso == INF || dest_node->peso < calc_peso )
+            printf(" voo pra %s com peso %d\n", dest_node->name, calc_peso);
+
+            if( dest_node->visitado )
+                continue;
+            
+            if( dest_node->peso == INF || dest_node->peso > calc_peso )
             {
                 dest_node->peso = calc_peso;
-                heap = pqueue_add( heap, dest_node);
+                dest_node->pai = cur_node;
+                //printf("set %s pai de %s\n", cur_node->name, dest_node->name);
             }
+
+            heap = pqueue_add( heap, dest_node );
         }
+        puts("done");
     }
     while( 1 );
 
@@ -236,6 +243,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     
     free_pqueue(heap);
     free_node(nodes);
-
+    free( current );
+    
     return n_caminho;
 }
