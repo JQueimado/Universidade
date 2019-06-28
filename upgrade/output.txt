@@ -17,13 +17,59 @@
 + novo voo BCN CDG 06:15
 + aeroporto CDB desconhecido
 + novo voo CDG MAD 21:00
+voos de OPO
+ ve voo BCN 15:55, com peso 1060
+ ve voo LECO 19:0, com peso 1175
+ ve voo LIS 22:0, com peso 1375
+done.
+voos de BCN
+ ve voo CDG 6:15, com peso 1935
+ ve voo CDG 20:25, com peso 1340
+done.
+voos de CDG
+ ve voo MAD 21:0, com peso 2830
+done.
+voos de LIS
+ ve voo MAD 14:15, com peso 2370
+done.
+voos de MAD
+done.
+voos de MAD
+done.
+voos de CDG
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 OPO  LECO 19:00 19:35
 Tempo de viagem: 455 minutos
 + voo OPO LECO 19:00 removido
+voos de OPO
+ ve voo BCN 15:55, com peso 1060
+ ve voo LIS 22:0, com peso 1375
+done.
+voos de BCN
+ ve voo CDG 6:15, com peso 1935
+ ve voo CDG 20:25, com peso 1340
+done.
+voos de CDG
+ ve voo MAD 21:0, com peso 2830
+done.
+voos de LIS
+ ve voo MAD 14:15, com peso 2370
+done.
+voos de MAD
+done.
+voos de MAD
+done.
+voos de CDG
+done.
 + sem voos de OPO para LECO
 + novo voo OPO LECO 12:00
+voos de OPO
+ ve voo LECO 12:0, com peso 755
+ ve voo BCN 15:55, com peso 1060
+ ve voo LIS 22:0, com peso 1375
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 OPO  LECO 12:00 12:35
@@ -31,17 +77,88 @@ Tempo de viagem: 35 minutos
 + novo voo LIS PDL 11:40
 + novo voo PDL LIS 07:00
 + novo voo MAD BCN 17:00
+voos de FAO
+ ve voo LIS 6:0, com peso 405
+ ve voo LIS 18:5, com peso 1130
+done.
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo PDL 11:40, com peso 845
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo PDL 11:40, com peso 845
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de OPO
+ ve voo LECO 12:0, com peso 755
+ ve voo BCN 15:55, com peso 1060
+done.
+voos de LECO
+done.
+voos de BCN
+ ve voo CDG 6:15, com peso 1935
+ ve voo CDG 20:25, com peso 1340
+done.
+voos de MAD
+done.
+voos de CDG
+done.
+voos de CDG
+done.
+voos de MAD
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 FAO  LIS  06:00 06:45
 LIS  PDL  11:40 14:05
 Tempo de viagem: 485 minutos
+voos de LIS
+ ve voo OPO 10:0, com peso 2095
+ ve voo PDL 11:40, com peso 2285
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de OPO
+ ve voo LECO 12:0, com peso 2195
+ ve voo BCN 15:55, com peso 1060
+done.
+voos de BCN
+ ve voo CDG 6:15, com peso 1935
+ ve voo CDG 20:25, com peso 1340
+done.
+voos de CDG
+ ve voo MAD 21:0, com peso 2830
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 LIS  MAD  14:15 15:30
 Tempo de viagem: 90 minutos
 + voo OPO BCN 15:55 removido
 + novo voo OPO BCN 22:05
+voos de PDL
+ ve voo LIS 7:0, com peso 550
+done.
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de OPO
+ ve voo LECO 12:0, com peso 755
+ ve voo BCN 22:5, com peso 1430
+done.
+voos de LECO
+done.
+voos de BCN
+ ve voo CDG 6:15, com peso 1935
+ ve voo CDG 20:25, com peso 2780
+done.
+voos de MAD
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 PDL  LIS  07:00 09:10
@@ -49,12 +166,46 @@ LIS  OPO  10:00 10:55
 OPO  BCN  22:05 23:50
 BCN  CDG  06:15 08:15
 Tempo de viagem: 1515 minutos
+voos de CDG
+ ve voo MAD 21:0, com peso 1390
+done.
+voos de MAD
+ ve voo BCN 17:0, com peso 2540
+done.
+voos de BCN
+done.
 + sem voos de CDG para PDL
+voos de CDG
+ ve voo MAD 21:0, com peso 1390
+done.
+voos de MAD
+ ve voo BCN 17:0, com peso 2540
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 CDG  MAD  21:00 23:10
 MAD  BCN  17:00 18:20
 Tempo de viagem: 1280 minutos
+voos de FAO
+ ve voo LIS 6:0, com peso 405
+ ve voo LIS 18:5, com peso 1130
+done.
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo PDL 11:40, com peso 845
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo PDL 11:40, com peso 845
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de OPO
+ ve voo LECO 12:0, com peso 755
+ ve voo BCN 22:5, com peso 1430
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 FAO  LIS  06:00 06:45
@@ -62,21 +213,65 @@ LIS  OPO  10:00 10:55
 OPO  LECO 12:00 12:35
 Tempo de viagem: 395 minutos
 + novo voo MAD BCN 16:30
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo PDL 11:40, com peso 845
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
+voos de OPO
+ ve voo LECO 12:0, com peso 755
+ ve voo BCN 22:5, com peso 1430
+done.
+voos de LECO
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 LIS  OPO  10:00 10:55
 OPO  BCN  22:05 23:50
 Tempo de viagem: 830 minutos
+voos de LECO
+ ve voo OPO 6:0, com peso 400
+done.
+voos de OPO
+ ve voo LIS 22:0, com peso 1375
+ ve voo BCN 22:5, com peso 1430
+done.
+voos de LIS
+ ve voo PDL 11:40, com peso 2285
+ ve voo MAD 14:15, com peso 2370
+done.
+voos de BCN
+ ve voo CDG 6:15, com peso 1935
+ ve voo CDG 20:25, com peso 2780
+done.
+voos de CDG
+ ve voo MAD 21:0, com peso 1390
+done.
+voos de MAD
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 LECO OPO  06:00 06:40
 OPO  LIS  22:00 22:55
 LIS  PDL  11:40 14:05
 Tempo de viagem: 1925 minutos
+voos de LIS
+ ve voo OPO 10:0, com peso 655
+ ve voo PDL 11:40, com peso 845
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 LIS  OPO  10:00 10:55
 Tempo de viagem: 55 minutos
+voos de LIS
+ ve voo OPO 10:0, com peso 2095
+ ve voo PDL 11:40, com peso 2285
+ ve voo OPO 14:0, com peso 895
+ ve voo MAD 14:15, com peso 930
+done.
 De   Para Parte Chega
 ==== ==== ===== =====
 LIS  OPO  14:00 14:55
