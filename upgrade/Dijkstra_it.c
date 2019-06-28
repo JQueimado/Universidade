@@ -47,7 +47,7 @@ char t_compare( char hora1, char min1, char hora2, char min2 )
 
 struct Node
 {
-    char name[6];       //6 bytes
+    char name[5];       //5 bytes
     
     short peso;         //2 bytes
     bool visitado;      //1 byte
@@ -59,7 +59,7 @@ struct Node
     struct Node *pai;   //4 bytes
     struct Node *next;  //4 bytes
 }
-typedef Node;           //21 bytes + 3 bytes = 6 paginas
+typedef Node;           //20 bytes = 5 paginas
 
 Node* add_Nodes( Node* head, char* codigo )
 {
@@ -211,11 +211,24 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         {
             voos voo = current->voosDecorrer[i];
 
+            /* calculo do peso */
             short hora_do_voo = time_min(voo.hora, voo.min);
             
-            if( hora_do_voo < cur_node->peso )
-                hora_do_voo += time_min(24, 0);
-            
+            short t_curr = cur_node->peso;
+            while (t_curr >= time_min(24,0))
+                t_curr -= time_min(24, 0);
+
+            if( strcmp(cur_node->name, init_code) == 0 )
+            {
+                if( hora_do_voo < t_curr )
+                    hora_do_voo += time_min(24, 0);
+            }
+            else
+            {
+                if( hora_do_voo < t_curr + 30)
+                    hora_do_voo += time_min(24, 0);
+            }
+
             int calc_peso = voo.duracao + hora_do_voo;
 
             //printf("%d = %d + %d\n", calc_peso, voo.duracao, hora_do_voo );
