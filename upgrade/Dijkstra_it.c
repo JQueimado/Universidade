@@ -17,15 +17,8 @@ short time_min(char hora, char min)
 
 void translate_time(short mins, char *hora, char *min)
 {
-	*hora = 0;
-	while (mins >= 60)
-	{
-		*hora += 1;
-		mins -= 60;
-        if( *hora >=24 )
-            *hora = 0;
-	}
-	*min = mins;
+	*hora = mins / 60;
+	*min = mins % 60;
 }
 
 void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
@@ -61,12 +54,12 @@ struct Node
     
     char hora;          //1 byte
     char min;           //1 byte
-    char dur;           //1 byte
+    short dur;          //2 byte
 
     struct Node *pai;   //4 bytes
     struct Node *next;  //4 bytes
 }
-typedef Node;           //20 bytes = 5 paginas
+typedef Node;           //21 bytes + 3 bytes = 6 paginas
 
 Node* add_Nodes( Node* head, char* codigo )
 {
@@ -75,6 +68,9 @@ Node* add_Nodes( Node* head, char* codigo )
     new_node->pai = NULL;
     new_node->peso = INF;
     new_node->visitado = false;
+    new_node->hora = 0;
+    new_node->min = 0;
+    new_node->dur = 0;
 
     new_node->next = head;
     return new_node;
@@ -181,9 +177,8 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     aeroportos* current = NULL;
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code);
-    nodes->peso = 0;
+    nodes->peso = time_min(hora_chegada, min_chegada);
     PQueue* heap = pqueue_add(NULL, nodes);
-    int tcurrent = time_min(hora_chegada, min_chegada);
 
     do
     {
@@ -212,18 +207,13 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             free( current );
         current = get_aeroporto(hash, disk, cur_node->name);
 
-        printf("ve voos de %s\n", cur_node->name);
-
         for( int i = 0; i < current->ocupado; i++ )
         {
             voos voo = current->voosDecorrer[i];
 
-            int t_espera;
-
             short hora_do_voo = time_min(voo.hora, voo.min);
-            t_espera = hora_do_voo - tcurrent;
 
-            int calc_peso = cur_node->peso + voo.duracao + t_espera;
+            int calc_peso = voo.duracao + hora_do_voo;
 
             Node* dest_node = get_node( nodes, voo.aero_chegada);
             if( dest_node == NULL )
@@ -231,8 +221,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 nodes = add_Nodes( nodes, voo.aero_chegada);
                 dest_node = nodes;
             }
-            
-            printf(" voo pra %s com peso %d\n", dest_node->name, calc_peso);
 
             if( dest_node->visitado )
                 continue;
@@ -244,12 +232,10 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node->hora = voo.hora;
                 dest_node->min = voo.min;
                 dest_node->dur = voo.duracao;
-                //printf("set %s pai de %s\n", cur_node->name, dest_node->name);
             }
 
             heap = pqueue_add( heap, dest_node );
         }
-        puts("done");
     }
     while( 1 );
 
