@@ -192,8 +192,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         /* cycle heap */
         cur_node = heap->elem;
         heap = pop(heap);
-
-        cur_node->visitado = true;
  
         /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
@@ -201,6 +199,8 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             *retdur = cur_node->peso;
             break;
         }
+
+        cur_node->visitado = true;
 
         /* cycle */
         if( current != NULL )
@@ -212,8 +212,14 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             voos voo = current->voosDecorrer[i];
 
             short hora_do_voo = time_min(voo.hora, voo.min);
-
+            
+            if( hora_do_voo < cur_node->peso )
+                hora_do_voo += cur_node->peso;
+            
             int calc_peso = voo.duracao + hora_do_voo;
+
+            printf("%d = %d + %d\n", calc_peso, voo.duracao, hora_do_voo );
+            printf("%s %s %d\n", cur_node->name, voo.aero_chegada, calc_peso );
 
             Node* dest_node = get_node( nodes, voo.aero_chegada);
             if( dest_node == NULL )
