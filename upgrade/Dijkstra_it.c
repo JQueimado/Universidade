@@ -7,6 +7,8 @@
 #include "basedados.h"
 #include "hashtable.h"
 
+#define MAX_NODE 750001 /* numero de nos maximo = numero maximo de voos + 1 */
+
 /* AUX OP */
 unsigned short time_min(char hora, char min)
 {
@@ -19,23 +21,31 @@ void translate_time(unsigned short mins, char *hora, char *min)
 	*min = mins % 60;
 }
 
+/* Simple hash function */
+int hash_node( char* code )
+{
+    return code[0] + code[1] + code[2];
+}
+
+/* Struct for node */
 struct Node
 {
-    char name[5];       //5 bytes
+    char name[5];           //5 bytes
     
-    unsigned short peso;         //2 bytes
-    bool visitado;      //1 byte
+    unsigned short peso;    //2 bytes
+    bool visitado;          //1 byte
     
-    char hora;          //1 byte
-    char min;           //1 byte
-    unsigned short dur;          //2 byte
+    char hora;              //1 byte
+    char min;               //1 byte
+    unsigned short dur;     //2 byte
 
-    struct Node *pai;   //4 bytes
-    struct Node *next;  //4 bytes
+    struct Node *pai;       //4 bytes
+    struct Node *next;      //4 bytes
 }
-typedef Node;           //20 bytes = 5 paginas
+typedef Node;               //20 bytes = 5 paginas
 
-Node* add_Nodes( Node* head, char* codigo )
+/* Add node to system */
+Node* add_Nodes( Node* head, char* codigo, Node** hash )
 {
     Node * new_node = malloc(sizeof(Node));
     strcpy(new_node->name, codigo);
@@ -46,16 +56,41 @@ Node* add_Nodes( Node* head, char* codigo )
     new_node->min = 0;
     new_node->dur = 0;
 
+    /* Add to list */
     new_node->next = head;
+
+    int i = hash_node(codigo);
+    if( i >= MAX_NODE )
+        i -= MAX_NODE;
+    
+    /* Add to hash */
+    while ( hash[i] != NULL )
+    {
+        i ++;
+        if( i >= MAX_NODE )
+            i = 0;
+    }
+    
+    hash[i] = new_node;
+
+    /* return new list head */
     return new_node;
 }
 
-Node* get_node( Node *head, char* codigo )
+Node* get_node(char* codigo, Node** hash )
 {
-    while ( head != NULL && strcmp(codigo, head->name)!=0 )
-        head = head->next;
+    int i = hash_node(codigo);
+    int p = i;
+    while( hash[i] != NULL && strcmp(hash[i]->name, codigo ) != 0 )
+    {
+        i ++;
+        if( i >= MAX_NODE )
+            i = 0;
 
-    return head;
+        if( i == p )
+            return NULL;
+    }
+    return hash[i];
 }
 
 struct PQueue
@@ -148,9 +183,11 @@ Caminho *build( Node* node )
 /* MAIN DIJKSTRA */
 Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
 {
+    Node* hash_nos[MAX_NODE] = {NULL};
+
     aeroportos* current = NULL;
     Node* cur_node = NULL;
-    Node* nodes = add_Nodes(NULL, init_code);
+    Node* nodes = add_Nodes(NULL, init_code, hash_nos);
     nodes->peso = time_min(hora_chegada, min_chegada);
     PQueue* heap = pqueue_add(NULL, nodes);
 
@@ -188,10 +225,10 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             voos voo = current->voosDecorrer[i];
 
             /* get no */
-            Node* dest_node = get_node( nodes, voo.aero_chegada);
+            Node* dest_node = get_node( voo.aero_chegada, hash_nos );
             if( dest_node == NULL )
             {
-                nodes = add_Nodes( nodes, voo.aero_chegada);
+                nodes = add_Nodes( nodes, voo.aero_chegada, hash_nos);
                 dest_node = nodes;
             }
 
