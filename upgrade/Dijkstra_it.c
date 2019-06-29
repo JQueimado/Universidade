@@ -228,24 +228,19 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             /***********************insto esta td mal****************************** */
             short hora_do_voo = time_min(voo.hora, voo.min);
             
-            short t_curr = cur_node->peso;
-            while ( t_curr >= time_min(24,0) )
-                t_curr -= time_min(24, 0);
+            short helper;
 
-            if( strcmp(cur_node->name, init_code) == 0 )
-            {
-                if( hora_do_voo < t_curr )
-                    hora_do_voo += time_min(24, 0);
-            }
+            if( strcmp( init_code, cur_node->name ) == 0 )
+                helper = cur_node->peso;
             else
+                helper = cur_node->peso + 30;
+            
+            while ( hora_do_voo < helper )
             {
-                if( hora_do_voo < t_curr + 30)
-                    hora_do_voo += time_min(24, 0);
+                hora_do_voo += time_min(24,0);
             }
 
-            short t_espera = hora_do_voo - cur_node->peso;
-
-            int calc_peso = cur_node->peso + t_espera + voo.duracao;
+            int calc_peso = hora_do_voo + voo.duracao;
             /***********************insto esta td mal****************************** */
 
             //printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
