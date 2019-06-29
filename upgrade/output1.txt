@@ -1,0 +1,584 @@
++ novo aeroporto RSN
++ novo aeroporto RDQ
++ novo aeroporto LTD
++ novo aeroporto ITLO
++ novo aeroporto QTV
++ novo aeroporto TRQY
++ novo aeroporto EBLA
++ novo aeroporto EUP
++ novo aeroporto LTL
++ novo aeroporto GGJF
++ novo aeroporto ERFS
++ novo aeroporto YPER
++ novo aeroporto VSWB
++ novo aeroporto JDXQ
++ novo aeroporto PIL
++ novo aeroporto VRQ
++ novo aeroporto AWR
++ novo aeroporto PYY
++ novo aeroporto WQD
++ novo aeroporto ZAJX
++ novo aeroporto FIGC
++ novo aeroporto ERJ
++ novo aeroporto BEJ
++ novo aeroporto GLS
++ novo aeroporto RHZR
++ novo aeroporto VHIN
++ novo aeroporto KWH
++ novo aeroporto BQSG
++ novo aeroporto YZZ
++ novo aeroporto DGB
++ novo aeroporto OMRO
++ novo aeroporto YPXD
++ novo aeroporto GOAR
++ novo aeroporto WYM
++ novo aeroporto QGI
++ novo aeroporto EHIX
++ novo aeroporto OYL
++ novo aeroporto NCTS
++ novo aeroporto IPG
++ novo aeroporto WWXN
++ novo aeroporto WNI
++ novo aeroporto EQG
++ novo aeroporto XPVU
++ novo aeroporto MUP
++ novo aeroporto HSKA
++ novo aeroporto UPC
++ novo aeroporto NYP
++ novo aeroporto XLQ
++ novo aeroporto JWYR
++ novo aeroporto VHGP
++ novo aeroporto SJAJ
++ novo aeroporto UVTP
++ novo aeroporto KRI
++ novo aeroporto SZA
++ novo aeroporto NSWY
++ novo aeroporto UQZ
++ novo aeroporto ZGIM
++ novo aeroporto UOK
++ novo aeroporto JFGA
++ novo aeroporto QRFQ
++ novo aeroporto HTAU
++ novo aeroporto ZSCV
++ novo aeroporto BNL
++ novo aeroporto XXKR
++ novo aeroporto WEX
++ novo aeroporto MXZF
++ novo aeroporto GVC
++ novo aeroporto OEJC
++ novo aeroporto CGBO
++ novo aeroporto QATN
++ novo aeroporto FFLB
++ novo aeroporto IEYH
++ novo aeroporto DYMA
++ novo aeroporto BPG
++ novo aeroporto TOPB
++ novo aeroporto FKHF
++ novo aeroporto UFKB
++ novo aeroporto NNB
++ novo aeroporto LIX
++ novo aeroporto GLQ
++ novo aeroporto NHT
++ novo aeroporto CHR
++ novo aeroporto WWOD
++ novo aeroporto TZJ
++ novo aeroporto BZT
++ novo aeroporto CLD
++ novo aeroporto JTTW
++ novo aeroporto ELTX
++ novo aeroporto VEEZ
++ novo aeroporto DPH
++ novo aeroporto IGSO
++ novo aeroporto TKZW
++ novo aeroporto EHGZ
++ novo aeroporto DLG
++ novo aeroporto GFC
++ novo aeroporto JICN
++ novo aeroporto TUUE
++ novo aeroporto MUOG
++ novo aeroporto QEA
++ novo aeroporto NGU
++ novo aeroporto LFYC
++ novo aeroporto DEOP
++ novo aeroporto TCA
++ novo aeroporto ZWS
++ novo aeroporto LNS
++ novo aeroporto RIXT
++ novo aeroporto KCZB
++ novo aeroporto EZRR
++ novo aeroporto VHUK
++ novo aeroporto WMR
++ novo aeroporto KLZV
++ novo aeroporto SQS
++ novo aeroporto NNF
++ novo aeroporto REDH
++ novo aeroporto CYD
++ novo aeroporto ULBG
++ novo aeroporto AUIX
++ novo aeroporto UZC
++ novo aeroporto TUO
++ novo aeroporto KCDL
++ novo aeroporto JOAU
++ novo aeroporto BXAV
++ novo aeroporto EDC
++ novo aeroporto ZKD
++ novo aeroporto EEJB
++ novo aeroporto EPVO
++ novo aeroporto YZPH
++ novo aeroporto RDJ
++ novo aeroporto BJP
++ novo aeroporto NSPT
++ novo aeroporto CXZG
++ novo aeroporto IJBM
++ novo aeroporto WCUU
++ novo aeroporto JDU
++ novo aeroporto HDVK
++ novo aeroporto LXC
++ novo aeroporto PXXR
++ novo aeroporto YZY
++ novo aeroporto JZV
++ novo aeroporto XZG
++ novo aeroporto DQWZ
++ novo aeroporto FEOP
++ novo aeroporto ZPXF
++ novo aeroporto UEX
++ novo aeroporto CYRI
++ novo aeroporto QFTP
++ novo aeroporto AIIS
++ novo aeroporto KLK
++ novo aeroporto ZBJ
++ novo aeroporto QIGW
++ novo aeroporto KTWO
++ novo voo RSN RDQ 19:59
++ novo voo RDQ RSN 13:50
++ novo voo RSN LTD 01:54
++ novo voo LTD RSN 15:59
++ novo voo RSN ITLO 14:14
++ novo voo ITLO RSN 19:22
++ novo voo RSN QTV 17:00
++ novo voo QTV RSN 07:22
++ novo voo RSN TRQY 21:33
++ novo voo TRQY RSN 00:19
++ novo voo RSN EBLA 13:09
++ novo voo EBLA RSN 20:16
++ novo voo RSN EUP 23:29
++ novo voo EUP RSN 20:53
++ novo voo RSN LTL 05:53
++ novo voo LTL RSN 03:55
++ novo voo RSN GGJF 17:35
++ novo voo GGJF RSN 06:59
++ novo voo RSN ERFS 20:58
++ novo voo ERFS RSN 07:11
++ novo voo RSN YPER 09:47
++ novo voo YPER RSN 16:27
++ novo voo RSN VSWB 13:29
++ novo voo VSWB RSN 05:30
++ novo voo RSN JDXQ 05:31
++ novo voo JDXQ RSN 18:17
++ novo voo RSN PIL 07:47
++ novo voo PIL RSN 15:22
++ novo voo RSN VRQ 21:49
++ novo voo VRQ RSN 20:59
++ novo voo RSN AWR 11:41
++ novo voo AWR RSN 16:31
++ novo voo RSN PYY 14:31
++ novo voo PYY RSN 00:52
++ novo voo RSN WQD 07:50
++ novo voo WQD RSN 01:30
++ novo voo RSN ZAJX 23:03
++ novo voo ZAJX RSN 19:55
++ novo voo RSN FIGC 04:15
++ novo voo FIGC RSN 10:54
++ novo voo RSN ERJ 01:27
++ novo voo ERJ RSN 19:17
++ novo voo RSN BEJ 02:00
++ novo voo BEJ RSN 17:13
++ novo voo RSN GLS 23:27
++ novo voo GLS RSN 03:15
++ novo voo RSN RHZR 14:02
++ novo voo RHZR RSN 22:23
++ novo voo RSN VHIN 00:55
++ novo voo VHIN RSN 18:21
++ novo voo RSN KWH 11:48
++ novo voo KWH RSN 20:07
++ novo voo RSN BQSG 04:50
++ novo voo BQSG RSN 19:47
++ novo voo RSN YZZ 04:22
++ novo voo YZZ RSN 20:53
++ novo voo RSN DGB 09:19
++ novo voo DGB RSN 11:53
++ novo voo RSN OMRO 12:57
++ novo voo OMRO RSN 16:03
++ novo voo RSN YPXD 05:18
++ novo voo YPXD RSN 20:30
++ novo voo RSN GOAR 01:35
++ novo voo GOAR RSN 21:18
++ novo voo RSN WYM 00:02
++ novo voo WYM RSN 00:50
++ novo voo RSN QGI 04:11
++ novo voo QGI RSN 03:22
++ novo voo RSN EHIX 17:39
++ novo voo EHIX RSN 03:47
++ novo voo RSN OYL 10:29
++ novo voo OYL RSN 09:41
++ novo voo RSN NCTS 04:50
++ novo voo NCTS RSN 13:48
++ novo voo RSN IPG 05:39
++ novo voo IPG RSN 04:51
++ novo voo RSN WWXN 17:23
++ novo voo WWXN RSN 03:19
++ novo voo RSN WNI 16:00
++ novo voo WNI RSN 03:07
++ novo voo RSN EQG 21:09
++ novo voo EQG RSN 01:55
++ novo voo RSN XPVU 20:23
++ novo voo XPVU RSN 10:17
++ novo voo RSN MUP 06:22
++ novo voo MUP RSN 20:02
++ novo voo RSN HSKA 01:54
++ novo voo HSKA RSN 13:26
++ novo voo RSN UPC 11:30
++ novo voo UPC RSN 01:49
++ novo voo RSN NYP 06:34
++ novo voo NYP RSN 08:48
++ novo voo RSN XLQ 03:00
++ novo voo XLQ RSN 05:39
++ novo voo RSN JWYR 19:09
++ novo voo JWYR RSN 04:10
++ novo voo RSN VHGP 16:47
++ novo voo VHGP RSN 04:40
++ novo voo RSN SJAJ 02:27
++ novo voo SJAJ RSN 05:40
++ novo voo RSN UVTP 16:50
++ novo voo UVTP RSN 12:34
++ novo voo RSN KRI 06:18
++ novo voo KRI RSN 09:59
++ novo voo RSN SZA 21:19
++ novo voo SZA RSN 19:47
++ novo voo RSN NSWY 23:08
++ novo voo NSWY RSN 22:52
++ novo voo RSN UQZ 03:18
++ novo voo UQZ RSN 15:04
++ novo voo RSN ZGIM 04:32
++ novo voo ZGIM RSN 07:36
++ novo voo RSN UOK 19:27
++ novo voo UOK RSN 19:04
++ novo voo RSN JFGA 10:01
++ novo voo JFGA RSN 22:32
++ novo voo RSN QRFQ 16:32
++ novo voo QRFQ RSN 06:46
++ novo voo RSN HTAU 00:50
++ novo voo HTAU RSN 13:05
++ novo voo RSN ZSCV 06:13
++ novo voo ZSCV RSN 18:48
++ novo voo RSN BNL 17:31
++ novo voo BNL RSN 13:14
++ novo voo RSN XXKR 05:28
++ novo voo XXKR RSN 12:39
++ novo voo RSN WEX 23:32
++ novo voo WEX RSN 05:02
++ novo voo RSN MXZF 04:42
++ novo voo MXZF RSN 21:59
++ novo voo RSN GVC 14:34
++ novo voo GVC RSN 23:16
++ novo voo RSN OEJC 12:25
++ novo voo OEJC RSN 08:27
++ novo voo RSN CGBO 04:12
++ novo voo CGBO RSN 06:01
++ novo voo RSN QATN 17:24
++ novo voo QATN RSN 03:29
++ novo voo RSN FFLB 12:09
++ novo voo FFLB RSN 23:34
++ novo voo RSN IEYH 19:48
++ novo voo IEYH RSN 20:15
++ novo voo RSN DYMA 15:39
++ novo voo DYMA RSN 07:11
++ novo voo RSN BPG 22:56
++ novo voo BPG RSN 10:54
++ novo voo RSN TOPB 01:47
++ novo voo TOPB RSN 16:43
++ novo voo RSN FKHF 22:43
++ novo voo FKHF RSN 18:23
++ novo voo RSN UFKB 09:46
++ novo voo UFKB RSN 11:07
++ novo voo RSN NNB 04:05
++ novo voo NNB RSN 12:12
++ novo voo RSN LIX 09:26
++ novo voo LIX RSN 02:25
++ novo voo RSN GLQ 22:38
++ novo voo GLQ RSN 14:23
++ novo voo RSN NHT 13:49
++ novo voo NHT RSN 06:31
++ novo voo RSN CHR 08:28
++ novo voo CHR RSN 10:07
++ novo voo RSN WWOD 19:44
++ novo voo WWOD RSN 00:37
++ novo voo RSN TZJ 17:12
++ novo voo TZJ RSN 01:50
++ novo voo RSN BZT 11:36
++ novo voo BZT RSN 15:54
++ novo voo RSN CLD 16:05
++ novo voo CLD RSN 01:52
++ novo voo RSN JTTW 01:48
++ novo voo JTTW RSN 12:26
++ novo voo RSN ELTX 05:09
++ novo voo ELTX RSN 16:14
++ novo voo RSN VEEZ 18:59
++ novo voo VEEZ RSN 03:12
++ novo voo RSN DPH 13:49
++ novo voo DPH RSN 02:20
++ novo voo RSN IGSO 09:36
++ novo voo IGSO RSN 02:06
++ novo voo RSN TKZW 05:11
++ novo voo TKZW RSN 13:47
++ novo voo RSN EHGZ 13:45
++ novo voo EHGZ RSN 21:25
++ novo voo RSN DLG 10:35
++ novo voo DLG RSN 23:51
++ novo voo RSN GFC 14:28
++ novo voo GFC RSN 13:58
++ novo voo RSN JICN 18:44
++ novo voo JICN RSN 20:26
++ novo voo RSN TUUE 03:43
++ novo voo TUUE RSN 21:49
++ novo voo RSN MUOG 22:50
++ novo voo MUOG RSN 00:15
++ novo voo RSN QEA 04:49
++ novo voo QEA RSN 19:36
++ novo voo RSN NGU 14:18
++ novo voo NGU RSN 07:19
++ novo voo RSN LFYC 11:17
++ novo voo LFYC RSN 04:17
++ novo voo RSN DEOP 19:20
++ novo voo DEOP RSN 10:58
++ novo voo RSN TCA 04:36
++ novo voo TCA RSN 07:16
++ novo voo RSN ZWS 11:12
++ novo voo ZWS RSN 18:23
++ novo voo RSN LNS 09:01
++ novo voo LNS RSN 04:56
++ novo voo RSN RIXT 13:12
++ novo voo RIXT RSN 07:32
++ novo voo RSN KCZB 18:04
++ novo voo KCZB RSN 13:42
++ novo voo RSN EZRR 13:14
++ novo voo EZRR RSN 07:33
++ novo voo RSN VHUK 08:48
++ novo voo VHUK RSN 18:42
++ novo voo RSN WMR 12:43
++ novo voo WMR RSN 12:35
++ novo voo RSN KLZV 23:01
++ novo voo KLZV RSN 15:36
++ novo voo RSN SQS 17:54
++ novo voo SQS RSN 15:24
++ novo voo RSN NNF 07:53
++ novo voo NNF RSN 07:05
++ novo voo RSN REDH 15:13
++ novo voo REDH RSN 11:00
++ novo voo RSN CYD 22:00
++ novo voo CYD RSN 06:25
++ novo voo RSN ULBG 19:24
++ novo voo ULBG RSN 08:08
++ novo voo RSN AUIX 18:01
++ novo voo AUIX RSN 11:08
++ novo voo RSN UZC 23:27
++ novo voo UZC RSN 16:26
++ novo voo RSN TUO 23:21
++ novo voo TUO RSN 05:32
++ novo voo RSN KCDL 22:06
++ novo voo KCDL RSN 19:04
++ novo voo RSN JOAU 23:24
++ novo voo JOAU RSN 00:08
++ novo voo RSN BXAV 05:50
++ novo voo BXAV RSN 08:26
++ novo voo RSN EDC 20:29
++ novo voo EDC RSN 09:13
++ novo voo RSN ZKD 11:12
++ novo voo ZKD RSN 06:58
++ novo voo RSN EEJB 14:20
++ novo voo EEJB RSN 14:55
++ novo voo RSN EPVO 19:18
++ novo voo EPVO RSN 04:22
++ novo voo RSN YZPH 10:43
++ novo voo YZPH RSN 20:16
++ novo voo RSN RDJ 19:16
++ novo voo RDJ RSN 12:37
++ novo voo RSN BJP 00:16
++ novo voo BJP RSN 20:34
++ novo voo RSN NSPT 13:16
++ novo voo NSPT RSN 07:30
++ novo voo RSN CXZG 02:17
++ novo voo CXZG RSN 17:10
++ novo voo RSN IJBM 05:08
++ novo voo IJBM RSN 23:04
++ novo voo RSN WCUU 11:51
++ novo voo WCUU RSN 16:56
++ novo voo RSN JDU 14:36
++ novo voo JDU RSN 05:20
++ novo voo RSN HDVK 18:25
++ novo voo HDVK RSN 04:57
++ novo voo RSN LXC 13:51
++ novo voo LXC RSN 04:33
++ novo voo RSN PXXR 15:54
++ novo voo PXXR RSN 20:53
++ novo voo RSN YZY 17:32
++ novo voo YZY RSN 19:36
++ novo voo RSN JZV 17:54
++ novo voo JZV RSN 16:48
++ novo voo RSN XZG 21:06
++ novo voo XZG RSN 06:02
++ novo voo RSN DQWZ 02:39
++ novo voo DQWZ RSN 12:08
++ novo voo RSN FEOP 23:42
++ novo voo FEOP RSN 07:06
++ novo voo RSN ZPXF 23:28
++ novo voo ZPXF RSN 10:11
++ novo voo RSN UEX 06:20
++ novo voo UEX RSN 01:36
++ novo voo RSN CYRI 09:01
++ novo voo CYRI RSN 03:08
++ novo voo RSN QFTP 21:10
++ novo voo QFTP RSN 19:26
++ novo voo RSN AIIS 14:06
++ novo voo AIIS RSN 19:25
++ novo voo RSN KLK 07:04
++ novo voo KLK RSN 03:02
++ novo voo RSN ZBJ 01:00
++ novo voo ZBJ RSN 10:50
++ novo voo RSN QIGW 18:27
++ novo voo QIGW RSN 21:42
++ novo voo RSN KTWO 15:08
++ novo voo KTWO RSN 04:51
++ aeroporto JVN desconhecido
++ aeroporto NYB desconhecido
++ aeroporto CTRI desconhecido
++ aeroporto CTRI desconhecido
++ aeroporto NYB desconhecido
+De   Para Parte Chega
+==== ==== ===== =====
+KLZV RSN  15:36 15:08
+RSN  PXXR 15:54 21:48
+Tempo de viagem: 2171 minutos
++ aeroporto MJV desconhecido
+De   Para Parte Chega
+==== ==== ===== =====
+TRQY RSN  00:19 21:26
+RSN  TOPB 01:47 22:30
+Tempo de viagem: 2873 minutos
++ aeroporto CTRI desconhecido
+De   Para Parte Chega
+==== ==== ===== =====
+GLQ  RSN  14:23 10:57
+RSN  BZT  11:36 05:45
+Tempo de viagem: 3656 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+PIL  RSN  15:22 00:01
+RSN  GOAR 01:35 12:21
+Tempo de viagem: 1492 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+JOAU RSN  00:08 03:24
+RSN  UEX  06:20 11:31
+Tempo de viagem: 2080 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+RDQ  RSN  13:50 22:53
+RSN  MUP  06:22 13:02
+Tempo de viagem: 2561 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+WQD  RSN  01:30 20:57
+RSN  KLK  07:04 11:43
+Tempo de viagem: 2471 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+UPC  RSN  01:49 14:24
+RSN  DYMA 15:39 21:27
+Tempo de viagem: 1734 minutos
++ aeroporto JVN desconhecido
++ aeroporto JVN desconhecido
+De   Para Parte Chega
+==== ==== ===== =====
+ZBJ  RSN  10:50 11:19
+RSN  WMR  12:43 23:20
+Tempo de viagem: 1226 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+FIGC RSN  10:54 08:55
+RSN  LFYC 11:17 09:11
+Tempo de viagem: 3369 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+WWOD RSN  00:37 03:34
+RSN  ZSCV 06:13 20:07
+Tempo de viagem: 1998 minutos
++ voo RSN QTV 17:00 inexistente
++ voo RSN GGJF 17:35 inexistente
++ voo YPER RSN 16:27 removido
++ voo RSN ZAJX 23:03 inexistente
++ voo RSN ERJ 01:27 inexistente
++ voo RSN QTV 17:00 inexistente
+De   Para Parte Chega
+==== ==== ===== =====
+RIXT RSN  07:32 08:24
+RSN  NHT  13:49 18:19
+Tempo de viagem: 1007 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+KCZB RSN  13:42 03:13
+RSN  NNB  04:05 09:13
+Tempo de viagem: 2093 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+QIGW RSN  21:42 22:36
+RSN  ERJ  01:27 00:36
+Tempo de viagem: 2302 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+FIGC RSN  10:54 08:55
+RSN  GFC  14:28 19:41
+Tempo de viagem: 2767 minutos
++ aeroporto GLA desconhecido
+De   Para Parte Chega
+==== ==== ===== =====
+CYD  RSN  06:25 00:48
+RSN  ERJ  01:27 00:36
+Tempo de viagem: 2650 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+BXAV RSN  08:26 23:31
+RSN  WYM  00:02 23:21
+Tempo de viagem: 3255 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+JICN RSN  20:26 16:42
+RSN  EDC  20:29 15:51
+Tempo de viagem: 3924 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+CHR  RSN  10:07 15:15
+RSN  WWXN 17:23 18:38
+Tempo de viagem: 1835 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+UZC  RSN  16:26 06:29
+RSN  AWR  11:41 17:10
+Tempo de viagem: 2772 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+NNB  RSN  12:12 16:01
+RSN  QRFQ 16:32 01:39
+Tempo de viagem: 1559 minutos
++ aeroporto CTRI desconhecido
+De   Para Parte Chega
+==== ==== ===== =====
+QGI  RSN  03:22 05:26
+RSN  KRI  06:18 22:09
+Tempo de viagem: 2242 minutos
+De   Para Parte Chega
+==== ==== ===== =====
+BPG  RSN  10:54 23:35
+RSN  LIX  09:26 20:43
+Tempo de viagem: 3439 minutos
++ aeroporto EXUJ desconhecido

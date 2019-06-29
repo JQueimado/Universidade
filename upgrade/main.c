@@ -332,7 +332,7 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 
 	unsigned short duracao = 0;
 
-	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada,min_chegada, codigo_chegada, &duracao);
+	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada, min_chegada, codigo_chegada, &duracao);
 	if (caminho == NULL)
 	{
 		printf("+ sem voos de %s para %s\n", codigo_partida, codigo_chegada);
@@ -456,7 +456,8 @@ int main(void)
 		}
 		else if (strcmp(modo, "TR") == 0)
 		{
-			scanf("%s %s %hhi:%hhi", codigo_aero1, codigo_aero2, &hora, &min);
+			scanf("%s %s %hhu:%hhu", codigo_aero1, codigo_aero2, &hora, &min);
+
 			tempo_voo(codigo_aero1, codigo_aero2, hora, min);
 		}
 		if (strcmp(modo, "X") == 0)
