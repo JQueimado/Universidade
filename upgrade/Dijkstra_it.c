@@ -93,56 +93,50 @@ Node* get_node(char* codigo, Node** hash )
     return hash[i];
 }
 
-struct PQueue
+struct Heap_Node
 {
-    struct Node* elem;      //4 bytes
-    struct PQueue* next;    //4 bytes
-}
-typedef PQueue;             //8 bytes = 2 paginas
+    struct Node* elem;
 
-PQueue* pqueue_add( PQueue* self, Node* node)
+    struct Node* parent;     //4 bytes
+    struct Heap* left;      //4 bytes
+    struct Heap* right;     //4 bytes
+}
+typedef Heap_Node;               //12 bytes = 3 paginas
+
+struct Heap
 {
-    PQueue* temp = malloc( sizeof( PQueue ) );
+    Heap_Node* head;
+    Heap_Node* To_add;
+}
+typedef Heap;
+
+Heap* Heap_add( Heap* self, Node* node)
+{
+    Heap_Node* temp = malloc( sizeof( Heap ) );
     temp->elem = node;
+    Heap_Node* head = self->head;
 
-    if( self == NULL )
-    {
-        temp->next = NULL;
-        return temp;
-    }
+    if( self->To_add->left == NULL)
+        self->To_add->left = temp;
+    else
+        self->To_add->right = temp;
 
-    if( node->peso < self->elem->peso )
-    {
-        temp->next = self;
-        return temp;
-    }
+    while( head-> )
 
-    PQueue* head = self;
-
-    while (self->next != NULL)
-    {
-        if( self->next->elem->peso > node->peso )
-            break;
-        self = self->next;
-    }
-    
-    temp->next = self->next;
-    self->next = temp;
-    return head;
 }
 
-PQueue *pop( PQueue *self)
+Heap *pop( Heap *self)
 {
-    PQueue* head = self->next;
+    Heap* head = self->next;
     free( self );
     return head;
 }
 
-void free_pqueue( PQueue *heap )
+void free_Heap( Heap *heap )
 {
     while (heap != NULL)
     {
-        PQueue* temp = heap->next;
+        Heap* temp = heap->next;
         free(heap);
         heap = temp;
     }   
@@ -189,7 +183,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code, hash_nos);
     nodes->peso = time_min(hora_chegada, min_chegada);
-    PQueue* heap = pqueue_add(NULL, nodes);
+    Heap* heap = Heap_add(NULL, nodes);
 
     do
     {
@@ -264,7 +258,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node->dur = voo.duracao;
             }
 
-            heap = pqueue_add( heap, dest_node );
+            heap = Heap_add( heap, dest_node );
         }
         //puts("done.");
     }
@@ -272,7 +266,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 
     Caminho *n_caminho = build( cur_node );
     
-    free_pqueue(heap);
+    free_Heap(heap);
     free_node(nodes);
     free( current );
 
