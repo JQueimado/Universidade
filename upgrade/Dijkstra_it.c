@@ -97,9 +97,9 @@ struct Heap_Node
 {
     struct Node* elem;
 
-    struct Node* parent;     //4 bytes
-    struct Heap* left;      //4 bytes
-    struct Heap* right;     //4 bytes
+    struct Heap_Node* parent;    //4 bytes
+    struct Heap_Node* left;      //4 bytes
+    struct Heap_Node* right;     //4 bytes
 }
 typedef Heap_Node;               //12 bytes = 3 paginas
 
@@ -121,7 +121,12 @@ Heap* Heap_add( Heap* self, Node* node)
     else
         self->To_add->right = temp;
 
-    while( head-> )
+    temp->parent = t_compare;
+
+    while( temp->parent->elem->peso < temp->elem->peso )
+    {
+        
+    }
 
 }
 
