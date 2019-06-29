@@ -112,7 +112,7 @@ PQueue* pqueue_add( PQueue* self, Node* node)
 
     while (self->next != NULL)
     {
-        if( self->next->elem->peso < node->peso )
+        if( self->next->elem->peso > node->peso )
             break;
         self = self->next;
     }
@@ -207,7 +207,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             free( current );
         current = get_aeroporto(hash, disk, cur_node->name);
 
-        printf("voos de %s com peso %d\n",cur_node->name, cur_node->peso);
+        //printf("voos de %s com peso %d\n",cur_node->name, cur_node->peso);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
@@ -248,7 +248,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             int calc_peso = cur_node->peso + t_espera + voo.duracao;
             /***********************insto esta td mal****************************** */
 
-            printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
+            //printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
             
             /* Avaliacao do peso do no */
             if( dest_node->peso == INF || dest_node->peso > calc_peso )
@@ -262,7 +262,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 
             heap = pqueue_add( heap, dest_node );
         }
-        puts("done.");
+        //puts("done.");
     }
     while( 1 );
 
