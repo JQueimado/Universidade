@@ -238,6 +238,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     free_pqueue(heap);
     free_node(nodes);
     free( current );
-
+    
     return n_caminho;
 }
