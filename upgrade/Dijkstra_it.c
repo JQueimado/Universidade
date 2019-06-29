@@ -10,51 +10,27 @@
 #define CACHE 879 //perto do numero de paginas
 
 /* AUX OP */
-short time_min(char hora, char min)
+unsigned short time_min(char hora, char min)
 {
 	return (hora*60) + min;
 }
 
-void translate_time(short mins, char *hora, char *min)
+void translate_time(unsigned short mins, char *hora, char *min)
 {
-	*hora = mins / 60;
+	*hora = (mins / 60) % 24;
 	*min = mins % 60;
 }
-
-void add_times(char hora1, char min1, char hora2, char min2, char *hora_res, char *min_res)
-{
-	translate_time( time_min(hora1,min1) + time_min(hora2,min2), hora_res, min_res );
-}
-
-/* 
-t_comp:
-    -1 se o 1º for menor que o 2º
-     1 se o 1º for maior que o 2º
-     0 se o 1º for igual ao 2º
-*/
-char t_compare( char hora1, char min1, char hora2, char min2 )
-{
-	int t1_min = time_min(hora1, min1);
-	int t2_min = time_min(hora2, min2);
-
-	if( t1_min > t2_min )
-		return 1;
-	else if( t1_min < t2_min )
-		return -1;
-	else
-		return 0;
-} 
 
 struct Node
 {
     char name[5];       //5 bytes
     
-    short peso;         //2 bytes
+    unsigned short peso;         //2 bytes
     bool visitado;      //1 byte
     
     char hora;          //1 byte
     char min;           //1 byte
-    short dur;          //2 byte
+    unsigned short dur;          //2 byte
 
     struct Node *pai;   //4 bytes
     struct Node *next;  //4 bytes
@@ -172,7 +148,7 @@ Caminho *build( Node* node )
 } 
 
 /* MAIN DIJKSTRA */
-Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, short* retdur)
+Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
 {
     aeroportos* current = NULL;
     Node* cur_node = NULL;
@@ -196,7 +172,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
         {
-            *retdur = cur_node->peso;
+            *retdur = cur_node->peso - time_min(hora_chegada, min_chegada);
             break;
         }
 
@@ -226,9 +202,9 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
 
             /* calculo do peso */
             /***********************insto esta td mal****************************** */
-            short hora_do_voo = time_min(voo.hora, voo.min);
+            unsigned short hora_do_voo = time_min(voo.hora, voo.min);
             
-            short helper;
+            unsigned short helper;
 
             if( strcmp( init_code, cur_node->name ) == 0 )
                 helper = cur_node->peso;

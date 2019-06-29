@@ -330,7 +330,7 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 		return true;
 	}
 
-	short duracao = 0;
+	unsigned short duracao = 0;
 
 	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada,min_chegada, codigo_chegada, &duracao);
 	if (caminho == NULL)
@@ -358,7 +358,7 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 
 	free( caminho );
 
-	printf("Tempo de viagem: %hd minutos\n", duracao - time_min(hora_chegada, min_chegada));
+	printf("Tempo de viagem: %hu minutos\n", duracao );
 	return true;
 }
 
