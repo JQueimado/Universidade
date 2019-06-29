@@ -7,8 +7,6 @@
 #include "basedados.h"
 #include "hashtable.h"
 
-#define CACHE 879 //perto do numero de paginas
-
 /* AUX OP */
 unsigned short time_min(char hora, char min)
 {
@@ -201,7 +199,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 continue;
 
             /* calculo do peso */
-            /***********************insto esta td mal****************************** */
             unsigned short hora_do_voo = time_min(voo.hora, voo.min);
             
             unsigned short helper;
@@ -217,7 +214,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             }
 
             int calc_peso = hora_do_voo + voo.duracao;
-            /***********************insto esta td mal****************************** */
 
             //printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
             
