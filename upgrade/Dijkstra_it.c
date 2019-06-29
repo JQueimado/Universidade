@@ -207,7 +207,7 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             free( current );
         current = get_aeroporto(hash, disk, cur_node->name);
 
-        printf("voos de %s\n",current->codigo);
+        printf("voos de %s com peso %d\n",cur_node->name, cur_node->peso);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
@@ -225,10 +225,11 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 continue;
 
             /* calculo do peso */
+            /***********************insto esta td mal****************************** */
             short hora_do_voo = time_min(voo.hora, voo.min);
             
             short t_curr = cur_node->peso;
-            while (t_curr >= time_min(24,0))
+            while ( t_curr >= time_min(24,0) )
                 t_curr -= time_min(24, 0);
 
             if( strcmp(cur_node->name, init_code) == 0 )
@@ -242,13 +243,12 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                     hora_do_voo += time_min(24, 0);
             }
 
-            int calc_peso = voo.duracao + hora_do_voo;
+            short t_espera = hora_do_voo - cur_node->peso;
+
+            int calc_peso = cur_node->peso + t_espera + voo.duracao;
+            /***********************insto esta td mal****************************** */
 
             printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
-
-
-            //printf("%d = %d + %d\n", calc_peso, voo.duracao, hora_do_voo );
-            //printf("%s %s %d\n", cur_node->name, voo.aero_chegada, calc_peso );
             
             /* Avaliacao do peso do no */
             if( dest_node->peso == INF || dest_node->peso > calc_peso )
