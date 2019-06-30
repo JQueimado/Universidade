@@ -8,7 +8,7 @@
 #include "basedados.h"
 #include "Dijkstra.h"
 
-#define MAX_SIZE 400009
+#define MAX_SIZE 20477
 #define MAX_VIAGEM 150000
 #define CACHE 879 //perto do numero de paginas
 #define MAX_VOO 150
