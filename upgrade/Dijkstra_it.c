@@ -7,7 +7,7 @@
 #include "basedados.h"
 #include "hashtable.h"
 
-#define MAX_NODE 150001 
+#define MAX_NODE 150053 /* numero de nos maximo = numero maximo de voos + 1 */
 
 /* AUX OP */
 unsigned short time_min(char hora, char min)
@@ -21,7 +21,6 @@ void translate_time(unsigned short mins, char *hora, char *min)
 	*min = mins % 60;
 }
 
-/*  hash function */
 int hash_node( char* code )
 {
     unsigned long hash = 5381;
@@ -30,23 +29,6 @@ int hash_node( char* code )
         hash = ((hash << 5) + hash) + c;  /*hash * 33 + c */    
     return hash % MAX_NODE;
 }
-
-/* Struct for node */
-struct Node
-{
-    char name[5];           //5 bytes
-    
-    unsigned short peso;    //2 bytes
-    bool visitado;          //1 byte
-    
-    char hora;              //1 byte
-    char min;               //1 byte
-    unsigned short dur;     //2 byte
-
-    struct Node *pai;       //4 bytes
-    struct Node *next;      //4 bytes
-}
-typedef Node;               //20 bytes = 5 paginas
 
 /* Add node to system */
 Node* add_Nodes( Node* head, char* codigo, Node** hash )
@@ -134,19 +116,8 @@ void heap_add( Heap* self, Node* node)
     self->end ++;
 }
 
-Node* heap_pop(Heap* self)
+void heapify(Heap* self )
 {
-    Node* ret = self->array[0];
-
-    if( self->end == 0 )
-    {
-        return ret;
-    }
-
-    self->array[0] = self->array[self->end-1];
-    self->array[self->end-1] = NULL;
-    self->end--;
-
     int i = 0;
     while( 1 )
     {
@@ -182,6 +153,23 @@ Node* heap_pop(Heap* self)
             break;
         }
     }
+}
+
+Node* heap_pop(Heap* self)
+{
+    Node* ret = self->array[0];
+
+    if( self->end == 0 )
+    {
+        return ret;
+    }
+
+    self->array[0] = self->array[self->end-1];
+    self->array[self->end-1] = NULL;
+    self->end--;
+
+    heapify(self);
+
     return ret;
 }
 
@@ -195,34 +183,12 @@ void free_node( Node* nodes )
     }   
 }
 
-/* Caminho */
-Caminho *build( Node* node )
-{
-    Caminho* ret = NULL;
-
-    while ( node != NULL )
-    {
-        Caminho* n_caminho = malloc(sizeof(Caminho));
-        
-        strcpy(n_caminho->aero, node->name);
-        n_caminho->next = ret;
-        n_caminho->hora_partida = node->hora;
-        n_caminho->min_partida = node->min;
-
-        translate_time( ( time_min(node->hora,node->min) + node->dur ), &n_caminho->hora_chegada, &n_caminho->min_chegada );
-
-        ret = n_caminho;
-        node = node->pai;
-    }
-    return ret;
-} 
-
 /* MAIN DIJKSTRA */
-Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
+Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
 {
     Node* hash_nos[MAX_NODE] = {NULL};
 
-    aeroportos* current = NULL;
+    aeroportos* current = malloc(sizeof( aeroportos ));
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code, hash_nos);
     nodes->peso = time_min(hora_chegada, min_chegada);
@@ -241,7 +207,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         /* cycle heap */
         cur_node = heap_pop(heap);
  
-        /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
         {
             *retdur = cur_node->peso - time_min(hora_chegada, min_chegada);
@@ -251,22 +216,21 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
         cur_node->visitado = true;
 
         /* cycle */
-        if( current != NULL )
-            free( current );
-        current = get_aeroporto(hash, disk, cur_node->name);
-
-        //printf("voos de %s com peso %d\n",cur_node->name, cur_node->peso);
+        aeroporto_to(hash, disk, cur_node->name, &current);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
             voos voo = current->voosDecorrer[i];
 
-            /* get no */
+            bool new = false;
+
+            /* get node */
             Node* dest_node = get_node( voo.aero_chegada, hash_nos );
             if( dest_node == NULL )
             {
                 nodes = add_Nodes( nodes, voo.aero_chegada, hash_nos);
                 dest_node = nodes;
+                new = true;
             }
 
             if( dest_node->visitado )
@@ -288,8 +252,6 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
             }
 
             int calc_peso = hora_do_voo + voo.duracao;
-
-            //printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
             
             /* Avaliacao do peso do no */
             if( dest_node->peso == INF || dest_node->peso > calc_peso )
@@ -299,17 +261,19 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node->hora = voo.hora;
                 dest_node->min = voo.min;
                 dest_node->dur = voo.duracao;
-                heap_add( heap, dest_node );
+                
+                if( new )
+                    heap_add( heap, dest_node );
+                else
+                    heapify(heap);
             }
         }
-        //puts("done.");
     }
     while( 1 );
 
-    Caminho *n_caminho = build( cur_node );
-
-    free_node(nodes);
     free( current );
 
-    return n_caminho;
+    free( heap );
+
+    return cur_node;
 }
