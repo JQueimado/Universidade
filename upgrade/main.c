@@ -27,7 +27,26 @@ int pos;
 int ae_size = 0;
 struct aeroportos buffer[CACHE];
 
-/* Funcoes auxiliares */
+/** Funcoes auxiliares **/
+/* 
+pesquisabinaria:
+
+Descrição:
+	Função recurciva que pesquisa um voo(codigo, hora_partida, min_partida) em um array de voos(arr)
+
+Argumentos:
+	codigo 			->codigo de chegada
+	hora_partida	->hora de partida do voo
+	min_partida		->minutos da partida do voo
+	arr				->array a pesquisar 
+	i				->apontador do inicio do array
+	j				->apontador do fim do array
+
+Return:
+	-1	->se o voo nao for encontrado
+	int -> representa a posição do voo no array caso encontre o voo
+
+*/
 int pesquisabinaria(char *codigo, char hora_partida, char min_partida, struct voos arr[], int i, int j)
 {
 
@@ -69,11 +88,19 @@ int pesquisabinaria(char *codigo, char hora_partida, char min_partida, struct vo
 
 
 /*
+cmp:
+Descrição:
+	Comparador de voos que é utilizado no quick sort
 
-Comparador que e utilizado no quick sort
+Argumentos:
+	p1	->voo a comparar 1
+	p2	->voo a comparar 2
 
+Return:
+	-1	-> se p1 < p2
+	1	-> se p1 > p2
+	0	-> se p1 = p2
 */
-
 int cmp(const void *p1, const void *p2)
 {
 	char *a1 = ((struct voos *)p1)->aero_chegada;
@@ -104,6 +131,22 @@ int cmp(const void *p1, const void *p2)
 	}
 }
 
+/*
+eliminaarray:
+Descrição:
+	elimina um voo(codigo, hora_partida, min_partida) de um array(array)
+
+Argumentos:
+	codigo			->cogigo do areporto de chegada
+	hora_partida	->hora de partida do voo
+	min_partida		->minutos de partida do voo
+	size			->tamanho do array
+	array			->array
+
+Return:
+	true	->se removeu
+	false	->se não removeu
+*/
 bool eliminaarray(char *codigo, char hora_partida, char min_partida, int size, struct voos array[])
 {
 	short pos = pesquisabinaria(codigo, hora_partida, min_partida, array, 0, size - 1);
@@ -119,6 +162,18 @@ bool eliminaarray(char *codigo, char hora_partida, char min_partida, int size, s
 	}
 }
 
+
+/*
+hash_code:
+Descrição:
+	Devolve um possivel hash code para uma string
+
+Argumentos:
+	str	->string
+
+Return:
+	unsigned long ->hash code
+*/
 const unsigned long hash_code(const char *str)
 {
 	unsigned long hash = 5381;
@@ -129,10 +184,21 @@ const unsigned long hash_code(const char *str)
 	return hash;
 }
 
+/*
+criar_aeroporto:
+Descrição:
+	adiciona um aeroporto ao sistema
+
+Argumentos:
+	codigo	->codigo do aeroporto
+
+Return:
+	true	->se adicionou
+	false	->se não adicionou
+	valores no std-out
+*/
 bool criar_aeroporto(char *codigo)
 {
-	//int pos = hash_function_aeroportos(codigo);
-	//printf("%d\n",pos);
 	//Procura o aeroporto na hashtable
 	if (find_aeroporto(hash, codigo))
 	{
@@ -142,28 +208,20 @@ bool criar_aeroporto(char *codigo)
 
 	//Cria um aeroporto
 	struct aeroportos *novoaeroporto = malloc(sizeof(struct aeroportos));
+	
 	if (novoaeroporto == NULL)
 		return false; // caso nao consiga alocar
+	
 	strcpy(novoaeroporto->codigo, codigo);
 	novoaeroporto->ocupado = 0;
+	
 	//Guarda a informação no disco
 	if (inserir_aeroporto(hash, codigo, pos))
 	{
-
 		write(disk, novoaeroporto, pos);
-		//strcpy( buffer[ae_size].codigo, codigo );
 
-		//ae_size++;
-		//printf("%d\n",ae_size);
 		pos++;
 
-		/*if(ae_size >= CACHE)
-			{
-				fseek(disk, pos*sizeof(struct aeroportos), SEEK_SET);
-				fwrite( &buffer ,sizeof(struct aeroportos), CACHE, disk);
-				ae_size = 0;
-				//printf("aqui\n");
-			}*/
 		printf("+ novo aeroporto %s\n", codigo);
 		free(novoaeroporto);
 		return true;
@@ -173,16 +231,28 @@ bool criar_aeroporto(char *codigo)
 	return false;
 }
 
+
+/*
+criarVoo:
+Descrição:
+	adiciona um voo a um aeroporto
+
+Argumentos:
+	codigo_partida	->codigo do aeroporto de partida
+	codigo_chegada	->codigo do aeroporto de chegada
+	hora			->hora de partida
+	min				->minutos de partida
+	duracao			->duração do voo
+
+Return:
+	true	->se adicionou
+	false	->se não adicionou
+	valores no std-out
+*/
 bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, short duracao)
 {
-	//printf("partida:%s chegada: %s hora_partida: %s duracao: %d\n",codigo_partida,codigo_chegada,hora_partida,duracao);
-	//aeroportos* temp_partida;
-	//aeroportos temp_chegada;
-	//temp_partida = read_aeroportos_at_hash(fd,codigo_partida);
-	//printf("%02d %02d\n",hora,min);
 	int pos1 = find_aeroportopos(hash, codigo_partida);
 
-	//printf("posicao em memoria: %d %d\n",pos1,pos2);
 	if (pos1 == -1)
 	{
 		printf("+ aeroporto %s desconhecido\n", codigo_partida);
@@ -197,75 +267,68 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	}
 	struct aeroportos *aeroporto1;
 	aeroporto1 = malloc(sizeof(struct aeroportos));
-	//int pos1=find_aeroportoid(hash,codigo_partida);
-	//printf("pos:%d\n",pos1);
-	//printf("aqui1");
+
 	if (aeroporto1 == NULL)
-	{
-		//printf("aqui2");
 		return false;
-	}
 
 	read(disk, aeroporto1, pos1); //le para o aeroporto a informacao do disco
-	//printf("aqui: %d\n",aeroporto1->ocupado);
 
 	short i = pesquisabinaria(codigo_chegada, hora, min, aeroporto1->voosDecorrer, 0, aeroporto1->ocupado - 1);
-	//printf("Indice do array: %d\n",i);
+
 	if (i != -1) //Encontrou voos iguais
 	{
 		printf("+ voo %s %s %02d:%02d existe\n", codigo_partida, codigo_chegada, hora, min);
-		/*for(int i=0;i<=aeroporto1->ocupado-1;i++)
-	{
-		printf("X:%s %s\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora_partida);
-	}*/
-		free(aeroporto1);
-		return true;
-		
-	}
-	//cria voo-
 
+		free(aeroporto1);
+		return true;		
+	}
+
+	//cria voo
 	struct voos voo;
 	strcpy(voo.aero_chegada, codigo_chegada);
 	voo.hora = hora;
 	voo.min = min;
-
 	voo.duracao = duracao;
 	
-
 	aeroporto1->voosDecorrer[aeroporto1->ocupado] = voo;
 	qsort(aeroporto1->voosDecorrer, aeroporto1->ocupado + 1, sizeof(*aeroporto1->voosDecorrer), cmp); //quick sort do standart
 
-
 	printf("+ novo voo %s %s %02d:%02d\n", codigo_partida, codigo_chegada, hora, min);
-
 
 	//guarda no disco
 	aeroporto1->ocupado += 1;
 	write(disk, aeroporto1, pos1);
-
 	free(aeroporto1);
-
 	return true;
 }
 
 /*
-elimina voo
+elimina_voo:
+Descrição:
+	elimina um voo do sistema
 
+Argumentos:
+	codigo_partida	->codigo do aeroporto de partida
+	codigo_chegada	->codigo do aeroporto de chegada
+	hora_partida	->hora de partida do voo
+	min_partida		->minutos de partida do voo
+
+Return:
+	true	->se removeu
+	false	->se não removeu
+	valores no std-out
 */
-
 bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, char min_partida)
 {
 	struct aeroportos *aeroporto1;
 	int pos1, pos2;
 
 	pos1 = find_aeroportopos(hash, codigo_partida);
-	//printf("Pos1:%d\n",pos1);
-	//printf("Pos1: %d pos2: %d\n",pos1,pos2);
+
 	aeroporto1 = malloc(sizeof(struct aeroportos));
 	if (aeroporto1 == NULL)
 		return false;
 
-	//printf("Encontrou: %d\n",i);
 	//tenta encontrar voo
 	if (pos1 == -1)
 	{
@@ -291,7 +354,6 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 		return true;
 	}
 
-	//read(disk, aeroporto1, pos1);
 	//tenta remover do array
 	eliminaarray(codigo_chegada, hora_partida, min_partida, aeroporto1->ocupado, aeroporto1->voosDecorrer);
 
@@ -303,6 +365,18 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 	return true;
 }
 
+/*
+printcaminho:
+Descrição:
+	função recurciva que mostra um caminho no std-out
+
+Argumentos:
+	curr	->ultimo no do caminho
+
+Return:
+	init	->pointer para atribuição do primerio nó do caminho
+	valores no std-out
+*/
 void printcaminho( Node* curr, Node** init )
 {
 	if( curr->pai == NULL )
@@ -328,22 +402,36 @@ void printcaminho( Node* curr, Node** init )
 
 }
 
+/*
+tempo_voo:
+Descrição:
+	calculo do caminho mais curto entre dois aeroportos
+
+Argumentos:
+	codigo_partida	->codigo do aeroporto inicial
+	codigo_chegada	->codigo do aeroporto destino
+	hora_chegada_in	->hora de chegada ao aeroporto partida
+	min_chegada_in	->minutos de chegada ao aeroporto de partida
+
+Return:
+	init	->pointer para atribuição do primerio nó do caminho
+	valores no std-out
+*/
 bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada_in, char min_chegada_in)
 {
 	int pos1 = find_aeroportopos(hash, codigo_partida);
 
-	//printf("posicao em memoria: %d %d\n",pos1,pos2);
 	if (pos1 == -1)
 	{
 		printf("+ aeroporto %s desconhecido\n", codigo_partida);
-		return true;
+		return false;
 	}
 
 	int pos2 = find_aeroportopos(hash, codigo_chegada);
 	if (pos1 != -1 && pos2 == -1)
 	{
 		printf("+ aeroporto %s desconhecido\n", codigo_chegada);
-		return true;
+		return false;
 	}
 
 	unsigned short duracao = 0;
@@ -352,16 +440,13 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada_in,
 	if (ret == NULL)
 	{
 		printf("+ sem voos de %s para %s\n", codigo_partida, codigo_chegada);
-		return true;
+		return false;
 	}
 
 	puts("De   Para Parte Chega");
 	puts("==== ==== ===== =====");
-	
 	Node* init;
-
 	printcaminho( ret, &init );
-
 	printf("Tempo de viagem: %hu minutos\n", duracao );
 
 	free_node( init );
@@ -369,10 +454,9 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada_in,
 	return true;
 }
 
+/** Main **/
 int main(void)
 {
-	//struct aeroportos buffer[CONA];
-	//int ae_size = 0;
 	pos = 0;
 	disk = openFile(FILE_DB);
 	hash = newhash();
@@ -385,35 +469,6 @@ int main(void)
 	//Interface do utilizador
 	char modo[3];
 
-	/*char codigo_aero1[5];
-	char codigo_aero2[5];
-	char hora_partida[6];
-	short duracao;
-	while(scanf("%s",modo) != EOF)
-	{
-	switch(hash_code(modo))
-	{
-
-		case AI:
-			scanf(" %s",codigo_aero1);
-			criar_aeroporto(codigo_aero1);
-			break;
-		case FI:	
-			scanf(" %s %s %s %hd",codigo_aero1, codigo_aero2, hora_partida, &duracao);
-			criarVoo(codigo_aero1,codigo_aero2,hora_partida,duracao);
-			break;
-		case FD:
-			scanf("%s %s %s", codigo_aero1, codigo_aero2, hora_partida);
-			elimina_voo(codigo_aero1,codigo_aero2,hora_partida);
-		case X:
-			hash_free(hash);
-			fclose(disk);
-			return 0;
-		default:
-			
-	}
-	}*/
-
 	while (scanf("%s", modo) != EOF)
 	{
 		char codigo_aero1[5];
@@ -425,34 +480,12 @@ int main(void)
 		{
 			scanf(" %s", codigo_aero1);
 			criar_aeroporto(codigo_aero1);
-			//printf("ae:%d\n",ae_size);
-
-			/*
-			if(find_aeroporto(hash,codigo_aero1))
-			{
-				printf("+ aeroporto %s existe\n",codigo_aero1);
-				continue;
-			}
-
-		 	strcpy( buffer[ae_size].codigo, codigo_aero1 );
-			ae_size++;
-
-			if(ae_size >= CONA)
-			{
-				fseek(disk, -1, SEEK_END);
-				fwrite( &buffer ,sizeof(struct aeroportos), CONA, disk);
-				ae_size = 0;
-			}
-			printf("+ novo aeroporto %s\n",codigo_aero1);	
-
-		*/
 		}
 		else if (strcmp(modo, "FI") == 0)
 		{
 			short duracao;
 
 			scanf(" %s %s %02hhu:%02hhu %hd", codigo_aero1, codigo_aero2, &hora, &min, &duracao);
-			//printf("%02hhu:%02hhu\n",hora,min);
 			criarVoo(codigo_aero1, codigo_aero2, hora, min, duracao);
 		}
 
@@ -469,20 +502,10 @@ int main(void)
 		}
 		if (strcmp(modo, "X") == 0)
 		{
-			/*	if(ae_size < CACHE)
-			{
-				fseek(disk, pos*sizeof(struct aeroportos), SEEK_SET);
-				fwrite( &buffer ,sizeof(struct aeroportos), CACHE, disk);
-				
-				
-			}*/
 			hash_free(hash);
-			//fseek(disk,0, SEEK_END);
-			//fwrite( &buffer ,sizeof(struct aeroportos), ae_size, disk);
 			fclose(disk);
 			return 0;
 		}
 	}
-
 	return 0;
 }
