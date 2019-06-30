@@ -72,18 +72,21 @@ aeroportos* get_aeroporto(hashtable *hash, FILE *disk, char *code)
 	int pos = find_aeroportopos(hash, code);
 	if( pos == -1 )
 	{
-		/****************************/
-		//puts("not found");
-		/****************************/
 		return NULL;
 	}
 	read(disk, temp, pos);
 
-	/****************************/
-	//printf("%s = %s\n", temp->codigo, code);
-	/****************************/
-
 	return temp;
+}
+
+void aeroporto_to(hashtable *hash, FILE *disk, char *code, aeroportos** ret )
+{
+	int pos = find_aeroportopos(hash, code);
+	if( pos == -1 )
+	{
+		*ret = NULL;
+	}
+	read(disk, *ret, pos);
 }
 
 void write_aero(hashtable* hash, FILE* disk, aeroportos* add)

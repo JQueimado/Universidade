@@ -177,7 +177,7 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
 {
     Node* hash_nos[MAX_NODE] = {NULL};
 
-    aeroportos* current = NULL;
+    aeroportos* current = malloc(sizeof( aeroportos ));
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code, hash_nos);
     nodes->peso = time_min(hora_chegada, min_chegada);
@@ -196,7 +196,6 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
         /* cycle heap */
         cur_node = heap_pop(heap);
  
-        /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
         {
             *retdur = cur_node->peso - time_min(hora_chegada, min_chegada);
@@ -206,17 +205,13 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
         cur_node->visitado = true;
 
         /* cycle */
-        if( current != NULL )
-            free( current );
-        current = get_aeroporto(hash, disk, cur_node->name);
-
-        //printf("voos de %s com peso %d\n",cur_node->name, cur_node->peso);
+        aeroporto_to(hash, disk, cur_node->name, &current);
 
         for( int i = 0; i < current->ocupado; i++ )
         {
             voos voo = current->voosDecorrer[i];
 
-            /* get no */
+            /* get node */
             Node* dest_node = get_node( voo.aero_chegada, hash_nos );
             if( dest_node == NULL )
             {
@@ -243,8 +238,6 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
             }
 
             int calc_peso = hora_do_voo + voo.duracao;
-
-            //printf(" ve voo %s %d:%d, com peso %d\n", dest_node->name, voo.hora, voo.min, calc_peso );
             
             /* Avaliacao do peso do no */
             if( dest_node->peso == INF || dest_node->peso > calc_peso )
@@ -262,6 +255,8 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
     while( 1 );
 
     free( current );
+
+    free( heap );
 
     return cur_node;
 }
