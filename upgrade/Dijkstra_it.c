@@ -21,43 +21,33 @@ void translate_time(unsigned short mins, char *hora, char *min)
 	*min = mins % 60;
 }
 
-/* Simple hash function */
-int hash_node( char* code )
-{
-    return code[0] + code[1] + code[2];
-}
-
 /* Add node to system */
-Node* add_Nodes( Node* head, char* codigo, Node** hash )
+Node* add_Nodes( Node** array, int s, char* codigo)
 {
-    Node * new_node = malloc(sizeof(Node));
-    strcpy(new_node->name, codigo);
-    new_node->pai = NULL;
-    new_node->peso = INF;
-    new_node->visitado = false;
-    new_node->hora = 0;
-    new_node->min = 0;
-    new_node->dur = 0;
+    if( s >= MAX_NODE )
+        return;
 
-    /* Add to list */
-    new_node->next = head;
+    Node* n_node = malloc(sizeof(Node));
+    n_node->peso = INF;
+    n_node->pai = NULL;
+    n_node->visitado = false;
 
-    int i = hash_node(codigo);
-    if( i >= MAX_NODE )
-        i -= MAX_NODE;
-    
-    /* Add to hash */
-    while ( hash[i] != NULL )
+    array[s] = n_node;
+    s++;
+
+    for( int i = s-1; s >0; i--)
     {
-        i ++;
-        if( i >= MAX_NODE )
-            i = 0;
+        if( array[i-1] > array[i] )
+        {
+            Node* temp = array[i];
+            array[i] = array[i-1];
+            array[i-1] = temp;
+        }
+        else
+        {
+            break;
+        }
     }
-    
-    hash[i] = new_node;
-
-    /* return new list head */
-    return new_node;
 }
 
 Node* get_node(char* codigo, Node** hash )
@@ -112,20 +102,9 @@ void heap_add( Heap* self, Node* node)
     self->end ++;
 }
 
-Node* heap_pop(Heap* self)
+void heapify( Heap* self, int pos )
 {
-    Node* ret = self->array[0];
-
-    if( self->end == 0 )
-    {
-        return ret;
-    }
-
-    self->array[0] = self->array[self->end-1];
-    self->array[self->end-1] = NULL;
-    self->end--;
-
-    int i = 0;
+    int i = pos;
     while( 1 )
     {
         Node* left = NULL;
@@ -159,6 +138,23 @@ Node* heap_pop(Heap* self)
             break;
         }
     }
+}
+
+Node* heap_pop(Heap* self)
+{
+    Node* ret = self->array[0];
+
+    if( self->end == 0 )
+    {
+        return ret;
+    }
+
+    self->array[0] = self->array[self->end-1];
+    self->array[self->end-1] = NULL;
+    self->end--;
+
+    heapify(self, 0);
+    
     return ret;
 }
 
@@ -211,12 +207,15 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
         {
             voos voo = current->voosDecorrer[i];
 
+            bool new = false;
+
             /* get node */
             Node* dest_node = get_node( voo.aero_chegada, hash_nos );
             if( dest_node == NULL )
             {
                 nodes = add_Nodes( nodes, voo.aero_chegada, hash_nos);
                 dest_node = nodes;
+                new = true;
             }
 
             if( dest_node->visitado )
@@ -247,10 +246,13 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
                 dest_node->hora = voo.hora;
                 dest_node->min = voo.min;
                 dest_node->dur = voo.duracao;
-                heap_add( heap, dest_node );
+                
+                if( new )
+                    heap_add( heap, dest_node );
+                else
+                    heapify(heap, 0);
             }
         }
-        //puts("done.");
     }
     while( 1 );
 

@@ -20,9 +20,8 @@ struct Node
     unsigned short dur;     //2 byte
 
     struct Node *pai;       //4 bytes
-    struct Node *next;      //4 bytes
 }
-typedef Node;               //20 bytes = 5 paginas
+typedef Node;               //16 bytes = 4 paginas
 
 unsigned short time_min(char hora, char min);
 
