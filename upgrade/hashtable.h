@@ -9,16 +9,16 @@
 struct tabela
 {
 	char codigo[5]; // 5 bytes
-	int pos; // 4 bytes                                
+	int pos; 		// 4 bytes                                
+	
 	//20mil em memoria depois passa para disco(33.18 mb)
 	
-
-} typedef tabela;
+} typedef tabela; //9 bytes + 3 bytes = 12 bytes = 3 paginas
 
 //definir hashtable
 struct hashtable 
 {
-	struct tabela *arr[MAX_SIZE]; 
+	struct tabela *arr[MAX_SIZE]; // 4 * MAX_Size
 } typedef hashtable;
 
 struct hashtable;
