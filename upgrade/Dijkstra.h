@@ -1,7 +1,11 @@
 #ifndef Dijkstra
 #define Dijkstra
 
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
+
 #include "hashtable.h"
 #include "aeroporto.h"
 
