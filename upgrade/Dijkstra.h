@@ -8,6 +8,7 @@
 
 #include "hashtable.h"
 #include "aeroporto.h"
+#include "basedados.h"
 
 #define INF -1
 
