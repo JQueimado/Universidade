@@ -30,7 +30,7 @@ void translate_time( unsigned short mins, char* hora, char* min);
 
 char t_compare( char hora1, char min1, char hora2, char min2 );
 
-Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur,  Node** lnodes);
+Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur);
 
 void free_node( Node* nodes );
 

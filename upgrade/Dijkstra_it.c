@@ -173,7 +173,7 @@ void free_node( Node* nodes )
 }
 
 /* MAIN DIJKSTRA */
-Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur, Node** lnodes)
+Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
 {
     Node* hash_nos[MAX_NODE] = {NULL};
 
@@ -262,8 +262,6 @@ Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, 
     while( 1 );
 
     free( current );
-
-    *lnodes = nodes;
 
     return cur_node;
 }
