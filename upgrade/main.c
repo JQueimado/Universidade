@@ -303,7 +303,7 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 	return true;
 }
 
-bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, char min_chegada)
+bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada_in, char min_chegada_in)
 {
 	int pos1 = find_aeroportopos(hash, codigo_partida);
 
@@ -323,33 +323,46 @@ bool tempo_voo(char *codigo_partida, char *codigo_chegada, char hora_chegada, ch
 
 	unsigned short duracao = 0;
 
-	Caminho *caminho = dijkstra(hash, disk, codigo_partida, hora_chegada, min_chegada, codigo_chegada, &duracao);
-	if (caminho == NULL)
+	Node* nodes;
+
+	Node *ret = dijkstra(hash, disk, codigo_partida, hora_chegada_in, min_chegada_in, codigo_chegada, &duracao, &nodes);
+	if (ret == NULL)
 	{
 		printf("+ sem voos de %s para %s\n", codigo_partida, codigo_chegada);
 		return true;
 	}
 
+	char hora_chegada;
+	char min_chegada;
+	char hora_partida;
+	char min_partida;
+
 	puts("De   Para Parte Chega");
 	puts("==== ==== ===== =====");
-	while (caminho->next != NULL)
+	while (ret->pai != NULL)
 	{
-		printf("%-4s %-4s %02hhi:%02hhi %02hhi:%02hhi\n",
-			caminho->aero, 
-			caminho->next->aero, 
-			caminho->next->hora_partida, 
-			caminho->next->min_partida, 
-			caminho->next->hora_chegada, 
-			caminho->next->min_chegada);
+        
+        hora_partida = ret->hora;
+        min_partida = ret->min;
+
+        translate_time( ( time_min(ret->hora,ret->min) + ret->dur ), &hora_chegada, &min_chegada );
 		
-		Caminho *to_free = caminho;
-		caminho = caminho->next;
-		free( to_free );
+		
+		printf("%-4s %-4s %02hhi:%02hhi %02hhi:%02hhi\n",
+			ret->name, 
+			ret->pai->name, 
+			hora_partida, 
+			min_partida, 
+			hora_chegada, 
+			min_chegada);
+		
+		ret = ret->pai;
 	}
 
-	free( caminho );
-
 	printf("Tempo de viagem: %hu minutos\n", duracao );
+
+	free_node( nodes );
+
 	return true;
 }
 

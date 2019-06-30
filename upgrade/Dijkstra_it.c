@@ -27,23 +27,6 @@ int hash_node( char* code )
     return code[0] + code[1] + code[2];
 }
 
-/* Struct for node */
-struct Node
-{
-    char name[5];           //5 bytes
-    
-    unsigned short peso;    //2 bytes
-    bool visitado;          //1 byte
-    
-    char hora;              //1 byte
-    char min;               //1 byte
-    unsigned short dur;     //2 byte
-
-    struct Node *pai;       //4 bytes
-    struct Node *next;      //4 bytes
-}
-typedef Node;               //20 bytes = 5 paginas
-
 /* Add node to system */
 Node* add_Nodes( Node* head, char* codigo, Node** hash )
 {
@@ -189,30 +172,8 @@ void free_node( Node* nodes )
     }   
 }
 
-/* Caminho */
-Caminho *build( Node* node )
-{
-    Caminho* ret = NULL;
-
-    while ( node != NULL )
-    {
-        Caminho* n_caminho = malloc(sizeof(Caminho));
-        
-        strcpy(n_caminho->aero, node->name);
-        n_caminho->next = ret;
-        n_caminho->hora_partida = node->hora;
-        n_caminho->min_partida = node->min;
-
-        translate_time( ( time_min(node->hora,node->min) + node->dur ), &n_caminho->hora_chegada, &n_caminho->min_chegada );
-
-        ret = n_caminho;
-        node = node->pai;
-    }
-    return ret;
-} 
-
 /* MAIN DIJKSTRA */
-Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
+Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur, Node** lnodes)
 {
     Node* hash_nos[MAX_NODE] = {NULL};
 
@@ -300,10 +261,9 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     }
     while( 1 );
 
-    Caminho *n_caminho = build( cur_node );
-
-    free_node(nodes);
     free( current );
 
-    return n_caminho;
+    *lnodes = nodes;
+
+    return cur_node;
 }
