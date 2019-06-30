@@ -1,26 +1,54 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "Dijkstra.h"
-#include "basedados.h"
-#include "hashtable.h"
 
 #define MAX_NODE 150053 /* numero de nos maximo = numero maximo de voos + 1 */
 
-/* AUX OP */
+/** AUX OP **/
+/*
+time_min:
+Descrição:
+	traduz o formato hh:mm para minutos
+
+Argumentos:
+	hora    -> hh
+    min     -> mm
+
+Return:
+	valor de hh:mm em minutos
+*/
 unsigned short time_min(char hora, char min)
 {
 	return (hora*60) + min;
 }
 
+/*
+translate_time:
+Descrição:
+	traduz o formato minutos para o formato hh:mm
+
+Argumentos:
+	mins    ->minutos a traduzir
+
+Return:
+	hora    -> hh
+    min     -> mm
+*/
 void translate_time(unsigned short mins, char *hora, char *min)
 {
 	*hora = (mins / 60) % 24;
 	*min = mins % 60;
 }
 
+/*
+translate_time:
+Descrição:
+	calcula o hash code de um no
+
+Argumentos:
+	code    -> codigo a dar hash
+
+Return:
+	hash code de codigo
+*/
 int hash_node( char* code )
 {
     unsigned long hash = 5381;
@@ -30,7 +58,19 @@ int hash_node( char* code )
     return hash % MAX_NODE;
 }
 
-/* Add node to system */
+/*
+add_Nodes:
+Descrição:
+	adiciona um node ao grafo
+
+Argumentos:
+	head    -> head da linked 
+    codigo  -> codigo do no a adicionar
+    hash    -> hash
+
+Return:
+	Node    -> cabeca da linked
+*/
 Node* add_Nodes( Node* head, char* codigo, Node** hash )
 {
     Node * new_node = malloc(sizeof(Node));
@@ -63,6 +103,19 @@ Node* add_Nodes( Node* head, char* codigo, Node** hash )
     return new_node;
 }
 
+/*
+get_node:
+Descrição:
+	procura por um no na hash
+
+Argumentos:
+    codigo  -> codigo do no a pesquisar
+    hash    -> hash
+
+Return:
+    NULL    -> no nao encontrado
+	Node    -> no encontrado
+*/
 Node* get_node(char* codigo, Node** hash )
 {
     int i = hash_node(codigo);
@@ -82,11 +135,19 @@ Node* get_node(char* codigo, Node** hash )
 /* Adaptado de https://www.geeksforgeeks.org/binary-heap/ */
 struct Heap
 {
-    Node* array[MAX_NODE];
-    int end;
+    Node* array[MAX_NODE];  // 4bytes * MAX_NODE
+    int end;                // 4bytes
 }
 typedef Heap;
 
+/*
+new_heap:
+Descrição:
+	cria uma heap
+
+Return:
+	Heap    -> heap criada
+*/
 Heap* new_heap()
 {
     Heap* temp = malloc(sizeof(Heap));
@@ -94,6 +155,15 @@ Heap* new_heap()
     return temp;
 }
 
+/*
+heap_add:
+Descrição:
+	adiciona um ramo a heap
+
+Argumentos:
+	self    -> heap
+    node    -> no a adicionar
+*/
 void heap_add( Heap* self, Node* node)
 {
     self->array[self->end] = node;
@@ -116,6 +186,14 @@ void heap_add( Heap* self, Node* node)
     self->end ++;
 }
 
+/*
+heapify:
+Descrição:
+	reorganiza uma heap metendo o no com menor peso na root
+
+Argumentos:
+	self    -> heap
+*/
 void heapify(Heap* self )
 {
     int i = 0;
@@ -155,6 +233,17 @@ void heapify(Heap* self )
     }
 }
 
+/*
+heap_pop:
+Descrição:
+	retira e devolve a raiz de uma heap
+
+Argumentos:
+    self    -> heap
+
+Return:
+	Node   -> raiz da heap (menor elemento)
+*/
 Node* heap_pop(Heap* self)
 {
     Node* ret = self->array[0];
@@ -173,6 +262,15 @@ Node* heap_pop(Heap* self)
     return ret;
 }
 
+/*
+heap_pop:
+Descrição:
+	liberta uma sequencia de nos
+
+Argumentos:
+    nodes   -> head da lista de nos
+
+*/
 void free_node( Node* nodes )
 {
     while (nodes != NULL)
@@ -184,6 +282,24 @@ void free_node( Node* nodes )
 }
 
 /* MAIN DIJKSTRA */
+/*
+dijkstra:
+Descrição:
+	procura o menor caminho entre dois nos de um grafo
+
+Argumentos:
+    hash
+    disk
+    init_code
+    hora_chegada
+    min_chegada
+    final
+
+Return:
+	Node    -> no final
+    retdur  -> peso do ultimo no
+    informacao que se encontra nos nos do caminho
+*/
 Node *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegada, char min_chegada, char *final, unsigned short* retdur)
 {
     Node* hash_nos[MAX_NODE] = {NULL};
