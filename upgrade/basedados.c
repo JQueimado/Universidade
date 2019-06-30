@@ -1,13 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "basedados.h"
 
-#include "aeroporto.h"
-#include "hashtable.h"
 /*
-*Abre o ficheiro com o nome do filename
-*cria-o se nao existir e devolve o file pointer caso nao consiga abrir
-*/
+openFile:
+Descrição:
+	Abre o ficheiro com o nome do filename
+	cria-o se nao existir e devolve o file pointer caso nao consiga abrir
 
+Argumentos:
+	filename	-> nome do ficheiro
+
+Return:
+	pointer para o ficheiro aberto
+*/
 FILE *openFile(char *filename)
 {
 	FILE *temp = fopen(filename, "rb+");
@@ -28,8 +32,15 @@ FILE *openFile(char *filename)
 }
 
 /*
-*Escreve um utilizador user na posição hash do ficheiro
-*recebe um fp do ficheiro
+write:
+Descrição:
+	Escreve um utilizador user na posição hash do ficheiro
+
+Argumentos:
+	file		-> pointer para o ficheiro
+	aeroportos	-> aeroporto a escrever
+	pos			-> posicao no fichero
+
 */
 void write(FILE *file,struct aeroportos *aeroportos,int pos)
 {
@@ -37,8 +48,18 @@ void write(FILE *file,struct aeroportos *aeroportos,int pos)
 	fwrite(aeroportos,sizeof(struct aeroportos),1,file);
 }
 
-/*Le um aeroporto da posicao hash do ficheiro
-*recebe um fp do ficheiro 
+/*
+read:
+Descrição:
+	Le um aeroporto da posicao hash do ficheiro
+
+Argumentos:
+	file		-> pointer para o ficheiro
+	pos			-> posicao no fichero
+
+Return:
+	aeroportos	-> aeroporto a ler
+
 */
 void read(FILE *file,struct aeroportos *aeroportos,int pos)
 {
@@ -46,11 +67,19 @@ void read(FILE *file,struct aeroportos *aeroportos,int pos)
 	fread(aeroportos,sizeof(struct aeroportos),1,file);
 }
 
-/*carrega todos os utilizadores para a hash
-recebe um fp do ficheiro e a hash a preencher
-devolve o id do ultimo aeroporto encontrado
-*/
+/*
+read:
+Descrição:
+	carrega todos os utilizadores para a hash
 
+Argumentos:
+	file		-> pointer para o ficheiro
+	hash		-> hash a carregar
+
+Return:
+	devolve o id do ultimo aeroporto encontrado
+
+*/
 int loadDb(FILE *file, struct hashtable *hash)
 {
 	struct aeroportos aeroportos;	
