@@ -24,24 +24,16 @@ int pos;
 pesquisabinaria:
 
 Descrição:
-<<<<<<< HEAD
 	Função recursiva que pesquisa um voo(codigo, hora_partida, min_partida) em um array de voos(arr)
-=======
-	Função recurciva que pesquisa um voo(codigo, hora_partida, min_partida) em um array de voos(arr)
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
 
 Argumentos:
 	codigo 			->codigo de chegada
 	hora_partida	->hora de partida do voo
 	min_partida		->minutos da partida do voo
 	arr				->array a pesquisar 
-<<<<<<< HEAD
 	i				-> inicio do array
 	j				-> fim do array
-=======
-	i				->apontador do inicio do array
-	j				->apontador do fim do array
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
+
 
 Return:
 	-1	->se o voo nao for encontrado
@@ -138,11 +130,7 @@ Descrição:
 	elimina um voo(codigo, hora_partida, min_partida) de um array(array)
 
 Argumentos:
-<<<<<<< HEAD
 	codigo			->codigo do areporto de chegada
-=======
-	codigo			->cogigo do areporto de chegada
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
 	hora_partida	->hora de partida do voo
 	min_partida		->minutos de partida do voo
 	size			->tamanho do array
@@ -373,11 +361,9 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 /*
 printcaminho:
 Descrição:
-<<<<<<< HEAD
+
 	função recursiva que mostra um caminho no std-out
-=======
-	função recurciva que mostra um caminho no std-out
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
+
 
 Argumentos:
 	curr	->ultimo no do caminho

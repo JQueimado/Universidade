@@ -62,10 +62,7 @@ bool find_aeroporto(hashtable *ht,char *codigo)
 {
 	/* hash search */
 	int hashIndex = hash_function_aeroportos(codigo);
-<<<<<<< HEAD
 
-=======
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
 
 	while(ht->arr[hashIndex] !=NULL)
 	{
@@ -128,10 +125,7 @@ Return:
 int find_aeroportopos(hashtable *ht,char *codigo)
 {
 	int hashIndex = hash_function_aeroportos(codigo);
-<<<<<<< HEAD
 
-=======
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
 
 	while(ht->arr[hashIndex] !=NULL)
 	{
@@ -144,12 +138,7 @@ int find_aeroportopos(hashtable *ht,char *codigo)
 		hashIndex+=hashIndex;
 		hashIndex %= MAX_SIZE;
 	}
-<<<<<<< HEAD
 
-	
-	
 
-=======
->>>>>>> 48a1ebc91aa3457c410cd614efbbf814ec1daf3f
 	return -1;
 }
