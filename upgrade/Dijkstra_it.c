@@ -170,7 +170,6 @@ void heap_add( Heap* self, Node* node)
     int i = self->end;
     while( i != 0 )
     {   
-        //printf("ciclo add\n");
         if( self->array[i]->peso < self->array[(i-1)/2]->peso )    
         {
             Node* temp = self->array[(i-1)/2];
@@ -199,7 +198,6 @@ void heapify(Heap* self )
     int i = 0;
     while( 1 )
     {
-        //printf("ciclo pop");
         Node* left = NULL;
         if( (2*i+1) < self->end )
             left = self->array[2 * i + 1];
