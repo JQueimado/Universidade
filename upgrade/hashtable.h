@@ -2,7 +2,7 @@
 #define _HASH_
 
 #include <stdbool.h>
-#define MAX_SIZE 400009
+#define MAX_SIZE 20477
 #define PRIME 399989
 #define MAX_VOO 150
 

@@ -5,7 +5,7 @@
 
 #include "hashtable.h"
 
-#define MAX_SIZE 400009
+#define MAX_SIZE 20477
 #define MAX_VOO 150
 
 hashtable *newhash()
