@@ -293,9 +293,8 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node->hora = voo.hora;
                 dest_node->min = voo.min;
                 dest_node->dur = voo.duracao;
+                heap_add( heap, dest_node );
             }
-
-            heap_add( heap, dest_node );
         }
         //puts("done.");
     }
