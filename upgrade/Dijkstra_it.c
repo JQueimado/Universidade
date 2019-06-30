@@ -134,19 +134,8 @@ void heap_add( Heap* self, Node* node)
     self->end ++;
 }
 
-Node* heap_pop(Heap* self)
+void heapify(Heap* self )
 {
-    Node* ret = self->array[0];
-
-    if( self->end == 0 )
-    {
-        return ret;
-    }
-
-    self->array[0] = self->array[self->end-1];
-    self->array[self->end-1] = NULL;
-    self->end--;
-
     int i = 0;
     while( 1 )
     {
@@ -182,6 +171,23 @@ Node* heap_pop(Heap* self)
             break;
         }
     }
+}
+
+Node* heap_pop(Heap* self)
+{
+    Node* ret = self->array[0];
+
+    if( self->end == 0 )
+    {
+        return ret;
+    }
+
+    self->array[0] = self->array[self->end-1];
+    self->array[self->end-1] = NULL;
+    self->end--;
+
+    heapify(self);
+
     return ret;
 }
 
