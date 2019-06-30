@@ -110,21 +110,44 @@ struct Heap
 }
 typedef Heap;
 
-Heap* Heap_add( Heap* self, Node* node)
+void Heap_add( Heap* self, Node* node)
 {
     Heap_Node* temp = malloc( sizeof( Heap ) );
     temp->elem = node;
     Heap_Node* head = self->head;
 
+    /* check left or right */
     if( self->To_add->left == NULL)
         self->To_add->left = temp;
     else
         self->To_add->right = temp;
 
-    temp->parent = t_compare;
+    /* set parrent To_add */
+    temp->parent = self->To_add;
 
+    /* re-sort heap */
     while( temp->parent->elem->peso < temp->elem->peso )
     {
+        temp->elem = temp->parent->elem;
+        temp->parent->elem = temp;
+        temp = temp->parent;
+    }
+
+    /* new To_add */
+    if( self->To_add->right != NULL )
+    {
+        /* ve a direita da direita do pai */
+        if( self->To_add->parent->right->right == NULL)
+            self->To_add = self->To_add->parent->right;
+        else
+        {
+            /* procura no mais a esquerda */
+            while ( head->left != NULL )
+            {
+                head = head->left;
+            }
+            self->To_add = head->parent;
+        }  
         
     }
 
