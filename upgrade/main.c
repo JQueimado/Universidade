@@ -53,15 +53,15 @@ int pesquisabinaria(char *codigo, char hora_partida, char min_partida, struct vo
 		if (hora_partida > arr[m].hora )
 	{
 		// Restringe a pesquisa ao intervalo i..m - 1
-		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
+		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m+1, j);
 	}
 	else if (hora_partida == arr[m].hora && min_partida > arr[m].min)
 	{
-		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
+		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m+1, j);
 	}
 	else if (hora_partida == arr[m].hora && min_partida == arr[m].min && strcmp(codigo, arr[m].aero_chegada) > 0)
 	{
-		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
+		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m+1, j);
 	}
 
 	return m; // n == v[m]
