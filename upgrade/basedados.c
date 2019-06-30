@@ -96,32 +96,6 @@ int loadDb(FILE *file, struct hashtable *hash)
 }
 
 /*
-get_aeroporto:
-Descrição:
-	le um aeroporto do ficheiro malloc
-
-Argumentos:
-	hash    -> hash
-    disk    -> pointer para o ficheiro
-	code	-> codigo a ler
-
-Return:
-	um aeroporto novo com a informacao do ficheiro
-*/
-aeroportos* get_aeroporto(hashtable *hash, FILE *disk, char *code)
-{
-	aeroportos *temp = malloc(sizeof(aeroportos));
-	int pos = find_aeroportopos(hash, code);
-	if( pos == -1 )
-	{
-		return NULL;
-	}
-	read(disk, temp, pos);
-
-	return temp;
-}
-
-/*
 aeroporto_to:
 Descrição:
 	le um aeroporto do ficheiro (reassign)
@@ -142,20 +116,4 @@ void aeroporto_to(hashtable *hash, FILE *disk, char *code, aeroportos** ret )
 		*ret = NULL;
 	}
 	read(disk, *ret, pos);
-}
-
-/*
-write_aero:
-Descrição:
-	escreve uma aeroporto no ficheiro
-
-Argumentos:
-	hash    -> hash
-    disk    -> pointer para o ficheiro
-	add		-> codigo a escrever
-*/
-void write_aero(hashtable* hash, FILE* disk, aeroportos* add)
-{
-	int pos = find_aeroportopos(hash, add->codigo);
-	write(disk, add, pos);
 }
