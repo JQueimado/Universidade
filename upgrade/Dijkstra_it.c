@@ -93,81 +93,90 @@ Node* get_node(char* codigo, Node** hash )
     return hash[i];
 }
 
-struct Heap_Node
-{
-    struct Node* elem;
-
-    struct Heap_Node* parent;    //4 bytes
-    struct Heap_Node* left;      //4 bytes
-    struct Heap_Node* right;     //4 bytes
-}
-typedef Heap_Node;               //12 bytes = 3 paginas
-
+/* Adaptado de https://www.geeksforgeeks.org/binary-heap/ */
 struct Heap
 {
-    Heap_Node* head;
-    Heap_Node* To_add;
+    Node* array[MAX_NODE];
+    int end;
 }
 typedef Heap;
 
-void Heap_add( Heap* self, Node* node)
+Heap* new_heap()
 {
-    Heap_Node* temp = malloc( sizeof( Heap ) );
-    temp->elem = node;
-    Heap_Node* head = self->head;
+    Heap* temp = malloc(sizeof(Heap));
+    temp->end = 0;
+    return temp;
+}
 
-    /* check left or right */
-    if( self->To_add->left == NULL)
-        self->To_add->left = temp;
-    else
-        self->To_add->right = temp;
-
-    /* set parrent To_add */
-    temp->parent = self->To_add;
-
-    /* re-sort heap */
-    while( temp->parent->elem->peso < temp->elem->peso )
+void heap_add( Heap* self, Node* node)
+{
+    self->array[self->end] = node;
+    int i = self->end;
+    while( i != 0 )
     {
-        temp->elem = temp->parent->elem;
-        temp->parent->elem = temp;
-        temp = temp->parent;
-    }
-
-    /* new To_add */
-    if( self->To_add->right != NULL )
-    {
-        /* ve a direita da direita do pai */
-        if( self->To_add->parent->right->right == NULL)
-            self->To_add = self->To_add->parent->right;
+        if( self->array[i]->peso < self->array[(i-1)/2]->peso )    
+        {
+            Node* temp = self->array[(i-1)/2];
+            self->array[(i-1)/2] = self->array[i];
+            self->array[i] = temp;
+            i = (i-1)/2;
+        }
         else
         {
-            /* procura no mais a esquerda */
-            while ( head->left != NULL )
-            {
-                head = head->left;
-            }
-            self->To_add = head->parent;
-        }  
-        
+            break;
+        }
+    }
+    self->end ++;
+}
+
+Node* heap_pop(Heap* self)
+{
+    Node* ret = self->array[0];
+
+    if( self->end == 0 )
+    {
+        return ret;
     }
 
-}
+    self->array[0] = self->array[self->end-1];
+    self->array[self->end-1] = NULL;
+    self->end--;
 
-Heap *pop( Heap *self)
-{
-    Heap* head = self->next;
-    free( self );
-    return head;
-}
-
-void free_Heap( Heap *heap )
-{
-    while (heap != NULL)
+    int i = 0;
+    while( 1 )
     {
-        Heap* temp = heap->next;
-        free(heap);
-        heap = temp;
-    }   
+        Node* left = NULL;
+        if( (2*i+1) < self->end )
+            left = self->array[2 * i + 1];
+
+        Node* right = NULL;
+        if( (2*i+2) < self->end )
+            right = self->array[2 * i + 2];
+
+        int min = i;   
+        if( left != NULL && left->peso < self->array[min]->peso )
+        {
+            min = 2*i+1;
+        }
+        
+        if( right != NULL && right->peso < self->array[min]->peso )
+        {
+            min = 2*i+2;
+        }
+
+        if( min != i )
+        {
+            Node* temp = self->array[i];
+            self->array[i] = self->array[min];
+            self->array[min] = temp;
+            i = min;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return ret;
 }
 
 void free_node( Node* nodes )
@@ -211,20 +220,20 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code, hash_nos);
     nodes->peso = time_min(hora_chegada, min_chegada);
-    Heap* heap = Heap_add(NULL, nodes);
+    Heap* heap = new_heap();
+    heap_add(heap, nodes);
 
     do
     {
         /* if heap is empty there are no more ways */
-        if( heap == NULL )
+        if( heap->end == 0 )
         {
             cur_node = NULL;
             break;
         }
 
         /* cycle heap */
-        cur_node = heap->elem;
-        heap = pop(heap);
+        cur_node = heap_pop(heap);
  
         /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
@@ -286,15 +295,14 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node->dur = voo.duracao;
             }
 
-            heap = Heap_add( heap, dest_node );
+            heap_add( heap, dest_node );
         }
         //puts("done.");
     }
     while( 1 );
 
     Caminho *n_caminho = build( cur_node );
-    
-    free_Heap(heap);
+
     free_node(nodes);
     free( current );
 
