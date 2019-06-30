@@ -9,14 +9,7 @@
 #include "Dijkstra.h"
 
 #define MAX_SIZE 20477
-#define MAX_VIAGEM 150000
-#define CACHE 879 //perto do numero de paginas
 #define MAX_VOO 150
-#define AI 5862127
-#define FI 5862292
-#define FD 5862287
-#define TR 5862763
-#define X 177661
 #define INF -1
 #define FILE_DB "db.cache"
 
@@ -24,23 +17,23 @@
 FILE *disk;
 struct hashtable *hash;
 int pos;
-int ae_size = 0;
-struct aeroportos buffer[CACHE];
+
 
 /** Funcoes auxiliares **/
 /* 
 pesquisabinaria:
 
 Descrição:
-	Função recurciva que pesquisa um voo(codigo, hora_partida, min_partida) em um array de voos(arr)
+	Função recursiva que pesquisa um voo(codigo, hora_partida, min_partida) em um array de voos(arr)
 
 Argumentos:
 	codigo 			->codigo de chegada
 	hora_partida	->hora de partida do voo
 	min_partida		->minutos da partida do voo
 	arr				->array a pesquisar 
-	i				->apontador do inicio do array
-	j				->apontador do fim do array
+	i				-> inicio do array
+	j				-> fim do array
+
 
 Return:
 	-1	->se o voo nao for encontrado
@@ -69,7 +62,7 @@ int pesquisabinaria(char *codigo, char hora_partida, char min_partida, struct vo
 		return pesquisabinaria(codigo, hora_partida, min_partida, arr, i, m - 1);
 	}
 
-		if (hora_partida > arr[m].hora )
+	if (hora_partida > arr[m].hora )
 	{
 		// Restringe a pesquisa ao intervalo i..m - 1
 		return pesquisabinaria(codigo, hora_partida, min_partida, arr, m+1, j);
@@ -137,7 +130,7 @@ Descrição:
 	elimina um voo(codigo, hora_partida, min_partida) de um array(array)
 
 Argumentos:
-	codigo			->cogigo do areporto de chegada
+	codigo			->codigo do areporto de chegada
 	hora_partida	->hora de partida do voo
 	min_partida		->minutos de partida do voo
 	size			->tamanho do array
@@ -368,7 +361,9 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 /*
 printcaminho:
 Descrição:
-	função recurciva que mostra um caminho no std-out
+
+	função recursiva que mostra um caminho no std-out
+
 
 Argumentos:
 	curr	->ultimo no do caminho

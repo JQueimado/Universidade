@@ -6,8 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #define MAX_SIZE 20477
-#define PRIME 399989
+
 #define MAX_VOO 150
 
 struct tabela
