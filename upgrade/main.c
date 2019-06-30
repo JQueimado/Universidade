@@ -300,7 +300,7 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 		return true;
 	}
 
-	read(disk, aeroporto1, pos1);
+	//read(disk, aeroporto1, pos1);
 	//tenta remover do array
 	eliminaarray(codigo_chegada, hora_partida, min_partida, aeroporto1->ocupado, aeroporto1->voosDecorrer);
 
