@@ -7,7 +7,7 @@
 #include "basedados.h"
 #include "hashtable.h"
 
-#define MAX_NODE 750001 /* numero de nos maximo = numero maximo de voos + 1 */
+#define MAX_NODE 150053 /* numero de nos maximo = numero maximo de voos + 1 */
 
 /* AUX OP */
 unsigned short time_min(char hora, char min)
@@ -24,7 +24,11 @@ void translate_time(unsigned short mins, char *hora, char *min)
 /* Simple hash function */
 int hash_node( char* code )
 {
-    return code[0] + code[1] + code[2];
+    unsigned long hash = 5381;
+    int c;
+    while ((c = *code++))
+        hash = ((hash << 5) + hash) + c;  /*hash * 33 + c */    
+    return hash % MAX_NODE;
 }
 
 /* Struct for node */
