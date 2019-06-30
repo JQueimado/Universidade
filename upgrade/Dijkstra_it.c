@@ -93,59 +93,90 @@ Node* get_node(char* codigo, Node** hash )
     return hash[i];
 }
 
-struct PQueue
+/* Adaptado de https://www.geeksforgeeks.org/binary-heap/ */
+struct Heap
 {
-    struct Node* elem;      //4 bytes
-    struct PQueue* next;    //4 bytes
+    Node* array[MAX_NODE];
+    int end;
 }
-typedef PQueue;             //8 bytes = 2 paginas
+typedef Heap;
 
-PQueue* pqueue_add( PQueue* self, Node* node)
+Heap* new_heap()
 {
-    PQueue* temp = malloc( sizeof( PQueue ) );
-    temp->elem = node;
+    Heap* temp = malloc(sizeof(Heap));
+    temp->end = 0;
+    return temp;
+}
 
-    if( self == NULL )
+void heap_add( Heap* self, Node* node)
+{
+    self->array[self->end] = node;
+    int i = self->end;
+    while( i != 0 )
     {
-        temp->next = NULL;
-        return temp;
-    }
-
-    if( node->peso < self->elem->peso )
-    {
-        temp->next = self;
-        return temp;
-    }
-
-    PQueue* head = self;
-
-    while (self->next != NULL)
-    {
-        if( self->next->elem->peso > node->peso )
+        if( self->array[i]->peso < self->array[(i-1)/2]->peso )    
+        {
+            Node* temp = self->array[(i-1)/2];
+            self->array[(i-1)/2] = self->array[i];
+            self->array[i] = temp;
+            i = (i-1)/2;
+        }
+        else
+        {
             break;
-        self = self->next;
+        }
     }
-    
-    temp->next = self->next;
-    self->next = temp;
-    return head;
+    self->end ++;
 }
 
-PQueue *pop( PQueue *self)
+Node* heap_pop(Heap* self)
 {
-    PQueue* head = self->next;
-    free( self );
-    return head;
-}
+    Node* ret = self->array[0];
 
-void free_pqueue( PQueue *heap )
-{
-    while (heap != NULL)
+    if( self->end == 0 )
     {
-        PQueue* temp = heap->next;
-        free(heap);
-        heap = temp;
-    }   
+        return ret;
+    }
+
+    self->array[0] = self->array[self->end-1];
+    self->array[self->end-1] = NULL;
+    self->end--;
+
+    int i = 0;
+    while( 1 )
+    {
+        Node* left = NULL;
+        if( (2*i+1) < self->end )
+            left = self->array[2 * i + 1];
+
+        Node* right = NULL;
+        if( (2*i+2) < self->end )
+            right = self->array[2 * i + 2];
+
+        int min = i;   
+        if( left != NULL && left->peso < self->array[min]->peso )
+        {
+            min = 2*i+1;
+        }
+        
+        if( right != NULL && right->peso < self->array[min]->peso )
+        {
+            min = 2*i+2;
+        }
+
+        if( min != i )
+        {
+            Node* temp = self->array[i];
+            self->array[i] = self->array[min];
+            self->array[min] = temp;
+            i = min;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return ret;
 }
 
 void free_node( Node* nodes )
@@ -189,20 +220,20 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
     Node* cur_node = NULL;
     Node* nodes = add_Nodes(NULL, init_code, hash_nos);
     nodes->peso = time_min(hora_chegada, min_chegada);
-    PQueue* heap = pqueue_add(NULL, nodes);
+    Heap* heap = new_heap();
+    heap_add(heap, nodes);
 
     do
     {
         /* if heap is empty there are no more ways */
-        if( heap == NULL )
+        if( heap->end == 0 )
         {
             cur_node = NULL;
             break;
         }
 
         /* cycle heap */
-        cur_node = heap->elem;
-        heap = pop(heap);
+        cur_node = heap_pop(heap);
  
         /* cycle heap */
         if( strcmp( cur_node->name, final ) == 0 )
@@ -262,17 +293,15 @@ Caminho *dijkstra(hashtable *hash, FILE *disk, char *init_code, char hora_chegad
                 dest_node->hora = voo.hora;
                 dest_node->min = voo.min;
                 dest_node->dur = voo.duracao;
+                heap_add( heap, dest_node );
             }
-
-            heap = pqueue_add( heap, dest_node );
         }
         //puts("done.");
     }
     while( 1 );
 
     Caminho *n_caminho = build( cur_node );
-    
-    free_pqueue(heap);
+
     free_node(nodes);
     free( current );
 

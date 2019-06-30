@@ -220,34 +220,25 @@ bool criarVoo(char *codigo_partida, char *codigo_chegada, char hora, char min, s
 	}*/
 		free(aeroporto1);
 		return true;
-		//printf("%d\n",i);
-		//printf("%s\n",aeroporto1->voosDecorrer[i].hora_partida);
+		
 	}
 	//cria voo-
-	//strcpy(aeroporto1->voosDecorrer[0].aero_chegada,codigo_chegada); //RESOLVER BUG DE QUANDO CRIA DEVIA IMPRIMIR JÁ EXISTE
+
 	struct voos voo;
 	strcpy(voo.aero_chegada, codigo_chegada);
 	voo.hora = hora;
 	voo.min = min;
 
 	voo.duracao = duracao;
-	//printf("VOO:%s %s %d\n",voo.aero_chegada,voo.hora_partida,voo.duracao);
+	
 
-	//arrayordenado(voo, aeroporto1->ocupado, aeroporto1->voosDecorrer);
 	aeroporto1->voosDecorrer[aeroporto1->ocupado] = voo;
 	qsort(aeroporto1->voosDecorrer, aeroporto1->ocupado + 1, sizeof(*aeroporto1->voosDecorrer), cmp); //quick sort do standart
-	//aeroporto1->voosDecorrer[0] = voo;
 
-	//printf("cod: %s\n",aeroporto1->voosDecorrer[0].aero_chegada);
 
 	printf("+ novo voo %s %s %02d:%02d\n", codigo_partida, codigo_chegada, hora, min);
 
-	//printf("cona\n");
 
-	for(int i=0;i<=aeroporto1->ocupado;i++)
-	{
-	//printf("cod: %s %02d:%02d\n",aeroporto1->voosDecorrer[i].aero_chegada,aeroporto1->voosDecorrer[i].hora,aeroporto1->voosDecorrer[i].min);
-	}
 	//guarda no disco
 	aeroporto1->ocupado += 1;
 	write(disk, aeroporto1, pos1);
@@ -300,7 +291,7 @@ bool elimina_voo(char *codigo_partida, char *codigo_chegada, char hora_partida, 
 		return true;
 	}
 
-	read(disk, aeroporto1, pos1);
+	//read(disk, aeroporto1, pos1);
 	//tenta remover do array
 	eliminaarray(codigo_chegada, hora_partida, min_partida, aeroporto1->ocupado, aeroporto1->voosDecorrer);
 
