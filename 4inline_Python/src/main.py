@@ -6,4 +6,4 @@ if __name__ == "__main__":
 
     tree = MinMaxTree( istate )
 
-    print( tree.minmax( 8 ) )
+    print( tree.minmax( 10 ) )

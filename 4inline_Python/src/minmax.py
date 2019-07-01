@@ -44,7 +44,7 @@ class MinMaxTree:
         self.root = Node( inithial_state )
 
     def minmax_rec(self, node, prof, player, plim):
-        print()
+        
         state = node.get_state()
         c = state.term()
 
