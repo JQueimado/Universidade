@@ -46,7 +46,7 @@ class MinMaxTree:
     def minmax_rec(self, node, prof, player, plim):
         
         state = node.get_state()
-        c = state.term()
+        c = state.term_state()
 
         inf = float('inf')
 
@@ -85,7 +85,7 @@ class MinMaxTree:
 
     def minmax(self, plim):
         inithial = self.root
-        c = inithial.get_state().term()
+        c = inithial.get_state().term_state()
         
         if( c != 0 ):
             return c

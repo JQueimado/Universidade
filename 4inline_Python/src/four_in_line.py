@@ -82,6 +82,57 @@ class State:
                 l.append(temp)
         return l
 
+    ############################## Auciliares ##############################
+
+    def get_line(self, l, matrix):
+        return matrix[l]
+    
+    def get_colum(self, c, matrix):
+        l = []
+        for i in range(Y_Size):
+            l.append( matrix[i][c] )
+        return l
+
+    def get_diag_up_bot(self, n, matrix):
+        l = []
+
+        if( n < Y_Size ):
+            x = 0
+            y = Y_Size-1 - n
+            for i in range(n+1):
+                l.append( matrix[y][x] )
+                x += 1
+                y += 1
+        elif ( n >= Y_Size ):
+            n = n - Y_Size + 1
+            x = n
+            y = 0
+            for i in range( X_Size - n):
+                l.append( matrix[y][x] )
+                x+=1
+                y+=1
+        return l
+
+    def get_diag_bot_up(self, n, matrix):
+        l = []
+
+        if( n < Y_Size ):
+            x = 0
+            y = n
+            for i in range(n+1):
+                l.append( matrix[y][x] )
+                x += 1
+                y -= 1
+        elif ( n >= Y_Size ):
+            n = n - Y_Size + 1
+            x = n
+            y = Y_Size - 1
+            for i in range( X_Size - n):
+                l.append( matrix[y][x] )
+                x+=1
+                y-=1
+        return l
+
     ############################## End Game Checks ################################
 
     # check #
@@ -113,200 +164,79 @@ class State:
     # check lines #
     def check_lines(self, matrix):
         for i in range(Y_Size):
-            c = self.check( matrix[i] )
+            c = self.check( self.get_line(i, matrix) )
             if( c != 0):
                 return c
         return 0
-
-    # get colum #
-    def get_colum(self, colum, matrix):
-        c = []
-        for i in range(Y_Size):
-            line = matrix[i]
-            c.append(line[colum])
-        return c
 
     # check_colums #
     def check_colums(self, matrix):
         for i in range(X_Size):
-            col = self.get_colum(i, matrix)
-
-            c = self.check(col)
-
-            if( c != 0 ):
+            c = self.check( self.get_colum(i, matrix) )
+            if( c != 0):
                 return c
-        
         return 0
 
     # check_diagonal #
     def check_diagonal_1(self, matrix):
-        # 0 to half #
-        for i in range(Y_Size - 1, -1, -1):
-            l = []
-            x = 0
-            y = i
-
-            for j in range( Y_Size - i):
-                l.append( matrix[y][x] )
-                x += 1
-                y += 1
-
-            c = self.check(l)
-
+        for i in range(Y_Size + X_Size -1):
+            c = self.check( self.get_diag_bot_up(i, matrix) )
             if( c != 0):
                 return c
-
-        # half to 7 #
-        for i in range(1, X_Size):
-            l = []
-            x = i
-            y = 0
-
-            for j in range( Y_Size - i + 1 ):
-                l.append( matrix[y][x] )
-                x += 1
-                y += 1
-
-            c = self.check(l)
-
-            if( c != 0):
-                return c
-
         return 0
 
     # check_diagonal_2 #
     def check_diagonal_2(self, matrix):
-
-        for i in range(X_Size - 1):
-            l = []
-            x = i
-            y = 0
-
-            for j in range( i + 1 ):
-                l.append( matrix[y][x] )
-                x -= 1 
-                y += 1
-
-            c = self.check(l)
-
+        for i in range(Y_Size + X_Size -1):
+            c = self.check( self.get_diag_up_bot(i, matrix) )
             if( c != 0):
                 return c
-
-        for i in range( Y_Size ):
-            l = []
-            x = X_Size -1
-            y = i
-
-            for j in range( Y_Size - i, 0, -1):
-                l.append( matrix[y][x] )
-                x -= 1
-                y += 1
-
-            c = self.check(l)
-
-            if( c != 0):
-                return c
-        
         return 0
 
-    # end game #
-    def term(self):
+    def term_state(self):
         matrix = self.generate_state()
-
-        c = self.check_lines( matrix )
-        if( c != 0 ):
+        
+        c = self.check_lines(matrix)
+        if c != 0:
             return c
 
-        c = self.check_colums( matrix )
-        if( c != 0 ):
+        c = self.check_colums(matrix)
+        if c != 0:
             return c
 
-        c = self.check_diagonal_1( matrix )
-        if( c != 0 ):
+        c = self.check_diagonal_1(matrix)
+        if c != 0:
             return c
 
-        c = self.check_diagonal_2( matrix )
-        if( c != 0 ):
+        c = self.check_diagonal_2(matrix)
+        if c != 0:
             return c
 
         return 0
 
     ####################### Eval State ############################
 
-    # evals colums #
-    def val_col(self, matrix):
-        s = 0
+    def can_win():
+        pass
 
-        for i in range(Y_Size):
-            # gets colum values #
-            l = self.get_colum( i , matrix)
-
-            # finds possible winner #
-            c = 0
-
-            for e in l:
-                if( e != EP ):
-                    break
-                c += 1
-
-            # if no player then valueles #
-            if( c >= len( l ) ):
+    def val_lis(self, l):
+        p = 0
+        cout = 0
+        for e in l:
+            if(e == 0):
+                cout = 0
                 continue
 
-            # gets chances for player #
-            t = l[c]
-            p = 1
+            if( e != p):
+                cout = 0
+                p = e
 
-            if( t == P2 ):
-                p = -1
 
-            count = 0
-            j = 0
 
-            for j in range( c, len( l ) ):
-                if( l[j] != t ):
-                    break
-                count += p
+        pass
 
-            # if any player cant win then its valueles #
-            if( j < WIN ):
-                continue
-
-            s += count
-
-        return s
-
-    def val_line(self, l):
-        count = 0
-        val = 0
-        t = EP
-
-        i = 0
-        while True:
-            e = l[i]
-            i += 1
-
-            if( e == P1 or e == EP):
-                val += 1
-
-            if( e == P2):
-                pass
-
-            if( i >= len(l)):
-                break
-
-        return count
-
-    def val_lines( self, matrix ):
-        s = 0
-        for l in matrix:
-            self.val_line(l)
-
-    # val #
     def val(self):
-        matrix = self.generate_state()
-        s = self.val_col( matrix )
-        return s
+        state = self.generate_state()
 
 ####################### Main ############################
 
@@ -318,17 +248,15 @@ if __name__ == "__main__":
     state0.add_move(1,3)
     state0.add_move(1,4)
     state0.add_move(2,6)
+    state0.add_move(2,5)
+    state0.add_move(2,5)
 
     state0.show()
 
-    expancion = state0.expand_state(1)
+    print( state0.get_line( Y_Size-1, state0.generate_state() ) )
+    print( state0.get_colum( X_Size-1, state0.generate_state() ) )
 
-    print()
-    print( state0.term() )
-
-    print()
-    print( state0.val() )
-
-    for ex in expancion:
-        print()
-        ex.show()
+    for i in range(X_Size + Y_Size -1):
+        if( i == Y_Size):
+            print("Done")
+        print( state0.get_diag_bot_up(i, state0.generate_state() ))
