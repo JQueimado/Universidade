@@ -217,20 +217,17 @@ class State:
     ####################### Eval State ############################
 
     def val_four(self, l, player):
-        ep_c = 0
         for e in l:
             if e != player and e != EP:
-                return -1
-            if e == EP:
-                ep_c += 1
-        if( ep_c == 4 ):
+                return 0
+        if l.count(EP) == 0:
             return 0
-        return 1
+        return l.count(player)
 
     def val_lis(self, l, player):
         val = 0
-        for i in range( len(l)-WIN-1 ):
-            val += self.val_four( l[i:i+WIN], player )
+        for i in range( len(l)-(WIN-1) ):
+            val += self.val_four( l[i:(i+WIN)], player )
         return val
 
     def val_lines(self, matrix, player ):
@@ -257,13 +254,17 @@ class State:
             val += self.val_lis( self.get_diag_up_bot(i,matrix), player)
         return val
 
-    def val(self, player):
+    def val(self, player, t_player):
         val = 0
         matrix = self.generate_state()
         val += self.val_lines( matrix, player)
         val += self.val_colums( matrix, player)
         val += self.val_diag_1( matrix, player)
         val += self.val_diag_2( matrix, player)
+
+        if player != t_player:
+            return -val
+
         return val
 
 ####################### Main ############################
@@ -281,7 +282,7 @@ if __name__ == "__main__":
 
     state0.show()
 
-    print( state0.val(P1) )
+    print( state0.val(P1, P1) )
 
     for i in range(X_Size + Y_Size -1):
         if( i == Y_Size):

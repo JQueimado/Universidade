@@ -76,10 +76,9 @@ class AlfaBetaCut:
         else:
             p = 1
 
-        l = []
         val = 0
         if player == t_player:
-            maxval = inf
+            maxval = -inf
             for n in node.children:
                 v = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta )
                 maxval = max( maxval, v )
@@ -89,7 +88,7 @@ class AlfaBetaCut:
             node.value = maxval
             val = maxval
         else:
-            minval = -inf
+            minval = inf
             for n in node.children:
                 v = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta )
                 minval = min(minval,v)
