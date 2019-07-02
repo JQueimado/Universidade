@@ -3,7 +3,6 @@ from four_in_line import *
 
 EXPAN = 7
 
-inf = 100000000
 if __name__ == "__main__":
     istate = State()
 
