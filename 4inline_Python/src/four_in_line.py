@@ -216,45 +216,72 @@ class State:
 
     ####################### Eval State ############################
 
-    def can_win():
-        pass
-
-    def val_lis(self, l):
-        p = 0
-        cout = 0
+    def val_four(self, l, player):
+        ep_c = 0
         for e in l:
-            if(e == 0):
-                cout = 0
-                continue
+            if e != player and e != EP:
+                return -1
+            if e == EP:
+                ep_c += 1
+        if( ep_c == 4 ):
+            return 0
+        return 1
 
-            if( e != p):
-                cout = 0
-                p = e
+    def val_lis(self, l, player):
+        val = 0
+        for i in range( len(l)-WIN-1 ):
+            val += self.val_four( l[i:i+WIN], player )
+        return val
 
+    def val_lines(self, matrix, player ):
+        val = 0
+        for i in range(Y_Size):
+            val += self.val_lis( self.get_line(i,matrix), player)
+        return val
 
+    def val_colums(self, matrix, player ):
+        val = 0
+        for i in range(X_Size):
+            val += self.val_lis( self.get_colum(i,matrix), player)
+        return val
 
-        pass
+    def val_diag_1(self, matrix, player ):
+        val = 0
+        for i in range(X_Size + Y_Size - 1):
+            val += self.val_lis( self.get_diag_bot_up(i,matrix), player)
+        return val
 
-    def val(self):
-        state = self.generate_state()
+    def val_diag_2(self, matrix, player ):
+        val = 0
+        for i in range(X_Size + Y_Size - 1):
+            val += self.val_lis( self.get_diag_up_bot(i,matrix), player)
+        return val
+
+    def val(self, player):
+        val = 0
+        matrix = self.generate_state()
+        val += self.val_lines( matrix, player)
+        val += self.val_colums( matrix, player)
+        val += self.val_diag_1( matrix, player)
+        val += self.val_diag_2( matrix, player)
+        return val
 
 ####################### Main ############################
 
 if __name__ == "__main__":
     state0 = State()
 
-    state0.add_move(1,1)
-    state0.add_move(1,2)
-    state0.add_move(1,3)
-    state0.add_move(1,4)
-    state0.add_move(2,6)
-    state0.add_move(2,5)
-    state0.add_move(2,5)
+    #state0.add_move(1,0)
+    #state0.add_move(1,1)
+    #state0.add_move(1,2)
+    #state0.add_move(1,3)
+    #state0.add_move(1,4)
+    state0.add_move(1,5)
+    state0.add_move(1,5)
 
     state0.show()
 
-    print( state0.get_line( Y_Size-1, state0.generate_state() ) )
-    print( state0.get_colum( X_Size-1, state0.generate_state() ) )
+    print( state0.val(P1) )
 
     for i in range(X_Size + Y_Size -1):
         if( i == Y_Size):
