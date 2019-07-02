@@ -52,21 +52,21 @@ class MinMaxTree:
 
         if( c == 1 ):
             state.show()
-            node.value = inf
             print( "win" )
-            return inf
+            v = state.val(t_player)
+            node.value = v
+            return v
 
         if( c == -1):
             state.show()
             print( "lose" )
-            node.value = -inf
-            return -inf
+            v = state.val(t_player)
+            node.val = v
+            return v
 
         if( plim == prof ):
-            state.show()
             v = state.val(t_player)
             node.value = v
-            print("leaf " + str(v) )
             return v
 
         node.expand( player )
@@ -92,13 +92,21 @@ class MinMaxTree:
         return val
 
 
-    def build_caminho(self, node, val):
-        if( len(node.children) == 0 ):
-            return []
-        for i in node.children:
-            if( i.value == val ):
-                return self.build_caminho( i, val ).append(i)
-        return []
+    def build_caminho(self, node):
+        val = self.root.value
+        node = self.root
+        l = []
+        while True:
+            l.append( node )
+            
+            if len( node.children ) == 0:
+                break
+
+            for e in node.children:
+                if e.value == val:
+                    node = e
+                    break
+        return l
 
     def minmax(self, plim, player):
         inithial = self.root
@@ -109,6 +117,6 @@ class MinMaxTree:
 
         val = self.minmax_rec( inithial, 0, 1, player, plim)
 
-        l = self.build_caminho( self.root, val )
+        l = self.build_caminho( self.root )
 
         return val, l
