@@ -1,16 +1,12 @@
 from nim import *
-
+from minmax_nim import *
+from alfabetacut_nim import *
 AI = P1
 US = P2
 
 if __name__ == "__main__":
     exp = int(input("nivel de expanção:"))
     alg = input("minmax ou alfabeta?")
-    
-    if alg == "minmax":
-        from minmax_nim import *
-    elif alg == "alfabeta":
-        from alfabetacut_nim import *
     
     nV = int(input("numero de varas:"))
     fp = input("jogar primeiro:")
@@ -20,7 +16,11 @@ if __name__ == "__main__":
         V.append(int(input("vara "+str(i)+":")))
 
     state = State(V)
-    tree = MinMaxTree( state )
+    if alg == "minmax":
+        tree = MinMaxTree( state )
+    else:
+        tree = AlfaBetaCut( state )
+
     if fp != "s":
         tree.minmax(exp, AI, AI)
     
