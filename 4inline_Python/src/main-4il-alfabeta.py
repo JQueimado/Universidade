@@ -1,4 +1,4 @@
-from alfabetacut import *
+from alfabetacut_4il import *
 from four_in_line import *
 
 EXPAN = 7

@@ -1,10 +1,11 @@
-from minmax import *
-from four_in_line import *
+from minmax_nim import *
+from nim import *
 
 EXPAN = 7
+V = [1,2,3,4]
 
 if __name__ == "__main__":
-    istate = State()
+    istate = State(V)
 
     tree = MinMaxTree( istate )
     val , l = tree.minmax( EXPAN, P1 )

@@ -136,16 +136,16 @@ class State:
     ############################## End Game Checks ################################
 
     # check #
-    def check(self, line):
+    def check(self, line, t_player):
         val = 0
         count1 = 0
         count2 = 0
 
         for elm in line:
-            if( elm == P1 ):
+            if( elm == t_player ):
                 count1 += 1
                 count2 = 0
-            elif( elm == P2 ):
+            elif( elm != t_player and elm != EP ):
                 count1 = 0
                 count2 += 1
 
@@ -162,53 +162,53 @@ class State:
         return 0
 
     # check lines #
-    def check_lines(self, matrix):
+    def check_lines(self, matrix, t_player):
         for i in range(Y_Size):
-            c = self.check( self.get_line(i, matrix) )
+            c = self.check( self.get_line(i, matrix), t_player )
             if( c != 0):
                 return c
         return 0
 
     # check_colums #
-    def check_colums(self, matrix):
+    def check_colums(self, matrix, t_player):
         for i in range(X_Size):
-            c = self.check( self.get_colum(i, matrix) )
+            c = self.check( self.get_colum(i, matrix), t_player )
             if( c != 0):
                 return c
         return 0
 
     # check_diagonal #
-    def check_diagonal_1(self, matrix):
+    def check_diagonal_1(self, matrix, t_player):
         for i in range(Y_Size + X_Size -1):
-            c = self.check( self.get_diag_bot_up(i, matrix) )
+            c = self.check( self.get_diag_bot_up(i, matrix), t_player )
             if( c != 0):
                 return c
         return 0
 
     # check_diagonal_2 #
-    def check_diagonal_2(self, matrix):
+    def check_diagonal_2(self, matrix, t_player):
         for i in range(Y_Size + X_Size -1):
-            c = self.check( self.get_diag_up_bot(i, matrix) )
+            c = self.check( self.get_diag_up_bot(i, matrix), t_player )
             if( c != 0):
                 return c
         return 0
 
-    def term_state(self):
+    def term_state(self, t_player):
         matrix = self.generate_state()
         
-        c = self.check_lines(matrix)
+        c = self.check_lines(matrix, t_player)
         if c != 0:
             return c
 
-        c = self.check_colums(matrix)
+        c = self.check_colums(matrix, t_player)
         if c != 0:
             return c
 
-        c = self.check_diagonal_1(matrix)
+        c = self.check_diagonal_1(matrix, t_player)
         if c != 0:
             return c
 
-        c = self.check_diagonal_2(matrix)
+        c = self.check_diagonal_2(matrix, t_player)
         if c != 0:
             return c
 

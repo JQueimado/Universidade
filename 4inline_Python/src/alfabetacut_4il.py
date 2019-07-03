@@ -48,7 +48,7 @@ class AlfaBetaCut:
     def minmax_rec(self, node, prof, t_player, player, plim, alfa, beta):
         
         state = node.get_state()
-        c = state.term_state()
+        c = state.term_state(t_player)
 
         if( c == 1 ):
             state.show()
@@ -119,7 +119,7 @@ class AlfaBetaCut:
 
     def minmax(self, plim, player):
         inithial = self.root
-        c = inithial.get_state().term_state()
+        c = inithial.get_state().term_state(player)
         
         if( c != 0 ):
             return c
