@@ -78,8 +78,8 @@ class State:
     def val(self, player, t_player):
         n = sum(self.tab)
         if( player == t_player):
-            return n
-        return -n
+            return -n
+        return n
 
 if __name__ == "__main__":
     V = [1,2,3,4]

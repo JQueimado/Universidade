@@ -65,7 +65,7 @@ class MinMaxTree:
             return v
 
         if( plim == prof ):
-            state.show()
+            #state.show()
             v = state.val(player, t_player)
             node.value = v
             return v
@@ -109,14 +109,14 @@ class MinMaxTree:
                     break
         return l
 
-    def minmax(self, plim, player):
+    def minmax(self, plim, player, t_player):
         inithial = self.root
-        c = inithial.get_state().term_state(player)
+        c = inithial.get_state().term_state(t_player)
         
         if( c != 0 ):
             return c
 
-        val = self.minmax_rec( inithial, 0, 1, player, plim)
+        val = self.minmax_rec( inithial, 0, player, t_player, plim)
 
         l = self.build_caminho( self.root )
 
