@@ -82,7 +82,7 @@ class MinMaxTree:
         l = []
 
         for n in node.children:
-            v = self.minmax_rec( n, prof+1, t_player, p, plim, n_node)
+            v, n_node = self.minmax_rec( n, prof+1, t_player, p, plim, n_node)
             l.append( v )
 
         if( player == t_player ):
@@ -118,8 +118,8 @@ class MinMaxTree:
         if( c != 0 ):
             return c
 
-        val, n_node = self.minmax_rec( inithial, 0, player, t_player, plim, 0)
+        val, nn_node = self.minmax_rec( inithial, 0, player, t_player, plim, 0)
 
-        l = self.build_caminho( self.root )
+        #l = self.build_caminho( self.root )
 
-        return val, l, n_node 
+        return val, nn_node 

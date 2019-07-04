@@ -45,29 +45,31 @@ class AlfaBetaCut:
     def __init__( self , inithial_state):
         self.root = Node( inithial_state )
 
-    def minmax_rec(self, node, prof, t_player, player, plim, alfa, beta):
+    def minmax_rec(self, node, prof, t_player, player, plim, alfa, beta, n_node):
         
         state = node.get_state()
         c = state.term_state(t_player)
+
+        n_node += 1
 
         if( c == 1 ):
             state.show()
             print( "win" )
             v = state.val(player, t_player)
             node.value = v
-            return v
+            return v, n_node
 
         if( c == -1):
             state.show()
             print( "lose" )
             v = state.val(player, t_player)
             node.val = v
-            return v
+            return v, n_node
 
         if( plim == prof ):
             v = state.val(player, t_player)
             node.value = v
-            return v
+            return v, n_node
 
         node.expand( player )
 
@@ -80,7 +82,7 @@ class AlfaBetaCut:
         if player == t_player:
             maxval = -inf
             for n in node.children:
-                v = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta )
+                v, n_node = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta, n_node )
                 maxval = max( maxval, v )
                 alfa = max( alfa, v )
                 if beta <= alfa:
@@ -90,7 +92,7 @@ class AlfaBetaCut:
         else:
             minval = inf
             for n in node.children:
-                v = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta )
+                v, n_node = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta, n_node )
                 minval = min(minval,v)
                 beta = min( beta, v )
                 if beta <= alfa:
@@ -98,7 +100,7 @@ class AlfaBetaCut:
             node.value = minval
             val = minval
 
-        return val
+        return val, n_node
 
 
     def build_caminho(self, node):
@@ -124,8 +126,8 @@ class AlfaBetaCut:
         if( c != 0 ):
             return c
 
-        val = self.minmax_rec( inithial, 0, player, t_player, plim, -inf, inf )
+        val, n_node = self.minmax_rec( inithial, 0, player, t_player, plim, -inf, inf, 0 )
 
-        l = self.   build_caminho( self.root )
+        l = self.build_caminho( self.root )
 
-        return val, l
+        return val, l, n_node
