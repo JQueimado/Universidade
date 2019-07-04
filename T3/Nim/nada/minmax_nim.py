@@ -1,9 +1,9 @@
-from four_in_line import *
+from nim import *
 import pickle;
 
 FILE_NAME = "cache.bin"
 
-inf = 100000000
+N_NODE = 0
 
 class Node:
     fp = -1
@@ -39,16 +39,18 @@ class Node:
             nnode = Node( s )
             self.children.append( nnode )
         
-class AlfaBetaCut:
+class MinMaxTree:
     root = None
 
     def __init__( self , inithial_state):
         self.root = Node( inithial_state )
 
-    def minmax_rec(self, node, prof, t_player, player, plim, alfa, beta):
+    def minmax_rec(self, node, prof, t_player, player, plim):
         
         state = node.get_state()
         c = state.term_state(t_player)
+
+        N_NODE += 1
 
         if( c == 1 ):
             #state.show()
@@ -65,6 +67,7 @@ class AlfaBetaCut:
             return v
 
         if( plim == prof ):
+            #state.show()
             v = state.val(player, t_player)
             node.value = v
             return v
@@ -76,27 +79,18 @@ class AlfaBetaCut:
         else:
             p = 1
 
-        val = 0
-        if player == t_player:
-            maxval = -inf
-            for n in node.children:
-                v = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta )
-                maxval = max( maxval, v )
-                alfa = max( alfa, v )
-                if beta <= alfa:
-                    break
-            node.value = maxval
-            val = maxval
+        l = []
+
+        for n in node.children:
+            v = self.minmax_rec( n, prof+1, t_player, p, plim)
+            l.append( v )
+
+        if( player == t_player ):
+            val = max(l)
         else:
-            minval = inf
-            for n in node.children:
-                v = self.minmax_rec( n, prof+1, t_player, p, plim, alfa, beta )
-                minval = min(minval,v)
-                beta = min( beta, v )
-                if beta <= alfa:
-                    break
-            node.value = minval
-            val = minval
+            val = min(l)
+
+        node.value = val
 
         return val
 
@@ -124,8 +118,8 @@ class AlfaBetaCut:
         if( c != 0 ):
             return c
 
-        val = self.minmax_rec( inithial, 0, player, t_player, plim, -inf, inf )
+        val = self.minmax_rec( inithial, 0, player, t_player, plim)
 
-        l = self.   build_caminho( self.root )
+        l = self.build_caminho( self.root )
 
-        return val, l
+        return val, l, N_NODE

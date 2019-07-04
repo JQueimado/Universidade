@@ -51,15 +51,15 @@ class MinMaxTree:
         inf = 1000
 
         if( c == 1 ):
-            state.show()
-            print( "win" )
+            #state.show()
+            #print( "win" )
             v = state.val(player, t_player)
             node.value = v
             return v
 
         if( c == -1):
-            state.show()
-            print( "lose" )
+            #state.show()
+            #print( "lose" )
             v = state.val(player, t_player)
             node.val = v
             return v
