@@ -66,3 +66,4 @@ if __name__ == "__main__":
         elif f == -1:
             print("Ganhas-te")
             break
+    state.show()

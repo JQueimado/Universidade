@@ -57,20 +57,20 @@ class MinMaxTree:
             #print( "win" )
             v = state.val(player, t_player)
             node.value = v
-            return v
+            return v, n_node
 
         if( c == -1):
             #state.show()
             #print( "lose" )
             v = state.val(player, t_player)
             node.val = v
-            return v
+            return v, n_node
 
         if( plim == prof ):
             #state.show()
             v = state.val(player, t_player)
             node.value = v
-            return v
+            return v, n_node
 
         node.expand( player )
 
@@ -92,7 +92,7 @@ class MinMaxTree:
 
         node.value = val
 
-        return val
+        return val ,n_node
 
 
     def build_caminho(self, node):
@@ -118,8 +118,8 @@ class MinMaxTree:
         if( c != 0 ):
             return c
 
-        val = self.minmax_rec( inithial, 0, player, t_player, plim)
+        val, n_node = self.minmax_rec( inithial, 0, player, t_player, plim, 0)
 
         l = self.build_caminho( self.root )
 
-        return val, l, N_NODE
+        return val, l, n_node 
