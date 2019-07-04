@@ -45,12 +45,12 @@ class MinMaxTree:
     def __init__( self , inithial_state):
         self.root = Node( inithial_state )
 
-    def minmax_rec(self, node, prof, t_player, player, plim):
+    def minmax_rec(self, node, prof, t_player, player, plim, n_node):
         
         state = node.get_state()
         c = state.term_state(t_player)
 
-        N_NODE += 1
+        n_node += 1
 
         if( c == 1 ):
             #state.show()
@@ -82,7 +82,7 @@ class MinMaxTree:
         l = []
 
         for n in node.children:
-            v = self.minmax_rec( n, prof+1, t_player, p, plim)
+            v = self.minmax_rec( n, prof+1, t_player, p, plim, n_node)
             l.append( v )
 
         if( player == t_player ):

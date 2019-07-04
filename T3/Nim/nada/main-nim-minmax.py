@@ -13,4 +13,4 @@ if __name__ == "__main__":
         print(" result: ")
         i.get_state().show()
     print( "MINMAX value: " + str( val ) )
-    print( "Nodes ", )
+    print( "Nodes ",  )
