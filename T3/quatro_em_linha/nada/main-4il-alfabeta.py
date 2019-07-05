@@ -7,8 +7,7 @@ if __name__ == "__main__":
     istate = State()
 
     tree = AlfaBetaCut( istate )
-    val , l = tree.minmax( EXPAN, P1 )
-    for i in l:
-        print(" result: ")
-        i.get_state().show()
+    val , nn_node = tree.minmax( EXPAN, P1, P1 )
+
     print( "MINMAX value: " + str( val ) )
+    print( nn_node )
