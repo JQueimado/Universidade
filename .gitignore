@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 4_inline_Python/__pycache__
 4_inline_Python\__pycache__
 *.txt
 test.txt
 *.bin
 *.pyc
+=======
+*.txt
+.vscode
+>>>>>>> TrabSo1_2

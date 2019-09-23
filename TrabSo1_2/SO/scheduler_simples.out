@@ -1,0 +1,28 @@
+instante     0:|   new    |
+instante     1:|  ready   |   new    |
+instante     2:| blocked  |  ready   |   new    |
+instante     3:| blocked  |   run    |  ready   |   new    |
+instante     4:| blocked  | blocked  |  ready   |  ready   |
+instante     5:|  ready   | blocked  | blocked  |  ready   |
+instante     6:|  ready   | blocked  | blocked  |   run    |
+instante     7:|  ready   |  ready   | blocked  | blocked  |
+instante     8:|   run    |  ready   | blocked  | blocked  |
+instante     9:|   exit   |  ready   |  ready   | blocked  |
+instante    10:|          |   run    |  ready   | blocked  |
+instante    11:|          |   run    |  ready   |  ready   |
+instante    12:|          | blocked  |  ready   |  ready   |
+instante    13:|          | blocked  |   run    |  ready   |
+instante    14:|          | blocked  |   run    |  ready   |
+instante    15:|          |  ready   |   exit   |  ready   |
+instante    16:|          |  ready   |          |   run    |
+instante    17:|          |  ready   |          |   run    |   new    |
+instante    18:|          |  ready   |          | blocked  |  ready   |
+instante    19:|          |   run    |          | blocked  |  ready   |
+instante    20:|          |   run    |          | blocked  |  ready   |
+instante    21:|          |   exit   |          |  ready   |  ready   |
+instante    22:|          |          |          |  ready   |   run    |
+instante    23:|          |          |          |  ready   |   exit   |
+instante    24:|          |          |          |   run    |          |
+instante    25:|          |          |          |   run    |          |
+instante    26:|          |          |          |   exit   |          |
+instante    27:|          |          |          |          |          |
