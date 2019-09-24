@@ -1,0 +1,60 @@
+funcao time_min
+    O(1)
+    traduz o formato hh:mm para minutos
+
+funcao translate_time
+    O(1)
+    traduz o formato minutos para o formato hh:mm
+
+funcao hash_node
+    O(n)
+    converte um codigo num hash code utiliznado o algoritmo djb
+
+funcao add_node
+    O(n)
+    cria um no e adiciona o a hash table e ao inicio da linked list
+
+funcao get_node
+
+Heap
+    conciste num array de 750001 pointers onde cada ramo e uma posicao
+    do array com a anotacao prefixa sendo os filhos de um no i obtidos por
+    2*i+1 para o filho da esquerda e 2*i+2 para o filho da direita
+    end representa a posicao asseguir ao ultimo no ou seja o tamanho da Heap
+
+funcao heap_add
+    O(log(n))
+    adiciona um no na ultima posicao da heap de seguida procura fazer com que esse no fique
+    o mais alto possivel na heap sem quebra a condicao imposta pela perioridade.
+
+funcao heapify
+    O(log(n))
+    reorganiza uma heap procurando meter os nos menos pesado o mais a cima possivel
+
+funcao heap_pop
+    O(log(n))
+    remove e devolve o no do topo da heap e procede ao heapify
+
+funcao free_node
+    O(n)
+    liberta uma lista de nos 
+
+funcao dijsktra
+    O(m + nlog(n))
+    pesquisa um grafo orientado pesado de forma a pesquisar o menor de um no para qualquer outro no alcanssavel
+    no grafo.
+    
+    No nosso caso esta limitado a dois nos sendo o algoritmo interrompido assim que o no final e visitado
+    para auxiliar o dijsktra e utilizado um grafo linear repersentado por uma hashtable onde todos os nos estao
+    ligados linearmente e uma heap representada por um array de nos.
+    
+    Os nos que contem peso infinito nao estao repersentados em memoria sendo apenas adicionados quando atingem
+    um peso concreto.
+    
+    No caso da heap, sempre que um no atinge um peso concreto e adicionado a heap, caso o peso de um no seja 
+    alterado a heap procede a sua reorganisacao evitando adicionar nos desnessesarios a heap.
+    Quando e feita a verificacao de um no com um no que ja tenha cido visitado o algoritmo ignora a ligacao
+    pois ja nao e possivel existir um acaminho mais curto para esse no.
+
+    Cada no visitado contem a imformacao do pai e do voo que originou a ligacao mais curta sendo assim possivel reconstruir
+    o caminho de volta para o no inicial.
