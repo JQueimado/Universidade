@@ -1,8 +1,9 @@
 
-package server;
+package Server;
 
 import java.sql.*;
 import java.util.Vector;
+import org.postgresql.util.PSQLException;
 
 
 public class DBManager {
@@ -21,7 +22,7 @@ public class DBManager {
         
         // Setup database uri
         String uri = "jdbc:postgresql://" +host+":"+ port+"/"+database;
-        System.out.println("Connecting to: "+ uri);
+        System.out.println("[..]:Connecting to: "+ uri);
         
         // Create conection
         this.con = DriverManager.getConnection( uri, user, passwd );
@@ -29,7 +30,20 @@ public class DBManager {
         // Create Statement
         this.stmnt = con.createStatement();
         
-        System.out.println("Connection Sucssesfull!");
+        System.out.println("[OK]:Connection Sucssesfull!");
+        
+        // Integrity
+        try 
+        { 
+            String query = "Create table usertable( name text primary key );";
+            stmnt.executeUpdate(query);
+            System.err.println("[OK]:Created 'usertable' plz check if this was ment to happen");
+        } 
+        catch( PSQLException sqle )
+        {
+            /* If execption ocures it means the table already exixts */
+            System.out.println("[OK]:'usertable' already exixts");
+        } 
         
     }
     
@@ -51,41 +65,46 @@ public class DBManager {
     //*****************
     
     /* Methods */
-    // Add: Runs a sql insert query
-    public void add( String table, Object[] values ) throws Exception{
-        
-        String query = "insert into "+ table +" values(";
-       
-        // Generate quary
-        
-        // Code subject to changes
-        for ( Object v: values )
-        {
-            Class vClass = v.getClass();
-            
-            if (vClass == String.class)
-            {
-                query += "'" + (String) v +"'";
-            }
-            else if ( vClass == Integer.class )
-            {
-                query += (Integer) v;
-            }
-            else
-                throw new Exception( "Unsuported Object type" );
-            
-            query+=",";
+    
+    /* User Database */
+    
+    // AddUser: Runs a sql insert query on usertable
+    public void addUser( String user ) throws Exception{
+        try{
+            // Define Query
+            String query = "insert into usertable values( '" + user + "' );" ;
+
+            //Send Query
+            this.stmnt.executeUpdate(query);
         }
-        
-        query = query.substring(0,query.length()-1) + ");";
-        
-        System.out.println(query);
-        
-        //Send Query
-        this.stmnt.executeUpdate(query);
+        catch( SQLException psqle)
+        {
+           throw new Exception(" User '"+user+"' already exists" );
+       }
     }
     
-    public ResultSet get( String table )
+    // Checks if a user exists 
+    public boolean identifyUser( String name ) throws Exception {
+        
+        // Setup Query
+        String query = "Select name from usertable where name = '" + name +"' ;";
+
+        ResultSet resp = stmnt.executeQuery(query);
+        
+        // if empty no result
+        if( !resp.next())
+            return false;
+
+        // Imposible but i still check-it it  
+        if( !resp.isLast() )
+            throw new Exception("Response size invalid");
+
+        if( resp.getString("name").compareTo(name) != 0 )
+            throw new Exception("Response invalid");
+        
+        return true;
+        
+    }
     
     // Close: closes the connection to the database
     public void close() throws Exception {
