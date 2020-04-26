@@ -7,7 +7,7 @@ public class LoginAgentImp extends java.rmi.server.UnicastRemoteObject implement
 
     private DBManager mngr;
     
-    public LoginAgentImp(DBManager mngr) throws RemoteException{
+    public LoginAgentImp( DBManager mngr ) throws RemoteException{
         super();
         this.mngr = mngr;
     }
@@ -22,10 +22,12 @@ public class LoginAgentImp extends java.rmi.server.UnicastRemoteObject implement
                 System.out.println("[OK]:AddedUser '" + name +"'");
                 r += 1;
             }
+            
             System.out.println("[OK]:User '" + name + "' loggedin");
             return r+1;
         }
         catch( Exception e ){
+            System.err.println("ERR");
             e.printStackTrace();
             return 0;
         }

@@ -1,35 +1,29 @@
 package Client;
 
-import Remotes.LoginAgent;
+import java.util.Scanner;
 
 public class Client {
+    
     public static void main(String[] args) throws Exception {
         
         try
         {
-            RemoteManager rm = new RemoteManager();
+            Scanner scanner = new Scanner(System.in);
+            CommandExec cmd = new CommandExec( scanner );
             
-            /* Login User */
-            System.err.print("Login user:");
+            String name = cmd.loggin();
             
-            // Input
-            byte[] rawinput = new byte[20];
-            
-            int s = System.in.read(rawinput);
-            
-            String name = new String(rawinput);
-            name = name.substring(0,s-1);
-            
-            // Calls rm with name
-            int res = rm.login(name);
-            
-            if( res == 1 ){
-                System.out.println("New user Added :"+ name  );
+            while( true )
+            {
+                System.out.print( name + " >>");
+                
+                String[] a = scanner.nextLine().split(" ");
+                
+                if( a[0].compareTo("add") == 0 )
+                {
+                    cmd.add(a[1]);
+                }
             }
-            
-            System.out.println("Logged in as "+ name );
-            
-            
         }
         catch(Exception e)
         {

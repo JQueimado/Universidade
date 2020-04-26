@@ -22,4 +22,12 @@ public class RMIController {
         this.registry.rebind(name, obj);
     }
     
+    public Object getRemote( String name ) throws Exception{
+        
+        String lookuri = "rmi://localhost:1099/" + name;
+        
+        return java.rmi.Naming.lookup(lookuri);
+        
+    }
+    
 }

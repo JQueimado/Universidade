@@ -1,6 +1,8 @@
 package Server;
 
 import Remotes.LoginAgent;
+import Remotes.ProductAgent;
+import Remotes.RequestAgent;
 
 /*
     Class Server
@@ -18,24 +20,27 @@ public class Server {
             DBManager database = new DBManager();
             
             // Strat RemoteObject Manager
-            RMIController remote_obj_mngr = new RMIController();
+            RMIController rmic = new RMIController();
             
             // Start Remote objects
             System.out.println("[..]:Creating Remote instances");
             
-            LoginAgent logobj = new LoginAgentImp( database );
+            LoginAgent   la = new LoginAgentImp  ( database );
+            RequestAgent ra = new RequestAgentImp( database );
+            ProductAgent pa = new ProductAgentImp( database );
             
             System.out.println("[OK]:All instances created sucsesfully");
             
             // Add Objects to manager
             System.out.println("[..]:Linking Remote objects to the controller");
            
-            remote_obj_mngr.addRemoteObject(logobj, "loguser");
+            rmic.addRemoteObject(la, "loguser");
+            rmic.addRemoteObject(ra, "requestagent");
+            rmic.addRemoteObject(pa, "productagent");
             
             System.out.println("[OK]:Linked Sucsesfull");
             
             System.out.println("-- Server Start --");
-            
             
         }
         catch ( Exception e ){
