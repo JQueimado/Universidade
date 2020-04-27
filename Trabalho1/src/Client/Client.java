@@ -96,7 +96,7 @@ public class Client {
             
             while( true )
             {
-                System.out.print( name + " >>");
+                System.out.print( name + " >> ");
                 
                 String[] a = scanner.nextLine().split(" ");
                 
