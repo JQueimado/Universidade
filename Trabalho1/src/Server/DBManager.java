@@ -18,7 +18,7 @@ public class DBManager {
     
     /* Constructors */
     
-    //Normal call no default parametrers
+    //Normal call no default parameters
     public DBManager( String user, String passwd, String database, String host, int port, Properties properties ) throws Exception{
         Class.forName("org.postgresql.Driver");
         
@@ -43,12 +43,12 @@ public class DBManager {
         { 
             String query = "Create table "+ this.usertable +"( name text primary key );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created '"+ this.usertable +"' plz check if this was ment to happen");
+            System.err.println("[OK]:Created '"+ this.usertable +"' plz check if this was meant to happen");
         } 
         catch( PSQLException sqle )
         {
-            /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'"+ this.usertable +"' already exixts");
+            /* If execption occures it means the table already exists */
+            System.out.println("[OK]:'"+ this.usertable +"' already exists");
 
         } 
         
@@ -56,24 +56,24 @@ public class DBManager {
         { 
             String query = "Create table "+ this.producttable +"( product text primary key, loc text );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created '"+ this.producttable +"' plz check if this was ment to happen");
+            System.err.println("[OK]:Created '"+ this.producttable +"' plz check if this was meant to happen");
         } 
         catch( PSQLException sqle )
         {
-            /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'"+ this.producttable +"' already exixts");
+            /* If exeception ocures it means the table already exists */
+            System.out.println("[OK]:'"+ this.producttable +"' already exists");
         }
         
         try 
         { 
             String query = "create table "+this.requesttable+"( ident int primary key, product text references producttable(product), name text references usertable(name) );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created '"+this.requesttable+"' plz check if this was ment to happen");
+            System.err.println("[OK]:Created '"+this.requesttable+"' plz check if this was meant to happen");
         } 
         catch( PSQLException sqle )
         {
-            /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'"+this.requesttable+"' already exixts");
+            /* If exeception occures it means the table already exists */
+            System.out.println("[OK]:'"+this.requesttable+"' already exists");
         } 
         
     }
@@ -136,7 +136,7 @@ public class DBManager {
         if( !resp.next())
             return false;
 
-        // Impossible but i still check-it it  
+        // Impossible but i still check it  
         if( !resp.isLast() )
             throw new Exception("Response size invalid");
 
