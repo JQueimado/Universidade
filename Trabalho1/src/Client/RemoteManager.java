@@ -75,7 +75,7 @@ public class RemoteManager {
         return r;
     }
     
-    // Set avalable
+    // Set available
     public boolean set_avalable( String product, String loc ){
         try
         {

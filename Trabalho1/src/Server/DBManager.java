@@ -38,7 +38,7 @@ public class DBManager {
         // Create Statement
         this.stmnt = con.createStatement();
         
-        System.out.println("[OK]:Connection Sucssesfull!");
+        System.out.println("[OK]:Connection Successful!");
         
         // Integrity
         try 
@@ -51,6 +51,7 @@ public class DBManager {
         {
             /* If execption ocures it means the table already exixts */
             System.out.println("[OK]:'"+ this.usertable +"' already exixts");
+
         } 
         
         try 
@@ -137,7 +138,7 @@ public class DBManager {
         if( !resp.next())
             return false;
 
-        // Imposible but i still check-it it  
+        // Impossible but i still check-it it  
         if( !resp.isLast() )
             throw new Exception("Response size invalid");
 

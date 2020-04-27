@@ -19,11 +19,11 @@ public class LoginAgentImp extends java.rmi.server.UnicastRemoteObject implement
             int r = 0;
             if( !this.mngr.identifyUser(name) ){
                 this.mngr.addUser(name);
-                System.out.println("[OK]:AddedUser '" + name +"'");
+                System.out.println("[OK]:Added User '" + name +"'");
                 r += 1;
             }
             
-            System.out.println("[OK]:User '" + name + "' loggedin");
+            System.out.println("[OK]:User '" + name + "' logged in");
             return r+1;
         }
         catch( Exception e ){

@@ -42,7 +42,7 @@ public class CommandExec {
 
         if( res == 1 )
         {
-            System.out.println("New user Added :"+ name  );
+            System.out.println("New user Added:"+ name  );
         }
 
         System.out.println("Logged in as "+ name );
@@ -58,8 +58,8 @@ public class CommandExec {
             
             // No products found
             if ( p == null ){
-                // Does not exists 
-                System.out.println("Product not found.\nDo you wish to set a request for it?(Y/n)");
+                // Does not exist
+                System.out.println("Product not found.\nDo you wish to set a request for it? (Y/n)");
 
                 String op = read();
 
@@ -83,7 +83,7 @@ public class CommandExec {
                 else
                 {
                     int code = rm.set_request( pname );
-                    System.out.format("Request for %s as ben set with code %d you will be notifyed if someone finds it.\n", pname, code);
+                    System.out.format("Request for %s as been set with code %d you will be notified if someone finds it.\n", pname, code);
                 }
             }
  
@@ -102,12 +102,12 @@ public class CommandExec {
     public boolean show(){
         try
         {
-            System.out.println("Geting requests");
+            System.out.println("Getting requests");
             String[][] res = rm.get_requests();
             
             if( res == null )
             {
-                System.out.println("You have no requsets");
+                System.out.println("You have no requests");
                 return true;
             }
             
@@ -129,10 +129,10 @@ public class CommandExec {
         return true;
     }
     
-    // Sets a product avalable
+    // Sets a product available
     public boolean set( String pname, String locasion ){
         
-        System.out.println("Seting product locasion...");
+        System.out.println("Setting product location...");
         rm.set_avalable(pname, locasion);
         System.out.println("Success");
         return true;

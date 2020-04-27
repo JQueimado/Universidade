@@ -1,7 +1,5 @@
 package Server;
 
-import static Client.Client.defaults;
-import static Client.Client.prop_file;
 import Remotes.LoginAgent;
 import Remotes.ProductAgent;
 import Remotes.RequestAgent;
@@ -18,7 +16,7 @@ import java.util.Properties;
 public class Server {
 
     /*
-        Program Main
+        Main Program
     */
     
     public static final String prop_file = "server_settings.properties";
@@ -125,7 +123,7 @@ public class Server {
             RequestAgent ra = new RequestAgentImp( database );
             ProductAgent pa = new ProductAgentImp( database );
             
-            System.out.println("[OK]:All instances created sucsesfully");
+            System.out.println("[OK]:All instances created successfully");
             
             // Add Objects to manager
             System.out.println("[..]:Linking Remote objects to the controller");
@@ -134,7 +132,7 @@ public class Server {
             rmic.addRemoteObject(ra, properties.getProperty("name-request"));
             rmic.addRemoteObject(pa, properties.getProperty("name-product"));
             
-            System.out.println("[OK]:Linked Sucsesfull");
+            System.out.println("[OK]:Linked Successfull");
             
             System.out.println("-- Server Start --");
             
