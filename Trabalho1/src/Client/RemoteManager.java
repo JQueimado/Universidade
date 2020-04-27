@@ -62,7 +62,7 @@ public class RemoteManager {
         return this.ra.set_request(this.name, product);        
     }
     
-    // Set avalable
+    // Set available
     public boolean set_avalable( String product, String loc ){
         try
         {
