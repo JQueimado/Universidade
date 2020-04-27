@@ -10,7 +10,7 @@ import Remotes.RequestAgent;
 public class Server {
 
     /*
-        Program Main
+        Main Program
     */
     public static void main(String[] args) {
         
@@ -19,7 +19,7 @@ public class Server {
             // Start Database Manager
             DBManager database = new DBManager();
             
-            // Strat RemoteObject Manager
+            // Start RemoteObject Manager
             RMIController rmic = new RMIController();
             
             // Start Remote objects
@@ -29,7 +29,7 @@ public class Server {
             RequestAgent ra = new RequestAgentImp( database );
             ProductAgent pa = new ProductAgentImp( database );
             
-            System.out.println("[OK]:All instances created sucsesfully");
+            System.out.println("[OK]:All instances created successfully");
             
             // Add Objects to manager
             System.out.println("[..]:Linking Remote objects to the controller");
@@ -38,7 +38,7 @@ public class Server {
             rmic.addRemoteObject(ra, "requestagent");
             rmic.addRemoteObject(pa, "productagent");
             
-            System.out.println("[OK]:Linked Sucsesfull");
+            System.out.println("[OK]:Linked Successfull");
             
             System.out.println("-- Server Start --");
             
