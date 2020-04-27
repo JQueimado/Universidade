@@ -94,13 +94,39 @@ public class CommandExec {
     public boolean show(){
         try
         {
+            System.out.println("Geting requests");
+            String[][] res = rm.get_requests();
             
+            if( res == null )
+            {
+                System.out.println("You have no requsets");
+                return true;
+            }
+            
+            System.out.format("Your requests:\n|-%10s-|-%10s\n", "code", "product");
+            
+            for( int c = 0; c<res[0].length; c++ )
+            {
+                System.out.format("| %10s | %10s\n", res[0][c], res[1][c]);
+            }
+            
+            System.out.println("Done");
         }
         catch( Exception e )
         {
+            e.printStackTrace();
             return false;
         }
         
+        return true;
+    }
+    
+    // Sets a product avalable
+    public boolean set( String pname, String locasion ){
+        
+        System.out.println("Seting product locasion...");
+        rm.set_avalable(pname, locasion);
+        System.out.println("Success");
         return true;
     }
     

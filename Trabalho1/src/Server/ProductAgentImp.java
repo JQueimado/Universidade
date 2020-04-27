@@ -41,5 +41,22 @@ public class ProductAgentImp extends java.rmi.server.UnicastRemoteObject impleme
         }
         
     }
-    
+
+    @Override
+    public boolean set_availabe( String product, String loc ) throws RemoteException {
+        try
+        {
+            if( get_product(product) == null)
+            {
+                add_product(product);
+            }
+            
+            database.set_available(product, loc);
+            return true;
+        }
+        catch( Exception e )
+        {
+            return false;
+        }
+    }
 }

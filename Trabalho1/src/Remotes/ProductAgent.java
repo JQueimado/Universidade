@@ -8,4 +8,6 @@ public interface ProductAgent extends java.rmi.Remote {
     // Adds a product to the system
     public boolean add_product( String product ) throws java.rmi.RemoteException;
     
+    public boolean set_availabe( String product, String loc ) throws java.rmi.RemoteException;
+    
 }

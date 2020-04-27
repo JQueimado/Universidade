@@ -1,6 +1,7 @@
 package Server;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class RequestAgentImp extends java.rmi.server.UnicastRemoteObject implements Remotes.RequestAgent, java.io.Serializable{
 
@@ -21,6 +22,19 @@ public class RequestAgentImp extends java.rmi.server.UnicastRemoteObject impleme
         {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    @Override
+    public String[][] get_requests_for(String name) throws RemoteException {
+        try
+        {
+            return database.get_requests(name);
+        }
+        catch( SQLException sqle )
+        {
+            sqle.printStackTrace();
+            return null;
         }
     }
     

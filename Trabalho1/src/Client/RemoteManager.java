@@ -3,10 +3,10 @@ package Client;
 import Remotes.LoginAgent;
 import Remotes.RequestAgent;
 import Remotes.ProductAgent;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 
 public class RemoteManager {
     
@@ -59,14 +59,29 @@ public class RemoteManager {
     
     // Set a request
     public int set_request(String product ) throws Exception{
-        
-        return this.ra.set_request(this.name, product);
-        
+        return this.ra.set_request(this.name, product);        
+    }
+    
+    // Set avalable
+    public boolean set_avalable( String product, String loc ){
+        try
+        {
+            this.pa.set_availabe(product, loc);
+            return true;
+        }
+        catch( RemoteException re)
+        {
+            re.printStackTrace();
+            return false;
+        }
+    }
+    
+    public String[][] get_requests() throws Exception{
+        return this.ra.get_requests_for( this.name );
     }
     
     // Search product
-    public String[] get_product( String p_name ) throws Exception
-    {   
+    public String[] get_product( String p_name ) throws Exception{   
         return this.pa.get_product(p_name);
     }
     

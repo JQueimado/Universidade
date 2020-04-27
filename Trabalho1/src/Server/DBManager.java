@@ -3,7 +3,6 @@ package Server;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import org.postgresql.util.PSQLException;
 
 
@@ -155,17 +154,25 @@ public class DBManager {
         return ret;
     }
     
+    public void set_available(String product, String local) throws SQLException{
+        
+        String query = "update producttable set loc='"+local+"' where product='"+product+"';";
+        
+        stmnt.executeUpdate(query);
+        
+    }
+    
     /* Request Database */
     public int add_request( String name, String product ) throws Exception{
         
         // Eval user
-        String query = "Select name from usertable;";
+        String query = "Select name from usertable where name='"+name+"';";
         ResultSet res = stmnt.executeQuery(query);
         if(! res.next() )
             throw new Exception("unknown user");
         
         // Eval product
-        query = "Select product from producttable;";
+        query = "Select product from producttable where product='"+product+"';";
         res = stmnt.executeQuery(query);
         if(! res.next() )
             throw new Exception("unknown product");
@@ -184,11 +191,29 @@ public class DBManager {
         
     }
     
-    public ResultSet get_requests( String name ) throws SQLException{
+    public String[][] get_requests( String name ) throws SQLException{
         
-        String query = "select ident, product from requesttable natural join producttable;";
+        String query = "select ident, product from requesttable natural join producttable where name='"+name+"';";
+        ResultSet res = stmnt.executeQuery(query);
         
-        return stmnt.executeQuery(query);
+        List<String> ident = new ArrayList();
+        List<String> products = new ArrayList();
+        
+        while(res.next())
+        {
+            ident.add( String.valueOf( res.getInt("ident") ) );
+            products.add( res.getString("product") );
+        }
+        
+        String[][] ret = new String[2][ident.size()];
+        
+        String[] identr = new String[ident.size()];
+        ret[0] = ident.toArray(identr);
+        
+        String[] prodr = new String[products.size()];
+        ret[1] = products.toArray(prodr);
+        
+        return ret;
         
     }
     
