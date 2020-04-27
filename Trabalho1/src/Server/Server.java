@@ -3,11 +3,7 @@ package Server;
 import Remotes.LoginAgent;
 import Remotes.ProductAgent;
 import Remotes.RequestAgent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Properties;
 
 /*

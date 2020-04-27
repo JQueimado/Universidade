@@ -1,12 +1,7 @@
 package Client;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Scanner;
-import java.util.Properties;
+import java.io.*;
+import java.util.*;
 
 
 public class Client {

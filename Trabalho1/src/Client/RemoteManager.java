@@ -140,5 +140,4 @@ public class RemoteManager {
         
         return set_request( p_name );
     }
-    
 }
