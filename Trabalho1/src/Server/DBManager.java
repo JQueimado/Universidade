@@ -3,6 +3,7 @@ package Server;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import org.postgresql.util.PSQLException;
 
 
@@ -12,16 +13,23 @@ public class DBManager {
     private Connection con;
     private Statement stmnt;
     
+    private String usertable;
+    private String producttable;
+    private String requesttable;
     //*****************
     
     /* Constructors */
     
     //Normal call no default parametrers
-    public DBManager( String user, String passwd, String database, String host, int port ) throws Exception{
+    public DBManager( String user, String passwd, String database, String host, int port, Properties properties ) throws Exception{
         Class.forName("org.postgresql.Driver");
         
+        this.usertable = properties.getProperty("table-user");
+        this.requesttable = properties.getProperty("table-request");
+        this.producttable = properties.getProperty("table-product");
+        
         // Setup database uri
-        String uri = "jdbc:postgresql://" +host+":"+ port+"/"+database;
+        String uri = "jdbc:postgresql://"+host+":"+port+"/"+database;
         System.out.println("[..]:Connecting to: "+ uri);
         
         // Create conection
@@ -35,55 +43,65 @@ public class DBManager {
         // Integrity
         try 
         { 
-            String query = "Create table usertable( name text primary key );";
+            String query = "Create table "+ this.usertable +"( name text primary key );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created 'usertable' plz check if this was ment to happen");
+            System.err.println("[OK]:Created '"+ this.usertable +"' plz check if this was ment to happen");
         } 
         catch( PSQLException sqle )
         {
             /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'usertable' already exixts");
+            System.out.println("[OK]:'"+ this.usertable +"' already exixts");
         } 
         
         try 
         { 
-            String query = "Create table producttable( product text primary key, loc text );";
+            String query = "Create table "+ this.producttable +"( product text primary key, loc text );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created 'producttable' plz check if this was ment to happen");
+            System.err.println("[OK]:Created '"+ this.producttable +"' plz check if this was ment to happen");
         } 
         catch( PSQLException sqle )
         {
             /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'producttable' already exixts");
+            System.out.println("[OK]:'"+ this.producttable +"' already exixts");
         }
         
         try 
         { 
-            String query = "create table requesttable( ident int primary key, product text references producttable(product), name text references usertable(name) );";
+            String query = "create table "+this.requesttable+"( ident int primary key, product text references producttable(product), name text references usertable(name) );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created 'requesttable' plz check if this was ment to happen");
+            System.err.println("[OK]:Created '"+this.requesttable+"' plz check if this was ment to happen");
         } 
         catch( PSQLException sqle )
         {
             /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'requesttable' already exixts");
+            System.out.println("[OK]:'"+this.requesttable+"' already exixts");
         } 
         
     }
     
     //Port omition results in the default postgress port (5432)
-    public DBManager( String user, String passwd, String database, String host) throws Exception{
-        this(user, passwd, database, host, 5432);
+    public DBManager( String user, String passwd, String database, String host, Properties properties) throws Exception{
+        this(user, passwd, database, host, 5432, properties);
     }
     
     //Host omition results in the default host (localhost)
-    public DBManager( String user, String passwd, String database) throws Exception{
-        this(user, passwd, database, "localhost", 5432);
+    public DBManager( String user, String passwd, String database, Properties properties) throws Exception{
+        this(   user, 
+                passwd, 
+                database, 
+                properties.getProperty("db-host"),
+                Integer.parseInt( properties.getProperty("db-port") ),
+                properties);
     }
     
     //parameter omition uses default values (localhost)
-    public DBManager() throws Exception{
-        this("user1", "1234", "trab", "localhost", 5432);
+    public DBManager( Properties properties ) throws Exception{
+        this(   properties.getProperty("db-user"), 
+                properties.getProperty("db-paswd"), 
+                properties.getProperty("db-database"), 
+                properties.getProperty("db-host"),
+                Integer.parseInt( properties.getProperty("db-port") ),
+                properties);
     }
     
     //*****************
@@ -96,7 +114,7 @@ public class DBManager {
     public void addUser( String user ) throws Exception{
         try{
             // Define Query
-            String query = "insert into usertable values( '" + user + "' );" ;
+            String query = "insert into "+ this.usertable +" values( '" + user + "' );" ;
 
             //Send Query
             this.stmnt.executeUpdate(query);
@@ -111,7 +129,7 @@ public class DBManager {
     public boolean identifyUser( String name ) throws Exception {
         
         // Setup Query
-        String query = "Select name from usertable where name = '" + name +"' ;";
+        String query = "Select name from "+ this.usertable +" where name = '" + name +"' ;";
 
         ResultSet resp = stmnt.executeQuery(query);
         
@@ -133,14 +151,14 @@ public class DBManager {
     /* Product Management */
     public void add_product( String name ) throws SQLException{
        
-        String query = " insert into producttable values( '"+name+"', '');";
+        String query = " insert into "+ this.producttable +" values( '"+name+"', '');";
         
         stmnt.executeUpdate(query);
     }
     
     public String[] get_product( String product ) throws SQLException{
         
-        String query = "select * from producttable where product='" + product + "';";
+        String query = "select * from "+ this.producttable +" where product='" + product + "';";
         
         ResultSet rs = stmnt.executeQuery(query);
         
@@ -156,7 +174,7 @@ public class DBManager {
     
     public void set_available(String product, String local) throws SQLException{
         
-        String query = "update producttable set loc='"+local+"' where product='"+product+"';";
+        String query = "update "+ this.producttable +" set loc='"+local+"' where product='"+product+"';";
         
         stmnt.executeUpdate(query);
         
@@ -166,25 +184,25 @@ public class DBManager {
     public int add_request( String name, String product ) throws Exception{
         
         // Eval user
-        String query = "Select name from usertable where name='"+name+"';";
+        String query = "Select name from "+this.usertable+" where name='"+name+"';";
         ResultSet res = stmnt.executeQuery(query);
         if(! res.next() )
             throw new Exception("unknown user");
         
         // Eval product
-        query = "Select product from producttable where product='"+product+"';";
+        query = "Select product from "+ this.producttable +" where product='"+product+"';";
         res = stmnt.executeQuery(query);
         if(! res.next() )
             throw new Exception("unknown product");
         
         // Add request        
-        query = "Select * from requesttable;";
+        query = "Select * from "+this.requesttable+";";
         res = stmnt.executeQuery(query);
         
         int s = 0; 
         while ( res.next() ) s++;
         
-        query = "insert into requesttable values("+s+", '"+product+"', '"+name+"' );";
+        query = "insert into "+this.requesttable+" values("+s+", '"+product+"', '"+name+"' );";
         stmnt.executeUpdate(query);
         
         return s;
@@ -193,25 +211,30 @@ public class DBManager {
     
     public String[][] get_requests( String name ) throws SQLException{
         
-        String query = "select ident, product from requesttable natural join producttable where name='"+name+"';";
+        String query = "select ident, product, loc from "+this.requesttable+" natural join "+ this.producttable +" where name='"+name+"';";
         ResultSet res = stmnt.executeQuery(query);
         
         List<String> ident = new ArrayList();
         List<String> products = new ArrayList();
+        List<String> locasions = new ArrayList();
         
         while(res.next())
         {
             ident.add( String.valueOf( res.getInt("ident") ) );
             products.add( res.getString("product") );
+            locasions.add( res.getString("loc") );
         }
         
-        String[][] ret = new String[2][ident.size()];
+        String[][] ret = new String[3][ident.size()];
         
         String[] identr = new String[ident.size()];
         ret[0] = ident.toArray(identr);
         
         String[] prodr = new String[products.size()];
         ret[1] = products.toArray(prodr);
+        
+        String[] locsr = new String[locasions.size()];
+        ret[2] = locasions.toArray(locsr);
         
         return ret;
         

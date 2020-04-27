@@ -3,19 +3,22 @@ package Server;
 
 import java.rmi.registry.*;
 import java.rmi.*;
+import java.util.Properties;
 
 public class RMIController {
     
     private Registry registry;
+    private Properties properties;
     
     /* Constructors */
     
-    public RMIController( int port ) throws Exception{
+    public RMIController( int port, Properties properties ) throws Exception{
         this.registry = java.rmi.registry.LocateRegistry.createRegistry(port);
+        this.properties = properties;
     }
     
-    public RMIController() throws Exception{
-        this(1099);
+    public RMIController( Properties properties ) throws Exception{
+        this( Integer.parseInt( properties.getProperty("def-regport") ), properties );
     }
     
     public void addRemoteObject(Remote obj, String name) throws RemoteException{
@@ -24,7 +27,7 @@ public class RMIController {
     
     public Object getRemote( String name ) throws Exception{
         
-        String lookuri = "rmi://localhost:1099/" + name;
+        String lookuri = "rmi://localhost:"+ properties.getProperty("def-regport") +"/" + name;
         
         return java.rmi.Naming.lookup(lookuri);
         

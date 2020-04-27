@@ -3,39 +3,38 @@ package Client;
 import Remotes.LoginAgent;
 import Remotes.RequestAgent;
 import Remotes.ProductAgent;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.Naming;
-import java.rmi.RemoteException;
+import java.rmi.*;
+import java.util.Properties;
 
 public class RemoteManager {
     
-    private String uri = "rmi://";
-    private Registry registry;      
+    private String uri = "rmi://";    
     
     private String name;
-    
+    private Properties properties;
+    private Storage storage;
+            
     private LoginAgent la;
     private RequestAgent ra;
     private ProductAgent pa; 
     
     /* Constructors */
     
-    public RemoteManager( String host, int port ) throws Exception{
+    public RemoteManager( String host, String port, Properties properties ) throws Exception{
         this.uri += host + ":" + port +"/";
         
-        // Get server registry
-        this.registry = LocateRegistry.getRegistry("localhost", 1099);
+        this.properties = properties;
+        this.storage = new Storage( properties.getProperty("storage-filename") );
         
-        this.la = (LoginAgent) Naming.lookup(uri +"loguser");
+        this.la = (LoginAgent) Naming.lookup(uri + properties.getProperty("name-log"));
         this.ra = null;
         this.pa = null;
         
         this.name = "";
     }
     
-    public RemoteManager() throws Exception{
-        this( "localhost", 1099 );
+    public RemoteManager( Properties properties ) throws Exception{
+        this( properties.getProperty("def-reghost"), properties.getProperty("def-regport"), properties );
     }
     
     /* Methods */
@@ -43,14 +42,20 @@ public class RemoteManager {
     // Login
     public int login( String name ) throws Exception{
 
+        String[] aux = {"aprove", name };
+        this.storage.store_send_msg( aux );
+        
         int ret = this.la.aprove(name);
 
+        aux[1] = String.valueOf(ret);
+        this.storage.store_recv_msg(aux);
+        
         if ( ret == 0 )
             throw new Exception("Login faild");
         
         // Set other objects
-        this.ra = (RequestAgent) Naming.lookup(uri + "requestagent");
-        this.pa = (ProductAgent) Naming.lookup(uri + "productagent");
+        this.ra = (RequestAgent) Naming.lookup(uri + properties.getProperty("name-request") );
+        this.pa = (ProductAgent) Naming.lookup(uri + properties.getProperty("name-product"));
         
         this.name = name;
         
@@ -59,15 +64,30 @@ public class RemoteManager {
     
     // Set a request
     public int set_request(String product ) throws Exception{
-        return this.ra.set_request(this.name, product);        
+        String[] aux = { "set_request", product };
+        this.storage.store_send_msg(aux);
+        
+        int r = this.ra.set_request(this.name, product);     
+        
+        aux[1] = String.valueOf(r);
+        this.storage.store_recv_msg(aux);
+        
+        return r;
     }
     
     // Set avalable
     public boolean set_avalable( String product, String loc ){
         try
         {
-            this.pa.set_availabe(product, loc);
-            return true;
+            String[] aux = { "set_avalable", product, loc};
+            this.storage.store_send_msg(aux);
+            
+            boolean r = this.pa.set_availabe(product, loc);
+            
+            aux[1] = String.valueOf(r);
+            this.storage.store_recv_msg(aux);
+            
+            return r;
         }
         catch( RemoteException re)
         {
@@ -77,17 +97,47 @@ public class RemoteManager {
     }
     
     public String[][] get_requests() throws Exception{
-        return this.ra.get_requests_for( this.name );
+        
+        String[] aux = { "get_requests", this.name };
+        this.storage.store_send_msg(aux);
+        
+        String[][] r =  this.ra.get_requests_for( this.name );
+        
+        this.storage.store_recv_msg(aux, r);
+        
+        return r;
     }
     
     // Search product
     public String[] get_product( String p_name ) throws Exception{   
-        return this.pa.get_product(p_name);
+        String[] aux = { "get_product", p_name, this.name };
+        this.storage.store_send_msg(aux);
+        
+        String[] r = this.pa.get_product(p_name);
+        
+        // Getto Array copy 
+        String[] temp = new String[5];
+        temp[0] = aux[0];
+        temp[1] = aux[1];
+        temp[2] = aux[2];
+        temp[3] = r[0];
+        temp[4] = r[1];
+        
+        this.storage.store_recv_msg(temp);
+        
+        return r;
     }
     
     // Add product and request
     public int add_product_request( String p_name ) throws Exception {
-        this.pa.add_product( p_name );
+        String[] aux = { "add_product", p_name, this.name };
+        this.storage.store_send_msg(aux);
+        
+        boolean r = this.pa.add_product( p_name );
+        
+        aux[1] = String.valueOf(r);
+        this.storage.store_recv_msg(aux);
+        
         return set_request( p_name );
     }
     

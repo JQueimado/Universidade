@@ -2,6 +2,7 @@ package Client;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class CommandExec {
@@ -9,11 +10,14 @@ public class CommandExec {
     private RemoteManager rm;
     private String loged_user;
     
+    private Properties properties;
+    
     private Scanner scanner;
     
-    public CommandExec( Scanner scanner) throws Exception{
-        this.rm = new RemoteManager();
+    public CommandExec( Scanner scanner , Properties properties ) throws Exception{
+        this.rm = new RemoteManager( properties );
         this.scanner = scanner;
+        this.properties = properties;
     }
     
     /* AUX methods */
@@ -24,10 +28,14 @@ public class CommandExec {
     /* Commands */
     // Logs user
     public String loggin() throws Exception{
-        System.err.print("Login user:");
-
-        // Input
-        String name = read();
+        
+        String name = properties.getProperty("def-user");
+        
+        if( name.compareToIgnoreCase("") == 0 )
+        {
+            System.err.print("Login user:");
+            name = read();
+        }
 
         // Calls rm with name
         int res = rm.login(name);
@@ -103,11 +111,11 @@ public class CommandExec {
                 return true;
             }
             
-            System.out.format("Your requests:\n|-%10s-|-%10s\n", "code", "product");
+            System.out.format("Your requests:\n|-%10s-|-%10s-|-%s\n", "code", "product", "locasion");
             
             for( int c = 0; c<res[0].length; c++ )
             {
-                System.out.format("| %10s | %10s\n", res[0][c], res[1][c]);
+                System.out.format("| %10s | %10s | %s\n", res[0][c], res[1][c], res[2][c]);
             }
             
             System.out.println("Done");
