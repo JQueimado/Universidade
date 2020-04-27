@@ -30,58 +30,58 @@ public class DBManager {
         // Create Statement
         this.stmnt = con.createStatement();
         
-        System.out.println("[OK]:Connection Sucssesfull!");
+        System.out.println("[OK]:Connection Successful!");
         
         // Integrity
         try 
         { 
             String query = "Create table usertable( name text primary key );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created 'usertable' plz check if this was ment to happen");
+            System.err.println("[OK]:Created 'usertable' plz check if this was meant to happen");
         } 
         catch( PSQLException sqle )
         {
-            /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'usertable' already exixts");
+            /* If exception occures it means the table already exists */
+            System.out.println("[OK]:'usertable' already exists");
         } 
         
         try 
         { 
             String query = "Create table producttable( product text primary key, loc text );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created 'producttable' plz check if this was ment to happen");
+            System.err.println("[OK]:Created 'producttable' plz check if this was meant to happen");
         } 
         catch( PSQLException sqle )
         {
-            /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'producttable' already exixts");
+            /* If exeception occures it means the table already exists */
+            System.out.println("[OK]:'producttable' already exists");
         }
         
         try 
         { 
             String query = "create table requesttable( ident int primary key, product text references producttable(product), name text references usertable(name) );";
             stmnt.executeUpdate(query);
-            System.err.println("[OK]:Created 'requesttable' plz check if this was ment to happen");
+            System.err.println("[OK]:Created 'requesttable' plz check if this was meant to happen");
         } 
         catch( PSQLException sqle )
         {
-            /* If execption ocures it means the table already exixts */
-            System.out.println("[OK]:'requesttable' already exixts");
+            /* If exeception occures it means the table already exists */
+            System.out.println("[OK]:'requesttable' already exists");
         } 
         
     }
     
-    //Port omition results in the default postgress port (5432)
+    //Port omission results in the default postgress port (5432)
     public DBManager( String user, String passwd, String database, String host) throws Exception{
         this(user, passwd, database, host, 5432);
     }
     
-    //Host omition results in the default host (localhost)
+    //Host omission results in the default host (localhost)
     public DBManager( String user, String passwd, String database) throws Exception{
         this(user, passwd, database, "localhost", 5432);
     }
     
-    //parameter omition uses default values (localhost)
+    //parameter omission uses default values (localhost)
     public DBManager() throws Exception{
         this("user1", "1234", "trab", "localhost", 5432);
     }
@@ -119,7 +119,7 @@ public class DBManager {
         if( !resp.next())
             return false;
 
-        // Imposible but i still check-it it  
+        // Impossible but i still check-it it  
         if( !resp.isLast() )
             throw new Exception("Response size invalid");
 
