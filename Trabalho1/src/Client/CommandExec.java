@@ -50,7 +50,7 @@ public class CommandExec {
             
             // No products found
             if ( p == null ){
-                // Does not exists 
+                // Does not exist
                 System.out.println("Product not found.\nDo you wish to set a request for it? (Y/n)");
 
                 String op = read();
@@ -121,7 +121,7 @@ public class CommandExec {
         return true;
     }
     
-    // Sets a product avalable
+    // Sets a product available
     public boolean set( String pname, String locasion ){
         
         System.out.println("Setting product location...");
