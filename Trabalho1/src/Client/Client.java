@@ -11,7 +11,7 @@ public class Client {
     public static Properties defaults(File file){
         try
         {
-            System.out.println("[..]:Creating default properties");
+            System.out.println("[..]: Creating default properties");
             
             file.createNewFile();
             OutputStream out = new FileOutputStream(file);
@@ -51,7 +51,7 @@ public class Client {
             
             if (! temp.exists() )
             {
-                System.err.println("[OK]:File "+prop_file+" not found");
+                System.err.println("[OK]: File "+prop_file+" not found");
                 prop = defaults(temp);
             }
             else
@@ -62,7 +62,7 @@ public class Client {
                 prop = new Properties();
                 prop.load(is);
                 
-                System.out.println("[OK]:Properties Loaded Sucsessfuly");
+                System.out.println("[OK]:Properties Loaded Successfully");
             }
             
             return prop;
@@ -84,7 +84,7 @@ public class Client {
             Properties properties = get_props();
             if( Boolean.parseBoolean( properties.getProperty("properties-reset") ) )
             {
-                System.out.println("[..]:Reseting Properties");
+                System.out.println("[..]:Resetting Properties");
                 File nf = new File(prop_file);
                 nf.delete();
                 properties = defaults(nf);
