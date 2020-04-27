@@ -51,7 +51,7 @@ public class RemoteManager {
         this.storage.store_recv_msg(aux);
         
         if ( ret == 0 )
-            throw new Exception("Login faild");
+            throw new Exception("Login failed");
         
         // Set other objects
         this.ra = (RequestAgent) Naming.lookup(uri + properties.getProperty("name-request") );
@@ -115,7 +115,7 @@ public class RemoteManager {
         
         String[] r = this.pa.get_product(p_name);
         
-        // Getto Array copy 
+        // Get to Array copy 
         String[] temp = new String[5];
         temp[0] = aux[0];
         temp[1] = aux[1];
