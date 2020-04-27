@@ -121,6 +121,10 @@ public class Client {
                     System.out.println("Quiting...");
                     return;
                 }
+                else if ( a[0].compareToIgnoreCase("mstorage") == 0 )
+                {
+                    cmd.mstorage();
+                }
                 else
                 {
                     System.err.println("[ER]:Command not found");

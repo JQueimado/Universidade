@@ -136,4 +136,12 @@ public class CommandExec {
         return true;
     }
     
+    // Prints Message storage
+    public boolean mstorage(){
+        
+        System.out.println("Getting mesage storage...");
+        this.rm.get_storage().show();
+        System.out.println("Done");
+        return true;
+    }
 }

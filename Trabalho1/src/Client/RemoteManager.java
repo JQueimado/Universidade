@@ -39,6 +39,10 @@ public class RemoteManager {
     
     /* Methods */
     
+    public Storage get_storage(){
+        return this.storage;
+    }
+    
     // Login
     public int login( String name ) throws Exception{
 

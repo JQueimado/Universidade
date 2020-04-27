@@ -2,12 +2,6 @@ package Client;
 
 import java.io.*;
 
-class Data implements Serializable{
-    public String[] sent_data;
-    public String[] recv_data;
-    public String[][] aux_recv_data;
-}
-
 public class Storage {
     
     private ObjectOutputStream out;
@@ -24,11 +18,11 @@ public class Storage {
             this.out = new ObjectOutputStream(new FileOutputStream(f));
             this.in = new ObjectInputStream(new FileInputStream(f));
             
-            Data temp = new Data();
-            temp.recv_data = new String[0];
-            temp.sent_data = new String[0];
-            temp.aux_recv_data = new String[0][0];
-            this.out.writeObject(temp);
+            Object[] data = new Object[3];
+            data[0] = new String[0];
+            data[1] = new String[0];
+            data[2] = new String[0][0];
+            this.out.writeObject(data);
             
             System.out.println("[OK]:Storage set at "+ fname );
             
@@ -44,10 +38,9 @@ public class Storage {
     public void store_send_msg( String[] data ){
         try
         {
-            Data temp = (Data) this.in.readObject();
-            temp.sent_data = data;
+            Object[] temp = (Object[]) this.in.readObject();
+            temp[0] = data;
             this.out.writeObject(temp);
-            
         }
         catch( Exception e )
         {
@@ -60,11 +53,10 @@ public class Storage {
     public void store_recv_msg( String[] data ){
         try
         {
-            Data temp = (Data) this.in.readObject();
-            temp.recv_data = data;
-            temp.aux_recv_data = new String[0][0];
+            Object[] temp = (Object[]) this.in.readObject();
+            temp[0] = data;
+            temp[1] = new String[0][0];
             this.out.writeObject(temp);
-            
         }
         catch( Exception e )
         {
@@ -77,9 +69,9 @@ public class Storage {
     public void store_recv_msg( String[] data, String[][] aux_data ){
         try
         {
-            Data temp = (Data) this.in.readObject();
-            temp.recv_data = data;
-            temp.aux_recv_data = aux_data;
+            Object[] temp = (Object[]) this.in.readObject();
+            temp[0] = data;
+            temp[1]= aux_data;
             this.out.writeObject(temp);
             
         }
@@ -90,4 +82,25 @@ public class Storage {
         }
     } 
     
+    public void show(){
+        try
+        {
+            Object[] data = (Object[]) this.in.readObject();
+
+            System.out.println("Last sent mesage: ");
+            System.out.println( data[0] );
+            
+            System.out.println("Last received mesage: ");
+            System.out.println( data[1] );
+            
+            System.out.println("Aux data to recive:");
+            System.out.println( data[2] );
+            
+        }
+        catch( Exception e )
+        {
+            System.out.println("[ER]:Error reading storage");
+            e.printStackTrace();
+        }
+    }
 }
