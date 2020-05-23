@@ -119,16 +119,6 @@ public class RemoteManager {
         
         String[] r = this.pa.get_product(p_name);
         
-        // Get to Array copy 
-        String[] temp = new String[5];
-        temp[0] = aux[0];
-        temp[1] = aux[1];
-        temp[2] = aux[2];
-        temp[3] = r[0];
-        temp[4] = r[1];
-        
-        this.storage.store_recv_msg(temp);
-        
         return r;
     }
     

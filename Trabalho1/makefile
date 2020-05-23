@@ -12,11 +12,11 @@ compile: Remotes.class Client.class Server.class
 Remotes.class:
 	javac -classpath build/classes -d build/classes/ src/Remotes/*.java 
 
-Client.class:
-	javac -classpath build/classes -d build/classes src/Client/*.java
+Client.class: Remotes.jar
+	javac -classpath Remotes.jar:build/classes -d build/classes src/Client/*.java
 
-Server.class: postgresql-42.2.11.jar
-	javac -classpath postgresql-42.2.11.jar:build/classes -d build/classes src/Server/*.java
+Server.class: postgresql-42.2.11.jar Remotes.jar
+	javac -classpath postgresql-42.2.11.jar:Remotes.jar:build/classes -d build/classes src/Server/*.java
 
 
 clean: clean_class clean_temp
