@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/joao/Desktop/so2-2020/Trabalho1/src/Client/RemoteManager.java</file>
-            <file>file:/home/joao/Desktop/so2-2020/Trabalho1/src/Client/CommandExec.java</file>
-            <file>file:/home/joao/Desktop/so2-2020/Trabalho1/src/Client/Storage.java</file>
-            <file>file:/home/joao/Desktop/so2-2020/Trabalho1/src/Client/Client.java</file>
-            <file>file:/home/joao/Desktop/so2-2020/Trabalho1/src/Server/Server.java</file>
+            <file>file:/home/joao/Desktop/so2-2020/T1/Trabalho1/src/Server/Server.java</file>
+            <file>file:/home/joao/Desktop/so2-2020/T1/Trabalho1/src/Server/RMIController.java</file>
+            <file>file:/home/joao/Desktop/so2-2020/T1/Trabalho1/src/Server/DBManager.java</file>
+            <file>file:/home/joao/Desktop/so2-2020/T1/Trabalho1/src/Client/CommandExec.java</file>
         </group>
     </open-files>
 </project-private>

@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Trab2;
+package Backend;
 
 /**
  *
  * @author joao
  */
-public class Main {
-
-    public static void main(String[] args) {
-        System.err.println("IT Works");    
-    }
+public class BackendServlet {
     
 }
