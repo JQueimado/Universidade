@@ -77,6 +77,10 @@
                         <plugin>
                                 <groupId>com.github.eirslett</groupId>
                                 <artifactId>frontend-maven-plugin</artifactId>
+                                <configuration>
+                                    <nodeVersion>v10.4.0</nodeVersion>
+                                    <npmVersion>6.13.1</npmVersion>
+                                </configuration>
                                 
                                 <executions>
                                     <execution>
@@ -85,12 +89,23 @@
                                             <goal>install-node-and-npm</goal>
                                         </goals>
                                     </execution>
+                                    
+                                    <execution>
+                                        <id>npm install</id>
+                                        <goals>
+                                            <goal>npm</goal>
+                                        </goals>
+                                    </execution>
+                                    
+                                    <execution>
+                                        <id>webpack</id>
+                                        <goals>
+                                            <goal>webpack</goal>
+                                        </goals>
+                                    </execution>
+                                    
                                 </executions>
-                                <configuration>
-                                    <nodeVersion>v10.4.0</nodeVersion>
 
-                                </configuration>
-                                
                         </plugin>
                         
 		</plugins>

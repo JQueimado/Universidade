@@ -15,8 +15,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/employees").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/employees").permitAll()
-                .antMatchers(HttpMethod.GET, "/**", "/").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.GET, "/", "/built/bundle.js").permitAll()
+                .anyRequest().authenticated()
+            .and()
+                .formLogin()
+                .loginPage("/")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/",true)
+                .failureUrl("/")
+            .and()
+                .logout()
+                .permitAll();
     }
 
 }
