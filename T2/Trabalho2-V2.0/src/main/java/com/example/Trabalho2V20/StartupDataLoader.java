@@ -57,15 +57,17 @@ public class StartupDataLoader implements ApplicationListener<ContextRefreshedEv
         // Create Roles
         createRoleIfNotFound("ADMIN", adminPrivileges);
         createRoleIfNotFound("USER", userPrivileges);
- 
-        // Create Admin User
-        Role adminRole = roleRepository.findByName("ADMIN");
-        Role userRole = roleRepository.findByName("USER");
-        User admin = new User( "admin", passwordEncoder.encode("admin"));
-        
-        admin.setRoles(Arrays.asList(adminRole, userRole));
-        
-        userRepository.save(admin);
+      
+        if(userRepository.findByUsername("admin") == null){
+            // Create Admin User
+            Role adminRole = roleRepository.findByName("ADMIN");
+            Role userRole = roleRepository.findByName("USER");
+            User admin = new User( "admin", passwordEncoder.encode("admin"));
+
+            admin.setRoles(Arrays.asList(adminRole, userRole));
+            
+            userRepository.save(admin);
+        }
  
         alreadySetup = true;
     }
@@ -93,5 +95,5 @@ public class StartupDataLoader implements ApplicationListener<ContextRefreshedEv
         }
         return role;
     }
-    
+
 }

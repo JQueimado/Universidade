@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
     
     // Data
@@ -28,9 +28,9 @@ public class User {
     
     @ManyToMany
     @JoinTable( 
-        name = "users_roles", 
+        name = "user_roles", 
         joinColumns = @JoinColumn(
-          name = "user_id", referencedColumnName = "id"), 
+          name = "users_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
           name = "role_id", referencedColumnName = "id")) 
     private Collection<Role> roles;
