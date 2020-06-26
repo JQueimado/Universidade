@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "8f0f76dc-525d-42c3-9f58-6389fd29f4c5",
+		"name": "TrabSo2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"protocolProfileBehavior": {
+				"tlsDisabledProtocols": [
+					"TLSv1"
+				]
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"joao\",\n    \"password\":\"joao\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SuperMarketRequest",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MzIxODYxNiwiaWF0IjoxNTkzMjAwNjE2fQ.umBj5sTavUt53P--Rdddy96byEqARxOEHTI-pZDvhfH3gcQ4G0lWnufCADy01Rp8qwPYi7j7cqMxl6_dTvfNXw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:8443/supermarkets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supermarkets unauthorised",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer totalynotavalidtokenfortestingporpuses",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:8443/supermarkets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"joao\",\n    \"password\":\"joao\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
