@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Config;
 
 import com.example.demo.Jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.Jwt.JwtRequestFilter;

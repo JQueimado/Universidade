@@ -1,4 +1,4 @@
-package com.example.demo.Jwt;
+package com.example.demo.Rest.Request;
 
 import java.io.Serializable;
 

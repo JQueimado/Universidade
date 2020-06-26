@@ -1,5 +1,8 @@
 package com.example.demo.Jwt;
 
+import com.example.demo.Rest.Request.JwtRequest;
+import com.example.demo.Rest.Responses.JwtResponse;
+import com.example.demo.Rest.Responses.TextResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,7 +11,6 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +29,7 @@ public class JwtLoginControler{
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    /* Login endpoint */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -34,6 +37,7 @@ public class JwtLoginControler{
 
     }
     
+    /* Register endpoint */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> registerUser(@RequestBody JwtRequest userdto) throws Exception {
         
@@ -42,7 +46,7 @@ public class JwtLoginControler{
             return login(userdto);
         }
         else{
-            return ResponseEntity.ok( new JwtResponse("User Alerady Exists") );
+            return ResponseEntity.ok( new TextResponse("User Alerady Exists", TextResponse.ER_STATUS) );
         }
     }
     

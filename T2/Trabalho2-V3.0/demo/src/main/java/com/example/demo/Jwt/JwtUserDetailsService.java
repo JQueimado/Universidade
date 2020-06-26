@@ -1,5 +1,6 @@
 package com.example.demo.Jwt;
 
+import com.example.demo.Rest.Request.JwtRequest;
 import com.example.demo.UserDB.Entities.PrivilegeEntity;
 import com.example.demo.UserDB.Entities.RoleEntity;
 import com.example.demo.UserDB.Entities.UserEntity;

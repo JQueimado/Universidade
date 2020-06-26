@@ -1,7 +1,7 @@
-package com.example.demo;
+package com.example.demo.Components;
 
-import com.example.demo.Entities.SuperMarket;
-import com.example.demo.Repositories.SuperMarketRepository;
+import com.example.demo.DB.Entities.SuperMarket;
+import com.example.demo.DB.Repositories.SuperMarketRepository;
 import com.example.demo.UserDB.Entities.PrivilegeEntity;
 import com.example.demo.UserDB.Entities.RoleEntity;
 import com.example.demo.UserDB.Entities.UserEntity;

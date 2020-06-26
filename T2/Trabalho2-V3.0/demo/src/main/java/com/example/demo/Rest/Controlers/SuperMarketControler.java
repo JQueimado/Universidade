@@ -1,6 +1,6 @@
-package com.example.demo.RestControlers;
+package com.example.demo.Rest.Controlers;
 
-import com.example.demo.Repositories.SuperMarketRepository;
+import com.example.demo.DB.Repositories.SuperMarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import static org.springframework.http.ResponseEntity.ok;
