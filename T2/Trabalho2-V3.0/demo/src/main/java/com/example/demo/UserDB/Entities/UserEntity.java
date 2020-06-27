@@ -35,6 +35,15 @@ public class UserEntity {
         inverseJoinColumns = @JoinColumn(
           name = "role_id", referencedColumnName = "id")) 
     private Collection<RoleEntity> roles;
+    
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable( 
+        name = "user_registry", 
+        joinColumns = @JoinColumn(
+          name = "users_id", referencedColumnName = "id"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "registry_id", referencedColumnName = "id")) 
+    private Collection<RegistryEntity> registries;
 
     // Constructors
     public UserEntity(){
@@ -80,5 +89,12 @@ public class UserEntity {
         this.roles = roles;
     }
     
+    public Collection<RegistryEntity> getRegistry() {
+        return registries;
+    }
+
+    public void setRegistry(Collection<RegistryEntity> registries) {
+        this.registries = registries;
+    }
     
 }
