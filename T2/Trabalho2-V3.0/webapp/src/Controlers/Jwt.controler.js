@@ -1,25 +1,25 @@
+import axios from "axios";
+
 class JwtClient {
     constructor() {
-        this.token = "";
-
-        this.getToken = this.getToken.bind();
         this.authenticate = this.authenticate.bind();
-    }
-
-    getToken() {
-        return this.token;
+        axios.defaults.baseURL = "https://localhost:8443/";
+        axios.defaults.headers.post["Content-Type"] =
+            "application/json;charset=utf-8";
     }
 
     authenticate(username, password) {
+        var token = "no token";
+
         var body = {
             username: username,
             password: password,
         };
 
-        var myHeaders = new Headers({
-            "Content-Type": "application/json;charset=utf-8",
-        });
-
+        axios
+            .post("/login", body)
+            .then((response) => (token = response.data.token));
+        /*
         fetch("https://localhost:8443/login", {
             method: "POST",
             headers: myHeaders,
@@ -29,6 +29,8 @@ class JwtClient {
         })
             .then((response) => response.json())
             .then((token) => (this.token = token.token));
+        */
+        return token;
     }
 }
 

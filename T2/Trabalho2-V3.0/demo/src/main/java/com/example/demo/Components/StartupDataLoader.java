@@ -1,6 +1,6 @@
 package com.example.demo.Components;
 
-import com.example.demo.DB.Entities.SuperMarket;
+import com.example.demo.DB.Entities.SuperMarketEntity;
 import com.example.demo.DB.Repositories.SuperMarketRepository;
 import com.example.demo.UserDB.Entities.PrivilegeEntity;
 import com.example.demo.UserDB.Entities.RoleEntity;
@@ -74,7 +74,7 @@ public class StartupDataLoader implements ApplicationListener<ContextRefreshedEv
             userRepository.save(admin);
         }
  
-        SuperMarket temp = new SuperMarket();
+        SuperMarketEntity temp = new SuperMarketEntity();
         temp.setName("continete");
         
         superRepository.save(temp);
