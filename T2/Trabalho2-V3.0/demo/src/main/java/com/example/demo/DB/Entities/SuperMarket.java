@@ -26,5 +26,4 @@ public class SuperMarket {
     @Column
     private String name; 
     
-    
 }

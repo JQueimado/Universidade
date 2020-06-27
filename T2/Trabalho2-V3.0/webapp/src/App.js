@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Home from "./Components/Home.component.jsx";
+import JwtClient from "./Controlers/Jwt.controler.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.jwtClient = new JwtClient();
+
+        this.state = {
+            token: "no token",
+        };
+    }
+
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <label>{this.state.token}</label>
+
+                    <button
+                        onClick={() => {
+                            this.jwtControler
+                                .authenticate("admin", "admin")
+                                .then(
+                                    this.setState({
+                                        token: this.state.jwtControler.getToken(),
+                                    })
+                                );
+                        }}
+                    >
+                        It hurts
+                    </button>
+                </div>
+                <Link to="/login"> login </Link>
+                <Route
+                    path="/login"
+                    exact
+                    component={() => (
+                        <Home jwtControler={this.state.jwtControler} />
+                    )}
+                />
+            </Router>
+        );
+    }
 }
 
 export default App;
