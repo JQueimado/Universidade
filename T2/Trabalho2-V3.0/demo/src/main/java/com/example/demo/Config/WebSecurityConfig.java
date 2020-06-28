@@ -55,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/login").permitAll()
         .antMatchers("/register").permitAll()
+        .antMatchers(HttpMethod.GET, "/supermarkets").permitAll()
+        .antMatchers(HttpMethod.OPTIONS, "/supermarkets").permitAll()
         .anyRequest().authenticated().and()
         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

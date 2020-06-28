@@ -39,6 +39,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         // only the Token
 
+        System.out.println("Token:" + requestTokenHeader );
+        
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 
             jwtToken = requestTokenHeader.substring(7);
