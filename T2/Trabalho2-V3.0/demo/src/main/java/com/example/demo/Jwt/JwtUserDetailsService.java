@@ -1,9 +1,9 @@
 package com.example.demo.Jwt;
 
 import com.example.demo.Rest.Request.JwtRequest;
-import com.example.demo.UserDB.Entities.PrivilegeEntity;
-import com.example.demo.UserDB.Entities.RoleEntity;
-import com.example.demo.UserDB.Entities.UserEntity;
+import com.example.demo.UserDB.Entities.Privilege;
+import com.example.demo.UserDB.Entities.Role;
+import com.example.demo.UserDB.Entities.User;
 import com.example.demo.UserDB.Repositories.RoleRepository;
 import com.example.demo.UserDB.Repositories.UserRepository;
 import java.lang.reflect.Array;
@@ -35,7 +35,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            UserEntity user = uRep.findByUsername(username);
+            User user = uRep.findByUsername(username);
             if (user == null) {
                 return new org.springframework.security.core.userdetails.User(
                   " ", " ", true, true, true, true, 
@@ -52,11 +52,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public boolean save(JwtRequest user) {
             
             if( uRep.findByUsername(user.getUsername() ) == null ) {
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
                 
-                RoleEntity role = rRep.findByName("USER");                
+                Role role = rRep.findByName("USER");                
                 newUser.setRoles( Arrays.asList( role ) );
                 
 		uRep.save(newUser);
@@ -69,17 +69,17 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
         //AUX methods
-        private List<String> getPrivileges(Collection<RoleEntity> roles) {
+        private List<String> getPrivileges(Collection<Role> roles) {
   
             List<String> privileges = new ArrayList<>();
             
-            List<PrivilegeEntity> collection = new ArrayList<>();
+            List<Privilege> collection = new ArrayList<>();
             
-            for (RoleEntity role : roles) {
+            for (Role role : roles) {
                 collection.addAll(role.getPrivileges());
             }
             
-            for (PrivilegeEntity item : collection) {
+            for (Privilege item : collection) {
                 privileges.add(item.getName());
             }
             
@@ -95,7 +95,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         
         private Collection<? extends GrantedAuthority> getAuthorities(
-            Collection<RoleEntity> roles) {
+            Collection<Role> roles) {
 
               return getGrantedAuthorities(getPrivileges(roles));
           }

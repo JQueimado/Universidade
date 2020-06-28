@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="privilege")
-public class PrivilegeEntity {
+public class Privilege {
     
     // Data
     @Id
@@ -20,14 +20,14 @@ public class PrivilegeEntity {
     private String name;
     
     @ManyToMany(mappedBy = "privileges")
-    private Collection<RoleEntity> roles;
+    private Collection<Role> roles;
 
     //Constructor
-    public PrivilegeEntity(){
+    public Privilege(){
         
     }
     
-    public PrivilegeEntity(String name) {
+    public Privilege(String name) {
         this.name = name;
     }
     
@@ -48,11 +48,11 @@ public class PrivilegeEntity {
         this.name = name;
     }
 
-    public Collection<RoleEntity> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<RoleEntity> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
     

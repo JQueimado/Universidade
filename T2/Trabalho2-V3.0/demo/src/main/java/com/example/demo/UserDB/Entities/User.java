@@ -1,5 +1,6 @@
 package com.example.demo.UserDB.Entities;
 
+import com.example.demo.DB.Entities.Registry;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name= "users")
-public class UserEntity {
+public class User {
     
         // Data
     @Id
@@ -34,24 +36,24 @@ public class UserEntity {
           name = "users_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
           name = "role_id", referencedColumnName = "id")) 
-    private Collection<RoleEntity> roles;
+    private Collection<Role> roles;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinTable( 
         name = "user_registry", 
         joinColumns = @JoinColumn(
           name = "users_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
           name = "registry_id", referencedColumnName = "id")) 
-    private Collection<RegistryEntity> registries;
-
+    private Collection<Registry> registries;
+   
     // Constructors
-    public UserEntity(){
+    public User(){
         this.username = null;
         this.password = null;
     }
     
-    public UserEntity(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -81,20 +83,20 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Collection<RoleEntity> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<RoleEntity> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
-    
-    public Collection<RegistryEntity> getRegistry() {
+    /*
+    public Collection<Registry> getRegistry() {
         return registries;
     }
 
-    public void setRegistry(Collection<RegistryEntity> registries) {
+    public void setRegistry(Collection<Registry> registries) {
         this.registries = registries;
     }
-    
+    */
 }

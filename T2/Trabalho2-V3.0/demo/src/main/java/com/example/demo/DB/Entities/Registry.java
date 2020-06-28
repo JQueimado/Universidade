@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Table(name="registry")
-public class RegistryEntity {
+public class Registry {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,12 +22,12 @@ public class RegistryEntity {
 
     // Constructors
 
-    public RegistryEntity(){
+    public Registry(){
 
         this.level = null;
     }
 
-    public RegistryEntity(String level) {
+    public Registry(String level) {
         
         this.level = level;
     }

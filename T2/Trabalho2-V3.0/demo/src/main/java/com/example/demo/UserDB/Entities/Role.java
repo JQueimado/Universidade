@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="role")
-public class RoleEntity {
+public class Role{
     
     // Data
     @Id
@@ -25,7 +25,7 @@ public class RoleEntity {
     private String name;
     
     @ManyToMany(mappedBy = "roles")
-    private Set<UserEntity> users;
+    private Set<User> users;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -34,14 +34,14 @@ public class RoleEntity {
           name = "role_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
           name = "privilege_id", referencedColumnName = "id"))
-    private Collection<PrivilegeEntity> privileges; 
+    private Collection<Privilege> privileges; 
     
     // Constructors
-    public RoleEntity(){
+    public Role(){
         
     }
     
-    public RoleEntity(String name) {
+    public Role(String name) {
         this.name = name;
     }
     
@@ -62,19 +62,19 @@ public class RoleEntity {
         this.name = name;
     }
 
-    public Set<UserEntity> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserEntity> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public Collection<PrivilegeEntity> getPrivileges() {
+    public Collection<Privilege> getPrivileges() {
         return privileges;
     }
 
-    public void setPrivileges(Collection<PrivilegeEntity> privileges) {
+    public void setPrivileges(Collection<Privilege> privileges) {
         this.privileges = privileges;
     }
     

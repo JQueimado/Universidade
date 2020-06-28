@@ -1,10 +1,10 @@
 package com.example.demo.UserDB.Repositories;
 
-import com.example.demo.UserDB.Entities.PrivilegeEntity;
-import org.springframework.data.repository.CrudRepository;
+import com.example.demo.UserDB.Entities.Privilege;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PrivilegeRepository extends CrudRepository<PrivilegeEntity, Long> {
+public interface PrivilegeRepository extends JpaRepository<Privilege, Long> {
     
-    PrivilegeEntity findByName(String name);
+    Privilege findByName(String name);
     
 }

@@ -1,8 +1,8 @@
 package com.example.demo.DB.Repositories;
 
-import com.example.demo.DB.Entities.SuperMarketEntity;
+import com.example.demo.DB.Entities.SuperMarket;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SuperMarketRepository extends JpaRepository<SuperMarketEntity, Long>{
+public interface SuperMarketRepository extends JpaRepository<SuperMarket, Long>{
     
 }
