@@ -90,7 +90,7 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
-    /*
+    
     public Collection<Registry> getRegistry() {
         return registries;
     }
@@ -98,5 +98,5 @@ public class User {
     public void setRegistry(Collection<Registry> registries) {
         this.registries = registries;
     }
-    */
+   
 }

@@ -21,6 +21,7 @@ public class SuperMarketControler {
     @Autowired
     private SuperMarketRepository supermarkets;
     
+    //Get All Super Markets
     @GetMapping("")
     public ResponseEntity all() {
         return ResponseEntity.ok().header("Access-Control-Allow-Origin","*").body(supermarkets.findAll());

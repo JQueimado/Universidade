@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Builder;
 import lombok.Data;
 
 @Entity
@@ -18,16 +17,16 @@ public class Registry {
     private long id;
     
     @Column
-    private String level; 
+    private int level; 
 
     // Constructors
 
     public Registry(){
 
-        this.level = null;
+        this.level = -1;
     }
 
-    public Registry(String level) {
+    public Registry(int level) {
         
         this.level = level;
     }
@@ -43,12 +42,12 @@ public class Registry {
         this.id = id;
     }
 
-    public String getLevel() {
+    public int getLevel() {
 
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
 
         this.level = level;
     }
