@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -67,7 +68,37 @@ public class JwtUserDetailsService implements UserDetailsService {
                 return false;
             }
 	}
+        
+        @Transactional
+        public boolean logoutUser( String username ){
+            
+            try{
+                uRep.findByUsername(username).setActiveToken("");
+                return true;
+            }catch(Exception e){
+                e.printStackTrace();
+                return false;
+            }
+            
+        }
+        
+        @Transactional
+        public boolean postAuth( UserDetails user, String token ){
+            try{
+                User usere = uRep.findByUsername(user.getUsername());
+                usere.setActiveToken(token);
+                return true;
+            }catch(Exception e ){
+                e.printStackTrace();
+                return false;
+            }
+            
+        }
 
+        public boolean verifyToken(String token, String username){
+            return uRep.findByUsername(username).getActiveToken().compareTo(token) == 0;
+        }
+        
         //AUX methods
         private List<String> getPrivileges(Collection<Role> roles) {
   
@@ -99,5 +130,5 @@ public class JwtUserDetailsService implements UserDetailsService {
 
               return getGrantedAuthorities(getPrivileges(roles));
           }
-        
+       
 }

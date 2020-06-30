@@ -1,5 +1,6 @@
 package com.example.demo.Jwt;
 
+import com.example.demo.Exceptions.TokenMissmatchException;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -48,6 +49,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
 
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                
+                if( !jwtUserDetailsService.verifyToken(jwtToken, username) )
+                    throw( new TokenMissmatchException() );
+                
 
             } catch (IllegalArgumentException e) {
 
@@ -60,6 +65,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (MalformedJwtException e){
                 
                 System.out.println("JWT Token Malformed");
+                
+            } catch( TokenMissmatchException e){
+                
+                System.out.println("JWT Token Does not matched the current loged Token");
                 
             }
 

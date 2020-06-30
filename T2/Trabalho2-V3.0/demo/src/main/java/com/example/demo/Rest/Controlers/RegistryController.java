@@ -70,7 +70,7 @@ public class RegistryController {
         // Find User that sent the mesage
         String username = jwtTokenUtil.getUsernameFromToken(token);
         
-        System.out.println("User:" +username);
+        System.out.println("User:" + username);
         System.out.println("Super:"+ registry.getSuperName());
         
         User user = users.findByUsername(username);

@@ -29,6 +29,9 @@ public class User {
     @Column
     private String password;
     
+    @Column
+    private String activeToken;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 
         name = "user_roles", 
@@ -98,5 +101,15 @@ public class User {
     public void setRegistry(Collection<Registry> registries) {
         this.registries = registries;
     }
+
+    public String getActiveToken() {
+        return activeToken;
+    }
+
+    public void setActiveToken(String activeToken) {
+        this.activeToken = activeToken;
+    }
+    
+    
    
 }

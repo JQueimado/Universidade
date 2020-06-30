@@ -37,7 +37,7 @@ class App extends Component {
         };
 
         axios
-            .post("https://localhost:8443/login", body)
+            .post("/login", body)
             .then((response) => {
                 this.setState({ token: response.data.token, logedin: true });
             })
@@ -65,6 +65,14 @@ class App extends Component {
             username: "",
             password: "",
         });
+
+        axios
+            .post(
+                "/logoutUser",
+                { method: "logout" },
+                { headers: { Authorization: "Bearer " + this.state.token } }
+            )
+            .then((response) => {});
     }
 
     //Render
