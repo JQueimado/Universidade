@@ -1,9 +1,13 @@
-package com.example.demo.Jwt;
+package com.example.demo.Rest.Controlers;
 
+import com.example.demo.Jwt.JwtTool;
+import com.example.demo.Components.UserDetailsServiceImpl;
 import com.example.demo.Rest.Request.JwtRequest;
 import com.example.demo.Rest.Request.StatusRequest;
+import com.example.demo.Rest.Request.UserDetailsRequest;
 import com.example.demo.Rest.Responses.JwtResponse;
 import com.example.demo.Rest.Responses.TextResponse;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -14,6 +18,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-public class JwtLoginControler{
+public class LoginControler{
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -31,7 +36,7 @@ public class JwtLoginControler{
     private JwtTool jwtTokenUtil;
 
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     /* Login endpoint */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -50,14 +55,8 @@ public class JwtLoginControler{
             return login(userdto);
         }
         else{
-            return ResponseEntity.ok( new TextResponse("User Alerady Exists", TextResponse.ER_STATUS) );
+            return ResponseEntity.ok( new TextResponse("User Alerady Exists") );
         }
-    }
-    
-    @RequestMapping(value = "/sayhi", method = RequestMethod.GET)
-    public ResponseEntity<?> hi() throws Exception {
-        
-        return ResponseEntity.ok("hi");
     }
     
     /*Logout*/
@@ -70,7 +69,7 @@ public class JwtLoginControler{
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
                     .header("Access-Control-Allow-Origin","*")
-                    .build();
+                    .body(new TextResponse("token doesnt start with Bearer"));
         
         token = token.substring(7);
         
@@ -81,15 +80,37 @@ public class JwtLoginControler{
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Access-Control-Allow-Origin","*")
-                    .body("LogOutError");
+                    .body(new TextResponse("LogOutError"));
         
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .header("Access-Control-Allow-Origin","*")
-                .build();   
+                .body( new TextResponse( "sucssesfuly logedout" ));   
+    }
+    
+    @RequestMapping(value = "/edit/{name}", method = RequestMethod.POST)
+    public ResponseEntity edit_User(
+            @RequestBody UserDetailsRequest request,
+            @PathVariable("name") String name ){
+        
+        try{
+            userDetailsService.edit_user(name, request);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body(new TextResponse("User "+ name + " edited" ));
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body(new TextResponse("Server Error"));
+        }
+        
     }
     
     /* Options */
+    /*
     @RequestMapping(value = "/logoutUser", method = RequestMethod.OPTIONS)
     public ResponseEntity getOption(){
         return ResponseEntity
@@ -98,6 +119,7 @@ public class JwtLoginControler{
                 .header("Access-Control-Allow-Headers","Authorization")
                 .build();
     }
+    */
     
     //AUX
     private ResponseEntity<?> login( JwtRequest authenticationRequest ) throws Exception{

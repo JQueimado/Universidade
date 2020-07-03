@@ -1,6 +1,7 @@
-package com.example.demo.Jwt;
+package com.example.demo.Components;
 
 import com.example.demo.Rest.Request.JwtRequest;
+import com.example.demo.Rest.Request.UserDetailsRequest;
 import com.example.demo.UserDB.Entities.Privilege;
 import com.example.demo.UserDB.Entities.Role;
 import com.example.demo.UserDB.Entities.User;
@@ -23,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service("userDetailsService")
-public class JwtUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserRepository uRep;
@@ -37,11 +38,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             User user = uRep.findByUsername(username);
-            if (user == null) {
+            if (user == null || !user.isEnabled()) {
                 return new org.springframework.security.core.userdetails.User(
                   " ", " ", true, true, true, true, 
                   getAuthorities(Arrays.asList(
-                    rRep.findByName("USER"))));
+                    rRep.findByName("ROLE_USER"))));
             }
 
             return new org.springframework.security.core.userdetails.User( 
@@ -57,7 +58,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
                 
-                Role role = rRep.findByName("USER");                
+                Role role = rRep.findByName("ROLE_USER");                
                 newUser.setRoles( Arrays.asList( role ) );
                 
 		uRep.save(newUser);
@@ -99,6 +100,37 @@ public class JwtUserDetailsService implements UserDetailsService {
             return uRep.findByUsername(username).getActiveToken().compareTo(token) == 0;
         }
         
+        public boolean hasRole(String username, String role){
+            
+            Collection<Role> roles = uRep.findByUsername(username).getRoles();
+            
+            List<String> privileges = new ArrayList();
+            
+            for( Role current_role: roles){
+                for( Privilege current_privilege: current_role.getPrivileges()){
+                    privileges.add(current_privilege.getName());
+                }
+            }
+            
+            return privileges.contains(role);
+        }
+        
+        @Transactional
+        public void edit_user(String username, UserDetailsRequest userdata) throws Exception {
+                
+            User user = uRep.findByUsername(username);
+            
+            if( user == null)
+                throw new UsernameNotFoundException(username + " not found");
+            
+            //update data
+            user.setUsername(userdata.getUsername());
+            user.setPassword(bcryptEncoder.encode( userdata.getPassword() ));
+            user.setEnabled(userdata.isStatus());
+            user.setActiveToken(""); //logoff if edited
+            
+        }
+        
         //AUX methods
         private List<String> getPrivileges(Collection<Role> roles) {
   
@@ -127,8 +159,26 @@ public class JwtUserDetailsService implements UserDetailsService {
         
         private Collection<? extends GrantedAuthority> getAuthorities(
             Collection<Role> roles) {
-
+            
               return getGrantedAuthorities(getPrivileges(roles));
-          }
+        }
        
+        private boolean status(String username, boolean status){
+            
+            try{
+                
+                User user = uRep.findByUsername(username);
+                if(user == null)
+                    return false;
+                
+                user.setEnabled(status);
+                return true;
+                
+            }catch(Exception e){
+                e.printStackTrace();
+                return false;
+            }
+            
+        }
+        
 }

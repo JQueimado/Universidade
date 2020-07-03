@@ -32,6 +32,9 @@ public class User {
     @Column
     private String activeToken;
     
+    @Column
+    private boolean enabled;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 
         name = "user_roles", 
@@ -52,13 +55,13 @@ public class User {
    
     // Constructors
     public User(){
-        this.username = null;
-        this.password = null;
+        this("","");
     }
     
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.enabled = true;
     }
     
     // Geters and Seters
@@ -109,7 +112,13 @@ public class User {
     public void setActiveToken(String activeToken) {
         this.activeToken = activeToken;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
     
-    
-   
 }

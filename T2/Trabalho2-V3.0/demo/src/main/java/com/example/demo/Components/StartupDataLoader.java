@@ -46,13 +46,10 @@ public class StartupDataLoader implements ApplicationListener<ContextRefreshedEv
             return;
         
         // Privileges
-        Privilege readAllPrivilege = createPrivilegeIfNotFound("READ_ALL_DATA");
-        
-        Privilege writeAllPrivilege = createPrivilegeIfNotFound("WRITE_ALL_DATA");
-  
-        Privilege readUserPrivilege = createPrivilegeIfNotFound("READ_USER_DATA");
-        
-        Privilege writeUserPrivilege = createPrivilegeIfNotFound("WRITE_USER_DATA");
+        Privilege readAllPrivilege = createPrivilegeIfNotFound("READ_ALL_DATA_PRIVILEGE");
+        Privilege writeAllPrivilege = createPrivilegeIfNotFound("WRITE_ALL_DATA_PRIVILEGE");
+        Privilege readUserPrivilege = createPrivilegeIfNotFound("READ_USER_DATA_PRIVILEGE");
+        Privilege writeUserPrivilege = createPrivilegeIfNotFound("WRITE_USER_DATA_PRIVILEGE");
         
         // Set all privilege to Roles
         List<Privilege> adminPrivileges = Arrays.asList(readAllPrivilege, writeAllPrivilege); 
@@ -60,13 +57,13 @@ public class StartupDataLoader implements ApplicationListener<ContextRefreshedEv
         List<Privilege> userPrivileges = Arrays.asList(readUserPrivilege, writeUserPrivilege );
         
         // Create Roles
-        createRoleIfNotFound("ADMIN", adminPrivileges);
-        createRoleIfNotFound("USER", userPrivileges);
+        createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
+        createRoleIfNotFound("ROLE_USER", userPrivileges);
       
         if(userRepository.findByUsername("admin") == null){
             // Create Admin User
-            Role adminRole = roleRepository.findByName("ADMIN");
-            Role userRole = roleRepository.findByName("USER");
+            Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+            Role userRole = roleRepository.findByName("ROLE_USER");
             User admin = new User("admin", passwordEncoder.encode("admin"));
 
             admin.setRoles(Arrays.asList(adminRole, userRole));

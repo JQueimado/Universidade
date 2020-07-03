@@ -5,9 +5,11 @@ import com.example.demo.DB.Entities.SuperMarket;
 import com.example.demo.DB.Repositories.RegistryRepository;
 import com.example.demo.DB.Repositories.SuperMarketRepository;
 import com.example.demo.Jwt.JwtTool;
+import com.example.demo.Components.UserDetailsServiceImpl;
 import com.example.demo.Rest.Request.RegistryRequest;
 import com.example.demo.UserDB.Entities.User;
 import com.example.demo.UserDB.Repositories.UserRepository;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,9 @@ public class RegistryController {
     private UserRepository users;
     
     @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+    
+    @Autowired
     private SuperMarketRepository supermarkets;
     
     @Autowired
@@ -44,17 +49,6 @@ public class RegistryController {
                 .header("Access-Control-Allow-Origin","*")
                 .body(registries.findAll());
     }    
-    
-    // GET One
-    @RequestMapping(value =  "/{id}", method = RequestMethod.GET)
-    public ResponseEntity findOne( @PathVariable("id") long id){
-        
-        return ResponseEntity
-                .ok()
-                .header("Access-Control-Allow-Origin","*")
-                .body(registries.findById(id));
-        
-    }
     
     // POST new registry
     @RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -107,6 +101,46 @@ public class RegistryController {
                 .ok()
                 .header("Access-Control-Allow-Origin","*")
                 .body(users.findByUsername(username).getRegistry());
+        
+    }
+    
+    @Transactional
+    @RequestMapping(value =  "/remove/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity remove( @RequestHeader("Authorization") String token, @PathVariable("id") long id ){
+        
+        try{
+            if( !token.startsWith("Bearer") )
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+            token = token.substring(7);
+
+            String username = jwtTokenUtil.getUsernameFromToken(token);
+
+            if( userDetailsService.hasRole(username, "WRITE_ALL_DATA_PRIVILEGE")){
+
+                Registry reg = registries.findById(id).get();
+                registries.delete(reg);
+            
+            }else{
+                User user = users.findByUsername(username);
+
+                Registry reg = registries.findById(id).get();
+
+                user.getRegistry().remove(reg);
+            }
+            
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .header("Access-Control-Allow-Origin","*")
+                    .build();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .build();
+        }
         
     }
     

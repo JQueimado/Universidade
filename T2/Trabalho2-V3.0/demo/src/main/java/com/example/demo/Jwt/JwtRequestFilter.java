@@ -1,5 +1,6 @@
 package com.example.demo.Jwt;
 
+import com.example.demo.Components.UserDetailsServiceImpl;
 import com.example.demo.Exceptions.TokenMissmatchException;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -20,7 +21,7 @@ import io.jsonwebtoken.MalformedJwtException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+    private UserDetailsServiceImpl jwtUserDetailsService;
 
     @Autowired
     private JwtTool jwtTokenUtil;
@@ -57,18 +58,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (IllegalArgumentException e) {
 
                 System.out.println("Unable to get JWT Token");
+                return;
 
             } catch (ExpiredJwtException e) {
 
                 System.out.println("JWT Token has expired");
+                return;
 
             } catch (MalformedJwtException e){
                 
                 System.out.println("JWT Token Malformed");
+                return;
                 
             } catch( TokenMissmatchException e){
                 
                 System.out.println("JWT Token Does not matched the current loged Token");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
                 
             }
 

@@ -23,7 +23,6 @@ public class JwtTool implements Serializable {
     private String secret;
 
     //retrieve username from jwt token
-
     public String getUsernameFromToken(String token) {
 
         return getClaimFromToken(token, Claims::getSubject);

@@ -3,15 +3,20 @@ package com.example.demo.Rest.Controlers;
 import com.example.demo.DB.Entities.SuperMarket;
 import com.example.demo.DB.Repositories.SuperMarketRepository;
 import com.example.demo.Rest.Request.SuperMarketRequest;
+import com.example.demo.UserDB.Repositories.UserRepository;
+import javax.transaction.Transactional;
+import jdk.jfr.internal.RequestEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.springframework.http.ResponseEntity.ok;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,21 +25,26 @@ public class SuperMarketControler {
     
     @Autowired
     private SuperMarketRepository supermarkets;
-    
+   
     //Get All Super Markets
     @GetMapping("")
     public ResponseEntity all() {
-        return ResponseEntity.ok().header("Access-Control-Allow-Origin","*").body(supermarkets.findAll());
+        return ResponseEntity
+                .ok()
+                .header("Access-Control-Allow-Origin","*")
+                .body(supermarkets.findAll());
     }    
     
     //Options Handler
+    /*
     @RequestMapping( value = "", method = RequestMethod.OPTIONS)
     public ResponseEntity getOption(){
         return ResponseEntity.ok().allow(HttpMethod.POST, HttpMethod.OPTIONS, HttpMethod.GET).header("Access-Control-Allow-Headers","Authorization").build();
     }
-    
+    */
+
     //Create Handler
-    @RequestMapping( value = "", method = RequestMethod.POST)
+    @RequestMapping( value = "/add", method = RequestMethod.POST)
     public ResponseEntity addSuperMarket( @RequestBody SuperMarketRequest request ){
         try{
             SuperMarket nsp = new SuperMarket();
@@ -47,6 +57,31 @@ public class SuperMarketControler {
             return ResponseEntity.ok(request);
         }catch( Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    @Transactional
+    @RequestMapping( value = "/remove/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity removeSuperMarquet( @PathVariable("id") long id ){
+        
+        try
+        {   
+            SuperMarket toDel = supermarkets.findById(id).get();
+            supermarkets.delete(toDel);
+            
+            return ResponseEntity
+                    .ok()
+                    .header("Access-Control-Allow-Headers","Authorization")
+                    .build();
+            
+        }
+        catch(Exception e )
+        {
+            e.printStackTrace();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Headers","Authorization")
+                    .build();
         }
         
     }

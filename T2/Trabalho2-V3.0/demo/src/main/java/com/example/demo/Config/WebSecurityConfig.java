@@ -1,4 +1,4 @@
-package com.example.demo.Config;
+    package com.example.demo.Config;
 
 import com.example.demo.Jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.Jwt.JwtRequestFilter;
@@ -23,6 +23,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final String USER_READ_ROLE = "READ_USER_DATA_PRIVILEGE";
+    private final String USER_WRITE_ROLE = "WRITE_USER_DATA_PRIVILEGE";
+    
+    private final String ADMIN_READ_ROLE = "READ_ALL_DATA_PRIVILEGE";
+    private final String ADMIN_WRITE_ROLE = "WRITE_ALL_DATA_PRIVILEGE";
+    
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -53,11 +59,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.csrf().disable()
         .authorizeRequests()
-        .antMatchers("/login").permitAll()
-        .antMatchers("/register").permitAll()
+        //User and Login
+        .antMatchers(HttpMethod.POST, "/login").permitAll()
+        .antMatchers(HttpMethod.POST, "/register").permitAll()
+        .antMatchers(HttpMethod.POST, "/logoutUser").hasAuthority(this.USER_WRITE_ROLE)
+        .antMatchers(HttpMethod.POST, "/edit/**").hasAuthority(this.ADMIN_WRITE_ROLE)
+        //SuperMarkets
         .antMatchers(HttpMethod.GET, "/supermarkets").permitAll()
-        .antMatchers(HttpMethod.OPTIONS, "/supermarkets").permitAll()
-        .antMatchers(HttpMethod.OPTIONS, "/logoutUser").permitAll()
+        .antMatchers(HttpMethod.POST, "/supermarkets/add").hasAuthority(ADMIN_WRITE_ROLE)
+        .antMatchers(HttpMethod.DELETE, "/supermarkets/remove/**").hasAuthority(ADMIN_WRITE_ROLE)
+                
+         //Registry
+        .antMatchers(HttpMethod.GET, "/registry/all").hasAuthority(ADMIN_READ_ROLE)
+        .antMatchers(HttpMethod.POST, "/registry/new").hasAuthority(USER_WRITE_ROLE)
+        .antMatchers(HttpMethod.GET,"/registry/user").hasAuthority(USER_READ_ROLE)
+        .antMatchers(HttpMethod.DELETE, "/registry/remove/**").hasAnyAuthority(USER_WRITE_ROLE,ADMIN_WRITE_ROLE)
+
         .anyRequest().authenticated().and()
         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
