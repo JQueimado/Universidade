@@ -1,5 +1,7 @@
 package com.example.demo.Jwt;
 
+//Codigo Adaptado de https://dzone.com/articles/spring-boot-security-json-web-tokenjwt-hello-world
+
 import com.example.demo.Components.UserDetailsServiceImpl;
 import com.example.demo.Exceptions.TokenMissmatchException;
 import java.io.IOException;
@@ -25,24 +27,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTool jwtTokenUtil;
-    
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         final String requestTokenHeader = request.getHeader("Authorization");
-
         String username = null;
-
         String jwtToken = null;
 
-        // JWT Token is in the form "Bearer token". Remove Bearer word and get
-
-        // only the Token
-
-        System.out.println("Token:" + requestTokenHeader );
-        
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 
             jwtToken = requestTokenHeader.substring(7);
@@ -50,10 +43,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
 
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-                
-                if( !jwtUserDetailsService.verifyToken(jwtToken, username) )
-                    throw( new TokenMissmatchException() );
-                
+
+                if (!jwtUserDetailsService.verifyToken(jwtToken, username))
+                    throw (new TokenMissmatchException());
 
             } catch (IllegalArgumentException e) {
 
@@ -65,17 +57,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
                 return;
 
-            } catch (MalformedJwtException e){
-                
+            } catch (MalformedJwtException e) {
+
                 System.out.println("JWT Token Malformed");
                 return;
-                
-            } catch( TokenMissmatchException e){
-                
+
+            } catch (TokenMissmatchException e) {
+
                 System.out.println("JWT Token Does not matched the current loged Token");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
-                
+
             }
 
         } else {
@@ -84,35 +76,22 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         }
 
-        // Once we get the token validate it.
-
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-        UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
-        // if token is valid configure Spring Security to manually set
+            if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
-        // authentication
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
 
-        if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+                usernamePasswordAuthenticationToken
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-        userDetails, null, userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
-        usernamePasswordAuthenticationToken
-
-        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-        // After setting the Authentication in the context, we specify
-
-        // that the current user is authenticated. So it passes the
-
-        // Spring Security Configurations successfully.
-
-        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-
-        }
+            }
 
         }
 
