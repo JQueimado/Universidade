@@ -1,9 +1,17 @@
 package com.example.demo.Rest.Controlers;
 
+import com.example.demo.DB.Entities.Registry;
 import com.example.demo.DB.Entities.SuperMarket;
+import com.example.demo.DB.Repositories.RegistryRepository;
 import com.example.demo.DB.Repositories.SuperMarketRepository;
 import com.example.demo.Rest.Request.SuperMarketRequest;
+import com.example.demo.Rest.Responses.SuperMarketResponse;
+import com.example.demo.Rest.Responses.TextResponse;
 import com.example.demo.UserDB.Repositories.UserRepository;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.transaction.Transactional;
 import jdk.jfr.internal.RequestEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +34,42 @@ public class SuperMarketControler {
     @Autowired
     private SuperMarketRepository supermarkets;
    
+    @Autowired
+    private RegistryRepository registies;
+    
+    @Autowired UserRepository users;
+    
     //Get All Super Markets
-    @GetMapping("")
-    public ResponseEntity all() {
-        return ResponseEntity
-                .ok()
+    @GetMapping("/{time}")
+    public ResponseEntity all( @PathVariable("time") long time ) {
+        
+        //Time Check
+        if( time < 0 )
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .header("Access-Control-Allow-Origin","*")
-                .body(supermarkets.findAll());
+                .body(new TextResponse("invalid time: "+time));
+        
+        Collection<SuperMarket> supers = supermarkets.findAll();
+        List<SuperMarketResponse> to_send = new ArrayList<>();
+        
+        for( SuperMarket s: supers){
+            
+            SuperMarketResponse temp = new SuperMarketResponse();
+            temp.setSuper_name(s.getName());
+            Collection<Registry> valid_reistries = registies.findBySuperIdAndTimeStamp(s.getName(), LocalDateTime.now().minusHours(time));
+            
+            for(Registry r: valid_reistries)
+                temp.getLevels().add(r.getLevel());
+            
+            to_send.add(temp);
+            
+        }
+        
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .header("Access-Control-Allow-Origin","*")
+                .body(to_send);
     }    
     
     //Options Handler
@@ -47,32 +84,67 @@ public class SuperMarketControler {
     @RequestMapping( value = "/add", method = RequestMethod.POST)
     public ResponseEntity addSuperMarket( @RequestBody SuperMarketRequest request ){
         try{
+            
+            SuperMarket eval = supermarkets.findByName(request.getName());
+            
+            if( eval != null){
+                return ResponseEntity
+                        .status(HttpStatus.CONFLICT)
+                        .header("Access-Control-Allow-Headers","Authorization")
+                        .body(new TextResponse("supermarket already exists"));
+            }
+            
             SuperMarket nsp = new SuperMarket();
             nsp.setName(request.getName());
-
-            System.out.println("Adding "+ request.getName() +" to the data base");
             
             supermarkets.save(nsp);
 
-            return ResponseEntity.ok(request);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .header("Access-Control-Allow-Headers","Authorization")
+                    .body(new TextResponse("created "+ request.getName()));
+            
         }catch( Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Headers","Authorization")
+                    .body("server error");
         }
     }
     
     @Transactional
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity removeSuperMarquet( @PathVariable("id") long id ){
+    @RequestMapping( value = "/remove/{name}", method = RequestMethod.DELETE)
+    public ResponseEntity removeSuperMarquet( @PathVariable("name") String name ){
         
         try
         {   
-            SuperMarket toDel = supermarkets.findById(id).get();
+            SuperMarket toDel = supermarkets.findByName(name);
+            
+            if(toDel == null)
+                return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .header("Access-Control-Allow-Headers","Authorization")
+                    .body(new TextResponse("Supermarket called  "+ name +" des not exist"));
+            
+            // Delete Registries
+            List<Registry> temp = new ArrayList<>();
+            
+            for( Registry reg: toDel.getRegistries() ){
+                
+                users.findUserByRegistryId(reg.getId()).getRegistry().remove(reg);
+                temp.add(reg);
+            }
+                
             supermarkets.delete(toDel);
+            
+            for(Registry reg: temp){
+                registies.delete(reg);
+            }
             
             return ResponseEntity
                     .ok()
                     .header("Access-Control-Allow-Headers","Authorization")
-                    .build();
+                    .body(new TextResponse("removed "+name+" and all its registries"));
             
         }
         catch(Exception e )
@@ -81,7 +153,7 @@ public class SuperMarketControler {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Access-Control-Allow-Headers","Authorization")
-                    .build();
+                    .body(new TextResponse("server error"));
         }
         
     }

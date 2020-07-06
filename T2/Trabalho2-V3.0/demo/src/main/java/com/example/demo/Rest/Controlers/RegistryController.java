@@ -7,14 +7,18 @@ import com.example.demo.DB.Repositories.SuperMarketRepository;
 import com.example.demo.Jwt.JwtTool;
 import com.example.demo.Components.UserDetailsServiceImpl;
 import com.example.demo.Rest.Request.RegistryRequest;
+import com.example.demo.Rest.Responses.RegistryDetails;
+import com.example.demo.Rest.Responses.TextResponse;
 import com.example.demo.UserDB.Entities.User;
 import com.example.demo.UserDB.Repositories.UserRepository;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import static org.springframework.http.ResponseEntity.ok;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -44,44 +48,88 @@ public class RegistryController {
     // GET All
     @RequestMapping(value =  "/all", method = RequestMethod.GET)
     public ResponseEntity all() {
-        return ResponseEntity
+        
+        try{
+            
+            Collection<Registry> _registies = registries.findAll();
+            List<RegistryDetails> to_send = new ArrayList();
+            
+            for( Registry reg: _registies ){
+                
+                RegistryDetails temp = new RegistryDetails();
+                temp.setId(reg.getId());
+                temp.setLevel(reg.getLevel());
+                temp.setSuper_name(supermarkets.findByRegId(reg.getId()).getName());
+                temp.setUsername(users.findUserByRegistryId(reg.getId()).getUsername());
+                to_send.add(temp);
+            }
+            
+            return ResponseEntity
                 .ok()
                 .header("Access-Control-Allow-Origin","*")
-                .body(registries.findAll());
+                .body(to_send);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new TextResponse("error getting ressorces"));
+        }
+        
     }    
     
     // POST new registry
+    @Transactional
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity newReg( 
             @RequestHeader("Authorization") String token, 
             @RequestBody RegistryRequest registry ){
         
-         if( !token.startsWith("Bearer") )
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        try{
         
-        token = token.substring(7);
-        
-        // Find User that sent the mesage
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        
-        System.out.println("User:" + username);
-        System.out.println("Super:"+ registry.getSuperName());
-        
-        User user = users.findByUsername(username);
-        SuperMarket sm = supermarkets.findByName(registry.getSuperName());
-        
-        Registry nRes = new Registry();
-        nRes.setLevel(registry.getOcup());
-        
-        user.getRegistry().add(nRes);
-        sm.getRegistries().add(nRes);
-        
-        registries.save(nRes);
+           if( registry.getOcup() > 5 || registry.getOcup() < 0 )
+               return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body(new TextResponse("invalid Ocupation"));
+            
+           if( !token.startsWith("Bearer") )
+              return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+           token = token.substring(7);
+
+           // Find User that sent the mesage
+           String username = jwtTokenUtil.getUsernameFromToken(token);
+
+           User user = users.findByUsername(username);
+           SuperMarket sm = supermarkets.findByName(registry.getSuperName());
+
+           if( sm == null)
+               return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body(new TextResponse("supermarket "+registry.getSuperName()+" not found")); 
+           
+           Registry nRes = new Registry();
+           nRes.setLevel(registry.getOcup());
+
+           user.getRegistry().add(nRes);
+           sm.getRegistries().add(nRes);
+
+           registries.save(nRes);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body(new TextResponse("error"));
+        }
         
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .header("Access-Control-Allow-Origin","*")
-                .build();
+                .body(new TextResponse("created registry for "+ registry.getSuperName()));
         
     }
     
@@ -118,28 +166,62 @@ public class RegistryController {
 
             if( userDetailsService.hasRole(username, "WRITE_ALL_DATA_PRIVILEGE")){
 
-                Registry reg = registries.findById(id).get();
+                Optional<Registry> temp = registries.findById(id);
+                
+                if(temp.isEmpty())
+                    return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body( new TextResponse("registry not found") );
+                
+                Registry reg = temp.get();
+                
+                users.findUserByRegistryId(reg.getId()).getRegistry().remove(reg);
+                supermarkets.findByRegId(reg.getId()).getRegistries().remove(reg);
                 registries.delete(reg);
             
             }else{
                 User user = users.findByUsername(username);
 
-                Registry reg = registries.findById(id).get();
+                if(user == null )
+                    return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body( new TextResponse("user not found") );
+                
+                Optional<Registry> temp = registries.findById(id);
 
+                if( temp.isEmpty() )
+                    return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin","*")
+                    .body( new TextResponse("registry not found") );
+                
+                Registry reg = temp.get();
+                
+                if(!user.getRegistry().contains(reg))
+                    return ResponseEntity
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .header("Access-Control-Allow-Origin","*")
+                        .body(new TextResponse("Register with id: "+ id + " does not belong to autenticated user"));
+                
                 user.getRegistry().remove(reg);
+                
+                supermarkets.findByRegId(reg.getId()).getRegistries().remove(reg);
+                registries.delete(reg);
             }
             
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .header("Access-Control-Allow-Origin","*")
-                    .build();
+                    .body(new TextResponse("removed registry with id "+ id));
             
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Access-Control-Allow-Origin","*")
-                    .build();
+                    .body( new TextResponse("server error") );
         }
         
     }

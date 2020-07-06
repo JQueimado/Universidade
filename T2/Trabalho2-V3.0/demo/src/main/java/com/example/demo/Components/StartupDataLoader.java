@@ -71,11 +71,12 @@ public class StartupDataLoader implements ApplicationListener<ContextRefreshedEv
             userRepository.save(admin);
         }
  
+        /*
         SuperMarket temp = new SuperMarket();
-        temp.setName("continete");
+        temp.setName("continente");
         
         superRepository.save(temp);
-        
+        */
         alreadySetup = true;
     }
     

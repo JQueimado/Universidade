@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -49,30 +50,44 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             } catch (IllegalArgumentException e) {
 
-                System.out.println("Unable to get JWT Token");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().append("Unable to get JWT Token");
+                response.getWriter().flush();
+                response.getWriter().close();
                 return;
 
             } catch (ExpiredJwtException e) {
 
-                System.out.println("JWT Token has expired");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().append("JWT Token has expired");
+                response.getWriter().flush();
+                response.getWriter().close();
                 return;
 
             } catch (MalformedJwtException e) {
 
-                System.out.println("JWT Token Malformed");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().append("JWT Token Malformed");
+                response.getWriter().flush();
+                response.getWriter().close();
                 return;
 
             } catch (TokenMissmatchException e) {
 
-                System.out.println("JWT Token Does not matched the current loged Token");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().append("JWT Token Does not matched the current loged Token");
+                response.getWriter().flush();
+                response.getWriter().close();
                 return;
 
+            } catch(UsernameNotFoundException e){
+                
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().append(e.getMessage());
+                response.getWriter().flush();
+                response.getWriter().close();
+                return;
             }
-
-        } else {
-
-            logger.warn("JWT Token does not begin with Bearer String");
 
         }
 
@@ -86,7 +101,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         userDetails, null, userDetails.getAuthorities());
 
                 usernamePasswordAuthenticationToken
-
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

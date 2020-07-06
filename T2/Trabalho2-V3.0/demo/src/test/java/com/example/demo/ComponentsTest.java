@@ -3,14 +3,12 @@ package com.example.demo;
 import com.example.demo.Rest.Controlers.LoginControler;
 import com.example.demo.Rest.Controlers.RegistryController;
 import com.example.demo.Rest.Controlers.SuperMarketControler;
-import com.example.demo.UserDB.Entities.Privilege;
 import com.example.demo.UserDB.Repositories.PrivilegeRepository;
 import com.example.demo.UserDB.Repositories.RoleRepository;
 import com.example.demo.UserDB.Repositories.UserRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

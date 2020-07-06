@@ -65,15 +65,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/logoutUser").hasAuthority(this.USER_WRITE_ROLE)
         .antMatchers(HttpMethod.POST, "/edit/**").hasAuthority(this.ADMIN_WRITE_ROLE)
         //SuperMarkets
-        .antMatchers(HttpMethod.GET, "/supermarkets").permitAll()
+        .antMatchers(HttpMethod.GET, "/supermarkets/**").permitAll()
         .antMatchers(HttpMethod.POST, "/supermarkets/add").hasAuthority(ADMIN_WRITE_ROLE)
         .antMatchers(HttpMethod.DELETE, "/supermarkets/remove/**").hasAuthority(ADMIN_WRITE_ROLE)
                 
          //Registry
-        .antMatchers(HttpMethod.GET, "/registry/all").hasAuthority(ADMIN_READ_ROLE)
-        .antMatchers(HttpMethod.POST, "/registry/new").hasAuthority(USER_WRITE_ROLE)
-        .antMatchers(HttpMethod.GET,"/registry/user").hasAuthority(USER_READ_ROLE)
-        .antMatchers(HttpMethod.DELETE, "/registry/remove/**").hasAnyAuthority(USER_WRITE_ROLE,ADMIN_WRITE_ROLE)
+        .antMatchers(HttpMethod.GET, "/registries/all").hasAuthority(ADMIN_READ_ROLE)
+        .antMatchers(HttpMethod.POST, "/registries/new").hasAuthority(USER_WRITE_ROLE)
+        .antMatchers(HttpMethod.GET,"/registries/user").hasAuthority(USER_READ_ROLE)
+        .antMatchers(HttpMethod.DELETE, "/registries/remove/**").hasAnyAuthority(USER_WRITE_ROLE,ADMIN_WRITE_ROLE)
 
         .anyRequest().authenticated().and()
         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

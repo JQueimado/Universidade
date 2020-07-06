@@ -96,8 +96,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             
         }
 
-        public boolean verifyToken(String token, String username){
-            return uRep.findByUsername(username).getActiveToken().compareTo(token) == 0;
+        public boolean verifyToken(String token, String username) throws UsernameNotFoundException{
+            try{
+                User user = uRep.findByUsername(username);
+
+                if(user == null)
+                    throw new UsernameNotFoundException("Can not find user "+ username);
+
+                return user.getActiveToken().compareTo(token) == 0;
+                
+            }catch(Exception e){
+                return false;
+            }
         }
         
         public boolean hasRole(String username, String role){
