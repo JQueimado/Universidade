@@ -97,29 +97,25 @@ public class LoginControler{
             userDetailsService.edit_user(name, request);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("User "+ name + " edited" ));
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("Server Error"));
         }
         
     }
     
     /* Options */
-    /*
-    @RequestMapping(value = "/logoutUser", method = RequestMethod.OPTIONS)
+    @RequestMapping(value = "/login", method = RequestMethod.OPTIONS)
     public ResponseEntity getOption(){
         return ResponseEntity
                 .ok()
-                .allow(HttpMethod.POST, HttpMethod.OPTIONS, HttpMethod.GET)
-                .header("Access-Control-Allow-Headers","Authorization")
+                .allow(HttpMethod.POST, HttpMethod.OPTIONS)
+                //.header("Access-Control-Allow-Headers","Authorization")
                 .build();
     }
-    */
     
     //AUX
     private ResponseEntity<?> login( JwtRequest authenticationRequest ) throws Exception{
@@ -134,7 +130,7 @@ public class LoginControler{
         if( !userDetailsService.postAuth(userDetails, token) )
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Error");
         
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token));
     }
     
     private void authenticate(String username, String password) throws Exception {
