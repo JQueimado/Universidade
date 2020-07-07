@@ -1,5 +1,11 @@
 package com.trabalho_so2.Rest.Request;
 
+/*
+JSON
+{
+    name: String
+}
+*/
 
 public class SuperMarketRequest {
     

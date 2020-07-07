@@ -7,9 +7,7 @@ import com.trabalho_so2.Rest.Request.StatusRequest;
 import com.trabalho_so2.Rest.Request.UserDetailsRequest;
 import com.trabalho_so2.Rest.Responses.JwtResponse;
 import com.trabalho_so2.Rest.Responses.TextResponse;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,7 +36,14 @@ public class LoginControler{
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    /* Login endpoint */
+    /* Login endpoint
+    path : /login
+    method: POST
+    expected body: json.username.String, json.password.String
+    responses:
+        - status: OK            body: json.token = generated token
+        - status: UNAUTHORIZED  body: json.text = "Authetiction Error"
+    */
     @CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -47,7 +52,15 @@ public class LoginControler{
 
     }
     
-    /* Register endpoint */
+    /* Register endpoint
+    path : /register
+    method: POST
+    expected body: json.username.String, json.password.String
+    responses:
+        - status: OK            body: json.token = generated token
+        - status: UNAUTHORIZED  body: json.text = "Authetiction Error"
+        - status: BAD_REQUEST   body: json.text = "User Alerady Exists"
+    */
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> registerUser(@RequestBody JwtRequest userdto) throws Exception {
@@ -57,11 +70,19 @@ public class LoginControler{
             return login(userdto);
         }
         else{
-            return ResponseEntity.ok( new TextResponse("User Alerady Exists") );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new TextResponse("User Alerady Exists") );
         }
     }
     
-    /*Logout*/
+    /*Logout
+    path : /logoutUser
+    method: POST
+    expected body: indiferent
+    responses:
+        - status: OK                    body: json.text = "sucssesfuly logedout"
+        - status: UNAUTHORIZED          body: json.text = "token doesnt start with Bearer"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "LogOutError"
+    */
     @CrossOrigin
     @RequestMapping(value = "/logoutUser", method = RequestMethod.POST)
     public ResponseEntity<?> logoutEndpoint(
@@ -88,6 +109,14 @@ public class LoginControler{
                 .body( new TextResponse( "sucssesfuly logedout" ));   
     }
     
+    /*Edit User
+    path : /edit/{name}
+    method: POST
+    expected body: json.username.String, json.password.String, json.status.boolean
+    responses:
+        - status: OK                    body: json.text = "User {{name}} edited"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "Server Error"
+    */
     @CrossOrigin
     @RequestMapping(value = "/edit/{name}", method = RequestMethod.POST)
     public ResponseEntity edit_User(
@@ -119,7 +148,7 @@ public class LoginControler{
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         if( !userDetailsService.postAuth(userDetails, token) )
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Error");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new TextResponse( "Authentication Error" ));
         
         return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token));
     }

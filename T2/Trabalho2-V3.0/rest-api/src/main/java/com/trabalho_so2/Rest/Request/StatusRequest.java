@@ -1,5 +1,12 @@
 package com.trabalho_so2.Rest.Request;
 
+/*
+JSON
+{
+    method: String
+}
+*/
+
 public class StatusRequest {
     
     private String method;

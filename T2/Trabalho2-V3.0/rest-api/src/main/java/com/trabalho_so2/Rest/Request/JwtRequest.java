@@ -2,6 +2,15 @@ package com.trabalho_so2.Rest.Request;
 
 import java.io.Serializable;
 
+/*
+JSON
+{
+    username: String,
+    password:String
+}
+*/
+
+
 public class JwtRequest implements Serializable {
 
     private static final long serialVersionUID = 5926468583005150707L;

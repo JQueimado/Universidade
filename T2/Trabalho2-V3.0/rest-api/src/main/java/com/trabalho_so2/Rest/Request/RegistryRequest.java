@@ -1,5 +1,13 @@
 package com.trabalho_so2.Rest.Request;
 
+/*
+JSON
+{
+    superName: String,
+    ocup:int
+}
+*/
+
 public class RegistryRequest {
     
     private String superName;

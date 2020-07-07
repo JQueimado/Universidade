@@ -1,5 +1,14 @@
 package com.trabalho_so2.Rest.Request;
 
+/*
+JSON
+{
+    username: String,
+    password:String,
+    status:boolean
+}
+*/
+
 public class UserDetailsRequest {
  
     private String username;

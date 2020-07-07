@@ -1,8 +1,5 @@
 package com.trabalho_so2.Rest.Responses;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import lombok.Data;
 
 @Data

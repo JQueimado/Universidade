@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,7 +46,14 @@ public class RegistryController {
     @Autowired
     private JwtTool jwtTokenUtil;
     
-    // GET All
+    /*Get all
+    path : /registries/all
+    method: GET
+    expected body: indiferent
+    responses:
+        - status: OK                    body: Array( json.int.id, json.String.username, json.int.level, json.String.super_name )
+        - status: INTERNAL_SERVER_ERROR body: json.text = "error getting ressorces"
+    */
     @CrossOrigin
     @RequestMapping(value =  "/all", method = RequestMethod.GET)
     public ResponseEntity all() {
@@ -80,7 +86,16 @@ public class RegistryController {
         
     }    
     
-    // POST new registry
+    /* New registry
+    path : /registries/new
+    method: POST
+    expected body: json.String.superName, json.int.oucup
+    responses:
+        - status: CREATED               body: "created registry for {{json.String.superName}}"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "invalid Ocupation"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "supermarket {{json.String.superName}} not found"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "error"
+    */
     @Transactional
     @CrossOrigin
     @RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -132,7 +147,14 @@ public class RegistryController {
         
     }
     
-    // GET All form User
+    /* Get registries from user
+    path : /registries/user
+    method: GET
+    expected body: indiferent
+    responses:
+        - status: OK           body: Array( json.int.id, json.String.username, json.int.level, json.String.super_name )
+        - status: UNAUTHORIZED body: empty
+    */
     @CrossOrigin
     @RequestMapping(value =  "/user", method = RequestMethod.GET)
     public ResponseEntity findByUser( @RequestHeader("Authorization") String token ){
@@ -164,6 +186,18 @@ public class RegistryController {
         
     }
     
+    /* Remove Registry
+    path : /registries/remove/{id}
+    method: DELETE
+    expected body: indiferent
+    responses:
+        - status: OK                    body: "removed registry with id {{id}}"
+        - status: UNAUTHORIZED          body: empty
+        - status: INTERNAL_SERVER_ERROR body: json.text = "registry not found"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "user not found"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "Register with id: {{id}} does not belong to autenticated user"
+        - status: INTERNAL_SERVER_ERROR body: json.text = "server error"
+    */
     @Transactional
     @CrossOrigin
     @RequestMapping(value =  "/remove/{id}", method = RequestMethod.DELETE)
