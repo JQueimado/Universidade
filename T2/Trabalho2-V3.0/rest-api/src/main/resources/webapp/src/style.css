@@ -57,3 +57,23 @@ ul.header li a {
   cursor: pointer;
 }
 .button1 {border-radius: 50px;}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+tr:nth-child(even){background-color: lightgrey}
+tr:nth-child(odd){background-color: lightgrey}
+
+th {
+  background-color: lightblue;
+  color: purple;
+}
