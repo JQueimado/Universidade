@@ -8,7 +8,10 @@ class SignIn extends Component {
     render() {
         return (
             <div>
-                <button> REGISTERTEST </button>
+                <button onClick={() => this.props.register("joao", "password")}>
+                    {" "}
+                    REGISTERTEST{" "}
+                </button>
             </div>
         );
     }

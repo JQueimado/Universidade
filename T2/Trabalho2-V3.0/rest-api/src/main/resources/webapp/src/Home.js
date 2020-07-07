@@ -1,6 +1,54 @@
 import React, { Component } from "react";
+import Table from "react-bootstrap/Table";
+
+const SuperMarket = (props) => {
+    var status = "";
+
+    if (props.market.empty_or_with_minimum_ocupation > 0)
+        status +=
+            "Empty or with minimum ocupation: " +
+            props.market.empty_or_with_minimum_ocupation +
+            " reports";
+
+    if (props.market.with_people_but_with_enouth_space > 0)
+        status +=
+            "With people, but with enouth space: " +
+            props.market.with_people_but_with_enouth_space +
+            " reports";
+
+    if (props.market.overcrowded > 0)
+        status += "Overcrowded: " + props.market.overcrowded + " reports";
+
+    if (props.market.overcrowded_with_a_big_queue > 0)
+        status +=
+            "Overcrowded, with a big queue: " +
+            props.market.overcrowded_with_a_big_queue +
+            " reports";
+
+    if (status === "") status = "no recent reports";
+    return (
+        <tr>
+            <td>{props.market.super_name}</td>
+            <td>{status}</td>
+        </tr>
+    );
+};
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+
+        props.supers(1);
+    }
+
+    componentDidMount() {}
+
+    listing() {
+        return this.props.supersList.map((e, i) => {
+            return <SuperMarket market={e} />;
+        });
+    }
+
     render() {
         return (
             <div>
@@ -28,8 +76,18 @@ class Home extends Component {
 
                 <div>
                     <button onClick={() => this.props.supers(1)}>
-                        TESTSUPERGET
+                        Refresh
                     </button>
+
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Super Market Name</th>
+                                <th>Ocupation</th>
+                            </tr>
+                        </thead>
+                        <tbody>{this.listing()}</tbody>
+                    </Table>
                 </div>
             </div>
         );

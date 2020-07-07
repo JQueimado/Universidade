@@ -28,6 +28,8 @@ class Main extends Component {
         this.logout = this.logout.bind(this);
         this.getsupermarkets = this.getsupermarkets.bind(this);
         this.getregistries = this.getregistries.bind(this);
+        this.createRegistry = this.createRegistry.bind(this);
+        this.register = this.register.bind(this);
 
         //Axios
         axios.defaults.baseURL = config.api;
@@ -115,6 +117,63 @@ class Main extends Component {
         return temp;
     }
 
+    //Create Registries
+    async createRegistry(superName, lvl) {
+        if (!this.state.logedin) return false;
+
+        var temp = false;
+
+        const body = { superName: superName, ocup: lvl };
+
+        let response = await axios.post("/registries/new", body, {
+            headers: { Authorization: this.state.token },
+        });
+
+        if (response.status === 201) temp = true;
+
+        return temp;
+    }
+
+    async removeRegistry(id) {
+        if (!this.state.logedin) return false;
+
+        var temp = false;
+
+        let response = await axios.delete("/registries/remove/" + id, {
+            headers: { Authorization: this.state.token },
+        });
+
+        if (response.status === 200) {
+            temp = true;
+        }
+
+        return false;
+    }
+
+    //Register user
+    async register(username, password) {
+        if (this.state.logedin) return false;
+
+        var temp = false;
+
+        const body = {
+            username: username,
+            password: password,
+        };
+
+        let response = await axios.post("/register", body);
+
+        if (response.status === 200) {
+            this.setState({
+                token: "Bearer " + response.data.token,
+                logedin: true,
+            });
+            temp = true;
+        }
+
+        return temp;
+    }
+
     //Render
     render() {
         return (
@@ -146,16 +205,27 @@ class Main extends Component {
                             exact
                             path="/home"
                             component={() => (
-                                <Home supers={this.getsupermarkets} />
+                                <Home
+                                    supers={this.getsupermarkets}
+                                    supersList={this.state.superMarkets}
+                                />
                             )}
                         />
                         <Route
                             path="/registry"
                             component={() => (
-                                <Registry regs={this.getregistries} />
+                                <Registry
+                                    regs={this.getregistries}
+                                    createRegistry={this.createRegistry}
+                                />
                             )}
                         />
-                        <Route path="/signin" component={() => <SignIn />} />
+                        <Route
+                            path="/signin"
+                            component={() => (
+                                <SignIn register={this.register} />
+                            )}
+                        />
                         <Route
                             path="/login"
                             component={() => (

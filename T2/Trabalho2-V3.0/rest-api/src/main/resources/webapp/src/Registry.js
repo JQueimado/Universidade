@@ -6,7 +6,14 @@ class Registry extends Component {
             <div>
                 <h2>Ocupation Registry</h2>
 
-                <button class="button button1">Create Registry</button>
+                <button
+                    onClick={() => {
+                        this.props.createRegistry("lidl", 3);
+                    }}
+                    class="button button1"
+                >
+                    Create Registry
+                </button>
                 <button onClick={this.props.regs} class="button button1">
                     Show Registry
                 </button>
