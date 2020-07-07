@@ -45,9 +45,10 @@ class Registry extends Component {
         this.onLevelChange = this.onLevelChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onSuperChange = this.onSuperChange.bind(this);
+        this.onCreateClick = this.onCreateClick.bind(this);
     }
 
-    state = { supername: "", level: 0 };
+    state = { supername: "", level: 0, showCreate: false };
 
     listing() {
         return this.props.regListing.map((e, i) => {
@@ -67,25 +68,28 @@ class Registry extends Component {
         this.props.createRegistry(this.state.supername, this.state.level);
     }
 
+    onCreateClick() {
+        this.state.showCreate
+            ? this.setState({ showCreate: false })
+            : this.setState({ showCreate: true });
+    }
+
     render() {
         return (
             <div>
                 <h2>Ocupation Registry</h2>
 
-                <button
-                    onClick={() => {
-                        this.props.createRegistry("lidl", 3);
-                    }}
-                    class="button button1"
-                >
+                <button onClick={this.onCreateClick} class="button button1">
                     Create Registry
                 </button>
 
-                <NewRegistry
-                    onSubmit={this.onSubmit}
-                    onSuperChange={this.onSuperChange}
-                    onLevelChange={this.onLevelChange}
-                />
+                {this.state.showCreate ? (
+                    <NewRegistry
+                        onSubmit={this.onSubmit}
+                        onSuperChange={this.onSuperChange}
+                        onLevelChange={this.onLevelChange}
+                    />
+                ) : null}
 
                 <button onClick={this.props.regs}> Refresh </button>
 

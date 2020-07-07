@@ -19,6 +19,7 @@ class Main extends Component {
         this.state = {
             token: "",
             logedin: false,
+            username: "",
             superMarkets: [],
             registries: [],
         };
@@ -56,6 +57,7 @@ class Main extends Component {
             this.setState({
                 token: "Bearer " + response.data.token,
                 logedin: true,
+                username: username,
             });
             temp = true;
         }
@@ -76,7 +78,12 @@ class Main extends Component {
         );
 
         if (response.status === 200) {
-            this.setState({ token: "", logedin: false, registries: [] });
+            this.setState({
+                token: "",
+                logedin: false,
+                username: "",
+                registries: [],
+            });
             temp = true;
         }
 
@@ -185,6 +192,9 @@ class Main extends Component {
             <HashRouter>
                 <div>
                     <h1>Ocupação de Espaços Comerciais</h1>
+                    {this.state.logedin ? (
+                        <h3> Loged In as: {this.state.username} </h3>
+                    ) : null}
 
                     <ul className="header">
                         <li>
@@ -195,12 +205,16 @@ class Main extends Component {
                         <li>
                             <NavLink to="/registry">Registry</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/signin">Sign In</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/login">Log In</NavLink>
-                        </li>
+                        {!this.state.logedin ? (
+                            <li>
+                                <NavLink to="/signin">Sign In</NavLink>
+                            </li>
+                        ) : null}
+                        {!this.state.logedin ? (
+                            <li>
+                                <NavLink to="/login">Log In</NavLink>
+                            </li>
+                        ) : null}
                         <li>
                             <NavLink to="/contact">Contact</NavLink>
                         </li>
@@ -227,10 +241,14 @@ class Main extends Component {
                                 />
                             )}
                         />
+
                         <Route
                             path="/signin"
                             component={() => (
-                                <SignIn register={this.register} />
+                                <SignIn
+                                    register={this.register}
+                                    loged={this.state.logedin}
+                                />
                             )}
                         />
                         <Route
@@ -241,6 +259,7 @@ class Main extends Component {
                                         this.login(username, password)
                                     }
                                     logout={() => this.logout()}
+                                    loged={this.state.logedin}
                                 />
                             )}
                         />
