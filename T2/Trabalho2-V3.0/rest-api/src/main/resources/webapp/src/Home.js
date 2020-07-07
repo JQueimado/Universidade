@@ -38,10 +38,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        props.supers(1);
+        this.state = { loaded: false };
     }
-
-    componentDidMount() {}
 
     listing() {
         return this.props.supersList.map((e, i) => {

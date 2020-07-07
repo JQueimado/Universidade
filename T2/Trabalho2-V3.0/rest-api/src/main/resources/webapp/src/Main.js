@@ -29,6 +29,7 @@ class Main extends Component {
         this.getsupermarkets = this.getsupermarkets.bind(this);
         this.getregistries = this.getregistries.bind(this);
         this.createRegistry = this.createRegistry.bind(this);
+        this.removeRegistry = this.removeRegistry.bind(this);
         this.register = this.register.bind(this);
 
         //Axios
@@ -131,6 +132,8 @@ class Main extends Component {
 
         if (response.status === 201) temp = true;
 
+        this.getregistries();
+
         return temp;
     }
 
@@ -147,7 +150,9 @@ class Main extends Component {
             temp = true;
         }
 
-        return false;
+        this.getregistries();
+
+        return temp;
     }
 
     //Register user
@@ -216,7 +221,9 @@ class Main extends Component {
                             component={() => (
                                 <Registry
                                     regs={this.getregistries}
+                                    regListing={this.state.registries}
                                     createRegistry={this.createRegistry}
+                                    removeRegistry={this.removeRegistry}
                                 />
                             )}
                         />
