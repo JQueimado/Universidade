@@ -59,8 +59,10 @@ public class SuperMarketControler {
             temp.setSuper_name(s.getName());
             Collection<Registry> valid_reistries = registies.findBySuperIdAndTimeStamp(s.getName(), LocalDateTime.now().minusHours(time));
             
-            for(Registry r: valid_reistries)
-                temp.getLevels().add(r.getLevel());
+            for(Registry r: valid_reistries){
+                temp.add( r.getLevel() );
+                
+            }
             
             to_send.add(temp);
             

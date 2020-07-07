@@ -49,7 +49,7 @@ class Main extends Component {
 
         let response = await axios.post("/login", body);
 
-        if (response.status == 200) {
+        if (response.status === 200) {
             this.setState({
                 token: "Bearer " + response.data.token,
                 logedin: true,
@@ -73,7 +73,7 @@ class Main extends Component {
             { headers: { Authorization: this.state.token } }
         );
 
-        if (response.status == 200) {
+        if (response.status === 200) {
             this.setState({ token: "", logedin: false });
             temp = true;
         }
@@ -143,12 +143,24 @@ class Main extends Component {
                         </li>
                     </ul>
                     <div className="content">
-                        <Route exact path="/home" component={Home} />
-                        <Route path="/registry" component={Registry} />
                         <Route
-                            path="/signin"
+                            exact
+                            path="/home"
                             component={() => (
-                                <SignIn
+                                <Home supers={this.getsupermarkets} />
+                            )}
+                        />
+                        <Route
+                            path="/registry"
+                            component={() => (
+                                <Registry regs={this.getregistries} />
+                            )}
+                        />
+                        <Route path="/signin" component={() => <SignIn />} />
+                        <Route
+                            path="/login"
+                            component={() => (
+                                <LogIn
                                     login={(username, password) =>
                                         this.login(username, password)
                                     }
@@ -156,7 +168,6 @@ class Main extends Component {
                                 />
                             )}
                         />
-                        <Route path="/login" component={LogIn} />
                         <Route path="/contact" component={Contact} />
                     </div>
                 </div>

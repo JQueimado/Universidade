@@ -8,20 +8,7 @@ class SignIn extends Component {
     render() {
         return (
             <div>
-                <button
-                    onClick={() => {
-                        this.props.login("admin", "admin");
-                    }}
-                >
-                    LOGINTEST
-                </button>
-                <button
-                    onClick={() => {
-                        this.props.logout();
-                    }}
-                >
-                    LOGOUTTEST
-                </button>
+                <button> REGISTERTEST </button>
             </div>
         );
     }

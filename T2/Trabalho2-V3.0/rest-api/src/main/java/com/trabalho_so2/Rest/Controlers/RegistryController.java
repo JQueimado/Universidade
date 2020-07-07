@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,7 +88,7 @@ public class RegistryController {
         
         try{
         
-           if( registry.getOcup() > 5 || registry.getOcup() < 0 )
+           if( registry.getOcup() > 4 || registry.getOcup() < 1 )
                return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Access-Control-Allow-Origin","*")
@@ -138,7 +139,10 @@ public class RegistryController {
     public ResponseEntity findByUser( @RequestHeader("Authorization") String token ){
         
         if( !token.startsWith("Bearer") )
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .header("Access-Control-Allow-Origin","*")
+                    .build();
         
         token = token.substring(7);
         
@@ -146,7 +150,7 @@ public class RegistryController {
         String username = jwtTokenUtil.getUsernameFromToken(token);
         
         return ResponseEntity
-                .ok()
+                .status(HttpStatus.OK)
                 .header("Access-Control-Allow-Origin","*")
                 .body(users.findByUsername(username).getRegistry());
         

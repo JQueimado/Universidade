@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET,"/registries/user").hasAuthority(USER_READ_ROLE)
         .antMatchers(HttpMethod.DELETE, "/registries/remove/**").hasAnyAuthority(USER_WRITE_ROLE,ADMIN_WRITE_ROLE)
 
-        .antMatchers(HttpMethod.OPTIONS).permitAll()
+        .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
         .anyRequest().authenticated().and()
         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
