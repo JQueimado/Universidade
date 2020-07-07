@@ -54,7 +54,6 @@ class Main extends Component {
                 token: "Bearer " + response.data.token,
                 logedin: true,
             });
-            console.log("got here");
             temp = true;
         }
 
@@ -74,7 +73,7 @@ class Main extends Component {
         );
 
         if (response.status === 200) {
-            this.setState({ token: "", logedin: false });
+            this.setState({ token: "", logedin: false, registries: [] });
             temp = true;
         }
 
@@ -106,7 +105,7 @@ class Main extends Component {
                 headers: { Authorization: this.state.token },
             })
             .then((response) => {
-                this.setState({ response: response.data });
+                this.setState({ registries: response.data });
                 temp = true;
             })
             .catch((err) => {
