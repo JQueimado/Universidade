@@ -7,7 +7,7 @@ class Contact extends Component {
                 <h2>Need More Information or Report an Issue?</h2>
                 <p>
                     <a>
-                        Then Plase Contact the App's owners by sending a email
+                        Then Please Contact the App's owners by sending a email
                         to:
                         <p>l37561@uevora.pt or l38176@uevora.pt</p>
                     </a>
