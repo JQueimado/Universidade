@@ -39,6 +39,7 @@ public class LoginControler{
     private UserDetailsServiceImpl userDetailsService;
 
     /* Login endpoint */
+    @CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -47,6 +48,7 @@ public class LoginControler{
     }
     
     /* Register endpoint */
+    @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> registerUser(@RequestBody JwtRequest userdto) throws Exception {
         
@@ -60,6 +62,7 @@ public class LoginControler{
     }
     
     /*Logout*/
+    @CrossOrigin
     @RequestMapping(value = "/logoutUser", method = RequestMethod.POST)
     public ResponseEntity<?> logoutEndpoint(
             @RequestHeader("Authorization") String token, 
@@ -85,6 +88,7 @@ public class LoginControler{
                 .body( new TextResponse( "sucssesfuly logedout" ));   
     }
     
+    @CrossOrigin
     @RequestMapping(value = "/edit/{name}", method = RequestMethod.POST)
     public ResponseEntity edit_User(
             @RequestBody UserDetailsRequest request,
@@ -102,16 +106,6 @@ public class LoginControler{
                     .body(new TextResponse("Server Error"));
         }
         
-    }
-    
-    /* Options */
-    @RequestMapping(value = "/login", method = RequestMethod.OPTIONS)
-    public ResponseEntity getOption(){
-        return ResponseEntity
-                .ok()
-                .allow(HttpMethod.POST, HttpMethod.OPTIONS)
-                //.header("Access-Control-Allow-Headers","Authorization")
-                .build();
     }
     
     //AUX

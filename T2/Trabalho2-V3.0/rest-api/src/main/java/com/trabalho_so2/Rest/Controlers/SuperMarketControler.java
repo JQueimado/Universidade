@@ -19,6 +19,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.springframework.http.ResponseEntity.ok;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/supermarkets")
 public class SuperMarketControler {
@@ -47,7 +49,6 @@ public class SuperMarketControler {
         if( time < 0 )
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .header("Access-Control-Allow-Origin","*")
                 .body(new TextResponse("invalid time: "+time));
         
         Collection<SuperMarket> supers = supermarkets.findAll();
@@ -70,19 +71,11 @@ public class SuperMarketControler {
         
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .header("Access-Control-Allow-Origin","*")
                 .body(to_send);
     }    
-    
-    //Options Handler
-    /*
-    @RequestMapping( value = "", method = RequestMethod.OPTIONS)
-    public ResponseEntity getOption(){
-        return ResponseEntity.ok().allow(HttpMethod.POST, HttpMethod.OPTIONS, HttpMethod.GET).header("Access-Control-Allow-Headers","Authorization").build();
-    }
-    */
 
     //Create Handler
+    @CrossOrigin
     @RequestMapping( value = "/add", method = RequestMethod.POST)
     public ResponseEntity addSuperMarket( @RequestBody SuperMarketRequest request ){
         try{
@@ -92,7 +85,6 @@ public class SuperMarketControler {
             if( eval != null){
                 return ResponseEntity
                         .status(HttpStatus.CONFLICT)
-                        .header("Access-Control-Allow-Headers","Authorization")
                         .body(new TextResponse("supermarket already exists"));
             }
             
@@ -103,18 +95,17 @@ public class SuperMarketControler {
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .header("Access-Control-Allow-Headers","Authorization")
                     .body(new TextResponse("created "+ request.getName()));
             
         }catch( Exception e){
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Headers","Authorization")
                     .body("server error");
         }
     }
     
     @Transactional
+    @CrossOrigin
     @RequestMapping( value = "/remove/{name}", method = RequestMethod.DELETE)
     public ResponseEntity removeSuperMarquet( @PathVariable("name") String name ){
         
@@ -125,7 +116,6 @@ public class SuperMarketControler {
             if(toDel == null)
                 return ResponseEntity
                     .status(HttpStatus.OK)
-                    .header("Access-Control-Allow-Headers","Authorization")
                     .body(new TextResponse("Supermarket called  "+ name +" des not exist"));
             
             // Delete Registries
@@ -145,7 +135,6 @@ public class SuperMarketControler {
             
             return ResponseEntity
                     .ok()
-                    .header("Access-Control-Allow-Headers","Authorization")
                     .body(new TextResponse("removed "+name+" and all its registries"));
             
         }
@@ -154,7 +143,6 @@ public class SuperMarketControler {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Headers","Authorization")
                     .body(new TextResponse("server error"));
         }
         

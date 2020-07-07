@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -47,6 +48,7 @@ public class RegistryController {
     private JwtTool jwtTokenUtil;
     
     // GET All
+    @CrossOrigin
     @RequestMapping(value =  "/all", method = RequestMethod.GET)
     public ResponseEntity all() {
         
@@ -67,7 +69,6 @@ public class RegistryController {
             
             return ResponseEntity
                 .ok()
-                .header("Access-Control-Allow-Origin","*")
                 .body(to_send);
             
         }catch(Exception e){
@@ -81,6 +82,7 @@ public class RegistryController {
     
     // POST new registry
     @Transactional
+    @CrossOrigin
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity newReg( 
             @RequestHeader("Authorization") String token, 
@@ -91,7 +93,6 @@ public class RegistryController {
            if( registry.getOcup() > 4 || registry.getOcup() < 1 )
                return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("invalid Ocupation"));
             
            if( !token.startsWith("Bearer") )
@@ -108,7 +109,6 @@ public class RegistryController {
            if( sm == null)
                return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("supermarket "+registry.getSuperName()+" not found")); 
            
            Registry nRes = new Registry();
@@ -123,25 +123,23 @@ public class RegistryController {
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("error"));
         }
         
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .header("Access-Control-Allow-Origin","*")
                 .body(new TextResponse("created registry for "+ registry.getSuperName()));
         
     }
     
     // GET All form User
+    @CrossOrigin
     @RequestMapping(value =  "/user", method = RequestMethod.GET)
     public ResponseEntity findByUser( @RequestHeader("Authorization") String token ){
         
         if( !token.startsWith("Bearer") )
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
-                    .header("Access-Control-Allow-Origin","*")
                     .build();
         
         token = token.substring(7);
@@ -149,14 +147,25 @@ public class RegistryController {
         // Find User that sent the mesage
         String username = jwtTokenUtil.getUsernameFromToken(token);
         
+        List<RegistryDetails> to_send = new ArrayList<>();
+        
+        for(Registry reg : users.findByUsername(username).getRegistry()){
+            RegistryDetails temp = new RegistryDetails();
+            temp.setId(reg.getId());
+            temp.setLevel(reg.getLevel());
+            temp.setSuper_name( supermarkets.findByRegId(reg.getId()).getName() );
+            temp.setUsername(username);
+            to_send.add(temp);
+        }
+        
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .header("Access-Control-Allow-Origin","*")
-                .body(users.findByUsername(username).getRegistry());
+                .body(to_send);
         
     }
     
     @Transactional
+    @CrossOrigin
     @RequestMapping(value =  "/remove/{id}", method = RequestMethod.DELETE)
     public ResponseEntity remove( @RequestHeader("Authorization") String token, @PathVariable("id") long id ){
         
@@ -175,7 +184,6 @@ public class RegistryController {
                 if(temp.isEmpty())
                     return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body( new TextResponse("registry not found") );
                 
                 Registry reg = temp.get();
@@ -190,7 +198,6 @@ public class RegistryController {
                 if(user == null )
                     return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body( new TextResponse("user not found") );
                 
                 Optional<Registry> temp = registries.findById(id);
@@ -198,7 +205,6 @@ public class RegistryController {
                 if( temp.isEmpty() )
                     return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body( new TextResponse("registry not found") );
                 
                 Registry reg = temp.get();
@@ -206,7 +212,6 @@ public class RegistryController {
                 if(!user.getRegistry().contains(reg))
                     return ResponseEntity
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .header("Access-Control-Allow-Origin","*")
                         .body(new TextResponse("Register with id: "+ id + " does not belong to autenticated user"));
                 
                 user.getRegistry().remove(reg);
@@ -217,14 +222,12 @@ public class RegistryController {
             
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("removed registry with id "+ id));
             
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body( new TextResponse("server error") );
         }
         
