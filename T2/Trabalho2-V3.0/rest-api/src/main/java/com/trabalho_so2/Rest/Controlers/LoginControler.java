@@ -68,7 +68,6 @@ public class LoginControler{
         if( !token.startsWith("Bearer") )
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("token doesnt start with Bearer"));
         
         token = token.substring(7);
@@ -79,12 +78,10 @@ public class LoginControler{
         if( !userDetailsService.logoutUser(username)) 
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Access-Control-Allow-Origin","*")
                     .body(new TextResponse("LogOutError"));
         
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .header("Access-Control-Allow-Origin","*")
                 .body( new TextResponse( "sucssesfuly logedout" ));   
     }
     
