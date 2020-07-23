@@ -1,0 +1,97 @@
+import java_cup.runtime.*;
+
+import machine.*;
+import machine.operations.*;
+
+action code {:
+  // creates an instance of the TISC
+  TISC program = new TISC();
+:} ;
+
+parser code {:
+  Yylex lexer;
+
+  public void report_error(String message, Object error_info) {
+    Symbol info = (Symbol) error_info;
+
+    System.err.print("** " + message);
+    System.err.println(" at " + info.value + "' in position " + info.left
+		       + " **");
+  }
+
+  public void report_fatal_error(String message, Object empty) {
+    System.err.println("** " + message);
+  }
+:} ;
+
+init with {: lexer = new Yylex(System.in); :} ;
+
+scan with {: return lexer.yylex(); :} ;
+
+terminal        ADD, SUB, MULT, DIV, MOD, EXP ;
+terminal        PUSH_INT, PUSH_VAR, STORE_VAR, PUSH_ARG, STORE_ARG ;
+terminal        SET_ARG, CALL, LOCALS, RETURN ;
+terminal        JUMP, JEQ, JLT ;
+terminal        PRINT, PRINT_STR, PRINT_NL ;
+terminal String IDENTIFIER ;
+terminal String	INTEGER, STRING ;
+terminal        TWO_POINTS;
+terminal	ERROR ;
+
+non terminal TISC program ;
+non terminal      tag, instruction ;
+
+
+program ::= program tag instruction
+	       {: RESULT = program; :}
+         |
+	 ;
+
+tag ::= IDENTIFIER:e TWO_POINTS 
+			{: program.addLable(e); :}
+		|
+	 ;
+
+instruction ::=
+	      ADD
+	        {: program.addOperation(new Add()); :}
+	  |   SUB
+	        {: program.addOperation(new Sub()); :}
+	  |   MULT
+            {: program.addOperation(new Mult()); :}
+	  |   DIV
+            {: program.addOperation(new Div()); :}
+	  |   MOD
+            {: program.addOperation(new Mod()); :}
+	  |   EXP
+            {: program.addOperation(new Exp()); :}
+	  |   PUSH_INT INTEGER:i
+	        {: program.addOperation(new PushInt(i)); :}
+	  |   PUSH_VAR INTEGER:d INTEGER:n
+	        {: program.addOperation(new PushVariables(d, n)); :}
+	  |   PUSH_ARG INTEGER:d INTEGER:n
+	        {: program.addOperation(new PushArguments(d, n)); :}
+	  |   STORE_VAR INTEGER:d INTEGER:n
+	        {: program.addOperation(new StoreVariable(d, n)); :}
+	  |   STORE_ARG INTEGER:d INTEGER:n
+	        {: program.addOperation(new StoreArguments(d, n)); :}
+	  |   SET_ARG INTEGER:n
+	        {: program.addOperation(new SetArguments(n)); :}
+      |   CALL INTEGER:d IDENTIFIER:p
+	        {: program.addOperation(new Call(d, p)); :}
+	  |   LOCALS INTEGER:a INTEGER:v
+            {: program.addOperation(new Locals(a, v)); :}
+	  |   RETURN
+            {: program.addOperation(new Return()); :}
+	  |   JUMP IDENTIFIER:e
+            {: program.addOperation(new Jump(e)); :}
+	  |   JEQ IDENTIFIER:e
+            {: program.addOperation(new Jeq(e)); :}
+	  |   JLT IDENTIFIER:e
+            {: program.addOperation(new Jlt(e)); :}
+	  |   PRINT
+            {: program.addOperation(new Print()); :}
+	  |   PRINT_STR STRING:s
+            {: program.addOperation(new PrintString(s)); :}
+	  |   PRINT_NL
+	        {: program.addOperation(new PrintNewLine()); :};
