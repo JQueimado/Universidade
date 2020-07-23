@@ -1,0 +1,74 @@
+REST API Services:
+
+->PATH                      ->TYPE  ->Authentication    ->Acces         ->Description                                                   ->Fully Tested  ->Tests
+
+--Login Controler:
+/login                      POST    ->Unauthenticated:  NO_ROLE         - Authenticates User and returns jwt to Client                  [X]             ->(Tested)Normal Login
+                                                                                                                                                        ->(Tested)Already Authenticated user
+                                                                                                                                                        ->(Tested)Authenticate Disabled User 
+
+/register                   POST    ->Unauthenticated:  NO_ROLE         - Registes User and return a jwt token                          [X]             ->(Tested)Normal register
+                                                                                                                                                        ->(Tested)Already regited user    
+
+/logoutUser                 POST    ->Authenticated:    USER_WRITE      - Logsout user invalidating its token                           [X]             ->(Tested)Normal logout
+                                                                                                                                                        ->(Tested)Logout inexisteing user
+                                                                                                                                                        ->(Tested)Logout Unauthenticated
+                                                                                                                                                        ->(Tested)Logout already Logedout user
+
+/edit/{username}            POST    ->Authenticated:    ADMIN_WRITE     - Edit user details                                             [X]             ->(Tested)Do nothing
+                                                                                                                                                        ->(Tested)Username change
+                                                                                                                                                        ->(Tested)Password change
+                                                                                                                                                        ->(Tested)Disabled
+                                                                                                                                                        ->(Tested)Enable
+                                                                                                                                                        ->(Tested)Unauthenticated request
+                                                                                                                                                        ->(Tested)Authenticated as a user
+
+--RegistryControler:
+/registry/all               GET     ->Authenticated:    ADMIN_READ      - Returns All Registrys in the system                           [X]             ->(Tested)Authenticated request
+                                                                                                                                                        ->(Tested)Unauthenticated request
+                                                                                                                                                        ->(Tested)User Authenticated request
+
+/registry/new               POST    ->Authenticated:    USER_WRITE      - Creates a new Registry                                        [X]             ->(Tested)Normal request
+                                                                                                                                                        ->(Tested)Inexisteing supermarket
+                                                                                                                                                        ->(Tested)Inexisteing level
+                                                                                                                                                        ->(Tested)Unauthenticated request
+
+/registry/user              GET     ->Authenticated:    USER_READ       - Returns all Registrys created by the authenticated user       [X]             ->(Tested)Normal request
+                                                                                                                                                        ->(Tested)Unauthenticated request
+                                                                                                                                                        ->(Tested)Diferent User
+
+/registry/remove/{id}       DELETE  ->Authenticated:    USER_WRITE      - Removes one registry marked by id                             [X]             ->(Tested)Normal request
+                                                        ADMIN_WRITE     - Admins can delete from the pool                                               ->(Tested)Unauthenticated request
+                                                                                                                                                        ->(Tested)Other User request
+                                                                                                                                                        ->(Tested)Remove unexisting
+                                                                                                                                                        ->(Tested)Admin remove
+
+--SuperMarketsControler:
+/supermarkets/{time}        GET     ->Unauthenticated   NO_ROLE         - Returns all supermarkets in the system                        [X]             ->(Tested)Normal request
+                                                                                                                                                        ->(Tested)Invalid time
+                                                                                                                                                        ->(Tested)Time Testing
+
+/supermarkets/add           POST    ->Authenticated     ADMIN_WRITE     - Adds a supermarket to the system                              [X]             ->(Tested)Normal request
+                                                                                                                                                        ->(Tested)Unauthenticated request
+                                                                                                                                                        ->(Tested)User request
+                                                                                                                                                        ->(Tested)Already added
+
+/supermarkets/remove/{id}   DELETE  ->Authenticated     USER_WRITE      - Removes a registry created by the authenticated user          [X]             ->(Tested)Normal request
+                                                                                                                                                        ->(Tested)Unauthenticated request
+                                                                                                                                                        ->(Tested)User request
+                                                                                                                                                        ->(Tested)Already Removed
+                                                                                                                                                        ->(Tested)Unexisting remove
+
+Privileges:
+-READ_ALL_DATA_PRIVILEGE    ->ADMIN_READ    ->General database read operations
+-WRITE_ALL_DATA_PRIVILEGE   ->ADMIN_WRITE   ->General database write operations
+-READ_USER_DATA_PRIVILEGE   ->USER_READ     ->Read operations limited to self
+-WRITE_USER_DATA_PRIVILEGE  ->USER_WRITE    ->Write operations limited to self
+-NO_ROLE(Abstract role)     ->NO_ROLE       ->Read and write operations limited to non loged users
+
+
+
+Roles:
+- ADMIN -> READ_ALL_DATA_PRIVILEGE, WRITE_ALL_DATA_PRIVILEGE
+
+- USER  -> READ_USER_DATA_PRIVILEGE, WRITE_USER_DATA_PRIVILEGE

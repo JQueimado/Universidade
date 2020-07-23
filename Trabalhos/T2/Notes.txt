@@ -1,0 +1,17 @@
+Notas:
+    Lotações vão de 1 a 4
+    Aprender a fazer codigos unicos
+    Comessar sem autenticação 
+
+Roles
+    Public->    Consultar o mapa com as localizações e as lotações registadas na ultima hora 
+    User->      Registar lotações em locais
+                Ler lotações registadas
+                Apagar lotações registadas
+
+Views
+    HomePage(Publica)-> Um mapa com as localizações registadas
+    LoginPage(Publica)-> Form pra login
+    RegistryPage(Publica)-> Form pra registar utilisadores
+    UserPage(User)-> Pagina onde cada utilizador pode ver e apagar os seus registos
+    UserInsertPage(User) -> Pagina utilizada pelo utilizador para registar a oucupação em um local
