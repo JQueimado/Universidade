@@ -1,0 +1,270 @@
+25-Jun-2020 15:08:54.804 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.0.0-M6
+25-Jun-2020 15:08:54.838 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jun 3 2020 14:45:17 UTC
+25-Jun-2020 15:08:54.838 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 10.0.0.0
+25-Jun-2020 15:08:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+25-Jun-2020 15:08:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.4.0-37-generic
+25-Jun-2020 15:08:54.840 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+25-Jun-2020 15:08:54.840 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-14-openjdk-amd64
+25-Jun-2020 15:08:54.840 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           14.0.1+7-Ubuntu-1ubuntu1
+25-Jun-2020 15:08:54.841 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Private Build
+25-Jun-2020 15:08:54.841 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 15:08:54.843 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 15:08:54.902 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+25-Jun-2020 15:08:54.903 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+25-Jun-2020 15:08:54.903 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+25-Jun-2020 15:08:54.904 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/logging.properties
+25-Jun-2020 15:08:54.904 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+25-Jun-2020 15:08:54.904 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+25-Jun-2020 15:08:54.904 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+25-Jun-2020 15:08:54.905 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+25-Jun-2020 15:08:54.905 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+25-Jun-2020 15:08:54.905 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 15:08:54.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 15:08:54.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/joao/Desktop/apache-tomcat-10.0.0-M6/temp
+25-Jun-2020 15:08:54.912 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [1.2.23] using APR version [1.6.5].
+25-Jun-2020 15:08:54.912 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+25-Jun-2020 15:08:54.919 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 1.1.1f  31 Mar 2020]
+25-Jun-2020 15:08:56.061 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 15:08:56.101 SEVERE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Failed to initialize component [Connector[HTTP/1.1-8080]]
+	org.apache.catalina.LifecycleException: Protocol handler initialization failed
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1048)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:533)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:1057)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:609)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:632)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:303)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473)
+	Caused by: java.net.BindException: Address already in use
+		at java.base/sun.nio.ch.Net.bind0(Native Method)
+		at java.base/sun.nio.ch.Net.bind(Net.java:479)
+		at java.base/sun.nio.ch.Net.bind(Net.java:468)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:220)
+		at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:88)
+		at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:172)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:157)
+		at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1112)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1125)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:558)
+		at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:74)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1045)
+		... 13 more
+25-Jun-2020 15:08:56.104 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [2,002] milliseconds
+25-Jun-2020 15:08:56.211 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+25-Jun-2020 15:08:56.212 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.0.0-M6]
+25-Jun-2020 15:08:56.243 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples]
+25-Jun-2020 15:08:57.453 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples] has finished in [1,209] ms
+25-Jun-2020 15:08:57.454 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs]
+25-Jun-2020 15:08:57.491 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs] has finished in [38] ms
+25-Jun-2020 15:08:57.491 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT]
+25-Jun-2020 15:08:57.523 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT] has finished in [32] ms
+25-Jun-2020 15:08:57.524 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager]
+25-Jun-2020 15:08:57.573 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager] has finished in [50] ms
+25-Jun-2020 15:08:57.574 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager]
+25-Jun-2020 15:08:57.622 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager] has finished in [48] ms
+25-Jun-2020 15:08:57.631 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,526] milliseconds
+25-Jun-2020 15:35:43.093 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+25-Jun-2020 15:35:43.095 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 15:35:43.096 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+25-Jun-2020 15:35:43.225 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 15:35:43.226 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:37:30.649 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.0.0-M6
+25-Jun-2020 16:37:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jun 3 2020 14:45:17 UTC
+25-Jun-2020 16:37:30.653 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 10.0.0.0
+25-Jun-2020 16:37:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+25-Jun-2020 16:37:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.4.0-37-generic
+25-Jun-2020 16:37:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+25-Jun-2020 16:37:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-14-openjdk-amd64
+25-Jun-2020 16:37:30.654 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           14.0.1+7-Ubuntu-1ubuntu1
+25-Jun-2020 16:37:30.655 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Private Build
+25-Jun-2020 16:37:30.655 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:37:30.655 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:37:30.675 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+25-Jun-2020 16:37:30.675 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+25-Jun-2020 16:37:30.676 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+25-Jun-2020 16:37:30.676 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/logging.properties
+25-Jun-2020 16:37:30.676 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+25-Jun-2020 16:37:30.676 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+25-Jun-2020 16:37:30.676 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+25-Jun-2020 16:37:30.677 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+25-Jun-2020 16:37:30.677 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+25-Jun-2020 16:37:30.677 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:37:30.677 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:37:30.677 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/joao/Desktop/apache-tomcat-10.0.0-M6/temp
+25-Jun-2020 16:37:30.682 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [1.2.23] using APR version [1.6.5].
+25-Jun-2020 16:37:30.682 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+25-Jun-2020 16:37:30.687 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 1.1.1f  31 Mar 2020]
+25-Jun-2020 16:37:31.260 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:37:31.303 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [968] milliseconds
+25-Jun-2020 16:37:31.368 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+25-Jun-2020 16:37:31.368 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.0.0-M6]
+25-Jun-2020 16:37:31.388 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples]
+25-Jun-2020 16:37:32.202 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples] has finished in [813] ms
+25-Jun-2020 16:37:32.203 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs]
+25-Jun-2020 16:37:32.236 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs] has finished in [34] ms
+25-Jun-2020 16:37:32.237 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT]
+25-Jun-2020 16:37:32.267 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT] has finished in [29] ms
+25-Jun-2020 16:37:32.267 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager]
+25-Jun-2020 16:37:32.316 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager] has finished in [48] ms
+25-Jun-2020 16:37:32.316 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager]
+25-Jun-2020 16:37:32.347 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager] has finished in [30] ms
+25-Jun-2020 16:37:32.352 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:37:32.375 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,070] milliseconds
+25-Jun-2020 16:44:02.637 INFO [Catalina-utility-1] org.apache.catalina.users.MemoryUserDatabase.backgroundProcess Reloading memory user database [UserDatabase] from updated source [file:/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/tomcat-users.xml]
+25-Jun-2020 16:44:02.670 SEVERE [Catalina-utility-1] org.apache.tomcat.util.digester.Digester.fatalError Parse fatal error at line [40] column [37]
+	org.xml.sax.SAXParseException; lineNumber: 40; columnNumber: 37; The value of attribute "password" associated with an element type "user" must not contain the '<' character.
+		at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:204)
+		at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:178)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1471)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLScanner.scanAttributeValue(XMLScanner.java:943)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanAttribute(XMLDocumentFragmentScannerImpl.java:1521)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanStartElement(XMLDocumentFragmentScannerImpl.java:1362)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2725)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:541)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:888)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:824)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1224)
+		at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:635)
+		at org.apache.tomcat.util.digester.Digester.parse(Digester.java:1482)
+		at org.apache.catalina.users.MemoryUserDatabase.open(MemoryUserDatabase.java:446)
+		at org.apache.catalina.users.MemoryUserDatabase.backgroundProcess(MemoryUserDatabase.java:674)
+		at org.apache.catalina.realm.UserDatabaseRealm.backgroundProcess(UserDatabaseRealm.java:143)
+		at org.apache.catalina.realm.CombinedRealm.backgroundProcess(CombinedRealm.java:302)
+		at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1137)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1353)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1335)
+		at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+		at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+		at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.base/java.lang.Thread.run(Thread.java:832)
+25-Jun-2020 16:44:02.678 SEVERE [Catalina-utility-1] org.apache.catalina.users.MemoryUserDatabase.backgroundProcess Error reloading memory user database [UserDatabase] from updated source [file:/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/tomcat-users.xml]
+	org.xml.sax.SAXParseException; lineNumber: 40; columnNumber: 37; The value of attribute "password" associated with an element type "user" must not contain the '<' character.
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+		at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:635)
+		at org.apache.tomcat.util.digester.Digester.parse(Digester.java:1482)
+		at org.apache.catalina.users.MemoryUserDatabase.open(MemoryUserDatabase.java:446)
+		at org.apache.catalina.users.MemoryUserDatabase.backgroundProcess(MemoryUserDatabase.java:674)
+		at org.apache.catalina.realm.UserDatabaseRealm.backgroundProcess(UserDatabaseRealm.java:143)
+		at org.apache.catalina.realm.CombinedRealm.backgroundProcess(CombinedRealm.java:302)
+		at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1137)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1353)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1335)
+		at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+		at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+		at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.base/java.lang.Thread.run(Thread.java:832)
+25-Jun-2020 16:44:32.717 INFO [Catalina-utility-1] org.apache.catalina.users.MemoryUserDatabase.backgroundProcess Reloading memory user database [UserDatabase] from updated source [file:/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/tomcat-users.xml]
+25-Jun-2020 16:46:32.800 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/newWebapp]
+25-Jun-2020 16:46:32.895 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/newWebapp] has finished in [94] ms
+25-Jun-2020 16:46:52.916 INFO [Catalina-utility-2] org.apache.catalina.startup.HostConfig.reload Reloading context [/newWebapp]
+25-Jun-2020 16:46:52.916 INFO [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/newWebapp] has started
+25-Jun-2020 16:46:53.217 INFO [Catalina-utility-2] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/newWebapp] is completed
+25-Jun-2020 16:49:23.681 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+25-Jun-2020 16:49:23.682 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:49:23.685 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+25-Jun-2020 16:49:23.747 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:49:23.750 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:49:29.337 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.0.0-M6
+25-Jun-2020 16:49:29.348 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jun 3 2020 14:45:17 UTC
+25-Jun-2020 16:49:29.349 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 10.0.0.0
+25-Jun-2020 16:49:29.349 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+25-Jun-2020 16:49:29.349 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.4.0-37-generic
+25-Jun-2020 16:49:29.349 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+25-Jun-2020 16:49:29.350 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-14-openjdk-amd64
+25-Jun-2020 16:49:29.350 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           14.0.1+7-Ubuntu-1ubuntu1
+25-Jun-2020 16:49:29.351 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Private Build
+25-Jun-2020 16:49:29.351 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:49:29.351 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:49:29.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+25-Jun-2020 16:49:29.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+25-Jun-2020 16:49:29.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+25-Jun-2020 16:49:29.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/logging.properties
+25-Jun-2020 16:49:29.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+25-Jun-2020 16:49:29.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+25-Jun-2020 16:49:29.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+25-Jun-2020 16:49:29.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+25-Jun-2020 16:49:29.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+25-Jun-2020 16:49:29.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:49:29.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 16:49:29.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/joao/Desktop/apache-tomcat-10.0.0-M6/temp
+25-Jun-2020 16:49:29.378 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [1.2.23] using APR version [1.6.5].
+25-Jun-2020 16:49:29.378 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+25-Jun-2020 16:49:29.382 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 1.1.1f  31 Mar 2020]
+25-Jun-2020 16:49:29.926 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:49:29.969 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [930] milliseconds
+25-Jun-2020 16:49:30.060 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+25-Jun-2020 16:49:30.060 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.0.0-M6]
+25-Jun-2020 16:49:30.072 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples]
+25-Jun-2020 16:49:31.455 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples] has finished in [1,383] ms
+25-Jun-2020 16:49:31.456 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs]
+25-Jun-2020 16:49:31.509 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs] has finished in [53] ms
+25-Jun-2020 16:49:31.510 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT]
+25-Jun-2020 16:49:31.566 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT] has finished in [56] ms
+25-Jun-2020 16:49:31.567 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager]
+25-Jun-2020 16:49:31.642 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager] has finished in [74] ms
+25-Jun-2020 16:49:31.642 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/newWebapp]
+25-Jun-2020 16:49:31.880 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/newWebapp] has finished in [238] ms
+25-Jun-2020 16:49:31.880 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager]
+25-Jun-2020 16:49:31.914 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager] has finished in [34] ms
+25-Jun-2020 16:49:31.920 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 16:49:31.990 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [2,020] milliseconds
+25-Jun-2020 18:13:42.500 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.0.0-M6
+25-Jun-2020 18:13:42.512 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jun 3 2020 14:45:17 UTC
+25-Jun-2020 18:13:42.513 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 10.0.0.0
+25-Jun-2020 18:13:42.513 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+25-Jun-2020 18:13:42.514 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.4.0-37-generic
+25-Jun-2020 18:13:42.514 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+25-Jun-2020 18:13:42.514 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-14-openjdk-amd64
+25-Jun-2020 18:13:42.514 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           14.0.1+7-Ubuntu-1ubuntu1
+25-Jun-2020 18:13:42.515 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Private Build
+25-Jun-2020 18:13:42.515 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 18:13:42.515 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 18:13:42.532 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+25-Jun-2020 18:13:42.532 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+25-Jun-2020 18:13:42.532 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+25-Jun-2020 18:13:42.532 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/joao/Desktop/apache-tomcat-10.0.0-M6/conf/logging.properties
+25-Jun-2020 18:13:42.533 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+25-Jun-2020 18:13:42.533 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+25-Jun-2020 18:13:42.533 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+25-Jun-2020 18:13:42.533 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+25-Jun-2020 18:13:42.533 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+25-Jun-2020 18:13:42.534 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 18:13:42.534 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/joao/Desktop/apache-tomcat-10.0.0-M6
+25-Jun-2020 18:13:42.534 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/joao/Desktop/apache-tomcat-10.0.0-M6/temp
+25-Jun-2020 18:13:42.538 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [1.2.23] using APR version [1.6.5].
+25-Jun-2020 18:13:42.538 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+25-Jun-2020 18:13:42.541 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 1.1.1f  31 Mar 2020]
+25-Jun-2020 18:13:42.918 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 18:13:42.949 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [696] milliseconds
+25-Jun-2020 18:13:43.006 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+25-Jun-2020 18:13:43.007 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.0.0-M6]
+25-Jun-2020 18:13:43.016 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples]
+25-Jun-2020 18:13:43.630 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/examples] has finished in [614] ms
+25-Jun-2020 18:13:43.631 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs]
+25-Jun-2020 18:13:43.657 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/docs] has finished in [25] ms
+25-Jun-2020 18:13:43.657 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT]
+25-Jun-2020 18:13:43.692 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/ROOT] has finished in [34] ms
+25-Jun-2020 18:13:43.692 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager]
+25-Jun-2020 18:13:43.741 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/manager] has finished in [49] ms
+25-Jun-2020 18:13:43.742 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/newWebapp]
+25-Jun-2020 18:13:44.006 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/newWebapp] has finished in [265] ms
+25-Jun-2020 18:13:44.006 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager]
+25-Jun-2020 18:13:44.034 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/joao/Desktop/apache-tomcat-10.0.0-M6/webapps/host-manager] has finished in [27] ms
+25-Jun-2020 18:13:44.038 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+25-Jun-2020 18:13:44.064 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,114] milliseconds
